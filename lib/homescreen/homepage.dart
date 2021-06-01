@@ -54,10 +54,10 @@ class _HomeScreenState extends State<HomeScreen> {
     appState.isApiServiceLoading(false);
         final orientation = MediaQuery.of(context).orientation;
 //        var userlocation = Provider.of<UserLocation>(context);
-        return Container(
+        /*return Container(
             height: MediaQuery.of(context).size.height,
             width: double.infinity,
-        child: Column(
+            child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
                 Container(
@@ -136,6 +136,45 @@ class _HomeScreenState extends State<HomeScreen> {
 
             ],
         ),
+        );*/
+        return DraggableScrollableSheet(
+            initialChildSize: 0.7,
+            minChildSize: 0.01,
+            maxChildSize: 0.7,
+            builder: (BuildContext context, ScrollController scrollController) {
+                return Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(10),
+                            topRight: Radius.circular(10)
+                        ),
+                        /*gradient: LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            *//*stops: [
+                                0.1,
+                                0.4,
+                                0.6,
+                            ],*//*
+                            colors: [
+                                CustomTheme.lightTheme.primaryColor,
+                                CustomTheme.lightTheme.splashColor,
+                                //Color.fromRGBO(234, 239, 255, 1),
+                                CustomTheme.lightTheme.accentColor
+                            ]
+                        ),*/
+                        //color: Color.fromRGBO(234, 239, 255, 1),
+                    ),
+                    child: ListView.builder(
+                        controller: scrollController,
+                        itemCount: 25,
+                        itemBuilder: (BuildContext context, int index) {
+                            return ListTile(title: Text('Item $index'));
+                        },
+                    ),
+                );
+            },
         );
     }
 }
