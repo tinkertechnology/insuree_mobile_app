@@ -51,6 +51,14 @@ class AuthService {
           fontSize: 16.0);
       return jsonDecode(response.body);
     }
+    else{
+      Fluttertoast.showToast(
+          msg: "Server Error",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIos: 1,
+          fontSize: 16.0);
+    }
 
   }
 
