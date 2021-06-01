@@ -670,7 +670,7 @@ class OtpPageState extends State<OtpPage> {
     void _verifyMobileNumber() async {
 //    var category_url = Url + '/api/categories';
 
-        var url = env.API_VALIDATE_MOBILE;
+        var url = '';
         final response = await http.post(Uri.parse(url),
 
             headers: <String, String>{
@@ -749,7 +749,7 @@ class OtpPageState extends State<OtpPage> {
     void matchOtp() async{
 
 
-        var validateOTP = env.API_VALIDATE_OTP;
+        var validateOTP = '';
         final response = await http.post(Uri.parse(validateOTP),
 
             headers: <String, String>{

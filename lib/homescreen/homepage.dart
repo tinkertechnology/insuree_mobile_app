@@ -12,6 +12,9 @@ import 'package:card_app/models/user_location.dart';
 import 'package:card_app/services/auth_service.dart';
 import 'package:graphql/client.dart';
 import 'package:http/http.dart' as http;
+import 'package:card_app/models/medical_services.dart';
+import 'package:card_app/services/api_graphql_services.dart';
+
 
 
 class HomeScreen extends StatefulWidget {
@@ -20,38 +23,16 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+
+    Future<MedicalServices> _medicalservices;
     @override
     void initState(){
         super.initState();
-        handleGQLQuery();
-    }
-    handleGQLQuery() async {
-
-        final response = await http.post(Uri.parse('https://oi.tinker.com.np/api/graphql'),
-            headers: {
-                "Content-Type": "application/json",
-//                "Accept" : "application/json"
-            },
-            body:
-                jsonEncode({"query":"query {\n  medicalServicesStr {  edges{    node{      id      name    }  }      }}","variables":null})
-
-        );
-
-
-        if (response.statusCode  == 200) {
-            final decodedJson = jsonDecode(response.body);
-        }
-        print('tara baji lai lai');
+        _medicalservices = ApiGraphQlServices().MedicalServicesGQL('medicalservice');
     }
     @override
     Widget build(BuildContext context) {
-      final appState = Provider.of<AppState>(context);
-    if(appState.isApiLoading==false){
-      appState.fetchData();
-      appState.isApiServiceLoading(true);
-    }
 
-    appState.isApiServiceLoading(false);
         final orientation = MediaQuery.of(context).orientation;
 //        var userlocation = Provider.of<UserLocation>(context);
         /*return Container(
@@ -166,12 +147,25 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),*/
                         //color: Color.fromRGBO(234, 239, 255, 1),
                     ),
-                    child: ListView.builder(
-                        controller: scrollController,
-                        itemCount: 25,
-                        itemBuilder: (BuildContext context, int index) {
-                            return ListTile(title: Text('Item $index'));
-                        },
+                    child: FutureBuilder<MedicalServices>(
+                      future: _medicalservices,
+                      builder: (context, snapshot) {
+                          if(snapshot.hasData) {
+                        return ListView.builder(
+                            controller: scrollController,
+                            itemCount: snapshot.data.data.medicalServicesStr.edges.length,
+                            itemBuilder: (BuildContext context, int index) {
+                                var medical_services = snapshot.data.data
+                                    .medicalServicesStr.edges[index];
+                                return ListTile(
+                                    title: Text('${medical_services.node.name}'));
+                            }
+
+                        );
+                      } else{
+                              return Center(child: CircularProgressIndicator());
+                          }
+                      }
                     ),
                 );
             },

@@ -76,11 +76,6 @@ SaveUpdateFirebaseToken() async {
 	);
 	print(response.body);
 	if (response.statusCode == 200) {
-		print('updated');
-		// If the server did return a 201 CREATED response,
-		// then parse the JSON.
-		// return Album.fromJson(json.decode(response.body));
-
 	}
 
 }
@@ -169,15 +164,15 @@ String USER_MOBILE_NO = "";
 
 
 
-String API_BASE_LOCAL_URL = "http://10.0.2.2:8000";
-String API_IOS_BASE_LOCAL_URL = "http://localhost:8000";
-String API_BASE_LOCAL_MOBILE_URL = "http://192.168.31.221:8000";
-String API_INLINETECH_URL = 'https://cardapp.inlinetech.com.np';
+String API_BASE_LOCAL_URL = "http://10.0.2.2:8000/api/graphql";
+String API_IOS_BASE_LOCAL_URL = "http://localhost:8000/api/graphql";
+String API_BASE_LOCAL_MOBILE_URL = "http://192.168.31.221:8000/api/graphql";
+String API_HIB_URL = '';
 
 
 String getBaseUrl(){
 	if (kReleaseMode) {
-		return API_INLINETECH_URL;
+		return API_HIB_URL;
 	} else {
 	}
 
@@ -188,18 +183,9 @@ String getBaseUrl(){
 	}
 }
 
-String API_BASE_URL =  API_BASE_LOCAL_URL;//API_BASE_LOCAL_MOBILE_URL;//getBaseUrl();
-String API_LOGIN_URL = API_BASE_URL+"/api/auth/token/";
-String API_REFRESH_TOKEN = API_BASE_URL + '/api/auth/token/refresh/';
+String API_BASE_URL =  getBaseUrl();
 
 
-
-//http://localhost:8000/api/store_orders/
-String API_VALIDATE_MOBILE = API_BASE_URL + '/api/validate_mobile/';
-String API_VALIDATE_OTP = API_BASE_URL + '/api/validate_otp/';
-String API_REGISTER_AFTER_OTP_VERIFICATION = API_BASE_URL+ '/api/register/';
-String API_RESET_PASSWORD_PHONE = API_BASE_URL + '/api/reset_password/';
-String API_CHANGE_PASSWORD = API_BASE_URL + '/api/change_password/';
 
 
 

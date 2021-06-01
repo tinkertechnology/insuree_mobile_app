@@ -5,7 +5,6 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:card_app/blocks/auth_block.dart';
-
 import  'package:card_app/common/env.dart' as env;
 
 class AuthService {
@@ -16,8 +15,7 @@ class AuthService {
   final GlobalKey<NavigatorState> navigatorKey = new GlobalKey<NavigatorState>();
   String dob = "1952-05-07";
   Future<Map> login(UserCredential userCredential) async {
-
-    final response = await http.post(Uri.parse('http://10.0.2.2:8000/api/graphql'),
+    final response = await http.post(Uri.parse(env.API_BASE_URL),
         headers: {
           "Content-Type": "application/json",
 //                "Accept" : "application/json"
@@ -67,7 +65,7 @@ class AuthService {
     // user.isRegisterSuccess =false;
   env.setRegisterSuccessFalse();
     //final response = await http.post('$BASE_URL/tradebakerz/wc/v1/register',
-    final response = await http.post(Uri.parse(env.API_REGISTER_AFTER_OTP_VERIFICATION),
+    final response = await http.post(Uri.parse(''),
         body: {
           'mobile': userRegister.mobile,//user.username,
           'email': userRegister.email,

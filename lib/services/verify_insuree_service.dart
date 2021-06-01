@@ -5,7 +5,6 @@ class VerifyInsureeService {
 bool isLoading=false;
 
   Future<Map> VerifyInsureeData(Insuree _verifyInsuree) async {
-    var dob ="1952-05-07";
     isLoading = true;
     final response = await http.post(Uri.parse('http://10.0.2.2:8000/api/graphql'),
         headers: {
@@ -15,7 +14,7 @@ bool isLoading=false;
         body:
         jsonEncode({"query":"\n\nquery {\n "
             " insureeAuth(insureeCHFID: \"${_verifyInsuree.chfid.toString()}\", familyHeadCHFID: \""
-            "${_verifyInsuree.fhchfid.toString()}\", dob:\"${dob}\"){\n    id\n  }\n}","variables":null}));
+            "${_verifyInsuree.fhchfid.toString()}\", dob:\"${_verifyInsuree.dob}\"){\n    id\n  }\n}","variables":null}));
     print(jsonDecode(response.body));
     print('tara baji lai lai');
       isLoading=false;

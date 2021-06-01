@@ -120,7 +120,7 @@ class _MyAppState extends State<MyApp> {
                         // locale: locale,
                         debugShowCheckedModeBanner: false,
                         theme: Styles.themeData(themeChangeProvider.darkTheme, context),
-                        initialRoute: '/',
+                        initialRoute: '/splash',
                         routes: <String, WidgetBuilder>{
                             '/ggg': (BuildContext context) => Auth(),
                             '/card' :(BuildContext context) => Display(initIndex: null,),

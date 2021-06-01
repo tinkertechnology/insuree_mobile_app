@@ -10,7 +10,7 @@ final GlobalKey<NavigatorState> navigatorKey = new GlobalKey<NavigatorState>();
 
 
 Future getToken(token) async {
-  final response = await http.post(Uri.parse(env.API_REFRESH_TOKEN),
+  final response = await http.post(Uri.parse(''),
 
       headers: <String, String>{
 

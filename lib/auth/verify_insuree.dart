@@ -21,8 +21,28 @@ class VerifyInsuree extends StatefulWidget {
 class _VerifyInsureeState extends State<VerifyInsuree> {
     final _formKey = GlobalKey<FormState>();
     final Insuree _insuree = Insuree();
+     TextEditingController _yearController = TextEditingController();
+    TextEditingController _monthController = TextEditingController();
+    TextEditingController _dayController = TextEditingController();
     dynamic verify;
-    
+
+     validateYear(val){
+        if(val.length!=4 && val.isNotEmpty ){
+            return "Year is invalid please enter valid one";
+        }
+    }
+     validateMonth(val){
+        if(val.length!=2 && val.isNotEmpty && val <=12){
+            return "Month is invalid please enter valid one";
+        }
+    }
+     validateDay(val){
+        if(val.length!=2 && val.isNotEmpty && val <=31 ){
+            return "Day is invalid please enter valid one";
+        }
+    }
+
+
     Widget _buildInsureeCHFID() {
         return Container(
             padding: EdgeInsets.symmetric(horizontal: 20.0),
@@ -145,9 +165,11 @@ class _VerifyInsureeState extends State<VerifyInsuree> {
                                                 hintStyle: TextStyle(fontFamily: 'Montserrat'),
                                                 filled: true,
                                                 contentPadding: EdgeInsets.all(16.0),
+                                                errorText: validateYear(_yearController.text),
                                             ),
                                             keyboardType: TextInputType.number,
-                                            obscureText: true,
+                                            obscureText: false,
+                                            controller: _yearController,
                                         )
                                     ],
                                 )),
@@ -164,9 +186,11 @@ class _VerifyInsureeState extends State<VerifyInsuree> {
                                                 hintStyle: TextStyle(fontFamily: 'Montserrat'),
                                                 filled: true,
                                                 contentPadding: EdgeInsets.all(16.0),
+                                                errorText: validateMonth(_monthController.text)
                                             ),
                                             keyboardType: TextInputType.number,
-                                            obscureText: true,
+                                            obscureText: false,
+                                            controller: _monthController,
                                         )
                                     ],
                                 )),
@@ -183,9 +207,11 @@ class _VerifyInsureeState extends State<VerifyInsuree> {
                                                 hintStyle: TextStyle(fontFamily: 'Montserrat'),
                                                 filled: true,
                                                 contentPadding: EdgeInsets.all(16.0),
+                                                errorText: validateDay(_dayController.text),
                                             ),
                                             keyboardType: TextInputType.number,
-                                            obscureText: true,
+                                            obscureText: false,
+                                            controller: _dayController,
                                         )
                                     ],
                                 )),
@@ -269,6 +295,7 @@ class _VerifyInsureeState extends State<VerifyInsuree> {
                                                             padding: EdgeInsets.all(circleBorderWidth),
                                                             child: DecoratedBox(
                                                                 decoration: ShapeDecoration(
+
                                                                     shape: CircleBorder(),
                                                                     image: DecorationImage(
                                                                         fit: BoxFit.cover,
@@ -309,6 +336,7 @@ class _VerifyInsureeState extends State<VerifyInsuree> {
                                                         width: double.infinity,
                                                         child: RaisedButton(
                                                             onPressed: () async {
+                                                                _insuree.dob = "${_yearController.text}-${_monthController.text}-${_dayController.text}";
                                                                 // Validate form
                                                                 if (_formKey.currentState.validate()) {
                                                                     // Update values
@@ -317,7 +345,6 @@ class _VerifyInsureeState extends State<VerifyInsuree> {
                                                                 }
                                                                 var verify = await VerifyInsureeService()
                                                                     .VerifyInsureeData(_insuree);
-                                                                print('tero bau');
                                                                 if (verify == null) {
                                                                     Fluttertoast.showToast(
                                                                         msg: "Incorrect Details ",
