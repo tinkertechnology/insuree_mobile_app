@@ -295,13 +295,14 @@ class _VerifyInsureeState extends State<VerifyInsuree> {
                                                             padding: EdgeInsets.all(circleBorderWidth),
                                                             child: DecoratedBox(
                                                                 decoration: ShapeDecoration(
-
                                                                     shape: CircleBorder(),
                                                                     image: DecorationImage(
                                                                         fit: BoxFit.cover,
                                                                         image: NetworkImage(
                                                                             'https://www.kindpng.com/picc/m/495-4952535_create-digital-profile-icon-blue-user-profile-icon.png',
-                                                                        ))),
+                                                                        ),
+                                                                    ),
+                                                                ),
                                                             ),
                                                         ),
                                                     ),
@@ -377,8 +378,7 @@ class _VerifyInsureeState extends State<VerifyInsuree> {
                                                             child: VerifyInsureeService().isLoading
                                                                 ? CircularProgressIndicator(
                                                                 valueColor:
-                                                                AlwaysStoppedAnimation<Color>(
-                                                                    Colors.white))
+                                                                AlwaysStoppedAnimation<Color>(Colors.white))
                                                                 : Text(
                                                                 "Verify",
                                                                 style: TextStyle(
@@ -417,7 +417,10 @@ class _VerifyInsureeState extends State<VerifyInsuree> {
                             IconButton(
                                 icon: Icon(Icons.location_on),
                                 color: Colors.white,
-                                onPressed: () {},
+                                onPressed: () {
+                                    print('Homepage Clicked....');
+                                    Navigator.pushNamed(context, '/');
+                                },
                             ),
                             IconButton(
                                 icon: Icon(Icons.attach_money),

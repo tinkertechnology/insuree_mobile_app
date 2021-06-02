@@ -152,7 +152,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 CustomTheme.lightTheme.accentColor
                             ]
                         ),*/
-                        //color: Color.fromRGBO(234, 239, 255, 1),
+                        color: Color.fromRGBO(234, 239, 255, 1),
                     ),
                     child: FutureBuilder<MedicalServices>(
                       future: _medicalservices,

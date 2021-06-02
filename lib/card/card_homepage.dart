@@ -1,3 +1,4 @@
+import 'package:card_app/theme/custom_theme.dart';
 import 'package:flutter/material.dart';
 
 import 'package:card_app/homescreen/homepage.dart';
@@ -8,21 +9,6 @@ class CardHome extends StatefulWidget {
 
 class _CardHomeState extends State<CardHome> {
 	Widget build(BuildContext context) {
-		/*return(
-			SingleChildScrollView(
-				child: Container(
-					padding: const EdgeInsets.all(0.0),
-					child: Center(
-						child: Column(
-							mainAxisAlignment: MainAxisAlignment.start,
-							children: <Widget>[
-								HomeScreen(),
-							],
-						),
-					),
-				),
-			)
-		);*/
 		return Stack(
 			children: <Widget>[
 				Container(
@@ -34,15 +20,14 @@ class _CardHomeState extends State<CardHome> {
 							bottomLeft: Radius.circular(10),
 							bottomRight: Radius.circular(10)
 						),
-						/*gradient: LinearGradient(
+						gradient: LinearGradient(
 							begin: Alignment.topLeft,
 							end: Alignment.bottomRight,
 							colors: [
 								CustomTheme.lightTheme.primaryColor,
-								CustomTheme.lightTheme.splashColor,
-								CustomTheme.lightTheme.accentColor
+								CustomTheme.lightTheme.splashColor
 							]
-						),*/
+						),
 					),
 					child: Row(
 						mainAxisAlignment: MainAxisAlignment.spaceBetween,

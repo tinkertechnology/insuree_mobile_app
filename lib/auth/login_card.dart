@@ -79,10 +79,6 @@ class _LoginScreenState extends State<LoginScreen> {
 		);
 	}
 
-
-
-
-
 	final double circleRadius =100.0;
 	final double circleBorderWidth = 8.0;
 	TextEditingController dateCtl = TextEditingController();

@@ -55,7 +55,7 @@ class _ProfilePageViewState extends State<ProfilePageView> {
        
     }
 
-
+	bool _flutter = false;
 	@override
 	Widget build(BuildContext context) {
     final bottom_nav = Provider.of<BottomNavigationBarProvider>(context);
@@ -65,91 +65,83 @@ class _ProfilePageViewState extends State<ProfilePageView> {
 			body: SingleChildScrollView(
 				child: Column(
 					children: <Widget>[
-						/*StackContainer(),
-						ListView.builder(
-							physics: NeverScrollableScrollPhysics(),
-							itemBuilder: (context, index) => CardItem(),
-							shrinkWrap: true,
-							itemCount: 6,
-						)*/
-						
 						// PROFILE INFO
 						Container(
-							margin: EdgeInsets.fromLTRB(20, 0, 20, 20),
+							margin: EdgeInsets.fromLTRB(20, 8, 20, 20),
 							child: Card(
 								shape: RoundedRectangleBorder(
 									side: BorderSide(color: Colors.white70, width: 1),
 									borderRadius: BorderRadius.circular(20),
 								),
-								child: Container(
-									padding: EdgeInsets.only(left: 16, top: 8, right: 16, bottom: 8),
-									child: Row(
-										mainAxisAlignment: MainAxisAlignment.spaceBetween,
-										mainAxisSize: MainAxisSize.min,
-										children: <Widget>[
-											Expanded(
-												child: Row(
-													children: <Widget>[
-														InkWell(
-                              onTap:  getImage,
-                              
-                            child: Container(
-															height: 80,
-															width: 80,
-															padding: EdgeInsets.all(8.0),
-															child: Card(
-																semanticContainer: true,
-																clipBehavior: Clip.antiAliasWithSaveLayer,
-																child:  (_image!=null)?Image.file(
-                            _image,
-                            fit: BoxFit.fill,
-                          ):Image.network(
-                            "https://images.unsplash.com/photo-1502164980785-f8aa41d53611?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
-                            fit: BoxFit.fill,
-                          ),//Image.asset('assets/images/card.png', fit: BoxFit.cover,),
-																shape: RoundedRectangleBorder(
-																	borderRadius: BorderRadius.circular(10.0),
-																),
-																// margin: EdgeInsets.all(10),
-															),
-														),
-                            ),
-														
-														Column(
-															crossAxisAlignment: CrossAxisAlignment.start,
-															children: <Widget>[
-																InkWell(
-																	onTap: (){
-																		Navigator.pushNamed(context, '/profileInfo');
-																	},
-																	child: Text(
-																		"Hari Bahadur Thapa",
-																		softWrap: true,
-																		style: TextStyle(
-																				fontSize: 14.0,
-																				fontFamily: "Open-sans"
+								child: InkWell(
+									onTap: (){
+										print('Profile Clicked');
+										Navigator.pushNamed(context, '/profile-info');
+									},
+									child: Container(
+										padding: EdgeInsets.only(left: 16, top: 8, right: 16, bottom: 8),
+										child: Row(
+											mainAxisAlignment: MainAxisAlignment.spaceBetween,
+											mainAxisSize: MainAxisSize.min,
+											children: <Widget>[
+												Expanded(
+													child: Row(
+														children: <Widget>[
+															InkWell(
+																onTap:  getImage,
+																child: Container(
+																	height: 80,
+																	width: 80,
+																	padding: EdgeInsets.all(8.0),
+																	child: Card(
+																		semanticContainer: true,
+																		clipBehavior: Clip.antiAliasWithSaveLayer,
+																		child: (_image!=null)?Image.file(_image, fit: BoxFit.fill,):
+																		Image.network("https://images.unsplash.com/photo-1502164980785-f8aa41d53611?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60", fit: BoxFit.fill,),//Image.asset('assets/images/card.png', fit: BoxFit.cover,),
+																		shape: RoundedRectangleBorder(
+																			borderRadius: BorderRadius.circular(10.0),
 																		),
+																		// margin: EdgeInsets.all(10),
 																	),
 																),
-
-																SizedBox(height: 8.0),
-																Text("9841-xxx-xxx")
-															],
-														)
-													],
+															),
+															
+															Column(
+																crossAxisAlignment: CrossAxisAlignment.start,
+																children: <Widget>[
+																	InkWell(
+																		onTap: (){
+																			Navigator.pushNamed(context, '/profileInfo');
+																		},
+																		child: Text(
+																			"Hari Bahadur Thapa",
+																			softWrap: true,
+																			style: TextStyle(
+																				fontSize: 14.0,
+																				fontFamily: "Open-sans"
+																			),
+																		),
+																	),
+																	
+																	SizedBox(height: 8.0),
+																	Text("9841-xxx-xxx")
+																],
+															)
+														],
+													),
 												),
-											),
-											
-											SizedBox(
-												child: Row(
-													children: <Widget>[
-														Text("Unverified"),
-														SizedBox(width: 10.0),
-														Icon(Icons.arrow_forward_ios, size: 25, color: Colors.grey.withOpacity(0.2),)
-													],
-												),
-											)
-										],
+												
+												SizedBox(
+													child: Row(
+														children: <Widget>[
+															Text("Unverified"),
+															SizedBox(width: 10.0),
+															Icon(Icons.arrow_forward_ios, size: 25, color: Colors.grey.withOpacity(0.2),)
+														],
+													),
+												)
+											],
+										),
 									),
 								)
 							),
@@ -191,6 +183,8 @@ class _ProfilePageViewState extends State<ProfilePageView> {
 													],
 												),
 											),
+											
+											// NOTIFICATIONS
 											Container(
 												padding: EdgeInsets.only(top: 16.0, bottom: 16.0),
 												decoration: BoxDecoration(
@@ -198,9 +192,10 @@ class _ProfilePageViewState extends State<ProfilePageView> {
 														bottom: BorderSide(color: Colors.grey.withOpacity(0.2), width: 1.0)
 													)
 												),
-												child: GestureDetector(
+												child: InkWell(
 													onTap: (){
-														print("clicked");
+														print("Notifications clicked...");
+														Navigator.pushNamed(context, '/notifications');
 													},
 													
 													child: Row(
@@ -213,7 +208,7 @@ class _ProfilePageViewState extends State<ProfilePageView> {
 																		Icon(Icons.map, size: 30,),
 																		SizedBox(width: 20.0),
 																		Text(
-																			"Address"
+																			"Notifications"
 																		),
 																	],
 																),
@@ -224,6 +219,8 @@ class _ProfilePageViewState extends State<ProfilePageView> {
 													),
 												)
 											),
+											
+											// SERVICE PROVIDER LIST
 											Container(
 												padding: EdgeInsets.only(top: 16.0, bottom: 16.0),
 												decoration: BoxDecoration(
@@ -245,7 +242,7 @@ class _ProfilePageViewState extends State<ProfilePageView> {
 																		Icon(Icons.history, size: 30,),
 																		SizedBox(width: 20.0),
 																		Text(
-																			"Transaction History"
+																			"Service Provider List"
 																		),
 																	],
 																),
@@ -256,11 +253,18 @@ class _ProfilePageViewState extends State<ProfilePageView> {
 													),
 												)
 											),
+											
+											// NOTICE
 											Container(
 												padding: EdgeInsets.only(top: 16.0, bottom: 16.0),
+												decoration: BoxDecoration(
+													border: Border(
+														bottom: BorderSide(color: Colors.grey.withOpacity(0.2), width: 1.0)
+													)
+												),
 												child: GestureDetector(
 													onTap: (){
-														print("clicked");
+														print("Notice Board clicked");
 													},
 													child: Row(
 														mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -272,7 +276,7 @@ class _ProfilePageViewState extends State<ProfilePageView> {
 																		Icon(Icons.account_circle, size: 30,),
 																		SizedBox(width: 20.0),
 																		Text(
-																			"Contact"
+																			"Notice"
 																		),
 																	],
 																),
@@ -283,36 +287,14 @@ class _ProfilePageViewState extends State<ProfilePageView> {
 													),
 												)
 											),
-										],
-									),
-								)
-							),
-						),
-						
-						// SETTINGS
-						Container(
-							margin: EdgeInsets.fromLTRB(20, 0, 20, 20),
-							child: Card(
-								shape: RoundedRectangleBorder(
-									side: BorderSide(color: Colors.white70, width: 1),
-									borderRadius: BorderRadius.circular(20),
-								),
-								child: Container(
-									padding: EdgeInsets.only(left: 16, top: 8, right: 16),
-									child: Column(
-										crossAxisAlignment: CrossAxisAlignment.start,
-										mainAxisSize: MainAxisSize.min,
-										children: <Widget>[
+											
+											// FEEDBACK
 											Container(
 												padding: EdgeInsets.only(top: 16.0, bottom: 16.0),
-												decoration: BoxDecoration(
-													border: Border(
-														bottom: BorderSide(color: Colors.grey.withOpacity(0.2), width: 1.0)
-													)
-												),
 												child: GestureDetector(
 													onTap: (){
-														print("clicked");
+														print("Feedback page clicked...");
+														Navigator.pushNamed(context, '/feedback');
 													},
 													child: Row(
 														mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -321,10 +303,10 @@ class _ProfilePageViewState extends State<ProfilePageView> {
 															Expanded(
 																child: Row(
 																	children: <Widget>[
-																		Icon(Icons.settings, size: 30,),
+																		Icon(Icons.account_circle, size: 30,),
 																		SizedBox(width: 20.0),
 																		Text(
-																			"Settings"
+																			"Feedback"
 																		),
 																	],
 																),
@@ -341,30 +323,89 @@ class _ProfilePageViewState extends State<ProfilePageView> {
 							),
 						),
 						
-						// HELP CENTER
+						// UPDATE LANGUAGE
 						Container(
 							margin: EdgeInsets.fromLTRB(20, 0, 20, 20),
+							child: Card(
+								color: Colors.white,
+								shape: RoundedRectangleBorder(
+									side: BorderSide(color: Colors.white70, width: 1),
+									borderRadius: BorderRadius.circular(20),
+								),
+								child: SwitchListTile(
+									title: Container(
+										child: Row(
+											children: [
+												Icon(Icons.language, size: 30,),
+												SizedBox(width: 20.0),
+												Text(
+													'Update Language',
+												)
+											],
+										),
+									),
+									value: _flutter,
+									activeColor: Colors.green,
+									inactiveTrackColor: Colors.grey,
+									onChanged: (bool value) {
+										setState(() {
+											_flutter = value;
+										});
+									},
+								),
+							),
+						),
+						
+						// DARK/LIGHT THEME
+						Container(
+							margin: EdgeInsets.fromLTRB(16, 8, 16, 8),
+							child: Card(
+								color: Colors.white,
+								shape: RoundedRectangleBorder(
+									side: BorderSide(color: Colors.white70, width: 1),
+									borderRadius: BorderRadius.circular(20),
+								),
+								child: SwitchListTile(
+									title: Container(
+										padding: EdgeInsets.only(left: 16.0, top: 16.0, bottom:16.0, right: 16.0),
+										child: Row(
+											children: [
+												Icon(Icons.info_outline, size: 30,),
+												SizedBox(width: 20.0),
+												Text('Dark/Light')
+											],
+										),
+									),
+									value: _flutter,
+									activeColor: Colors.red,
+									inactiveTrackColor: Colors.grey,
+									onChanged: (bool value) {
+										setState(() {
+											_flutter = value;
+										});
+									},
+								),
+							),
+						),
+						
+						// CONTACT US
+						Container(
+							margin: EdgeInsets.fromLTRB(16, 8, 16, 8),
 							child: Card(
 								shape: RoundedRectangleBorder(
 									side: BorderSide(color: Colors.white70, width: 1),
 									borderRadius: BorderRadius.circular(20),
 								),
 								child: Container(
-									padding: EdgeInsets.only(left: 16, top: 8, right: 16),
 									child: Column(
 										crossAxisAlignment: CrossAxisAlignment.start,
 										mainAxisSize: MainAxisSize.min,
 										children: <Widget>[
 											Container(
-												padding: EdgeInsets.only(top: 16.0, bottom: 16.0),
-												decoration: BoxDecoration(
-													border: Border(
-														bottom: BorderSide(color: Colors.grey.withOpacity(0.2), width: 1.0)
-													)
-												),
+												padding: EdgeInsets.only(left: 16.0, top: 16.0, bottom:16.0, right: 16.0),
 												child: GestureDetector(
 													onTap: (){
-														print("clicked");
+														print("Contact Us clicked");
 													},
 													child: Row(
 														mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -376,7 +417,7 @@ class _ProfilePageViewState extends State<ProfilePageView> {
 																		Icon(Icons.help, size: 30,),
 																		SizedBox(width: 20.0),
 																		Text(
-																			"Help Center"
+																			"Contact Us"
 																		),
 																	],
 																),

@@ -1,4 +1,7 @@
 import 'package:card_app/card/sync.dart';
+import 'package:card_app/pages/policy.dart';
+import 'package:card_app/pages/services.dart';
+import 'package:card_app/theme/custom_theme.dart';
 import 'package:card_app/theme/dark_theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -12,8 +15,6 @@ import 'package:card_app/localization/language/languages.dart';
 import 'package:card_app/localization/locale_constant.dart';
 import 'package:card_app/models/language_data.dart';
 
-
-
 class Display extends StatefulWidget {
   final int initIndex;
   Display({Key key, @required this.initIndex}) : super(key: key);
@@ -25,23 +26,21 @@ class Display extends StatefulWidget {
 class _DisplayState extends State<Display> {
     _getDrawerItemWidget(int pos) {
         switch (pos) {
-
             case 0:
                 return new CardHome();
             case 1:
-                return new LinkCard();
+                //return new LinkCard();
+                return new PolicyInformation();
             case 2:
-                return new Sync();
+                return new ServicesPage();
             case 3:
-                return new Sync();
-            case 4:
                 return new ProfilePageView();
             default:
                 return new Text("Error");
         }
     }
 
-    List<String> titleList = ["Home", "Cards", "Dashboard", "Sync", "Profile"];
+    List<String> titleList = ["openIMIS", "Policy Information", "Services", "Settings"];
 
     _createLanguageDropDown() {
         return DropdownButton<LanguageData>(
@@ -86,7 +85,7 @@ class _DisplayState extends State<Display> {
             appBar: AppBar(
                 automaticallyImplyLeading: false,
                 // backgroundColor: Colors.transparent,
-                backgroundColor: Color.fromRGBO(234, 239, 255, 50),
+                backgroundColor: CustomTheme.lightTheme.primaryColor,//Color.fromRGBO(234, 239, 255, 50),
                 // Remove any elevation to avoid seeing a shadow underneath the translucent material of the app bar.
                 elevation: 0.0,
 
@@ -104,53 +103,34 @@ class _DisplayState extends State<Display> {
             ),
             body:  _getDrawerItemWidget(bottom_nav.currentIndex),
             bottomNavigationBar: CurvedNavigationBar(
-                color: Colors.orange[300],
+                color: CustomTheme.lightTheme.primaryColor,
                 height: 50,
-                // index: 0,
-                // backgroundColor: colorScheme.surface,
-                // selectedFontSize: 24,
-                // selectedItemColor: Color.fromRGBO(252, 65, 3, 0.8),
-                // unselectedItemColor: colorScheme.onSurface.withOpacity(.60),
-                // selectedLabelStyle: textTheme.caption,
-                // unselectedLabelStyle: textTheme.caption,
-
-                // currentIndex: bottom_nav.currentIndex,
-                // initialIndex: 0,
                 onTap: (index) {
-
                     bottom_nav.currentIndex = index;
                 },
-                backgroundColor: Colors.white,
+                backgroundColor: CustomTheme.lightTheme.splashColor.withOpacity(0.25),
                 items: <Widget>[
-                    Icon(Icons.home, size: 30),
-                    Icon(Icons.credit_card, size: 30),
-                    Icon(Icons.camera, size: 30),
-                    Icon(Icons.sync, size: 30),
-                    Icon(Icons.person, size: 30),
+                    Icon(
+                        Icons.home,
+                        size: 30,
+                        color: Colors.white,
+                    ),
+                    Icon(
+                        Icons.credit_card,
+                        size: 30,
+                        color: Colors.white,
+                    ),
+                    Icon(
+                        Icons.camera,
+                        size: 30,
+                        color: Colors.white,
+                    ),
+                    Icon(
+                        Icons.settings,
+                        size: 30,
+                        color: Colors.white,
+                    ),
                 ],
-                // items: [
-                //     BottomNavigationBarItem(
-                //         icon: new Icon(Icons.home),
-                //         title: new Text(''),
-                //     ),
-                //     BottomNavigationBarItem(
-                //         icon: new Icon(Icons.card_giftcard),
-                //         title: new Text('Cards'),
-                //     ),
-                //     BottomNavigationBarItem(
-                //         icon: Icon(Icons.settings),
-                //         title: Text('Settings'),
-                //     ),
-                //     BottomNavigationBarItem(
-                //         icon: Icon(Icons.sync),
-                //         title: Text('Sync'),
-                //     ),
-                //     BottomNavigationBarItem(
-                //         icon: Icon(Icons.person),
-                //         title: Text('Profile'),
-                //     )
-                // ],
-
             ),
         );
 
