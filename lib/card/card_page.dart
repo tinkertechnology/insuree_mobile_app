@@ -1,7 +1,6 @@
 import 'package:card_app/card/sync.dart';
 import 'package:card_app/theme/dark_theme_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:card_app/services/app_state.dart';
 import 'package:provider/provider.dart';
 import 'package:card_app/card/card_homepage.dart';
 import 'package:card_app/services/bottom_nav_bar_service.dart';
@@ -74,7 +73,6 @@ class _DisplayState extends State<Display> {
         );
     }
     Widget build(BuildContext context) {
-        final appState = Provider.of<AppState>(context);
         final bottom_nav = Provider.of<BottomNavigationBarProvider>(context);
         final themeChange = Provider.of<DarkThemeProvider>(context);
 

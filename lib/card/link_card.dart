@@ -3,7 +3,7 @@ import 'package:card_app/blocks/auth_block.dart';
 import 'package:flutter/material.dart';
 import 'package:card_app/card/components/link_card_component.dart';
 // import 'package:card_app/card/components/linked_card_component.dart';
-import 'package:card_app/card/components/linked_cards_component.dart';
+
 import 'package:provider/provider.dart';
 
 class LinkCard extends StatelessWidget {
@@ -35,7 +35,7 @@ class LinkCard extends StatelessWidget {
                                             ),
                                             SizedBox(
                                                 height: 200,
-                                                child : LinkedCard(), //LinkedCardComponent(),
+                                                child : Text('asd'), //LinkedCardComponent(),
                                             ),
                                 
                                             Container(

@@ -9,7 +9,6 @@ import 'package:provider/provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:card_app/auth/auth.dart';
 import 'package:card_app/blocks/auth_block.dart';
-import 'package:card_app/services/app_state.dart';
 import 'package:card_app/services/linked_card_state.dart';
 import 'package:card_app/card/card_page.dart';
 import 'package:card_app/ui/splash_screen.dart';
@@ -85,7 +84,6 @@ class _MyAppState extends State<MyApp> {
         return MultiProvider(
             providers: [
                 ChangeNotifierProvider<AuthBlock>.value(value: AuthBlock()),
-                ChangeNotifierProvider<AppState>.value(value: AppState()),
                 ChangeNotifierProvider<LinkedCardState>.value(value: LinkedCardState()),
                 ChangeNotifierProvider<BottomNavigationBarProvider>.value(value: BottomNavigationBarProvider()),
                 ChangeNotifierProvider(create: (_) {

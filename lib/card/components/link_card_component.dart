@@ -1,4 +1,3 @@
-import 'package:card_app/services/app_state.dart';
 import 'package:flutter/material.dart';
 import 'package:card_app/services/linked_card_state.dart';
 import 'package:provider/provider.dart';

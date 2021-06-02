@@ -3,8 +3,9 @@ import 'dart:convert';
 import 'package:card_app/card/link_card.dart';
 import 'package:card_app/homescreen/homepage_link_sync_event.dart';
 import 'package:card_app/localization/language/languages.dart';
+import 'package:card_app/models/claimed.dart';
+import 'package:card_app/models/insuree_claims.dart';
 import 'package:flutter/material.dart';
-import 'package:card_app/services/app_state.dart';
 import 'package:provider/provider.dart';
 // import 'package:card_app/homescreen/recent_card_used.dart';
 import 'package:card_app/homescreen/recent_card_component.dart';
@@ -25,10 +26,16 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
 
     Future<MedicalServices> _medicalservices;
+    Future<Claims> _insureeclaims;
+    Future<Claimed> _claimed;
     @override
     void initState(){
         super.initState();
+
         _medicalservices = ApiGraphQlServices().MedicalServicesGQL('medicalservice');
+        _insureeclaims = ApiGraphQlServices().ClaimsServicesGQL();
+        _claimed = ApiGraphQlServices().ClaimedServicesGQL();
+
     }
     @override
     Widget build(BuildContext context) {
