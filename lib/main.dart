@@ -5,7 +5,6 @@ import 'package:card_app/models/user_location.dart';
 import 'package:card_app/pages/feedback.dart';
 import 'package:card_app/pages/notification.dart';
 import 'package:card_app/pages/policy.dart';
-import 'package:card_app/pages/profile.dart';
 import 'package:card_app/pages/services.dart';
 import 'package:card_app/theme/dark_theme_provider.dart';
 import 'package:card_app/theme/dark_theme_styles.dart';

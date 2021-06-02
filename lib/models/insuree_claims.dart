@@ -66,7 +66,7 @@ class InsureeClaim {
 
   String id;
   DateTime dateClaimed;
-  int claimed;
+  double claimed;
   HealthFacility healthFacility;
 
   factory InsureeClaim.fromJson(Map<String, dynamic> json) => InsureeClaim(

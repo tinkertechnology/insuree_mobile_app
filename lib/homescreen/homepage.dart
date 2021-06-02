@@ -41,90 +41,6 @@ class _HomeScreenState extends State<HomeScreen> {
     Widget build(BuildContext context) {
 
         final orientation = MediaQuery.of(context).orientation;
-//        var userlocation = Provider.of<UserLocation>(context);
-        /*return Container(
-            height: MediaQuery.of(context).size.height,
-            width: double.infinity,
-            child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-                Container(
-                    height: 300,
-                    width: double.infinity,
-                    color: Color.fromRGBO(234, 239, 255, 50),
-                    child: Column(
-                        // crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                            SizedBox(height: 20.0),
-
-//                    Text(
-//                        'Location: Lat${userlocation?.latitude}, Long: ${userlocation?.longitude}'),
-                            CircleAvatar(
-                                radius: 25,
-                                backgroundColor: Colors.white,
-                                child: ClipOval(
-                                    child: Image.asset("assets/dp.jpg", fit: BoxFit.contain,),
-                                ),
-                            ),
-                            SizedBox(height: 4,),
-                            Text(
-                                Languages
-                                    .of(context)
-                                    .labelWelcome,
-                                style: TextStyle(
-                                    fontSize: 30,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black),
-                            ),
-                            SizedBox(height: 4.0),
-                            ListTile(
-                                title: Text(
-                                    "21",
-                                    style: TextStyle(
-                                        fontSize: 24,
-                                        color: Colors.orange
-                                    ),
-                                    textAlign: TextAlign.center,
-                                ),
-                                subtitle: Text(
-                                    "Cards Linked",
-                                    style: TextStyle(
-                                        fontSize: 14
-                                    ),
-                                    textAlign: TextAlign.center,
-                                ),
-                            ),
-                            SizedBox(height: 10.0),
-
-                            HomeLinkSyncEvent(),
-                        ],
-                    )
-                ),
-
-                SizedBox(height: 24.0),
-                Padding(
-                    padding: EdgeInsets.fromLTRB(25, 0, 0, 15),
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                            Text("Recently used cards"),
-                            Divider(
-                                height: 40,
-                                thickness: 1,
-                                endIndent: 25.0,
-                            ),
-                        ],
-                    ),
-                ),
-                Container(
-                    height: 390,
-                    child: LinkedCardComponent(),
-                    //RecentCard(),
-                ),
-
-            ],
-        ),
-        );*/
         return DraggableScrollableSheet(
             initialChildSize: 0.7,
             minChildSize: 0.01,
@@ -154,18 +70,18 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),*/
                         color: Color.fromRGBO(234, 239, 255, 1),
                     ),
-                    child: FutureBuilder<MedicalServices>(
-                      future: _medicalservices,
+                    child: FutureBuilder<Claims>(
+                      future: _insureeclaims,
                       builder: (context, snapshot) {
                           if(snapshot.hasData) {
                         return ListView.builder(
                             controller: scrollController,
-                            itemCount: snapshot.data.data.medicalServicesStr.edges.length,
+                            itemCount: snapshot.data.data.insureeProfile.insureeClaim.length,
                             itemBuilder: (BuildContext context, int index) {
-                                var medical_services = snapshot.data.data
-                                    .medicalServicesStr.edges[index];
+                                var claims = snapshot.data.data.insureeProfile.insureeClaim
+                                    [index];
                                 return ListTile(
-                                    title: Text('${medical_services.node.name}'));
+                                    title: Text('${claims.dateClaimed}'));
                             }
 
                         );

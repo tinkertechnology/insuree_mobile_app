@@ -1,3 +1,5 @@
+import 'package:card_app/models/medical_services.dart';
+import 'package:card_app/services/api_graphql_services.dart';
 import 'package:card_app/theme/custom_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -7,6 +9,15 @@ class ServicesPage extends StatefulWidget {
 }
 
 class _ServicesPageState extends State<ServicesPage> {
+	Future<MedicalServices> _medicalservices;
+	@override
+	initState(){
+		super.initState();
+		_medicalservices = ApiGraphQlServices().MedicalServicesGQL('medicalservice');
+	}
+
+
+
 	@override
 	Widget build(BuildContext context) {
 		return Scaffold(
@@ -91,53 +102,6 @@ class _ServicesPageState extends State<ServicesPage> {
 	}
 	
 	Widget _getService(String service) {
-		/*return Container(
-			color: Color.fromRGBO(234, 239, 255, 100),
-			// Color.fromRGBO(234, 239, 255, 50),
-			// margin: EdgeInsets.fromLTRB(20, 0, 20, 20),
-			child: Card(
-				elevation: 8.0,
-				margin: new EdgeInsets.symmetric(horizontal: 8.0, vertical: 6.0),
-				child: Container(
-					padding: EdgeInsets.all(8.0),
-					decoration: BoxDecoration(
-						color: Color.fromRGBO(126,174,183,50)
-					),
-					child: Column(
-						crossAxisAlignment: CrossAxisAlignment.start,
-						mainAxisSize: MainAxisSize.min,
-						children: <Widget>[
-							Container(
-								padding: EdgeInsets.only(top: 16.0, bottom: 16.0),
-								child: GestureDetector(
-									onTap: (){
-										print("Tab View clicked");
-										// Navigator.pushNamed(context, '/tab-view');
-									},
-									child: Row(
-										mainAxisAlignment: MainAxisAlignment.spaceBetween,
-										mainAxisSize: MainAxisSize.max,
-										children: <Widget>[
-											Expanded(
-												child: Text(
-													service, //"Address"
-													style: TextStyle(
-														fontSize: 16.0,
-														fontWeight: FontWeight.w400,
-													),
-												),
-											),
-											
-											Icon(Icons.arrow_forward_ios, size: 25)
-										],
-									),
-								)
-							),
-						],
-					),
-				)
-			),
-		);*/
 		
 		return Container(
 			padding: EdgeInsets.only(left: 16.0, top: 16.0, right: 16.0, bottom: 16.0),
@@ -155,22 +119,27 @@ class _ServicesPageState extends State<ServicesPage> {
 					mainAxisAlignment: MainAxisAlignment.spaceBetween,
 					mainAxisSize: MainAxisSize.max,
 					children: <Widget>[
-						Expanded(
-							child: Text(
-								service,
-								style: TextStyle(
-									fontSize: 16,
-									fontWeight: FontWeight.normal
-								),
-								maxLines: 3,
-							),
+						 FutureBuilder<MedicalServices>(
+								future: _medicalservices,
+								builder: (context, snapshot) {
+									if(snapshot.hasData) {
+										return ListView.builder(
+//												controller: scrollController,
+												itemCount: snapshot.data.data.medicalServicesStr.edges.length,
+												itemBuilder: (BuildContext context, int index) {
+													var medical_services = snapshot.data.data
+															.medicalServicesStr.edges[index];
+													return
+														Text('${medical_services.node.name} $index');
+												}
+
+										);
+									}
+									else{
+										return Center(child: CircularProgressIndicator());
+									}
+								}
 						),
-						SizedBox(width: 8.0),
-						Icon(
-							Icons.arrow_forward_ios,
-							size: 25,
-							color: CustomTheme.lightTheme.accentColor,
-						)
 					],
 				),
 			)
