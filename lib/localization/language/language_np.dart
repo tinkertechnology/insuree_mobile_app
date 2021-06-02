@@ -1,6 +1,6 @@
 import 'languages.dart';
 
-class LanguageHi extends Languages {
+class LanguageNp extends Languages {
   @override
   String get appName => "बहु भाषा";
 

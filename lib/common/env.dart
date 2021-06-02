@@ -187,7 +187,7 @@ String API_BASE_URL =  getBaseUrl();
 
 
 
-
+String Currency = "Npr.";
 
 
 

@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:card_app/models/medical_services.dart';
 import 'package:card_app/models/insuree_claims.dart';
 import 'package:card_app/models/claimed.dart';
+import 'package:card_app/models/claimed_services_items.dart';
 import 'package:card_app/graphql/gql_queries.dart';
 import 'package:card_app/common/env.dart' as env;
 
@@ -11,6 +12,7 @@ class ApiGraphQlServices {
   MedicalServices medicalServices = MedicalServices();
   Claims insuree_claims = Claims();
   Claimed claimed = Claimed();
+  ClaimedServicesItems claimedServicesItems = ClaimedServicesItems();
 
   Future<MedicalServices> MedicalServicesGQL(String args) async {
     try {
@@ -29,8 +31,7 @@ class ApiGraphQlServices {
     }
     return medicalServices;
   }
-var requestbody = {"query":"query{\n  insureeProfile(insureeCHFID: 1){\n    insureeClaim{\n"
-    "      id\n      dateClaimed\n      claimed\n      healthFacility{\n        name\n      }\n    }\n  }\n}","variables":null};
+
   Future<Claims> ClaimsServicesGQL() async {
     try {
       final response = await http.post(Uri.parse(env.API_BASE_URL),
@@ -38,7 +39,7 @@ var requestbody = {"query":"query{\n  insureeProfile(insureeCHFID: 1){\n    insu
             "Content-Type": "application/json",
                 "Accept" : "application/json"
           },
-          body: jsonEncode(requestbody)
+          body: jsonEncode(openimisGqlQueries().openimis_gql_insuree_claims(1))
 
           );
         var jsonMap = response.body;
@@ -66,5 +67,24 @@ var requestbody = {"query":"query{\n  insureeProfile(insureeCHFID: 1){\n    insu
       return claimed;
     }
     return claimed;
+  }
+
+
+  Future<ClaimedServicesItems> ClaimedServicesItemsServicesGQL() async { //todo pass claim id from widget
+    try {
+      final response = await http.post(Uri.parse(env.API_BASE_URL),
+          headers: {
+            "Content-Type": "application/json",
+//                "Accept" : "application/json"
+          },
+          body: jsonEncode(openimisGqlQueries()
+              .openimis_gql_individual_claimed_item_services(2)) //todo map qs filtering
+      );
+      var jsonMap = json.decode(response.body);
+      claimedServicesItems = ClaimedServicesItems.fromJson(jsonMap);
+    } catch (Exception) {
+      return claimedServicesItems;
+    }
+    return claimedServicesItems;
   }
 }

@@ -1,20 +1,21 @@
 import 'dart:convert';
 
-import 'package:card_app/card/link_card.dart';
 import 'package:card_app/homescreen/homepage_link_sync_event.dart';
 import 'package:card_app/localization/language/languages.dart';
 import 'package:card_app/models/claimed.dart';
 import 'package:card_app/models/insuree_claims.dart';
+import 'package:card_app/profile/profile_main.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-// import 'package:card_app/homescreen/recent_card_used.dart';
-import 'package:card_app/homescreen/recent_card_component.dart';
 import 'package:card_app/models/user_location.dart';
 import 'package:card_app/services/auth_service.dart';
-import 'package:graphql/client.dart';
 import 'package:http/http.dart' as http;
+import 'package:card_app/common/env.dart' as env;
 import 'package:card_app/models/medical_services.dart';
+import 'package:card_app/models/claimed_services_items.dart';
 import 'package:card_app/services/api_graphql_services.dart';
+
+
 
 
 
@@ -28,6 +29,8 @@ class _HomeScreenState extends State<HomeScreen> {
     Future<MedicalServices> _medicalservices;
     Future<Claims> _insureeclaims;
     Future<Claimed> _claimed;
+    Future<ClaimedServicesItems> _claimedservicesitems;
+
     @override
     void initState(){
         super.initState();
@@ -35,6 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
         _medicalservices = ApiGraphQlServices().MedicalServicesGQL('medicalservice');
         _insureeclaims = ApiGraphQlServices().ClaimsServicesGQL();
         _claimed = ApiGraphQlServices().ClaimedServicesGQL();
+        _claimedservicesitems = ApiGraphQlServices().ClaimedServicesItemsServicesGQL();
 
     }
     @override
@@ -58,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: FutureBuilder<Claims>(
                       future: _insureeclaims,
                       builder: (context, snapshot) {
-                          if(snapshot.hasData) {
+                          if(snapshot.hasData && snapshot.data.data!=null) {
                         return ListView.builder(
                             controller: scrollController,
                             itemCount: snapshot.data.data.insureeProfile.insureeClaim.length,
@@ -66,11 +70,23 @@ class _HomeScreenState extends State<HomeScreen> {
                                 var claims = snapshot.data.data.insureeProfile.insureeClaim
                                     [index];
                                 return ListTile(
-                                    title: Text('${claims.dateClaimed}'));
+                                    trailing: Text('${env.Currency} ${claims.claimed}'),
+                                    title: Text('${claims.dateClaimed}'),
+                                    subtitle: Text('${claims.healthFacility.name}'),
+                                    onTap: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) => ProfilePageView(),
+                                            ),
+                                        );
+                                    },
+                                );
                             }
 
                         );
-                      } else{
+                      }
+                          else{
                               return Center(child: CircularProgressIndicator());
                           }
                       }

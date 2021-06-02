@@ -1,4 +1,5 @@
 import 'package:card_app/common/env.dart';
+import 'package:card_app/theme/dark_theme_provider.dart';
 import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -63,6 +64,8 @@ class _ProfilePageViewState extends State<ProfilePageView> {
    
     
     final auth = Provider.of<AuthBlock>(context);
+		final themeChange = Provider.of<DarkThemeProvider>(context);
+
 		return Scaffold(
 			backgroundColor: Color.fromRGBO(234, 239, 255, 50),
 			body: SingleChildScrollView(
@@ -326,6 +329,14 @@ class _ProfilePageViewState extends State<ProfilePageView> {
 											});
 										}
 									),
+									value: themeChange.darkTheme,
+									activeColor: Colors.red,
+									inactiveTrackColor: Colors.grey,
+									onChanged: (bool value) {
+
+													themeChange.darkTheme = value;
+
+									},
 								),
 							),
 						),
@@ -400,7 +411,7 @@ class _ProfilePageViewState extends State<ProfilePageView> {
 												child: GestureDetector(
 													onTap: () async {
 														await auth.logout();
-                            bottom_nav.currentIndex = 0;
+//                            bottom_nav.currentIndex = 0;
 														Navigator.of(context)
 															.pushNamedAndRemoveUntil('/insuree_verify', (Route<dynamic> route) => false);
 													},

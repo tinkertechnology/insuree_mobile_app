@@ -1,5 +1,6 @@
 import 'package:card_app/auth/register_card.dart';
 import 'package:card_app/auth/reset-password.dart';
+import 'package:card_app/models/connectivity.dart';
 import 'package:card_app/models/insuree.dart';
 import 'package:card_app/models/user_location.dart';
 import 'package:card_app/pages/feedback.dart';
@@ -8,6 +9,7 @@ import 'package:card_app/pages/policy.dart';
 import 'package:card_app/pages/services.dart';
 import 'package:card_app/theme/dark_theme_provider.dart';
 import 'package:card_app/theme/dark_theme_styles.dart';
+import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -18,7 +20,7 @@ import 'package:card_app/card/card_page.dart';
 import 'package:card_app/ui/splash_screen.dart';
 import 'package:card_app/services/bottom_nav_bar_service.dart';
 import 'package:card_app/auth/login_card.dart';
-import 'package:card_app/card/add_card.dart'; 
+import 'package:card_app/card/add_card.dart';
 import 'package:card_app/profile/profile_main.dart';
 import 'package:card_app/profile/pages/profile_info.dart';
 import 'card/sync.dart';
@@ -27,14 +29,14 @@ import 'package:card_app/services/location_service.dart';
 
 import 'localization/locale_constant.dart';
 import 'localization/localizations_delegate.dart';
-import 'package:graphql/client.dart';
 import 'package:card_app/auth/verify_insuree.dart';
-import 'package:card_app/models/insuree.dart';
+import 'package:card_app/services/connectivity.dart';
+
+import 'models/connectivity_status.dart';
 
 
 void main() async{
     WidgetsFlutterBinding.ensureInitialized();
-    await HiveStore.openBox;
     runApp(MyApp());
 }
 
@@ -53,9 +55,9 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
     Insuree insuree;
     DarkThemeProvider themeChangeProvider = new DarkThemeProvider();
+    ConnectivityService connectivityStatus = new ConnectivityService();
 
     Locale _locale;
-    GraphQLClient _client;
     void setLocale(Locale locale) {
         setState(() {
             _locale = locale;
@@ -93,7 +95,10 @@ class _MyAppState extends State<MyApp> {
                 ChangeNotifierProvider(create: (_) {
                     return themeChangeProvider;
                 }),
-                 StreamProvider<UserLocation>.value(value: LocationService().locationStream)
+                 StreamProvider<UserLocation>.value(value: LocationService().locationStream),
+                StreamProvider(
+                    create: (context) => Connectivity().onConnectivityChanged),
+
             ],
             child: Consumer<DarkThemeProvider>(
                 builder: (BuildContext context, value, Widget child) {

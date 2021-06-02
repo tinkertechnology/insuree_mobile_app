@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:card_app/localization/language/language_ar.dart';
 import 'package:card_app/localization/language/language_en.dart';
-import 'package:card_app/localization/language/language_hi.dart';
+import 'package:card_app/localization/language/language_np.dart';
 
 import 'language/languages.dart';
 
@@ -23,7 +23,7 @@ class AppLocalizationsDelegate extends LocalizationsDelegate<Languages> {
       case 'ar':
         return LanguageAr();
       case 'hi':
-        return LanguageHi();
+        return LanguageNp();
       default:
         return LanguageEn();
     }

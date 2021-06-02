@@ -11,20 +11,11 @@ class openimisGqlQueries{
       };
   }
 
-  openimis_gql_insuree_claims(){ //pass insureeCHFID
+  openimis_gql_insuree_claims(insuree_chfid){ //pass insureeCHFID
     return
-      {"query":"query{\n"
-          "  insureeProfile(insureeCHFID: 1){\n"
-          "    insureeClaim{\n"
-          "      id\n"
-          "      dateClaimed\n"
-          "      claimed\n"
-          "      healthFacility{\n"
-          "        name\n"
-          "      }\n"
-          "    }\n"
-          "  }\n"
-          "}","variables":null};
+      {"query":"query{\n  insureeProfile(insureeCHFID: ${insuree_chfid}){\n    insureeClaim{\n"
+          "      id\n      dateClaimed\n      claimed\n      healthFacility{\n        name\n      }\n    }\n  }\n}","variables":null
+      };
 
   }
 

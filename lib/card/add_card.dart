@@ -4,7 +4,6 @@ import 'package:card_app/models/userform.dart';
 import 'package:card_app/common/env.dart' as env;
 import 'package:http/http.dart' as http;
 import 'package:awesome_dialog/awesome_dialog.dart';
-import 'package:card_app/services/add_card_service.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class AddCard extends StatefulWidget {
@@ -1070,4 +1069,6 @@ class _AddCardState extends State<AddCard> {
     );
     _scaffoldKey.currentState.showSnackBar(snackBar);
   }
+
+  RetriveLinkedCard(int cardpk) {}
 }
