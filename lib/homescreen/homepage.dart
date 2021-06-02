@@ -43,7 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
         final orientation = MediaQuery.of(context).orientation;
         return DraggableScrollableSheet(
             initialChildSize: 0.7,
-            minChildSize: 0.01,
+            minChildSize: 0.05,
             maxChildSize: 0.7,
             builder: (BuildContext context, ScrollController scrollController) {
                 return Container(
@@ -53,21 +53,6 @@ class _HomeScreenState extends State<HomeScreen> {
                             topLeft: Radius.circular(10),
                             topRight: Radius.circular(10)
                         ),
-                        /*gradient: LinearGradient(
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                            *//*stops: [
-                                0.1,
-                                0.4,
-                                0.6,
-                            ],*//*
-                            colors: [
-                                CustomTheme.lightTheme.primaryColor,
-                                CustomTheme.lightTheme.splashColor,
-                                //Color.fromRGBO(234, 239, 255, 1),
-                                CustomTheme.lightTheme.accentColor
-                            ]
-                        ),*/
                         color: Color.fromRGBO(234, 239, 255, 1),
                     ),
                     child: FutureBuilder<Claims>(

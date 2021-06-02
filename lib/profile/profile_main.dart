@@ -12,6 +12,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
 import 'package:card_app/blocks/auth_block.dart';
+
 class ProfilePageView extends StatefulWidget {
 	@override
 	_ProfilePageViewState createState() => _ProfilePageViewState();
@@ -59,6 +60,8 @@ class _ProfilePageViewState extends State<ProfilePageView> {
 	@override
 	Widget build(BuildContext context) {
     final bottom_nav = Provider.of<BottomNavigationBarProvider>(context);
+   
+    
     final auth = Provider.of<AuthBlock>(context);
 		return Scaffold(
 			backgroundColor: Color.fromRGBO(234, 239, 255, 50),
@@ -186,7 +189,7 @@ class _ProfilePageViewState extends State<ProfilePageView> {
 											
 											// NOTIFICATIONS
 											Container(
-												padding: EdgeInsets.only(top: 16.0, bottom: 16.0),
+												//padding: EdgeInsets.only(top: 16.0, bottom: 16.0),
 												decoration: BoxDecoration(
 													border: Border(
 														bottom: BorderSide(color: Colors.grey.withOpacity(0.2), width: 1.0)
@@ -198,31 +201,18 @@ class _ProfilePageViewState extends State<ProfilePageView> {
 														Navigator.pushNamed(context, '/notifications');
 													},
 													
-													child: Row(
-														mainAxisAlignment: MainAxisAlignment.spaceBetween,
-														mainAxisSize: MainAxisSize.max,
-														children: <Widget>[
-															Expanded(
-																child: Row(
-																	children: <Widget>[
-																		Icon(Icons.map, size: 30,),
-																		SizedBox(width: 20.0),
-																		Text(
-																			"Notifications"
-																		),
-																	],
-																),
-															),
-															
-															Icon(Icons.arrow_forward_ios, size: 25)
-														],
-													),
+													child: ListTile(
+														title: Text('Notifications'),
+														//subtitle: Text('write a feedback'),
+														leading: Icon(Icons.notifications),
+														trailing: Icon(Icons.arrow_forward_ios),
+													)
 												)
 											),
 											
 											// SERVICE PROVIDER LIST
 											Container(
-												padding: EdgeInsets.only(top: 16.0, bottom: 16.0),
+												// padding: EdgeInsets.only(top: 16.0, bottom: 16.0),
 												decoration: BoxDecoration(
 													border: Border(
 														bottom: BorderSide(color: Colors.grey.withOpacity(0.2), width: 1.0)
@@ -232,31 +222,18 @@ class _ProfilePageViewState extends State<ProfilePageView> {
 													onTap: (){
 														print("clicked");
 													},
-													child: Row(
-														mainAxisAlignment: MainAxisAlignment.spaceBetween,
-														mainAxisSize: MainAxisSize.max,
-														children: <Widget>[
-															Expanded(
-																child: Row(
-																	children: <Widget>[
-																		Icon(Icons.history, size: 30,),
-																		SizedBox(width: 20.0),
-																		Text(
-																			"Service Provider List"
-																		),
-																	],
-																),
-															),
-															
-															Icon(Icons.arrow_forward_ios, size: 25)
-														],
-													),
+													child: ListTile(
+														title: Text('Service Provider List'),
+														//subtitle: Text('write a feedback'),
+														leading: Icon(Icons.list),
+														trailing: Icon(Icons.arrow_forward_ios),
+													)
 												)
 											),
 											
 											// NOTICE
 											Container(
-												padding: EdgeInsets.only(top: 16.0, bottom: 16.0),
+												// padding: EdgeInsets.only(top: 16.0, bottom: 16.0),
 												decoration: BoxDecoration(
 													border: Border(
 														bottom: BorderSide(color: Colors.grey.withOpacity(0.2), width: 1.0)
@@ -266,55 +243,29 @@ class _ProfilePageViewState extends State<ProfilePageView> {
 													onTap: (){
 														print("Notice Board clicked");
 													},
-													child: Row(
-														mainAxisAlignment: MainAxisAlignment.spaceBetween,
-														mainAxisSize: MainAxisSize.max,
-														children: <Widget>[
-															Expanded(
-																child: Row(
-																	children: <Widget>[
-																		Icon(Icons.account_circle, size: 30,),
-																		SizedBox(width: 20.0),
-																		Text(
-																			"Notice"
-																		),
-																	],
-																),
-															),
-															
-															Icon(Icons.arrow_forward_ios, size: 25)
-														],
-													),
+													child: ListTile(
+														title: Text('Notice'),
+														//subtitle: Text('write a feedback'),
+														leading: Icon(Icons.note),
+														trailing: Icon(Icons.arrow_forward_ios),
+													)
 												)
 											),
 											
 											// FEEDBACK
 											Container(
-												padding: EdgeInsets.only(top: 16.0, bottom: 16.0),
+												//padding: EdgeInsets.only(top: 16.0, bottom: 16.0),
 												child: GestureDetector(
 													onTap: (){
 														print("Feedback page clicked...");
 														Navigator.pushNamed(context, '/feedback');
 													},
-													child: Row(
-														mainAxisAlignment: MainAxisAlignment.spaceBetween,
-														mainAxisSize: MainAxisSize.max,
-														children: <Widget>[
-															Expanded(
-																child: Row(
-																	children: <Widget>[
-																		Icon(Icons.account_circle, size: 30,),
-																		SizedBox(width: 20.0),
-																		Text(
-																			"Feedback"
-																		),
-																	],
-																),
-															),
-															
-															Icon(Icons.arrow_forward_ios, size: 25)
-														],
-													),
+													child: ListTile(
+														title: Text('Feedback'),
+														//subtitle: Text('write a feedback'),
+														leading: Icon(Icons.feedback),
+														trailing: Icon(Icons.arrow_forward_ios),
+													)
 												)
 											),
 										],
@@ -332,58 +283,49 @@ class _ProfilePageViewState extends State<ProfilePageView> {
 									side: BorderSide(color: Colors.white70, width: 1),
 									borderRadius: BorderRadius.circular(20),
 								),
-								child: SwitchListTile(
-									title: Container(
-										child: Row(
-											children: [
-												Icon(Icons.language, size: 30,),
-												SizedBox(width: 20.0),
-												Text(
-													'Update Language',
-												)
-											],
-										),
+								child: Container(
+									padding: EdgeInsets.all(8.0),
+									child: SwitchListTile(
+										title: Text('Update Language'),
+										subtitle: Text('change language to your preferred language'),
+										secondary: Icon(Icons.language),
+										value: _flutter,
+										activeColor: Colors.yellow[500],
+										inactiveTrackColor: Colors.grey,
+										onChanged: (bool val){
+											setState(() {
+												_flutter = val;
+											});
+										}
 									),
-									value: _flutter,
-									activeColor: Colors.green,
-									inactiveTrackColor: Colors.grey,
-									onChanged: (bool value) {
-										setState(() {
-											_flutter = value;
-										});
-									},
 								),
 							),
 						),
 						
 						// DARK/LIGHT THEME
 						Container(
-							margin: EdgeInsets.fromLTRB(16, 8, 16, 8),
+							margin: EdgeInsets.fromLTRB(20, 0, 20, 20),
 							child: Card(
 								color: Colors.white,
 								shape: RoundedRectangleBorder(
 									side: BorderSide(color: Colors.white70, width: 1),
 									borderRadius: BorderRadius.circular(20),
 								),
-								child: SwitchListTile(
-									title: Container(
-										padding: EdgeInsets.only(left: 16.0, top: 16.0, bottom:16.0, right: 16.0),
-										child: Row(
-											children: [
-												Icon(Icons.info_outline, size: 30,),
-												SizedBox(width: 20.0),
-												Text('Dark/Light')
-											],
-										),
+								child: Container(
+									padding: EdgeInsets.all(8.0),
+									child: SwitchListTile(
+										title: Text('Dark/Light Theme'),
+										subtitle: Text('Change theme color'),
+										secondary: Icon(Icons.brightness_6),
+										value: _flutter,
+										activeColor: Colors.yellow[500],
+										inactiveTrackColor: Colors.grey,
+										onChanged: (bool val){
+											setState(() {
+												_flutter = val;
+											});
+										}
 									),
-									value: _flutter,
-									activeColor: Colors.red,
-									inactiveTrackColor: Colors.grey,
-									onChanged: (bool value) {
-										setState(() {
-											_flutter = value;
-										});
-									},
 								),
 							),
 						),

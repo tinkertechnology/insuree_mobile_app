@@ -38,7 +38,45 @@ class _ServicesPageState extends State<ServicesPage> {
 								child: CustomScrollView(
 									slivers: <Widget>[
 										SliverList(
-											delegate: SliverChildListDelegate(_getServices()),
+											delegate: SliverChildBuilderDelegate(
+												(BuildContext context, int index){
+													return Container(
+														padding: EdgeInsets.only(left: 16.0, top: 16.0, right: 16.0, bottom: 16.0),
+														decoration: BoxDecoration(
+															border: Border(
+																bottom: BorderSide(color: Colors.grey.withOpacity(0.2), width: 1.0)
+															)
+														),
+														child: GestureDetector(
+															onTap: (){
+																print("Tab View clicked");
+															},
+															
+															child: FutureBuilder<MedicalServices>(
+																future: _medicalservices,
+																builder: (context, snapshot) {
+																	if(snapshot.hasData) {
+																		return ListView.builder(
+//												controller: scrollController,
+																			itemCount: snapshot.data.data.medicalServicesStr.edges.length,
+																			itemBuilder: (BuildContext context, int index) {
+																				var medical_services = snapshot.data.data
+																					.medicalServicesStr.edges[index];
+																				return
+																					Text('${medical_services.node.name} $index');
+																			}
+																		
+																		);
+																	}
+																	else{
+																		return Center(child: CircularProgressIndicator());
+																	}
+																}
+															),
+														)
+													);
+												}
+											),
 										)
 									],
 								),
@@ -55,54 +93,10 @@ class _ServicesPageState extends State<ServicesPage> {
 		service.add(
 			_getService('M1 OBG Cervical Cerclage - Shrodikar')
 		);
-		service.add(
-			_getService('M2 OBG Cervix Repair')
-		);
-		service.add(
-			_getService('M3 OBG Colpotomy')
-		);
-		service.add(
-			_getService('M4 OBG Mursupialisation')
-		);
-		service.add(
-			_getService('M5 OBG Perineal / Genital Repair')
-		);
-		service.add(
-			_getService('M6 OBG Polypectomy - Cervical')
-		);
-		service.add(
-			_getService('M7 OBG Surgical Toilet and Suture for 3rd Degree Tears')
-		);
-		service.add(
-			_getService('M8 SUR Anal Dilatation')
-		);
-		service.add(
-			_getService('M9 SUR Biopsy - Incisional')
-		);
-		service.add(
-			_getService('M10 SUR Biopsy - Lymph Node')
-		);
-		service.add(
-			_getService('M6 OBG Polypectomy - Cervical')
-		);
-		service.add(
-			_getService('M7 OBG Surgical Toilet and Suture for 3rd Degree Tears')
-		);
-		service.add(
-			_getService('M8 SUR Anal Dilatation')
-		);
-		service.add(
-			_getService('M9 SUR Biopsy - Incisional')
-		);
-		service.add(
-			_getService('M10 SUR Biopsy - Lymph Node')
-		);
-		
 		return service;
 	}
 	
 	Widget _getService(String service) {
-		
 		return Container(
 			padding: EdgeInsets.only(left: 16.0, top: 16.0, right: 16.0, bottom: 16.0),
 			decoration: BoxDecoration(
@@ -115,32 +109,26 @@ class _ServicesPageState extends State<ServicesPage> {
 					print("Tab View clicked");
 				},
 				
-				child: Row(
-					mainAxisAlignment: MainAxisAlignment.spaceBetween,
-					mainAxisSize: MainAxisSize.max,
-					children: <Widget>[
-						 FutureBuilder<MedicalServices>(
-								future: _medicalservices,
-								builder: (context, snapshot) {
-									if(snapshot.hasData) {
-										return ListView.builder(
+				child: FutureBuilder<MedicalServices>(
+					future: _medicalservices,
+					builder: (context, snapshot) {
+						if(snapshot.hasData) {
+							return ListView.builder(
 //												controller: scrollController,
-												itemCount: snapshot.data.data.medicalServicesStr.edges.length,
-												itemBuilder: (BuildContext context, int index) {
-													var medical_services = snapshot.data.data
-															.medicalServicesStr.edges[index];
-													return
-														Text('${medical_services.node.name} $index');
-												}
-
-										);
-									}
-									else{
-										return Center(child: CircularProgressIndicator());
-									}
+								itemCount: snapshot.data.data.medicalServicesStr.edges.length,
+								itemBuilder: (BuildContext context, int index) {
+									var medical_services = snapshot.data.data
+										.medicalServicesStr.edges[index];
+									return
+										Text('${medical_services.node.name} $index');
 								}
-						),
-					],
+							
+							);
+						}
+						else{
+							return Center(child: CircularProgressIndicator());
+						}
+					}
 				),
 			)
 		);
