@@ -1,20 +1,21 @@
 import 'package:card_app/card/sync.dart';
+import 'package:card_app/models/connectivity_status.dart';
 import 'package:card_app/pages/policy.dart';
 import 'package:card_app/pages/services.dart';
 import 'package:card_app/theme/custom_theme.dart';
 import 'package:card_app/theme/dark_theme_provider.dart';
+import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:card_app/card/card_homepage.dart';
 import 'package:card_app/services/bottom_nav_bar_service.dart';
-import 'package:card_app/card/link_card.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:card_app/profile/profile_main.dart';
 import 'package:card_app/services/location_service.dart';
 import 'package:card_app/localization/language/languages.dart';
 import 'package:card_app/localization/locale_constant.dart';
 import 'package:card_app/models/language_data.dart';
-
+import 'package:card_app/models/connectivity.dart';
 class Display extends StatefulWidget {
   final int initIndex;
   Display({Key key, @required this.initIndex}) : super(key: key);
@@ -73,35 +74,25 @@ class _DisplayState extends State<Display> {
     }
     Widget build(BuildContext context) {
         final bottom_nav = Provider.of<BottomNavigationBarProvider>(context);
-        final themeChange = Provider.of<DarkThemeProvider>(context);
+        var connectionStatus = Provider.of<ConnectivityResult>(context);
+        if(connectionStatus==ConnectivityResult.none){setState(() {
 
-        print('123');
-
-        // appState.fetchData();
+        });}
 
         return Scaffold(
-            // extendBodyBehindAppBar: true,
-            // extendBody: true,
             appBar: AppBar(
                 automaticallyImplyLeading: false,
-                // backgroundColor: Colors.transparent,
                 backgroundColor: CustomTheme.lightTheme.primaryColor,//Color.fromRGBO(234, 239, 255, 50),
-                // Remove any elevation to avoid seeing a shadow underneath the translucent material of the app bar.
                 elevation: 0.0,
-
-                //title: Text('Photo frame'),
                 actions: <Widget>[
-                    Switch(
-                        value: themeChange.darkTheme,
-                        onChanged: (bool value) {
-                            themeChange.darkTheme = value;
-                        }),
                     _createLanguageDropDown()
                 ],
                 title: Text(titleList[bottom_nav.currentIndex], textAlign: TextAlign.center,),
 
             ),
-            body:  _getDrawerItemWidget(bottom_nav.currentIndex),
+            body : connectionStatus==ConnectivityResult.none ?
+                    Container(child: Center(child: Text('No Internet Connection'),),)
+                :_getDrawerItemWidget(bottom_nav.currentIndex),
             bottomNavigationBar: CurvedNavigationBar(
                 color: CustomTheme.lightTheme.primaryColor,
                 height: 50,
