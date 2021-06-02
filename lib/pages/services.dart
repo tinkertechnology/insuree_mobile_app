@@ -9,64 +9,8 @@ class ServicesPage extends StatefulWidget {
 class _ServicesPageState extends State<ServicesPage> {
 	@override
 	Widget build(BuildContext context) {
-		/*return Scaffold(
-//			appBar: PreferredSize(
-//				child: AppBar(
-//					backgroundColor: Color.fromRGBO(0, 103, 35, 50),
-//					elevation: 0,
-//				),
-//				preferredSize: Size.fromHeight(0),
-//			),
-			body: CustomScrollView(
-				slivers: <Widget>[
-					SliverAppBar(
-						title: Text('Services'),
-						backgroundColor: Color.fromRGBO(41,127,141,50),
-						centerTitle: false,
-					),
-					SliverList(
-						delegate: SliverChildListDelegate(_getServices()),
-					)
-				],
-			),
-		);*/
 		return Scaffold(
 			backgroundColor: CustomTheme.lightTheme.primaryColor,
-			appBar: AppBar(
-				elevation: 0.0,
-				title: Text(
-					'Services',
-					style: TextStyle(
-						color: Colors.white
-					),
-				),
-				backgroundColor: CustomTheme.lightTheme.primaryColor,
-			),
-			/*body: CustomScrollView(
-			  slivers: <Widget>[
-				  SliverAppBar(
-					  title: Text('Notifications'),
-					  backgroundColor: Color.fromRGBO(41,127,141,50), //Colors.white,
-					  centerTitle: false,
-					  actions: <Widget>[
-						  Container(
-							  child: IconButton(
-								  icon: Icon(Icons.notifications),
-								  color: Colors.black,
-								  disabledColor: Colors.black,
-								  splashColor: Theme.of(context).accentColor,
-								  onPressed: () {},
-							  ),
-						  ),
-						  Padding(
-							  padding: EdgeInsets.only(right: 10),
-						  ),
-					  ]),
-				  SliverList(
-					  delegate: SliverChildListDelegate(_getNotifications()),
-				  )
-			  ],
-		  ),*/
 			body: Column(
 				children: <Widget>[
 					Expanded(

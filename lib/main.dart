@@ -2,6 +2,11 @@ import 'package:card_app/auth/register_card.dart';
 import 'package:card_app/auth/reset-password.dart';
 import 'package:card_app/models/insuree.dart';
 import 'package:card_app/models/user_location.dart';
+import 'package:card_app/pages/feedback.dart';
+import 'package:card_app/pages/notification.dart';
+import 'package:card_app/pages/policy.dart';
+import 'package:card_app/pages/profile.dart';
+import 'package:card_app/pages/services.dart';
 import 'package:card_app/theme/dark_theme_provider.dart';
 import 'package:card_app/theme/dark_theme_styles.dart';
 import 'package:flutter/material.dart';
@@ -120,12 +125,12 @@ class _MyAppState extends State<MyApp> {
                         // locale: locale,
                         debugShowCheckedModeBanner: false,
                         theme: Styles.themeData(themeChangeProvider.darkTheme, context),
-                        initialRoute: '/splash',
+                        initialRoute: '/card',
                         routes: <String, WidgetBuilder>{
                             '/ggg': (BuildContext context) => Auth(),
                             '/card' :(BuildContext context) => Display(initIndex: null,),
                             '/profile' :(BuildContext context) => ProfilePageView(),
-                            '/profileInfo' :(BuildContext context) => ProfileInfo(),
+                            
                             '/sync' :(BuildContext context) => Sync(),
                             '/splash':(BuildContext context) => SplashScreen(),
                             '/':(BuildContext context) => LoginScreen(), //OTP this is
@@ -135,6 +140,21 @@ class _MyAppState extends State<MyApp> {
                             '/insuree_verify' :(BuildContext context) => VerifyInsuree(),
                             // SIGN UP
                             '/reset-password':(BuildContext context) => ResetPassword(),
+                            
+                            //POLICY INFORMATION
+                            '/policy-information':(BuildContext context) => PolicyInformation(),
+    
+                            // SERVICES
+                            '/services':(BuildContext context) => ServicesPage(),
+    
+                            // NOTIFICATIONS
+                            '/notifications':(BuildContext context) => NotificationPage(),
+    
+                            // FEEDBACK
+                            '/feedback':(BuildContext context) => FeedbackPage(),
+    
+                            // PROFILE INFO
+                            '/profile-info' :(BuildContext context) => ProfileInfo(),
                         },
                     );
                 }));
