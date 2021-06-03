@@ -1,9 +1,7 @@
-import 'package:card_app/card/sync.dart';
-import 'package:card_app/models/connectivity_status.dart';
+import 'package:card_app/pages/history.dart';
 import 'package:card_app/pages/policy.dart';
 import 'package:card_app/pages/services.dart';
 import 'package:card_app/theme/custom_theme.dart';
-import 'package:card_app/theme/dark_theme_provider.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -11,11 +9,10 @@ import 'package:card_app/card/card_homepage.dart';
 import 'package:card_app/services/bottom_nav_bar_service.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:card_app/profile/profile_main.dart';
-import 'package:card_app/services/location_service.dart';
 import 'package:card_app/localization/language/languages.dart';
 import 'package:card_app/localization/locale_constant.dart';
 import 'package:card_app/models/language_data.dart';
-import 'package:card_app/models/connectivity.dart';
+
 class Display extends StatefulWidget {
   final int initIndex;
   Display({Key key, @required this.initIndex}) : super(key: key);
@@ -29,19 +26,20 @@ class _DisplayState extends State<Display> {
         switch (pos) {
             case 0:
                 return new CardHome();
-            case 1:
-                //return new LinkCard();
-                return new PolicyInformation();
+	        case 1:
+		        return new HistoryPage();
             case 2:
-                return new ServicesPage();
+                return new PolicyInformation();
             case 3:
+                return new ServicesPage();
+            case 4:
                 return new ProfilePageView();
             default:
                 return new Text("Error");
         }
     }
 
-    List<String> titleList = ["openIMIS", "Policy Information", "Services", "Settings"];
+    List<String> titleList = ["openIMIS", "History", "Policy Information", "My Services", "Settings"];
 
     _createLanguageDropDown() {
         return DropdownButton<LanguageData>(
@@ -107,6 +105,11 @@ class _DisplayState extends State<Display> {
                         color: Colors.white,
                     ),
                     Icon(
+                        Icons.history,
+                        size: 30,
+                        color: Colors.white,
+                    ),
+                    Icon(
                         Icons.credit_card,
                         size: 30,
                         color: Colors.white,
@@ -117,7 +120,7 @@ class _DisplayState extends State<Display> {
                         color: Colors.white,
                     ),
                     Icon(
-                        Icons.settings,
+                        Icons.more_vert,
                         size: 30,
                         color: Colors.white,
                     ),
