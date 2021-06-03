@@ -9,6 +9,8 @@ import 'package:card_app/services/api_graphql_services.dart';
 import 'package:card_app/models/claimed.dart';
 import 'package:card_app/models/insuree_claims.dart';
 
+import 'claimed_item_services.dart';
+
 class HistoryPage extends StatefulWidget {
 	@override
 	_HistoryPageState createState() => _HistoryPageState();
@@ -212,7 +214,7 @@ class _HistoryPageState extends State<HistoryPage> {
 												Navigator.push(
 													context,
 													MaterialPageRoute(
-														builder: (context) => ProfilePageView(),
+															builder: (context) => ClaimedItemServicesPage(claimid: int.parse(claims.id)),
 													),
 												);
 											},
