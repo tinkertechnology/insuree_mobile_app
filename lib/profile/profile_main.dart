@@ -79,7 +79,7 @@ class _ProfilePageViewState extends State<ProfilePageView> {
 									side: BorderSide(color: Colors.white70, width: 1),
 									borderRadius: BorderRadius.circular(20),
 								),
-								child: InkWell(
+								/*child: InkWell(
 									onTap: (){
 										print('Profile Clicked');
 										Navigator.pushNamed(context, '/profile-info');
@@ -115,20 +115,14 @@ class _ProfilePageViewState extends State<ProfilePageView> {
 															Column(
 																crossAxisAlignment: CrossAxisAlignment.start,
 																children: <Widget>[
-																	InkWell(
-																		onTap: (){
-																			Navigator.pushNamed(context, '/profileInfo');
-																		},
-																		child: Text(
-																			"Hari Bahadur Thapa",
-																			softWrap: true,
-																			style: TextStyle(
-																				fontSize: 14.0,
-																				fontFamily: "Open-sans"
-																			),
+																	Text(
+																		"Hari Bahadur Thapa",
+																		softWrap: true,
+																		style: TextStyle(
+																			fontSize: 14.0,
+																			fontFamily: "Open-sans"
 																		),
 																	),
-																	
 																	SizedBox(height: 8.0),
 																	Text("9841-xxx-xxx")
 																],
@@ -140,7 +134,6 @@ class _ProfilePageViewState extends State<ProfilePageView> {
 												SizedBox(
 													child: Row(
 														children: <Widget>[
-															Text("Unverified"),
 															SizedBox(width: 10.0),
 															Icon(Icons.arrow_forward_ios, size: 25, color: Colors.grey.withOpacity(0.2),)
 														],
@@ -149,7 +142,36 @@ class _ProfilePageViewState extends State<ProfilePageView> {
 											],
 										),
 									),
-								)
+								)*/
+								child: InkWell(
+									onTap: (){
+										print('Profile Clicked');
+										Navigator.pushNamed(context, '/profile-info');
+									},
+									child: Container(
+										child: ListTile(
+											title: Text('Hari Bahadur Thapa'),
+											subtitle: Text('9841-xxx-xxx'),
+											trailing: Icon(Icons.arrow_forward_ios),
+											leading: Container(
+												padding: EdgeInsets.all(8.0),
+												child: Card(
+													semanticContainer: true,
+													clipBehavior: Clip.antiAliasWithSaveLayer,
+													child: (_image!=null)?Image.file(_image, fit: BoxFit.fill,):
+													Image.network(
+														"https://images.unsplash.com/photo-1502164980785-f8aa41d53611?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+														fit: BoxFit.fill,
+													),
+													shape: RoundedRectangleBorder(
+														borderRadius: BorderRadius.circular(10.0),
+													),
+													// margin: EdgeInsets.all(10),
+												),
+											),
+										),
+									),
+								),
 							),
 						),
 						
@@ -224,6 +246,7 @@ class _ProfilePageViewState extends State<ProfilePageView> {
 												child: GestureDetector(
 													onTap: (){
 														print("clicked");
+														Navigator.pushNamed(context, '/services');
 													},
 													child: ListTile(
 														title: Text('Service Provider List'),

@@ -1,3 +1,4 @@
+import 'package:card_app/pages/claimed_item_services.dart';
 import 'package:card_app/profile/profile_main.dart';
 import 'package:card_app/theme/custom_theme.dart';
 import 'package:flutter/material.dart';
@@ -215,7 +216,7 @@ class _CardHomeState extends State<CardHome> {
 												Navigator.push(
 													context,
 													MaterialPageRoute(
-														builder: (context) => ProfilePageView(),
+														builder: (context) => ClaimedItemServicesPage(claimid: int.parse(claims.id)),
 													),
 												);
 											},

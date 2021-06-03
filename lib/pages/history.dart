@@ -214,7 +214,7 @@ class _HistoryPageState extends State<HistoryPage> {
 												Navigator.push(
 													context,
 													MaterialPageRoute(
-															builder: (context) => ClaimedItemServicesPage(claimid: int.parse(claims.id)),
+														builder: (context) => ClaimedItemServicesPage(claimid: int.parse(claims.id)),
 													),
 												);
 											},

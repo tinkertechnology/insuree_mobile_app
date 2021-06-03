@@ -16,23 +16,17 @@ import 'package:card_app/models/medical_services.dart';
 import 'package:card_app/models/claimeditems.dart';
 import 'package:card_app/services/api_graphql_services.dart';
 
-
-
-
-
 class HomeScreen extends StatefulWidget {
 	@override
 	_HomeScreenState createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
-
+	
 	Future<MedicalServices> _medicalservices;
 	Future<Claims> _insureeclaims;
 	Future<Claimed> _claimed;
-
-
+	
 	@override
 	void initState() {
 		super.initState();

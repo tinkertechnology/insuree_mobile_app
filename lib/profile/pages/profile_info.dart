@@ -102,7 +102,20 @@ class _ProfileInfoState extends State<ProfileInfo> {
 			}
 		);
 	}
-	TextEditingController dateCtl = TextEditingController();
+	
+	Future getImage() async {
+		var image = await picker.getImage(source: ImageSource.camera);
+		
+		setState(() {
+			_image = image as File;
+			print('Image Path $_image');
+		});
+		if(_image!=null){
+			uploadPic();
+		}
+	}
+	
+	
 	@override
 	Widget build(BuildContext context) {
 		return Scaffold(
@@ -154,7 +167,9 @@ class _ProfileInfoState extends State<ProfileInfo> {
 															child: MaterialButton(
 																minWidth: 0,
 																child: Icon(Icons.camera_alt),
-																onPressed: (){},
+																onPressed: (){
+																	getImage();
+																},
 																textColor: Colors.white,
 																color: Theme.of(context).accentColor,
 																elevation: 0,
@@ -237,8 +252,8 @@ class _ProfileInfoState extends State<ProfileInfo> {
 														),
 													),
 													SizedBox(height: 8.0),
-													/*TextFormField(
-                                                        keyboardType: TextInputType.datetime,
+													TextFormField(
+                                                        keyboardType: TextInputType.text,
                                                         validator: (value) {
                                                             if (value.isEmpty) {
                                                                 return 'Please enter date of birth';
@@ -268,40 +283,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
                                                             contentPadding: EdgeInsets.all(16.0),
                                                             prefixIcon: Icon(Icons.person_outline),
                                                         ),
-                                                    ),*/
-													
-													TextFormField(
-														controller: dateCtl,
-														decoration: InputDecoration(
-															border: OutlineInputBorder(
-																borderRadius: BorderRadius.all(
-																	Radius.circular(10.0)
-																),
-																borderSide: BorderSide(
-																	color: Colors.white,
-																)
-															),
-															
-															hintText: 'DOB',
-															hintStyle: TextStyle(
-																fontFamily: 'Open-sans'
-															),
-															filled: true,
-															contentPadding: EdgeInsets.all(16.0),
-															prefixIcon: Icon(Icons.person_outline),
-														),
-														onTap: () async {
-															DateTime date = DateTime(1900);
-															FocusScope.of(context).requestFocus(new FocusNode());
-															date = await showDatePicker(
-																context: context,
-																initialDate: DateTime.now(),
-																firstDate: DateTime(1900),
-																lastDate: DateTime(2100)
-															);
-															dateCtl.text = date.toIso8601String();
-														},
-													)
+                                                    ),
 												],
 											),
 										),
