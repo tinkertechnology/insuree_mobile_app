@@ -149,10 +149,10 @@ class _CardHomeState extends State<CardHome> {
 						
 						// CARD
 						Container(
-							height: 130,
+							height: 100,
 							width: double.infinity,
 							padding: EdgeInsets.all(10.0),
-							margin: EdgeInsets.only(top: 150),
+							margin: EdgeInsets.only(top: 165),
 							child: Card(
 								shape: RoundedRectangleBorder(
 									borderRadius: BorderRadius.circular(20)

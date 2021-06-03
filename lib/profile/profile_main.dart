@@ -266,7 +266,7 @@ class _ProfilePageViewState extends State<ProfilePageView> {
 													child: ListTile(
 														title: Text('Feedback'),
 														//subtitle: Text('write a feedback'),
-														leading: Icon(Icons.feedback),
+														leading: Icon(Icons.feedback,),
 														trailing: Icon(Icons.arrow_forward_ios),
 													)
 												)
@@ -278,7 +278,7 @@ class _ProfilePageViewState extends State<ProfilePageView> {
 						),
 						
 						// UPDATE LANGUAGE
-						Container(
+						/*Container(
 							margin: EdgeInsets.fromLTRB(20, 0, 20, 20),
 							child: Card(
 								color: Colors.white,
@@ -303,10 +303,33 @@ class _ProfilePageViewState extends State<ProfilePageView> {
 									),
 								),
 							),
+						),*/
+						Container(
+							margin: EdgeInsets.fromLTRB(16, 8, 16, 8),
+							child: Card(
+								shape: RoundedRectangleBorder(
+									side: BorderSide(color: Colors.white70, width: 1),
+									borderRadius: BorderRadius.circular(20),
+								),
+								child: Container(
+									padding: EdgeInsets.all(8.0),
+									child: SwitchListTile(
+										title: Text('Update Language'),
+										subtitle: Text('Change language to your preferred language'),
+										secondary: Icon(Icons.language, size: 30,),
+										value: _flutter,
+										activeColor: Colors.white.withOpacity(0.25),
+										inactiveTrackColor: Colors.grey,
+										onChanged: (bool value) {
+											_flutter = value;
+										},
+									),
+								)
+							),
 						),
 						
 						// DARK/LIGHT THEME
-						Container(
+						/*Container(
 							margin: EdgeInsets.fromLTRB(20, 0, 20, 20),
 							child: Card(
 								color: Colors.white,
@@ -329,6 +352,28 @@ class _ProfilePageViewState extends State<ProfilePageView> {
 									),
 								),
 							),
+						),*/
+						Container(
+							margin: EdgeInsets.fromLTRB(16, 8, 16, 8),
+							child: Card(
+								shape: RoundedRectangleBorder(
+									side: BorderSide(color: Colors.white70, width: 1),
+									borderRadius: BorderRadius.circular(20),
+								),
+								child: Container(
+									child: SwitchListTile(
+										title: Text('Dark/Light Theme'),
+										subtitle: Text('Change theme color'),
+										secondary: Icon(Icons.brightness_6, size: 30,),
+										value: themeChange.darkTheme,
+										activeColor: Colors.white.withOpacity(0.25),
+										inactiveTrackColor: Colors.grey,
+										onChanged: (bool value) {
+											themeChange.darkTheme = value;
+										},
+									),
+								)
+							),
 						),
 						
 						// CONTACT US
@@ -340,38 +385,16 @@ class _ProfilePageViewState extends State<ProfilePageView> {
 									borderRadius: BorderRadius.circular(20),
 								),
 								child: Container(
-									child: Column(
-										crossAxisAlignment: CrossAxisAlignment.start,
-										mainAxisSize: MainAxisSize.min,
-										children: <Widget>[
-											Container(
-												padding: EdgeInsets.only(left: 16.0, top: 16.0, bottom:16.0, right: 16.0),
-												child: GestureDetector(
-													onTap: (){
-														print("Contact Us clicked");
-													},
-													child: Row(
-														mainAxisAlignment: MainAxisAlignment.spaceBetween,
-														mainAxisSize: MainAxisSize.max,
-														children: <Widget>[
-															Expanded(
-																child: Row(
-																	children: <Widget>[
-																		Icon(Icons.help, size: 30,),
-																		SizedBox(width: 20.0),
-																		Text(
-																			"Contact Us"
-																		),
-																	],
-																),
-															),
-															
-															Icon(Icons.arrow_forward_ios, size: 25)
-														],
-													),
-												)
-											),
-										],
+									child: ListTile(
+										title: Text('Contact Us'),
+										subtitle: Text('Change theme color'),
+										leading: Icon(
+											Icons.info_outline,
+											size: 30,
+										),
+										trailing: Icon(
+											Icons.arrow_forward_ios,
+										),
 									),
 								)
 							),
