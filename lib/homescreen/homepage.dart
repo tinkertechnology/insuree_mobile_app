@@ -81,7 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
 														Navigator.push(
 															context,
 															MaterialPageRoute(
-																builder: (context) => ProfilePageView(),
+																builder: (context) => ClaimedItemServicesPage(claimid: int.parse(claims.id)),
 															),
 														);
 													},
