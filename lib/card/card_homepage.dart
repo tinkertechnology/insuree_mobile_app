@@ -28,8 +28,7 @@ class _CardHomeState extends State<CardHome> {
 		
 		_medicalservices = ApiGraphQlServices().MedicalServicesGQL('medicalservice');
 		_insureeclaims = ApiGraphQlServices().ClaimsServicesGQL();
-		_claimed = ApiGraphQlServices().ClaimedServicesGQL();
-		_claimedservicesitems = ApiGraphQlServices().ClaimedServicesItemsServicesGQL();
+
 	}
 	
 	Widget build(BuildContext context) {

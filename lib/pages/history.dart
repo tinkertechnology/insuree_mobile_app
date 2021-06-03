@@ -23,7 +23,7 @@ class _HistoryPageState extends State<HistoryPage> {
 		super.initState();
 		_medicalservices = ApiGraphQlServices().MedicalServicesGQL('medicalservice');
 		_insureeclaims = ApiGraphQlServices().ClaimsServicesGQL();
-		_claimed = ApiGraphQlServices().ClaimedServicesGQL();
+
 		
 	}
 	
