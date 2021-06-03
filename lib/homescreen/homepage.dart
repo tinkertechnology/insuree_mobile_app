@@ -59,26 +59,31 @@ class _HomeScreenState extends State<HomeScreen> {
 							future: _insureeclaims,
 							builder: (context, snapshot) {
 								if (snapshot.hasData && snapshot.data.data != null) {
-									return ListView.builder(
+									return GridView.builder(
 											controller: scrollController,
 											itemCount: snapshot.data.data.insureeProfile.insureeClaim
 													.length,
+											gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: (orientation == Orientation.portrait) ? 2 : 3),
 											itemBuilder: (BuildContext context, int index) {
 												var claims = snapshot.data.data.insureeProfile
 														.insureeClaim
 												[index];
-												return ListTile(
-													trailing: Text('${env.Currency} ${claims.claimed}'),
-													title: Text('${claims.dateClaimed}'),
-													subtitle: Text('${claims.healthFacility.name}'),
-													onTap: () {
-														Navigator.push(
-															context,
-															MaterialPageRoute(
-																builder: (context) => ClaimedItemServicesPage(claimid: int.parse(claims.id)),
-															),
-														);
-													},
+												return Container(
+													padding: EdgeInsets.all(8.0),
+													child: Card(
+														child: ListTile(
+															title: Image.asset('assets/images/openimis-logo.png', fit: BoxFit.cover, ),
+															subtitle: Text('${claims.healthFacility.name}'),
+															onTap: () {
+																Navigator.push(
+																	context,
+																	MaterialPageRoute(
+																		builder: (context) => ClaimedItemServicesPage(claimid: int.parse(claims.id)),
+																	),
+																);
+															},
+														),
+													),
 												);
 											}
 
