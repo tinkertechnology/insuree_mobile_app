@@ -320,23 +320,13 @@ class _ProfilePageViewState extends State<ProfilePageView> {
 										title: Text('Dark/Light Theme'),
 										subtitle: Text('Change theme color'),
 										secondary: Icon(Icons.brightness_6),
-										value: _flutter,
-										activeColor: Colors.yellow[500],
+										value: themeChange.darkTheme,
+										activeColor: Colors.red,
 										inactiveTrackColor: Colors.grey,
-										onChanged: (bool val){
-											setState(() {
-												_flutter = val;
-											});
-										}
+										onChanged: (bool value) {
+											themeChange.darkTheme = value;
+										},
 									),
-									value: themeChange.darkTheme,
-									activeColor: Colors.red,
-									inactiveTrackColor: Colors.grey,
-									onChanged: (bool value) {
-
-													themeChange.darkTheme = value;
-
-									},
 								),
 							),
 						),

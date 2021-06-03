@@ -20,79 +20,77 @@ import 'package:card_app/services/api_graphql_services.dart';
 
 
 class HomeScreen extends StatefulWidget {
-  @override
-  _HomeScreenState createState() => _HomeScreenState();
+	@override
+	_HomeScreenState createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
-    Future<MedicalServices> _medicalservices;
-    Future<Claims> _insureeclaims;
-    Future<Claimed> _claimed;
-    Future<ClaimedServicesItems> _claimedservicesitems;
-
-    @override
-    void initState(){
-        super.initState();
-
-        _medicalservices = ApiGraphQlServices().MedicalServicesGQL('medicalservice');
-        _insureeclaims = ApiGraphQlServices().ClaimsServicesGQL();
-        _claimed = ApiGraphQlServices().ClaimedServicesGQL();
-        _claimedservicesitems = ApiGraphQlServices().ClaimedServicesItemsServicesGQL();
-
-    }
-    @override
-    Widget build(BuildContext context) {
-
-        final orientation = MediaQuery.of(context).orientation;
-        return DraggableScrollableSheet(
-            initialChildSize: 0.7,
-            minChildSize: 0.05,
-            maxChildSize: 0.7,
-            builder: (BuildContext context, ScrollController scrollController) {
-                return Container(
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(10),
-                            topRight: Radius.circular(10)
-                        ),
-                        color: Color.fromRGBO(234, 239, 255, 1),
-                    ),
-                    child: FutureBuilder<Claims>(
-                      future: _insureeclaims,
-                      builder: (context, snapshot) {
-                          if(snapshot.hasData && snapshot.data.data!=null) {
-                        return ListView.builder(
-                            controller: scrollController,
-                            itemCount: snapshot.data.data.insureeProfile.insureeClaim.length,
-                            itemBuilder: (BuildContext context, int index) {
-                                var claims = snapshot.data.data.insureeProfile.insureeClaim
-                                    [index];
-                                return ListTile(
-                                    trailing: Text('${env.Currency} ${claims.claimed}'),
-                                    title: Text('${claims.dateClaimed}'),
-                                    subtitle: Text('${claims.healthFacility.name}'),
-                                    onTap: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) => ProfilePageView(),
-                                            ),
-                                        );
-                                    },
-                                );
-                            }
-
-                        );
-                      }
-                          else{
-                              return Center(child: CircularProgressIndicator());
-                          }
-                      }
-                    ),
-                );
-            },
-        );
-    }
+	
+	Future<MedicalServices> _medicalservices;
+	Future<Claims> _insureeclaims;
+	Future<Claimed> _claimed;
+	Future<ClaimedServicesItems> _claimedservicesitems;
+	
+	@override
+	void initState(){
+		super.initState();
+		
+		_medicalservices = ApiGraphQlServices().MedicalServicesGQL('medicalservice');
+		_insureeclaims = ApiGraphQlServices().ClaimsServicesGQL();
+		_claimed = ApiGraphQlServices().ClaimedServicesGQL();
+		_claimedservicesitems = ApiGraphQlServices().ClaimedServicesItemsServicesGQL();
+	}
+	@override
+	Widget build(BuildContext context) {
+		final orientation = MediaQuery.of(context).orientation;
+		return DraggableScrollableSheet(
+			initialChildSize: 0.65,
+			minChildSize: 0.03,
+			maxChildSize: 0.65,
+			builder: (BuildContext context, ScrollController scrollController) {
+				return Container(
+					width: double.infinity,
+					decoration: BoxDecoration(
+						borderRadius: BorderRadius.only(
+							topLeft: Radius.circular(10),
+							topRight: Radius.circular(10)
+						),
+						color: Color.fromRGBO(234, 239, 255, 1),
+					),
+					child: FutureBuilder<Claims>(
+						future: _insureeclaims,
+						builder: (context, snapshot) {
+							if(snapshot.hasData && snapshot.data.data!=null) {
+								return ListView.builder(
+									controller: scrollController,
+									itemCount: snapshot.data.data.insureeProfile.insureeClaim.length,
+									itemBuilder: (BuildContext context, int index) {
+										var claims = snapshot.data.data.insureeProfile.insureeClaim
+										[index];
+										return ListTile(
+											trailing: Text('${env.Currency} ${claims.claimed}'),
+											title: Text('${claims.dateClaimed}'),
+											subtitle: Text('${claims.healthFacility.name}'),
+											onTap: () {
+												Navigator.push(
+													context,
+													MaterialPageRoute(
+														builder: (context) => ProfilePageView(),
+													),
+												);
+											},
+										);
+									}
+								
+								);
+							}
+							else{
+								return Center(child: CircularProgressIndicator());
+							}
+						}
+					),
+				);
+			},
+		);
+	}
 }
