@@ -3,7 +3,8 @@ import 'package:http/http.dart' as http;
 import 'package:card_app/models/medical_services.dart';
 import 'package:card_app/models/insuree_claims.dart';
 import 'package:card_app/models/claimed.dart';
-import 'package:card_app/models/claimed_services_items.dart';
+import 'package:card_app/models/claimeditems.dart';
+import 'package:card_app/models/claimedservices.dart';
 import 'package:card_app/graphql/gql_queries.dart';
 import 'package:card_app/common/env.dart' as env;
 
@@ -12,7 +13,10 @@ class ApiGraphQlServices {
   MedicalServices medicalServices = MedicalServices();
   Claims insuree_claims = Claims();
   Claimed claimed = Claimed();
-  ClaimedServicesItems claimedServicesItems = ClaimedServicesItems();
+//  ClaimedServicesItems claimedServicesItems = ClaimedServicesItems();
+  ClaimedServices claimedservices = ClaimedServices();
+  ClaimedItems claimeditems = ClaimedItems();
+
 
   Future<MedicalServices> MedicalServicesGQL(String args) async {
     try {
@@ -51,7 +55,44 @@ class ApiGraphQlServices {
   }
 
 
-  Future<Claimed> ClaimedServicesGQL() async {
+//  Future<Claimed> ClaimedServicesGQL() async {
+//    try {
+//      final response = await http.post(Uri.parse(env.API_BASE_URL),
+//          headers: {
+//            "Content-Type": "application/json",
+////                "Accept" : "application/json"
+//          },
+//          body: jsonEncode(openimisGqlQueries()
+//              .openimis_gql_individual_claimed_item_services(1)) //todo map qs filtering
+//      );
+//      var jsonMap = json.decode(response.body);
+//      claimed = Claimed.fromJson(jsonMap);
+//    } catch (Exception) {
+//      return claimed;
+//    }
+//    return claimed;
+//  }
+//
+
+//  Future<ClaimedServicesItems> ClaimedServicesItemsServicesGQL(int claimid) async { //todo pass claim id from widget
+//    try {
+//      final response = await http.post(Uri.parse(env.API_BASE_URL),
+//          headers: {
+//            "Content-Type": "application/json",
+////                "Accept" : "application/json"
+//          },
+//          body: jsonEncode(openimisGqlQueries()
+//              .openimis_gql_individual_claimed_item_services(claimid)) //todo map qs filtering
+//      );
+//      var jsonMap = json.decode(response.body);
+//      claimedServicesItems = ClaimedServicesItems.fromJson(jsonMap);
+//    } catch (Exception) {
+//      return claimedServicesItems;
+//    }
+//    return claimedServicesItems;
+//  }
+ // Services api
+  Future<ClaimedServices> ClaimedServicesServicesGQL(int claimid) async { //todo pass claim id from widget
     try {
       final response = await http.post(Uri.parse(env.API_BASE_URL),
           headers: {
@@ -59,18 +100,17 @@ class ApiGraphQlServices {
 //                "Accept" : "application/json"
           },
           body: jsonEncode(openimisGqlQueries()
-              .openimis_gql_individual_claimed_item_services(1)) //todo map qs filtering
+              .openimis_gql_insuree_claimed_services(claimid)) //todo map qs filtering
       );
       var jsonMap = json.decode(response.body);
-      claimed = Claimed.fromJson(jsonMap);
+      claimedservices = ClaimedServices.fromJson(jsonMap);
     } catch (Exception) {
-      return claimed;
+      return claimedservices;
     }
-    return claimed;
+    return claimedservices;
   }
 
-
-  Future<ClaimedServicesItems> ClaimedServicesItemsServicesGQL() async { //todo pass claim id from widget
+  Future<ClaimedItems> ClaimedItemServicesGQL(int claimid) async { //todo pass claim id from widget
     try {
       final response = await http.post(Uri.parse(env.API_BASE_URL),
           headers: {
@@ -78,13 +118,15 @@ class ApiGraphQlServices {
 //                "Accept" : "application/json"
           },
           body: jsonEncode(openimisGqlQueries()
-              .openimis_gql_individual_claimed_item_services(2)) //todo map qs filtering
+              .openimis_gql_insuree_claimed_items(claimid)) //todo map qs filtering
       );
       var jsonMap = json.decode(response.body);
-      claimedServicesItems = ClaimedServicesItems.fromJson(jsonMap);
+      claimeditems = ClaimedItems.fromJson(jsonMap);
+
+
     } catch (Exception) {
-      return claimedServicesItems;
+      return  claimeditems;//claimeditems;
     }
-    return claimedServicesItems;
+    return claimeditems;
   }
 }

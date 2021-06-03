@@ -4,6 +4,7 @@ import 'package:card_app/homescreen/homepage_link_sync_event.dart';
 import 'package:card_app/localization/language/languages.dart';
 import 'package:card_app/models/claimed.dart';
 import 'package:card_app/models/insuree_claims.dart';
+import 'package:card_app/pages/claimed_item_services.dart';
 import 'package:card_app/profile/profile_main.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -12,7 +13,7 @@ import 'package:card_app/services/auth_service.dart';
 import 'package:http/http.dart' as http;
 import 'package:card_app/common/env.dart' as env;
 import 'package:card_app/models/medical_services.dart';
-import 'package:card_app/models/claimed_services_items.dart';
+import 'package:card_app/models/claimeditems.dart';
 import 'package:card_app/services/api_graphql_services.dart';
 
 
@@ -28,8 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     Future<MedicalServices> _medicalservices;
     Future<Claims> _insureeclaims;
-    Future<Claimed> _claimed;
-    Future<ClaimedServicesItems> _claimedservicesitems;
+   Future<ClaimedItems> _claimeditems;
 
     @override
     void initState(){
@@ -37,8 +37,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
         _medicalservices = ApiGraphQlServices().MedicalServicesGQL('medicalservice');
         _insureeclaims = ApiGraphQlServices().ClaimsServicesGQL();
-        _claimed = ApiGraphQlServices().ClaimedServicesGQL();
-        _claimedservicesitems = ApiGraphQlServices().ClaimedServicesItemsServicesGQL();
+        _claimeditems = ApiGraphQlServices().ClaimedItemServicesGQL(12);
+
 
     }
     @override
@@ -92,7 +92,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         Navigator.push(
                                             context,
                                             MaterialPageRoute(
-                                                builder: (context) => ProfilePageView(),
+                                                builder: (context) => ClaimedItemServicesPage(claimid: int.parse(claims.id)),
                                             ),
                                         );
                                     },

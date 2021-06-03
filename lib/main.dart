@@ -26,13 +26,13 @@ import 'package:card_app/profile/pages/profile_info.dart';
 import 'card/sync.dart';
 import 'package:card_app/auth/validate_otp_card.dart';
 import 'package:card_app/services/location_service.dart';
-
 import 'localization/locale_constant.dart';
 import 'localization/localizations_delegate.dart';
 import 'package:card_app/auth/verify_insuree.dart';
 import 'package:card_app/services/connectivity.dart';
+import 'package:card_app/pages/notification.dart';
+import 'package:card_app/pages/claimed_item_services.dart';
 
-import 'models/connectivity_status.dart';
 
 
 void main() async{
@@ -157,6 +157,9 @@ class _MyAppState extends State<MyApp> {
     
                             // PROFILE INFO
                             '/profile-info' :(BuildContext context) => ProfileInfo(),
+
+                            //Claimed item Services
+                            '/claimed_item_services' : (BuildContext context) => ClaimedItemServicesPage(),
                         },
                     );
                 }));
