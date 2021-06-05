@@ -1,6 +1,7 @@
 import 'package:card_app/pages/claimed_item_services.dart';
 import 'package:card_app/profile/profile_main.dart';
 import 'package:card_app/theme/custom_theme.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:card_app/homescreen/homepage.dart';
@@ -155,7 +156,6 @@ class _CardHomeState extends State<CardHome> {
 									// CARD
 									Container(
 										height: 100,
-										width: double.infinity,
 										padding: EdgeInsets.all(8.0),
 										margin: EdgeInsets.only(top: 165),
 										child: Card(
@@ -163,23 +163,133 @@ class _CardHomeState extends State<CardHome> {
 												borderRadius: BorderRadius.circular(20)
 											),
 											child: Padding(
-												padding: EdgeInsets.all(4.0),
+												padding: EdgeInsets.only(left: 8, top: 2, bottom: 2, right: 8),
 												child: Row(
 													mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 													mainAxisSize: MainAxisSize.max,
-													children: <Widget>[
-														IconButton(
-															icon: Icon(Icons.history, size: 30,),
-															onPressed: (){}
+													children: [
+														Container(
+															child: Card(
+																shape: RoundedRectangleBorder(
+																	borderRadius: BorderRadius.circular(8),
+																	side: BorderSide(color: CustomTheme.lightTheme.primaryColor)
+																),
+																child: Column(
+																	children: [
+																		Container(
+																			decoration: BoxDecoration(
+																				borderRadius: BorderRadius.only(
+																					topRight: Radius.circular(8),
+																					topLeft: Radius.circular(8),
+																				),
+																				color: CustomTheme.lightTheme.primaryColor
+																			),
+																			padding: EdgeInsets.all(4),
+																			child: Text(
+																				'Expiry Date',
+																				style: TextStyle(
+																					color: Colors.white
+																				),
+																			),
+																		),
+																		SizedBox(height: 8.0),
+																		Text('2078-01-01')
+																	],
+																),
+															),
 														),
-														Icon(Icons.notifications),
-														Icon(Icons.calendar_today),
-														IconButton(
-															icon: Icon(Icons.history, size: 30,),
-															onPressed: (){}
+														Container(
+															child: Card(
+																shape: RoundedRectangleBorder(
+																	borderRadius: BorderRadius.circular(8),
+																	side: BorderSide(color: CustomTheme.lightTheme.primaryColor)
+																),
+																child: Column(
+																	children: [
+																		Container(
+																			decoration: BoxDecoration(
+																				borderRadius: BorderRadius.only(
+																					topRight: Radius.circular(8),
+																					topLeft: Radius.circular(8),
+																				),
+																				color: CustomTheme.lightTheme.primaryColor
+																			),
+																			padding: EdgeInsets.all(4),
+																			child: Text(
+																				'Expiry Date',
+																				style: TextStyle(
+																					color: Colors.white
+																				),
+																			),
+																		),
+																		SizedBox(height: 8.0),
+																		Text('2078-01-01')
+																	],
+																),
+															),
+														),
+														Container(
+															child: Card(
+																shape: RoundedRectangleBorder(
+																	borderRadius: BorderRadius.circular(8),
+																	side: BorderSide(color: CustomTheme.lightTheme.primaryColor)
+																),
+																child: Column(
+																	children: [
+																		Container(
+																			decoration: BoxDecoration(
+																				borderRadius: BorderRadius.only(
+																					topRight: Radius.circular(8),
+																					topLeft: Radius.circular(8),
+																				),
+																				color: CustomTheme.lightTheme.primaryColor
+																			),
+																			padding: EdgeInsets.all(4),
+																			child: Text(
+																				'Expiry Date',
+																				style: TextStyle(
+																					color: Colors.white
+																				),
+																			),
+																		),
+																		SizedBox(height: 8.0),
+																		Text('2078-01-01')
+																	],
+																),
+															),
+														),
+														Container(
+															child: Card(
+																shape: RoundedRectangleBorder(
+																	borderRadius: BorderRadius.circular(8),
+																	side: BorderSide(color: CustomTheme.lightTheme.primaryColor)
+																),
+																child: Column(
+																	children: [
+																		Container(
+																			decoration: BoxDecoration(
+																				borderRadius: BorderRadius.only(
+																					topRight: Radius.circular(8),
+																					topLeft: Radius.circular(8),
+																				),
+																				color: CustomTheme.lightTheme.primaryColor
+																			),
+																			padding: EdgeInsets.all(4),
+																			child: Text(
+																				'Expiry Date',
+																				style: TextStyle(
+																					color: Colors.white
+																				),
+																			),
+																		),
+																		SizedBox(height: 8.0),
+																		Text('2078-01-01')
+																	],
+																),
+															),
 														),
 													],
-												),
+												)
 											)
 										),
 									),
@@ -213,6 +323,7 @@ class _CardHomeState extends State<CardHome> {
 													return ListView.builder(
 														shrinkWrap: true,
 														scrollDirection: Axis.vertical,
+														physics: NeverScrollableScrollPhysics(),
 														itemCount: snapshot.data.data.insureeProfile.insureeClaim.length,
 														itemBuilder: (BuildContext context, int index){
 															var claims = snapshot.data.data.insureeProfile.insureeClaim[index];
