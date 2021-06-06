@@ -52,7 +52,7 @@ class CustomColors {
 	Color.fromRGBO(255, 238, 155, 0.36); // 36%
 	
 //	static const Color PinkLight = Color.fromRGBO(234, 239, 255, 50);
-	static const Color PinkLight = Color.fromRGBO(241, 248, 255, 1);
+	static const Color PinkLight = Color.fromRGBO(242, 250, 251, 1);
 	
 	static const Color BellGrey = Color.fromRGBO(217, 217, 217, 1);
 	static const Color BellYellow = Color.fromRGBO(255, 220, 0, 1);
