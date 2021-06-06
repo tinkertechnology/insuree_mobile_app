@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:card_app/models/medical_services.dart';
 import 'package:card_app/services/api_graphql_services.dart';
 
-
 class HomeScreen extends StatefulWidget {
 	@override
 	_HomeScreenState createState() => _HomeScreenState();
@@ -48,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
 							topRight: Radius.circular(20),
 							topLeft: Radius.circular(20)
 						),
-						color:CustomTheme.lightTheme.accentColor,
+						color:CustomTheme.lightTheme.backgroundColor.withOpacity(1),
 						/*gradient: LinearGradient(
 							begin: Alignment.bottomRight,
 							end: Alignment.topLeft,
@@ -69,10 +68,10 @@ class _HomeScreenState extends State<HomeScreen> {
 								mainAxisAlignment: MainAxisAlignment.center,
 								children: <Widget>[
 									Container(
-										width: 30,
+										width: 40,
 										height: 5,
 										decoration: BoxDecoration(
-											color: Colors.grey[300],
+											color: Colors.white,
 											borderRadius: BorderRadius.all(Radius.circular(12.0))),
 									),
 								],

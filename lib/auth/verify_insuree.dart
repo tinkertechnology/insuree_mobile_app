@@ -431,12 +431,74 @@ class _VerifyInsureeState extends State<VerifyInsuree> {
                             IconButton(
                                 icon: Icon(Icons.phone_in_talk),
                                 color: Colors.white,
-                                onPressed: () {},
+                                onPressed: () => showDialog(
+                                    context: context,
+                                    builder: (BuildContext context){
+                                        return AlertDialog(
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.circular(4.0)
+                                            ),
+                                            contentPadding: EdgeInsets.all(0.0),
+                                            
+                                            content:  Container(
+                                                height: 120,
+                                                color: Colors.orangeAccent,
+                                                child: Column(
+                                                    children: [
+                                                        Expanded(
+                                                            child: Container(
+	                                                            margin: const EdgeInsets.only(top: 4.0),
+	                                                            padding: const EdgeInsets.all(8.0),
+	                                                            child: Column(
+		                                                            crossAxisAlignment: CrossAxisAlignment.center,
+		                                                            mainAxisSize: MainAxisSize.max,
+		                                                            children: [
+			                                                            Text('Contact Details',
+				                                                            style: TextStyle(
+					                                                            fontSize: 20.0,
+					                                                            fontWeight: FontWeight.bold,
+					                                                            color: Colors.white,
+				                                                            ),
+				                                                            textAlign: TextAlign.center,
+			                                                            ),
+		                                                            ],
+	                                                            )
+                                                            ),
+                                                        ),
+                                                        
+                                                        Container(
+	                                                        color: Colors.white,
+                                                            child: Column(
+                                                                children: [
+                                                                    ListTile(
+                                                                        title: Text('openIMIS'),
+                                                                        subtitle: Text('Phone: 01-42xxxxx'),
+                                                                    )
+                                                                ],
+                                                            ),
+                                                        )
+                                                    ],
+                                                ),
+                                            ),
+                                            /*actions: <Widget>[
+                                                TextButton(
+                                                    onPressed: (){},
+                                                    child: Text('Cancel')
+                                                ),
+                                                TextButton(
+                                                    onPressed: (){},
+                                                    child: Text('OK')
+                                                )
+                                            ],*/
+                                        );
+                                    }),
                             ),
                             IconButton(
                                 icon: Icon(Icons.info_outline),
                                 color: Colors.white,
-                                onPressed: () {},
+                                onPressed: () {
+                                    Navigator.pushNamed(context, '/faq');
+                                },
                             ),
                         ],
                     ),

@@ -103,7 +103,7 @@ class _DisplayState extends State<Display> {
                 onTap: (index) {
                     bottom_nav.currentIndex = index;
                 },
-                backgroundColor: Colors.white,//CustomTheme.lightTheme.splashColor,
+                backgroundColor: CustomTheme.lightTheme.backgroundColor,
                 items: <Widget>[
                     Icon(
                         Icons.home,
