@@ -29,7 +29,7 @@ class _DisplayState extends State<Display> {
 	        case 1:
 		        return new HistoryPage();
             case 2:
-                return new PolicyInformation();
+                return new PolicyInformationPage();
             case 3:
                 return new ServicesPage();
             case 4:

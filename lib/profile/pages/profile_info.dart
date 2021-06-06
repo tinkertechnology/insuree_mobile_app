@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:card_app/theme/custom_theme.dart';
 import 'package:flutter/cupertino.dart';
@@ -27,21 +28,21 @@ class _ProfileInfoState extends State<ProfileInfo> {
 		// File image = (await _picker.getImage(source: ImageSource.camera, imageQuality: 50)) as File;  // await ImagePicker.getImage(
 		//source: ImageSource.camera, imageQuality: 50
 		//);
-		final pickedFile = await picker.getImage(source: ImageSource.camera);
+		PickedFile image = await picker.getImage(source: ImageSource.camera);
 		setState(() {
-			if (pickedFile != null) {
-				_image = File(pickedFile.path);
+			if (image != null) {
+				_image = File(image.path);
 			} else {
 				print('No image selected.');
 			}
 		});
 	}
-	
+
 	_imgFromGallery() async {
-		final pickedFile = await picker.getImage(source: ImageSource.gallery);
+		PickedFile image = await picker.getImage(source: ImageSource.gallery);
 		setState(() {
-			if (pickedFile != null) {
-				_image = File(pickedFile.path);
+			if (image != null) {
+				_image = File(image.path);
 			} else {
 				print('No image selected.');
 			}
@@ -49,18 +50,16 @@ class _ProfileInfoState extends State<ProfileInfo> {
 	}
 	
 	Future uploadPic() async{
-		//  StorageReference firebaseStorageRef = FirebaseStorage.instance.ref().child(fileName);
-		//  StorageUploadTask uploadTask = firebaseStorageRef.putFile(_image);
-		//  StorageTaskSnapshot taskSnapshot=await uploadTask.onComplete;
-		Map<String, String> headers = { "Authorization": "JWT "+ env.getAuthToken(null)};
-		String url = env.API_BASE_URL+ '/api/profile/';
-		var uri = Uri.parse(url);
-		var request = new http.MultipartRequest("POST", uri);
-		request.headers.addAll(headers);
-		request.files.add(new http.MultipartFile.fromBytes('file', await File.fromUri(Uri.parse(_image.path)).readAsBytes(), contentType: new MediaType('image', 'jpeg')));
-		request.fields['address'] = 'address';
+		String url = env.API_BASE_URL;
+		var request = new http.MultipartRequest("POST", Uri.parse(url));
+//		request.headers.addAll(headers);
+		request.files.add(new http.MultipartFile.fromBytes('file', await File.fromUri(Uri.parse(_image.path)).readAsBytes(), filename: "jpt.jpg"));
+//		request.fields['address'] = 'address';
+//		request.fields['query'] ='mutation {createVoucherPayment(file: ${Uri.parse(_image.path)}){   ok  }  }","variables":null"}';
+		request.fields['query'] ='mutation {createVoucherPayment(file: "file"){   ok  }  }';
 		print(request);
 		request.send().then((response) {
+			print(response.stream.bytesToString().toString());
 			if (response.statusCode == 200)
 				print("Uploaded!");
 			setState(() {
@@ -103,18 +102,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
 		);
 	}
 	
-	Future getImage() async {
-		var image = await picker.getImage(source: ImageSource.camera);
-		
-		setState(() {
-			_image = image as File;
-			print('Image Path $_image');
-		});
-		if(_image!=null){
-			uploadPic();
-		}
-	}
-	
+
 	
 	@override
 	Widget build(BuildContext context) {
@@ -168,7 +156,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
 																minWidth: 0,
 																child: Icon(Icons.camera_alt),
 																onPressed: (){
-																	getImage();
+																	_imgFromCamera();
 																},
 																textColor: Colors.white,
 																color: Theme.of(context).accentColor,
@@ -424,7 +412,8 @@ class _ProfileInfoState extends State<ProfileInfo> {
 														},
 														onSaved: (value) {
 															setState(() {
-																// userCredential.usernameOrEmail = value;
+
+																uploadPic();
 															});
 														},
 														decoration: InputDecoration(
@@ -456,7 +445,9 @@ class _ProfileInfoState extends State<ProfileInfo> {
 											padding: EdgeInsets.fromLTRB(12, 8, 12, 10),
 											width: double.infinity,
 											child: RaisedButton(
-												onPressed: () async {},
+												onPressed: () async {
+													uploadPic();
+												},
 												padding: EdgeInsets.all(20.0),
 												shape: RoundedRectangleBorder(
 													borderRadius: BorderRadius.all(Radius.circular(10.0)),

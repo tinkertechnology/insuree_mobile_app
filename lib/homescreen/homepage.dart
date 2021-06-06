@@ -30,6 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
 		_medicalservices =
 			ApiGraphQlServices().MedicalServicesGQL('medicalservice');
 		_insureeclaims = ApiGraphQlServices().ClaimsServicesGQL();
+
 	}
 	
 	@override

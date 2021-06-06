@@ -148,7 +148,7 @@ class _MyAppState extends State<MyApp> {
                             '/reset-password':(BuildContext context) => ResetPassword(),
                             
                             //POLICY INFORMATION
-                            '/policy-information':(BuildContext context) => PolicyInformation(),
+                            '/policy-information':(BuildContext context) => PolicyInformationPage(),
     
                             // SERVICES
                             '/services':(BuildContext context) => ClaimedItemServicesPage(),
