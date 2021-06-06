@@ -70,12 +70,11 @@ class _DisplayState extends State<Display> {
                 .toList(),
         );
     }
+    
     Widget build(BuildContext context) {
         final bottom_nav = Provider.of<BottomNavigationBarProvider>(context);
         var connectionStatus = Provider.of<ConnectivityResult>(context);
-        if(connectionStatus==ConnectivityResult.none){setState(() {
-
-        });}
+        if(connectionStatus==ConnectivityResult.none){setState(() {});}
 
         return Scaffold(
             appBar: AppBar(
@@ -83,7 +82,14 @@ class _DisplayState extends State<Display> {
                 backgroundColor: CustomTheme.lightTheme.primaryColor,//Color.fromRGBO(234, 239, 255, 50),
                 elevation: 0.0,
                 actions: <Widget>[
-                    _createLanguageDropDown()
+                    // _createLanguageDropDown()
+                    IconButton(
+                        icon: Icon(Icons.credit_card, color: Colors.white, size: 30,),
+                        onPressed: (){
+                            print('Show Card Clicked...');
+                            Navigator.pushNamed(context, '/show-card');
+                        }
+                    )
                 ],
                 title: Text(titleList[bottom_nav.currentIndex], textAlign: TextAlign.center,),
 
@@ -93,11 +99,11 @@ class _DisplayState extends State<Display> {
                 :_getDrawerItemWidget(bottom_nav.currentIndex),
             bottomNavigationBar: CurvedNavigationBar(
                 color: CustomTheme.lightTheme.primaryColor,
-                height: 50,
+                height: 60,
                 onTap: (index) {
                     bottom_nav.currentIndex = index;
                 },
-                backgroundColor: CustomTheme.lightTheme.splashColor.withOpacity(0.25),
+                backgroundColor: CustomTheme.lightTheme.backgroundColor,
                 items: <Widget>[
                     Icon(
                         Icons.home,

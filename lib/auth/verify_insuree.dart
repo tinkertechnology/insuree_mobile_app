@@ -1,4 +1,5 @@
 import 'package:card_app/auth/login_card.dart';
+import 'package:card_app/theme/custom_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:card_app/blocks/auth_block.dart';
@@ -126,7 +127,7 @@ class _VerifyInsureeState extends State<VerifyInsuree> {
                             filled: true,
                             contentPadding: EdgeInsets.all(16.0),
                             prefixIcon: Icon(Icons.dialpad)),
-                        keyboardType: TextInputType.text,
+                        keyboardType: TextInputType.number,
                         obscureText: true,
                     ),
                 ],
@@ -230,13 +231,13 @@ class _VerifyInsureeState extends State<VerifyInsuree> {
     Widget build(BuildContext context) {
         Size deviceSize = MediaQuery.of(context).size;
         return Scaffold(
-            backgroundColor:
-            Color.fromRGBO(41, 127, 141, 25), //Color.fromRGBO(234, 239, 255, 30),
+            backgroundColor: CustomTheme.lightTheme.primaryColor, //Color.fromRGBO(41, 127, 141, 25),,
             body: Container(
+                margin: EdgeInsets.only(top: 70),
                 height: MediaQuery.of(context).size.height,
                 child: Column(
                     children: <Widget>[
-                        Container(
+                        /*Container(
                             padding: EdgeInsets.all(20.0),
                             margin: EdgeInsets.only(top: 10),
                             child: Row(
@@ -262,7 +263,7 @@ class _VerifyInsureeState extends State<VerifyInsuree> {
                                     ),
                                 ],
                             ),
-                        ),
+                        ),*/
                         Expanded(
                             child: Form(
                                 key: _formKey,
@@ -298,9 +299,7 @@ class _VerifyInsureeState extends State<VerifyInsuree> {
                                                                     shape: CircleBorder(),
                                                                     image: DecorationImage(
                                                                         fit: BoxFit.cover,
-                                                                        image: NetworkImage(
-                                                                            'https://www.kindpng.com/picc/m/495-4952535_create-digital-profile-icon-blue-user-profile-icon.png',
-                                                                        ),
+                                                                        image: AssetImage('assets/images/openimis-logo.png'),
                                                                     ),
                                                                 ),
                                                             ),
@@ -330,7 +329,7 @@ class _VerifyInsureeState extends State<VerifyInsuree> {
                                                     _buildInsureeCHFID(),
                                                     _buildFamilyCHFID(),
                                                     _buildDOBTF(),
-                                                    SizedBox(height: 8.0),
+                                                    SizedBox(height: 16.0),
                                                     // SIGN IN BUTTON
                                                     Container(
                                                         padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
@@ -374,17 +373,19 @@ class _VerifyInsureeState extends State<VerifyInsuree> {
                                                                 borderRadius:
                                                                 BorderRadius.all(Radius.circular(10.0)),
                                                             ),
-                                                            color: Color.fromRGBO(254, 196, 45, 50),
+                                                            color: CustomTheme.lightTheme.splashColor.withOpacity(0.8), //Color.fromRGBO(254, 196, 45, 50),
                                                             child: VerifyInsureeService().isLoading
                                                                 ? CircularProgressIndicator(
                                                                 valueColor:
                                                                 AlwaysStoppedAnimation<Color>(Colors.white))
                                                                 : Text(
-                                                                "Verify",
+                                                                "Verify".toUpperCase(),
                                                                 style: TextStyle(
                                                                     fontSize: 16.0,
-                                                                    fontWeight: FontWeight.w400,
-                                                                    fontFamily: "Open-sans"),
+                                                                    fontWeight: FontWeight.bold,
+                                                                    fontFamily: "Open-sans",
+                                                                    color: Colors.white
+                                                                ),
                                                             ),
                                                         )),
                                                 ],
@@ -400,7 +401,7 @@ class _VerifyInsureeState extends State<VerifyInsuree> {
             bottomNavigationBar: BottomAppBar(
                 child: Container(
                     height: 50,
-                    color: Colors.orangeAccent,
+                    color: CustomTheme.lightTheme.primaryColor,
                     /*decoration: BoxDecoration(
 						gradient: LinearGradient(
 							begin: Alignment.topRight,
@@ -418,8 +419,8 @@ class _VerifyInsureeState extends State<VerifyInsuree> {
                                 icon: Icon(Icons.location_on),
                                 color: Colors.white,
                                 onPressed: () {
-                                    print('Homepage Clicked....');
-                                    Navigator.pushNamed(context, '/');
+                                    print('Address Clicked....');
+                                    // Navigator.pushNamed(context, '/');
                                 },
                             ),
                             IconButton(
@@ -430,12 +431,74 @@ class _VerifyInsureeState extends State<VerifyInsuree> {
                             IconButton(
                                 icon: Icon(Icons.phone_in_talk),
                                 color: Colors.white,
-                                onPressed: () {},
+                                onPressed: () => showDialog(
+                                    context: context,
+                                    builder: (BuildContext context){
+                                        return AlertDialog(
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.circular(4.0)
+                                            ),
+                                            contentPadding: EdgeInsets.all(0.0),
+                                            
+                                            content:  Container(
+                                                height: 120,
+                                                color: Colors.orangeAccent,
+                                                child: Column(
+                                                    children: [
+                                                        Expanded(
+                                                            child: Container(
+	                                                            margin: const EdgeInsets.only(top: 4.0),
+	                                                            padding: const EdgeInsets.all(8.0),
+	                                                            child: Column(
+		                                                            crossAxisAlignment: CrossAxisAlignment.center,
+		                                                            mainAxisSize: MainAxisSize.max,
+		                                                            children: [
+			                                                            Text('Contact Details',
+				                                                            style: TextStyle(
+					                                                            fontSize: 20.0,
+					                                                            fontWeight: FontWeight.bold,
+					                                                            color: Colors.white,
+				                                                            ),
+				                                                            textAlign: TextAlign.center,
+			                                                            ),
+		                                                            ],
+	                                                            )
+                                                            ),
+                                                        ),
+                                                        
+                                                        Container(
+	                                                        color: Colors.white,
+                                                            child: Column(
+                                                                children: [
+                                                                    ListTile(
+                                                                        title: Text('openIMIS'),
+                                                                        subtitle: Text('Phone: 01-42xxxxx'),
+                                                                    )
+                                                                ],
+                                                            ),
+                                                        )
+                                                    ],
+                                                ),
+                                            ),
+                                            /*actions: <Widget>[
+                                                TextButton(
+                                                    onPressed: (){},
+                                                    child: Text('Cancel')
+                                                ),
+                                                TextButton(
+                                                    onPressed: (){},
+                                                    child: Text('OK')
+                                                )
+                                            ],*/
+                                        );
+                                    }),
                             ),
                             IconButton(
                                 icon: Icon(Icons.info_outline),
                                 color: Colors.white,
-                                onPressed: () {},
+                                onPressed: () {
+                                    Navigator.pushNamed(context, '/faq');
+                                },
                             ),
                         ],
                     ),

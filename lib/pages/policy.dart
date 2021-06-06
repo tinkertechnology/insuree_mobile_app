@@ -21,7 +21,7 @@ class _PolicyInformationPageState extends State<PolicyInformationPage> {
 	@override
 	Widget build(BuildContext context) {
 		return Scaffold(
-			backgroundColor: Color.fromRGBO(41,127,141, 25),//Color.fromRGBO(0, 96, 113, 25),
+			backgroundColor: CustomTheme.lightTheme.primaryColor,//Color.fromRGBO(41,127,141, 25)
 			
 			body: Column(
 				children: <Widget>[
