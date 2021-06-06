@@ -23,7 +23,13 @@ class LocationService {
           }
         });
       }
-    });
+      else{
+      return;
+
+      }
+    }
+    
+    );
   }
 
   Future<UserLocation> getLocation() async {
