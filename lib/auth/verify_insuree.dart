@@ -61,7 +61,7 @@ class _VerifyInsureeState extends State<VerifyInsuree> {
                     ),
                     SizedBox(height: 8.0),
                     TextFormField(
-                        keyboardType: TextInputType.emailAddress,
+                        keyboardType: TextInputType.number,
                         validator: (value) {
                             if (value.isEmpty) {
                                 return 'Please enter insurance number';
@@ -128,7 +128,7 @@ class _VerifyInsureeState extends State<VerifyInsuree> {
                             contentPadding: EdgeInsets.all(16.0),
                             prefixIcon: Icon(Icons.dialpad)),
                         keyboardType: TextInputType.number,
-                        obscureText: true,
+                        //obscureText: true,
                     ),
                 ],
             ));
