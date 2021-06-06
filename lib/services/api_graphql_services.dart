@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:card_app/models/health_facility_coordinates.dart';
 import 'package:http/http.dart' as http;
 import 'package:card_app/models/medical_services.dart';
 import 'package:card_app/models/insuree_claims.dart';
@@ -16,6 +17,7 @@ class ApiGraphQlServices {
 //  ClaimedServicesItems claimedServicesItems = ClaimedServicesItems();
   ClaimedServices claimedservices = ClaimedServices();
   ClaimedItems claimeditems = ClaimedItems();
+  HealthFacilityCoordinates healthFacilityCoordinates = HealthFacilityCoordinates();
 
 
   Future<MedicalServices> MedicalServicesGQL(String args) async {
@@ -128,5 +130,21 @@ class ApiGraphQlServices {
       return  claimeditems;//claimeditems;
     }
     return claimeditems;
+  }
+
+  Future<HealthFacilityCoordinates> HealthFacilityCoordinatesServicesGQL(args) async {
+    try {
+      final response = await http.post(Uri.parse(env.API_BASE_URL),
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: jsonEncode(openimisGqlQueries().health_facility_coordinate(args))
+      );
+      var jsonMap = json.decode(response.body);
+      healthFacilityCoordinates = HealthFacilityCoordinates.fromJson(jsonMap);
+    } catch (Exception) {
+      return  healthFacilityCoordinates;
+    }
+    return healthFacilityCoordinates;
   }
 }
