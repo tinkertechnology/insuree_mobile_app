@@ -50,19 +50,16 @@ class _ProfileInfoState extends State<ProfileInfo> {
 	}
 	
 	Future uploadPic() async{
-		//  StorageReference firebaseStorageRef = FirebaseStorage.instance.ref().child(fileName);
-		//  StorageUploadTask uploadTask = firebaseStorageRef.putFile(_image);
-		//  StorageTaskSnapshot taskSnapshot=await uploadTask.onComplete;
-		Map<String, String> headers = { "Content-Type": "multipart/form-data"};
 		String url = env.API_BASE_URL;
 		var request = new http.MultipartRequest("POST", Uri.parse(url));
-		request.headers.addAll(headers);
-		request.files.add(new http.MultipartFile.fromBytes('file', await File.fromUri(Uri.parse(_image.path)).readAsBytes(), contentType: new MediaType('image', 'jpeg')));
-		request.fields['address'] = 'address';
-		request.fields['query'] ='mutation {createVoucherPayment(file: ${Uri.parse(_image.path)}){   ok  }  }","variables":null"}';
+//		request.headers.addAll(headers);
+		request.files.add(new http.MultipartFile.fromBytes('file', await File.fromUri(Uri.parse(_image.path)).readAsBytes(), filename: "jpt.jpg"));
+//		request.fields['address'] = 'address';
+//		request.fields['query'] ='mutation {createVoucherPayment(file: ${Uri.parse(_image.path)}){   ok  }  }","variables":null"}';
+		request.fields['query'] ='mutation {createVoucherPayment(file: "file"){   ok  }  }';
 		print(request);
 		request.send().then((response) {
-			print(response.stream.toStringStream().toString());
+			print(response.stream.bytesToString().toString());
 			if (response.statusCode == 200)
 				print("Uploaded!");
 			setState(() {
@@ -105,18 +102,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
 		);
 	}
 	
-	Future getImage() async {
-		var image = await picker.getImage(source: ImageSource.camera);
-		
-		setState(() {
-			_image = image as File;
-			print('Image Path $_image');
-		});
-		if(_image!=null){
-			uploadPic();
-		}
-	}
-	
+
 	
 	@override
 	Widget build(BuildContext context) {

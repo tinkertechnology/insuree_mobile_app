@@ -2,6 +2,7 @@ import 'package:card_app/models/claimeditems.dart';
 import 'package:card_app/models/claimedservices.dart';
 import 'package:card_app/theme/custom_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:card_app/common/env.dart' as env;
 import 'package:card_app/services/api_graphql_services.dart';
 
 class ClaimedItemServicesPage extends StatefulWidget {
@@ -109,7 +110,7 @@ class _ClaimedItemServicesPageState extends State<ClaimedItemServicesPage> {
                                                                                         ),
                                                                                     ),
                                                                                     subtitle: Text(
-                                                                                        '${claimeditems.item.price.toString()}',
+                                                                                        '${env.Currency} ${claimeditems.item.price.toString()}',
                                                                                         style: TextStyle(
                                                                                             fontSize: 12,
                                                                                             fontWeight: FontWeight.w300
@@ -177,7 +178,7 @@ class _ClaimedItemServicesPageState extends State<ClaimedItemServicesPage> {
                                                                                         ),
                                                                                     ),
                                                                                     trailing: Text(
-                                                                                        '${claimedservices.service.price.toString()}',
+                                                                                        '${env.Currency} ${claimedservices.service.price.toString()}',
                                                                                         style: TextStyle(
                                                                                             fontSize: 14.0,
                                                                                             fontWeight: FontWeight.w300

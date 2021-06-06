@@ -4,6 +4,7 @@ import 'package:card_app/homescreen/homepage_link_sync_event.dart';
 import 'package:card_app/localization/language/languages.dart';
 import 'package:card_app/models/claimed.dart';
 import 'package:card_app/models/insuree_claims.dart';
+import 'package:card_app/models/policy_information.dart';
 import 'package:card_app/pages/claimed_item_services.dart';
 import 'package:card_app/profile/profile_main.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
 	Future<MedicalServices> _medicalservices;
 	Future<Claims> _insureeclaims;
 	Future<Claimed> _claimed;
-	
+
 	@override
 	void initState() {
 		super.initState();
@@ -34,6 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
 		_medicalservices =
 				ApiGraphQlServices().MedicalServicesGQL('medicalservice');
 		_insureeclaims = ApiGraphQlServices().ClaimsServicesGQL();
+
 	}
 
 	@override
