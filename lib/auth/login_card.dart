@@ -1,3 +1,4 @@
+import 'package:card_app/theme/custom_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:local_auth/auth_strings.dart';
@@ -87,12 +88,13 @@ class _LoginScreenState extends State<LoginScreen> {
 	Widget build(BuildContext context) {
 		Size deviceSize = MediaQuery.of(context).size;
 		return Scaffold(
-				backgroundColor: Color.fromRGBO(41,127,141, 25), //Color.fromRGBO(234, 239, 255, 30),
+				backgroundColor: CustomTheme.lightTheme.primaryColor, //Color.fromRGBO(234, 239, 255, 30),
 				body: Container(
+					margin: EdgeInsets.only(top: 70),
 					height: MediaQuery.of(context).size.height,
 					child: Column(
 						children: <Widget>[
-							Container(
+							/*Container(
 								padding: EdgeInsets.all(20.0),
 								margin: EdgeInsets.only(top: 30),
 								child: Row(
@@ -115,7 +117,7 @@ class _LoginScreenState extends State<LoginScreen> {
 										),
 									],
 								),
-							),
+							),*/
 
 							Expanded(
 								child: Form(
@@ -155,7 +157,7 @@ class _LoginScreenState extends State<LoginScreen> {
 																			shape: CircleBorder(),
 																			image: DecorationImage(
 																					fit: BoxFit.cover,
-																					image: NetworkImage('https://www.kindpng.com/picc/m/495-4952535_create-digital-profile-icon-blue-user-profile-icon.png',)
+																					image: AssetImage('assets/images/openimis-logo.png'),
 																			)
 																	),
 																),
@@ -165,7 +167,7 @@ class _LoginScreenState extends State<LoginScreen> {
 														SizedBox(height: 10.0),
 														ListTile(
 															title: Text(
-																"Let's Sign You In",
+																"Validate OTP",
 																style: TextStyle(
 																		fontSize: 24,
 																		fontWeight: FontWeight.w400
@@ -173,11 +175,11 @@ class _LoginScreenState extends State<LoginScreen> {
 																textAlign: TextAlign.center,
 															),
 															subtitle: Text(
-																"Welcome back, you've been missed!",
+																"Enter the validaton code!",
 																style: TextStyle(
-																		fontSize: 16,
-																		fontWeight: FontWeight.w300,
-																		color: Colors.grey
+																	fontSize: 16,
+																	fontWeight: FontWeight.w300,
+																	color: Colors.grey
 																),
 																textAlign: TextAlign.center,
 															),
@@ -222,16 +224,17 @@ class _LoginScreenState extends State<LoginScreen> {
 																			shape: RoundedRectangleBorder(
 																				borderRadius: BorderRadius.all(Radius.circular(10.0)),
 																			),
-																			color: Color.fromRGBO(254, 196, 45, 50),
+																			color: CustomTheme.lightTheme.splashColor.withOpacity(0.8),
 																			child: auth.loading && auth.loadingType == 'login'
 																					? CircularProgressIndicator(
 																					valueColor: AlwaysStoppedAnimation<Color>(Colors.white))
 																					: Text(
-																				"Sign In",
+																				"Validate OTP".toUpperCase(),
 																				style: TextStyle(
-																						fontSize: 16.0,
-																						fontWeight: FontWeight.w400,
-																						fontFamily: "Open-sans"
+																					fontSize: 16.0,
+																					fontWeight: FontWeight.bold,
+																					fontFamily: "Open-sans",
+																					color: Colors.white
 																				),
 																			),
 																		);

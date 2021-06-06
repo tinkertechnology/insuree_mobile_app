@@ -1,12 +1,12 @@
 import 'package:card_app/theme/custom_theme.dart';
 import 'package:flutter/material.dart';
 
-class CardPage extends StatefulWidget {
+class ShowCard extends StatefulWidget {
     @override
-    _CardPageState createState() => _CardPageState();
+    _ShowCardState createState() => _ShowCardState();
 }
 
-class _CardPageState extends State<CardPage> {
+class _ShowCardState extends State<ShowCard> {
     @override
     Widget build(BuildContext context) {
         return Scaffold(

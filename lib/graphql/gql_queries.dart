@@ -27,7 +27,8 @@ class openimisGqlQueries {
 
       //"query":"query{\n  insureeClaim(claimId: ${claimed_id}){\n   \n    services{\n      id\n      service{\n        id\n        name\n      }\n    }\n  }\n}","variables":null
       {
-        "query":"query{\n  insureeClaim(claimId: ${claimed_id}){\n   \n    services{\n      id\n      service{\n        id\n        name\n        price\n      }\n    }\n  }\n}","variables":null
+        "query": "query{\n  insureeClaim(claimId: ${claimed_id}){\n   \n    services{\n      id\n      service{\n        id\n        name\n        price\n      }\n    }\n  }\n}",
+        "variables": null
       };
   }
 
@@ -46,5 +47,13 @@ class openimisGqlQueries {
         "query": "query{\n  insureeClaim(claimId: 1){\n   \n    items{\n      id\n      item{\n        id\n        name\n        price\n      }\n    }\n  }\n}",
         "variables": null
       };
+  }
+
+  openimis_gql_insuree_policy_information(chfid) {
+    return {
+
+      "query": "query{\n  insureeProfile(insureeCHFID: ${chfid}){\n    otherNames\n    lastName\n    chfId\n    insureePolicies{\n      expiryDate\n    }\n    \n  }\n}",
+      "variables": null
+    };
   }
 }

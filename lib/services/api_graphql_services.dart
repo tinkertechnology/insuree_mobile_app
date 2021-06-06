@@ -6,6 +6,7 @@ import 'package:card_app/models/insuree_claims.dart';
 import 'package:card_app/models/claimed.dart';
 import 'package:card_app/models/claimeditems.dart';
 import 'package:card_app/models/claimedservices.dart';
+import 'package:card_app/models/policy_information.dart';
 import 'package:card_app/graphql/gql_queries.dart';
 import 'package:card_app/common/env.dart' as env;
 
@@ -14,10 +15,10 @@ class ApiGraphQlServices {
   MedicalServices medicalServices = MedicalServices();
   Claims insuree_claims = Claims();
   Claimed claimed = Claimed();
-//  ClaimedServicesItems claimedServicesItems = ClaimedServicesItems();
   ClaimedServices claimedservices = ClaimedServices();
   ClaimedItems claimeditems = ClaimedItems();
   HealthFacilityCoordinates healthFacilityCoordinates = HealthFacilityCoordinates();
+  PolicyInformation policyinformation = PolicyInformation();
 
 
   Future<MedicalServices> MedicalServicesGQL(String args) async {
@@ -147,4 +148,25 @@ class ApiGraphQlServices {
     }
     return healthFacilityCoordinates;
   }
+
+  Future<PolicyInformation> PolicyInformationServicesGQL(chfid) async { //todo pass claim id from widget
+    try {
+      final response = await http.post(Uri.parse(env.API_BASE_URL),
+          headers: {
+            "Content-Type": "application/json",
+//                "Accept" : "application/json"
+          },
+          body: jsonEncode(openimisGqlQueries()
+              .openimis_gql_insuree_policy_information(chfid)) //todo map qs filtering
+      );
+      var jsonMap = json.decode(response.body);
+      policyinformation = PolicyInformation.fromJson(jsonMap);
+
+
+    } catch (Exception) {
+      return  policyinformation;//claimeditems;
+    }
+    return policyinformation;
+  }
+
 }
