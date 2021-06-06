@@ -41,6 +41,14 @@ class openimisGqlQueries {
       };
   }
 
+  health_facility_coordinate(args) {
+    return
+      {
+        "query": "query{\n  insureeClaim(claimId: 1){\n   \n    items{\n      id\n      item{\n        id\n        name\n        price\n      }\n    }\n  }\n}",
+        "variables": null
+      };
+  }
+
   openimis_gql_insuree_policy_information(chfid) {
     return {
 
