@@ -9,6 +9,7 @@ import 'package:card_app/pages/feedback.dart';
 import 'package:card_app/pages/notice.dart';
 import 'package:card_app/pages/healthFacilitiesCoordinates.dart';
 import 'package:card_app/pages/notification.dart';
+import 'package:card_app/pages/office.dart';
 import 'package:card_app/pages/policy.dart';
 import 'package:card_app/pages/services.dart';
 import 'package:card_app/pages/userhistory.dart';
@@ -179,7 +180,11 @@ class _MyAppState extends State<MyApp> {
 
                             '/PaymentsubmissionPage': (BuildContext context) => SubmissionPage(),
     
+                            // NOTICE BOARD
                             '/notice': (BuildContext context) => NoticePage(),
+                            
+                            // OFFICE RELATED TO HIB
+                            '/offices': (BuildContext context) => OfficePage(),
 
                             //test
 //                            '/profile-info' :(BuildContext context) => HealthFacilityCoordinatesPage(),

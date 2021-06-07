@@ -57,7 +57,10 @@ class _HomeScreenState extends State<HomeScreen> {
 							topRight: Radius.circular(20),
 							topLeft: Radius.circular(20)
 						),
-						color:CustomTheme.lightTheme.backgroundColor.withOpacity(1),
+//						border: Border(
+//							top: BorderSide(color: Colors.orangeAccent)
+//						),
+						color:CustomTheme.lightTheme.backgroundColor,
 						/*gradient: LinearGradient(
 							begin: Alignment.bottomRight,
 							end: Alignment.topLeft,
@@ -81,7 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
 										width: 40,
 										height: 5,
 										decoration: BoxDecoration(
-											color: Colors.white,
+											color: Colors.black54,
 											borderRadius: BorderRadius.all(Radius.circular(12.0))),
 									),
 								],
