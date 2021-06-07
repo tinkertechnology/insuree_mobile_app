@@ -418,15 +418,85 @@ class _VerifyInsureeState extends State<VerifyInsuree> {
                             IconButton(
                                 icon: Icon(Icons.location_on),
                                 color: Colors.white,
-                                onPressed: () {
-                                    print('Address Clicked....');
-                                    // Navigator.pushNamed(context, '/');
-                                },
+                                onPressed: () => showDialog(
+                                    context: context,
+                                    builder: (BuildContext context){
+                                        return AlertDialog(
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.circular(4.0)
+                                            ),
+                                            contentPadding: EdgeInsets.all(0.0),
+                
+                                            content:  Container(
+                                                height: 260,
+                                                color: CustomTheme.lightTheme.primaryColor,
+                                                child: Column(
+                                                    children: [
+                                                        Expanded(
+                                                            child: Container(
+                                                                margin: const EdgeInsets.only(top: 4.0),
+                                                                padding: const EdgeInsets.all(8.0),
+                                                                child: Column(
+                                                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                                                    mainAxisSize: MainAxisSize.max,
+                                                                    children: [
+                                                                        Text('Office Details',
+                                                                            style: TextStyle(
+                                                                                fontSize: 20.0,
+                                                                                fontWeight: FontWeight.bold,
+                                                                                color: Colors.white,
+                                                                            ),
+                                                                            textAlign: TextAlign.center,
+                                                                        ),
+                                                                    ],
+                                                                )
+                                                            ),
+                                                        ),
+                            
+                                                        Container(
+                                                            color: Colors.white,
+                                                            child: Column(
+                                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                                mainAxisSize: MainAxisSize.min,
+                                                                children: [
+                                                                    ListTile(
+                                                                        title: Text('openIMIS'),
+                                                                        subtitle: Text('Phone: 01-42xxxxx'),
+                                                                    ),
+                                                                    ListTile(
+                                                                        title: Text('Email'),
+                                                                        subtitle: Text('openimis@gmail.com'),
+                                                                    ),
+                                                                    ListTile(
+                                                                        title: Text('Address'),
+                                                                        subtitle: Text('Kathmandu, Nepal'),
+                                                                    ),
+                                                                ],
+                                                            ),
+                                                        )
+                                                    ],
+                                                ),
+                                            ),
+                                            /*actions: <Widget>[
+                                                TextButton(
+                                                    onPressed: (){},
+                                                    child: Text('Cancel')
+                                                ),
+                                                TextButton(
+                                                    onPressed: (){},
+                                                    child: Text('OK')
+                                                )
+                                            ],*/
+                                        );
+                                    }),
                             ),
                             IconButton(
                                 icon: Icon(Icons.attach_money),
                                 color: Colors.white,
-                                onPressed: () {},
+                                onPressed: () {
+                                    print('OfficeRelated clicked...');
+                                    Navigator.pushNamed(context, '/offices');
+                                },
                             ),
                             IconButton(
                                 icon: Icon(Icons.phone_in_talk),
@@ -442,7 +512,7 @@ class _VerifyInsureeState extends State<VerifyInsuree> {
                                             
                                             content:  Container(
                                                 height: 120,
-                                                color: Colors.orangeAccent,
+                                                color: CustomTheme.lightTheme.primaryColor,
                                                 child: Column(
                                                     children: [
                                                         Expanded(
