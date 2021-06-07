@@ -8,7 +8,7 @@ class FeedbackPage extends StatefulWidget {
 }
 
 class _FeedbackPageState extends State<FeedbackPage> {
-    final double circleRadius =100.0;
+    final double circleRadius = 30.0;
     final double circleBorderWidth = 8.0;
     Color mainColor = Color(0xFF177767);
     TextEditingController dateCtl = TextEditingController();
@@ -33,9 +33,27 @@ class _FeedbackPageState extends State<FeedbackPage> {
                                 )
                             ),
                             child: Padding(
-                                padding: const EdgeInsets.only(left: 12.0, right: 12.0, top: 10.0),
+                                padding: const EdgeInsets.only(left: 16.0, top: 8.0, right: 16.0, bottom: 8.0),
                                 child: ListView(
                                     children: [
+                                        SizedBox(height: 8.0),
+                                        Column(
+                                            crossAxisAlignment: CrossAxisAlignment.center,
+                                            children: [
+                                                CircleAvatar(
+                                                    radius: circleRadius,
+                                                    backgroundColor: CustomTheme.lightTheme.primaryColor.withOpacity(0.25),
+                                                    child: Icon(Icons.message_rounded, color: Colors.white, size: 30,),
+                                                ),
+                                                SizedBox(height: 16.0),
+                                                Text(
+                                                    'Fill in your query if you have any issue regarding our app',
+                                                    style: TextStyle(
+                                                        color: Colors.black54,
+                                                    ),
+                                                )
+                                            ],
+                                        ),
                                         // FULL NAME
                                         SizedBox(height: 20.0),
                                         Container(
@@ -88,7 +106,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
                                                 ],
                                             ),
                                         ),
-    
+                            
                                         // MOBILE NUMBER
                                         SizedBox(height: 20.0),
                                         Container(
@@ -129,7 +147,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
                                                                     color: Colors.white,
                                                                 )
                                                             ),
-                        
+                                                
                                                             hintText: '9841xxxxxx',
                                                             hintStyle: TextStyle(
                                                                 fontFamily: 'Open-sans'
@@ -142,7 +160,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
                                                 ],
                                             ),
                                         ),
-    
+                            
                                         // EMAIL
                                         SizedBox(height: 20.0),
                                         Container(
@@ -183,7 +201,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
                                                                     color: Colors.white,
                                                                 )
                                                             ),
-                        
+                                                
                                                             hintText: 'Email Address',
                                                             hintStyle: TextStyle(
                                                                 fontFamily: 'Open-sans'
@@ -196,7 +214,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
                                                 ],
                                             ),
                                         ),
-    
+                            
                                         // FeedbackPage
                                         SizedBox(height: 20.0),
                                         Container(
@@ -206,7 +224,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
                                                 mainAxisSize: MainAxisSize.min,
                                                 children: <Widget>[
                                                     Text(
-                                                        "FeedbackPage",
+                                                        "Query Description (max. 150 words)",
                                                         style: TextStyle(
                                                             fontSize: 16,
                                                             fontWeight: FontWeight.w400,
@@ -238,42 +256,66 @@ class _FeedbackPageState extends State<FeedbackPage> {
                                                                     color: Colors.white,
                                                                 )
                                                             ),
-                                                            hintText: 'FeedbackPage',
                                                             hintStyle: TextStyle(
                                                                 fontFamily: 'Open-sans'
                                                             ),
                                                             filled: true,
                                                             contentPadding: EdgeInsets.all(16.0),
-                                                            prefixIcon: Icon(Icons.feedback),
                                                         ),
                                                     ),
                                                 ],
                                             ),
                                         ),
-    
-                                        // SIGN UP BUTTON
+                            
+                                        // CANCEL & SUBMIT BUTTON
                                         SizedBox(height: 20.0),
-                                        Container(
-                                            padding: EdgeInsets.fromLTRB(12, 8, 12, 10),
-                                            width: double.infinity,
-                                            child: RaisedButton(
-                                                onPressed: () async {},
-                                                padding: EdgeInsets.all(20.0),
-                                                shape: RoundedRectangleBorder(
-                                                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                                                ),
-                                                color: CustomTheme.lightTheme.splashColor,
-                                                child: Text(
-                                                    "save changes".toUpperCase(),
-                                                    style: TextStyle(
-                                                        fontSize: 18.0,
-                                                        fontWeight: FontWeight.bold,
-                                                        fontFamily: "Open-sans",
-                                                        color: Colors.white
+                                        Row(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                                Expanded(
+                                                    // padding: EdgeInsets.fromLTRB(8, 4, 8, 4),
+                                                    child: RaisedButton(
+                                                        onPressed: () async {},
+                                                        padding: EdgeInsets.all(16.0),
+                                                        shape: RoundedRectangleBorder(
+                                                            borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                                        ),
+                                                        color: Colors.red.shade500,
+                                                        child: Text(
+                                                            "cancel".toUpperCase(),
+                                                            style: TextStyle(
+                                                                fontSize: 18.0,
+                                                                fontWeight: FontWeight.bold,
+                                                                fontFamily: "Open-sans",
+                                                                color: Colors.white
+                                                            ),
+                                                        ),
                                                     ),
                                                 ),
-                                            ),
-                                        ),
+                                                SizedBox(width: 16.0),
+                                                Expanded(
+                                                    // padding: EdgeInsets.fromLTRB(4, 8, 4, 8),
+                                                    child: RaisedButton(
+                                                        onPressed: () async {},
+                                                        padding: EdgeInsets.all(16.0),
+                                                        shape: RoundedRectangleBorder(
+                                                            borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                                        ),
+                                                        color: CustomTheme.lightTheme.primaryColor,
+                                                        child: Text(
+                                                            "submit".toUpperCase(),
+                                                            style: TextStyle(
+                                                                fontSize: 18.0,
+                                                                fontWeight: FontWeight.bold,
+                                                                fontFamily: "Open-sans",
+                                                                color: Colors.white
+                                                            ),
+                                                        ),
+                                                    ),
+                                                ),
+                                            ],
+                                        )
                                     ],
                                 ),
                             ),
