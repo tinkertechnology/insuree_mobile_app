@@ -4,6 +4,8 @@ import 'package:card_app/theme/custom_theme.dart';
 import 'package:flutter/material.dart';
 
 class ShowCard extends StatefulWidget {
+    final String message;
+    ShowCard({Key key, @required this.message}) : super(key: key);
     @override
     _ShowCardState createState() => _ShowCardState();
 }
@@ -16,9 +18,21 @@ class _ShowCardState extends State<ShowCard> {
         // TODO: implement initState
         super.initState();
         _policyinformation = ApiGraphQlServices().PolicyInformationServicesGQL(1);
+        Future(() {
+            if (widget.message != null && widget.message.isNotEmpty) {
+                showInSnackBar(widget.message);
+            }
+        });
+
+    }
+    final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
+    void showInSnackBar(String value) {
+        ScaffoldMessenger.of(context).showSnackBar( SnackBar( content: Text(value), duration: Duration(milliseconds: 3000), ), );
     }
     @override
     Widget build(BuildContext context) {
+
         return Scaffold(
             backgroundColor: CustomTheme.lightTheme.primaryColor,//Color.fromRGBO(41,127,141, 25)
 	        appBar: AppBar(
@@ -346,7 +360,9 @@ class _ShowCardState extends State<ShowCard> {
                                                         padding: EdgeInsets.fromLTRB(12, 8, 12, 10),
                                                         width: double.infinity,
                                                         child: RaisedButton(
-                                                            onPressed: () async {},
+                                                            onPressed: () async {
+                                                                Navigator.pushNamed(context, '/PaymentsubmissionPage');
+                                                            },
                                                             padding: EdgeInsets.all(20.0),
                                                             shape: RoundedRectangleBorder(
                                                                 borderRadius: BorderRadius.all(

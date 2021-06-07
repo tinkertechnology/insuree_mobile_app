@@ -268,6 +268,7 @@ class _ProfilePageViewState extends State<ProfilePageView> {
 												child: GestureDetector(
 													onTap: (){
 														print("Notice Board clicked");
+														Navigator.pushNamed(context, '/notice');
 													},
 													child: ListTile(
 														title: Text('Notice'),

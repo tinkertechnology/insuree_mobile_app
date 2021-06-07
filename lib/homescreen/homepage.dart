@@ -2,11 +2,16 @@ import 'dart:ui';
 
 import 'package:card_app/models/claimed.dart';
 import 'package:card_app/models/insuree_claims.dart';
+import 'package:card_app/models/user_location.dart';
 import 'package:card_app/theme/custom_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:card_app/models/medical_services.dart';
 import 'package:card_app/services/api_graphql_services.dart';
+import 'package:card_app/services/location_service.dart';
+import 'package:provider/provider.dart';
+
+
 
 class HomeScreen extends StatefulWidget {
 	@override
@@ -18,7 +23,8 @@ class _HomeScreenState extends State<HomeScreen> {
 	Future<MedicalServices> _medicalservices;
 	Future<Claims> _insureeclaims;
 	Future<Claimed> _claimed;
-	
+  UserLocation userLocation;
+  
 	final double _initFabHeight = 120.0;
 	double _fabHeight = 0;
 	double _panelHeightOpen = 0.0;
@@ -31,10 +37,13 @@ class _HomeScreenState extends State<HomeScreen> {
 			ApiGraphQlServices().MedicalServicesGQL('medicalservice');
 		_insureeclaims = ApiGraphQlServices().ClaimsServicesGQL();
 
+
 	}
 	
 	@override
 	Widget build(BuildContext context) {
+		var userLocation = Provider.of<UserLocation>(context);
+
 		_panelHeightOpen = MediaQuery.of(context).size.height * .52;
 		
 		return DraggableScrollableSheet(
@@ -102,8 +111,17 @@ class _HomeScreenState extends State<HomeScreen> {
 									_button("Service2", Icons.medical_services_sharp, CustomTheme.lightTheme.splashColor),
 									_button("Service3", Icons.medical_services_outlined, CustomTheme.lightTheme.splashColor),
 									_button("Service4", Icons.medical_services, CustomTheme.lightTheme.splashColor),
+
 								],
+
 							),
+							Row(
+								mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+								children: [
+									Text('Latitude: ${userLocation?.longitude}  Longitude: ${userLocation?.longitude}')
+								],
+							)
+
 						],
 					),
 				);
@@ -132,6 +150,7 @@ class _HomeScreenState extends State<HomeScreen> {
 					height: 12.0,
 				),
 				Text(label),
+
 			],
 		);
 	}
