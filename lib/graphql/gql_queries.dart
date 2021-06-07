@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class openimisGqlQueries {
 
   openimis_gql_medical_services(first) {
@@ -42,12 +44,24 @@ class openimisGqlQueries {
   }
 
   health_facility_coordinate(args) {
-    return
-      {
-        "query": "query{\n  insureeClaim(claimId: 1){\n   \n    items{\n      id\n      item{\n        id\n        name\n        price\n      }\n    }\n  }\n}",
+      var query="""
+        query {
+          healthFacilityCoordinate(inputLatitude:"1", inputLongitude:"1"){
+            id,
+            distance,
+            healthFacility{
+              id
+            }
+          }
+        }
+      """;
+      var _ret= {
+        "query": query, //jsonEncode(query),
         "variables": null
       };
+      return _ret;
   }
+
 
   openimis_gql_insuree_policy_information(chfid) {
     return {
