@@ -35,6 +35,7 @@ import 'package:card_app/auth/verify_insuree.dart';
 import 'package:card_app/services/connectivity.dart';
 import 'package:card_app/pages/notification.dart';
 import 'package:card_app/pages/claimed_item_services.dart';
+import 'package:card_app/pages/submission_page.dart';
 
 
 
@@ -173,6 +174,8 @@ class _MyAppState extends State<MyApp> {
 
                             //Claimed item Services
                             '/claimed_item_services' : (BuildContext context) => ClaimedItemServicesPage(),
+
+                            '/PaymentsubmissionPage': (BuildContext context) => SubmissionPage(),
                         },
                     );
                 }));
