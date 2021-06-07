@@ -310,13 +310,18 @@ class _CardHomeState extends State<CardHome> {
                                                     ),
                                                 ),
                                                 leading: Icon(Icons.history, color: Colors.green, size: 30,),
-                                                trailing: Text(
-                                                    'View All',
-                                                    style: TextStyle(
-                                                        fontSize: 16.0,
-                                                        fontWeight: FontWeight.normal
+                                                trailing: GestureDetector(
+                                                    onTap: (){
+                                                        Navigator.pushNamed(context, '/user-history');
+                                                    },
+                                                    child: Text(
+                                                        'View All',
+                                                        style: TextStyle(
+                                                            fontSize: 16.0,
+                                                            fontWeight: FontWeight.normal
+                                                        ),
                                                     ),
-                                                ),
+                                                )
                                             ),
                                             FutureBuilder<Claims>(
                                                 future: _insureeclaims,
@@ -330,9 +335,9 @@ class _CardHomeState extends State<CardHome> {
                                                             itemBuilder: (BuildContext context, int index){
                                                                 var claims = snapshot.data.data.insureeProfile.insureeClaim[index];
                                                                 return ListTile(
+                                                                    title: Text('${claims.healthFacility.name}'),
+                                                                    subtitle: Text('${claims.dateClaimed}'),
                                                                     trailing: Text('${env.Currency} ${claims.claimed}'),
-                                                                    title: Text('${claims.dateClaimed}'),
-                                                                    subtitle: Text('${claims.healthFacility.name}'),
                                                                     onTap: () {
                                                                         Navigator.push(
                                                                             context,

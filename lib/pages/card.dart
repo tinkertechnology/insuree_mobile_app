@@ -21,7 +21,16 @@ class _ShowCardState extends State<ShowCard> {
     Widget build(BuildContext context) {
         return Scaffold(
             backgroundColor: CustomTheme.lightTheme.primaryColor,//Color.fromRGBO(41,127,141, 25)
-        
+	        appBar: AppBar(
+		        elevation: 0.0,
+		        title: Text(
+			        'Card Details',
+			        style: TextStyle(
+				        color: Colors.white
+			        ),
+		        ),
+		        backgroundColor: CustomTheme.lightTheme.primaryColor,
+	        ),
             body: Column(
                 children: <Widget>[
                     Expanded(
@@ -44,16 +53,15 @@ class _ShowCardState extends State<ShowCard> {
                                                 children: [
                                                     // CARD
                                                     Container(
-                                                        height: 200,
+                                                        // height: 250,
                                                         child: Card(
                                                             shape: RoundedRectangleBorder(
-                                                                borderRadius: BorderRadius.circular(20)
+                                                                borderRadius: BorderRadius.circular(8)
                                                             ),
                                                             color: CustomTheme.lightTheme.splashColor,
                                                             //Colors.orange,
                                                             child: Container(
-                                                                padding: EdgeInsets.only(
-                                                                    left: 16, top: 16, right: 16, bottom: 16),
+                                                                padding: EdgeInsets.all(16.0),
                                                                 child: Column(
                                                                     crossAxisAlignment: CrossAxisAlignment
                                                                         .start,
@@ -61,58 +69,107 @@ class _ShowCardState extends State<ShowCard> {
                                                                     children: <Widget>[
                                                                         Row(
                                                                             mainAxisAlignment: MainAxisAlignment
-                                                                                .spaceBetween,
+                                                                                .spaceAround,
                                                                             mainAxisSize: MainAxisSize.max,
                                                                             children: <Widget>[
-                                                                                Text(
-                                                                                    'openIMIS',
-                                                                                    style: TextStyle(
-                                                                                        fontSize: 16,
-                                                                                        fontWeight: FontWeight.bold,
-                                                                                        color: Colors.white
-                                                                                    ),
+	                                                                            Image.asset(
+		                                                                            'assets/images/openimis-logo.png',
+		                                                                            height: 40,
+	                                                                            ),
+                                                                                SizedBox(width: 8.0),
+                                                                                Column(
+	                                                                                children: [
+		                                                                                Text(
+			                                                                                'नेपाल सरकार',
+			                                                                                style: TextStyle(
+				                                                                                fontSize: 14.0,
+				                                                                                fontWeight: FontWeight.normal,
+				                                                                                color: Colors.white
+			                                                                                ),
+		                                                                                ),
+		                                                                                Text(
+			                                                                                'सामाजिक स्वास्थ्य सुरक्षा विकास समिति',
+			                                                                                style: TextStyle(
+				                                                                                fontSize: 14.0,
+				                                                                                fontWeight: FontWeight.normal,
+				                                                                                color: Colors.white
+			                                                                                ),
+		                                                                                ),
+	                                                                                ],
                                                                                 ),
+	                                                                            SizedBox(width: 8.0),
                                                                                 Image.asset(
                                                                                     'assets/images/openimis-logo.png',
-                                                                                    height: 40,)
+                                                                                    height: 40,
+                                                                                )
                                                                             ],
                                                                         ),
-                                                                    
+	
+	                                                                    SizedBox(height: 8.0),
+	                                                                    Row(
+		                                                                    mainAxisAlignment: MainAxisAlignment.end,
+		                                                                    mainAxisSize: MainAxisSize.max,
+		                                                                    children: [
+			                                                                    Text(
+				                                                                    'सदस्यता नं: ' + '${policyprofile.chfId}',
+				                                                                    style: TextStyle(
+					                                                                    fontSize: 16.0,
+					                                                                    fontWeight: FontWeight.normal,
+				                                                                    ),
+			                                                                    ),
+		                                                                    ],
+	                                                                    ),
+	
+	                                                                    SizedBox(height: 8.0),
+	                                                                    Row(
+		                                                                    mainAxisAlignment: MainAxisAlignment.start,
+		                                                                    mainAxisSize: MainAxisSize.max,
+		                                                                    children: [
+			                                                                    Text(
+				                                                                    'नामथर: ' + '${policyprofile.otherNames} ${policyprofile.lastName}',
+				                                                                    style: TextStyle(
+					                                                                    fontSize: 16.0,
+					                                                                    fontWeight: FontWeight.normal,
+				                                                                    ),
+			                                                                    ),
+		                                                                    ],
+	                                                                    ),
+                                                                        
                                                                         SizedBox(height: 8.0),
-                                                                        SizedBox(
-                                                                            child: Text(
-                                                                                '${policyprofile.chfId}',
-                                                                                style: TextStyle(
-                                                                                    fontSize: 28,
-                                                                                    fontWeight: FontWeight.bold,
-                                                                                    color: Colors.white
-                                                                                ),
-                                                                            ),
+                                                                        Row(
+	                                                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+	                                                                        mainAxisSize: MainAxisSize.max,
+	                                                                        children: [
+	                                                                        	Text(
+			                                                                        'जन्ममिति: 2078-01-01',
+			                                                                        style: TextStyle(
+				                                                                        fontSize: 16.0,
+				                                                                        fontWeight: FontWeight.normal,
+			                                                                        ),
+		                                                                        ),
+		                                                                        Text(
+			                                                                        'लिङ्ग: Male',
+			                                                                        style: TextStyle(
+				                                                                        fontSize: 16.0,
+				                                                                        fontWeight: FontWeight.normal,
+			                                                                        ),
+		                                                                        )
+	                                                                        ],
                                                                         ),
-                                                                    
-                                                                        SizedBox(height: 8.0),
-                                                                        SizedBox(
-                                                                            child: Text(
-                                                                                '${policyprofile.insureePolicies[0].expiryDate}',
-                                                                                style: TextStyle(
-                                                                                    fontSize: 24,
-                                                                                    fontWeight: FontWeight.w400,
-                                                                                    color: Colors.white
-                                                                                ),
-                                                                            ),
-                                                                        ),
-                                                                    
-                                                                        SizedBox(height: 8.0),
-                                                                        SizedBox(
-                                                                            child: Text(
-                                                                                '${policyprofile.otherNames} ${policyprofile.lastName}'.toUpperCase(),
-                                                                                style: TextStyle(
-                                                                                    fontSize: 24,
-                                                                                    fontWeight: FontWeight.w400,
-                                                                                    color: Colors.white
-                                                                                ),
-                                                                            ),
-                                                                        ),
+	
+	                                                                    SizedBox(height: 8.0),
+	                                                                    Row(
+		                                                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+		                                                                    children: [
+			                                                                    Text(
+				                                                                    'प्रथम स्वास्थ्य संस्था: 2078-01-01',
+				                                                                    style: TextStyle(
+					                                                                    fontSize: 16.0,
+					                                                                    fontWeight: FontWeight.normal,
+				                                                                    ),
+			                                                                    ),
+		                                                                    ],
+	                                                                    ),
                                                                     ],
                                                                 ),
                                                             )

@@ -1,5 +1,8 @@
+import 'package:card_app/models/insuree_claims.dart';
+import 'package:card_app/services/api_graphql_services.dart';
 import 'package:card_app/theme/custom_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:card_app/common/env.dart' as env;
 
 class UserHistory extends StatefulWidget {
 	@override
@@ -7,6 +10,14 @@ class UserHistory extends StatefulWidget {
 }
 
 class _UserHistoryState extends State<UserHistory> {
+	Future<Claims> _insureeclaims;
+	
+	@override
+	void initState(){
+		super.initState();
+		_insureeclaims = ApiGraphQlServices().ClaimsServicesGQL();
+	}
+	
 	@override
 	Widget build(BuildContext context) {
 		return Scaffold(
@@ -14,7 +25,7 @@ class _UserHistoryState extends State<UserHistory> {
 			appBar: AppBar(
 				elevation: 0.0,
 				title: Text(
-					'User History',
+					'History',
 					style: TextStyle(
 						color: Colors.white
 					),
@@ -33,13 +44,84 @@ class _UserHistoryState extends State<UserHistory> {
 								)
 							),
 							child: Padding(
-								padding: const EdgeInsets.only(left: 12.0, right: 12.0, top: 10.0),
-								child: CustomScrollView(
-									slivers: <Widget>[
-										SliverList(
-											delegate: SliverChildListDelegate(_getHistories()),
-										)
-									],
+								padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 16.0),
+								child: FutureBuilder<Claims>(
+									future: _insureeclaims,
+									builder: (context, snapshot){
+										if(snapshot.hasData && snapshot.data.data!=null) {
+											return ListView.builder(
+												shrinkWrap: true,
+												scrollDirection: Axis.vertical,
+												physics: NeverScrollableScrollPhysics(),
+												itemCount: snapshot.data.data.insureeProfile.insureeClaim.length,
+												itemBuilder: (BuildContext context, int index){
+													var claims = snapshot.data.data.insureeProfile.insureeClaim[index];
+													/*return ListTile(
+														title: Text('${claims.healthFacility.name}'),
+														subtitle: Text('${claims.dateClaimed}'),
+														trailing: Text('${env.Currency} ${claims.claimed}'),
+													);*/
+													return Container(
+														padding: EdgeInsets.all(2),
+														child: Column(
+															crossAxisAlignment: CrossAxisAlignment.start,
+															mainAxisSize: MainAxisSize.max,
+															children: <Widget>[
+																Padding(
+																	padding: EdgeInsets.only(left: 12, top: 8, bottom: 8),
+																	child: Text(
+																		'${claims.dateClaimed}', // 'Fri, May 28th',
+																		style: TextStyle(
+																			fontSize: 14.0,
+																			fontWeight: FontWeight.bold
+																		),
+																	),
+																),
+																Card(
+																	shape: RoundedRectangleBorder(
+																		// side: BorderSide(color: Colors.white, width: 1),
+																		borderRadius: BorderRadius.circular(20)
+																	),
+																	color: CustomTheme.lightTheme.accentColor.withOpacity(1),
+																	child: Container(
+																		padding: EdgeInsets.all(8.0),
+																		child: Column(
+																			crossAxisAlignment: CrossAxisAlignment.start,
+																			mainAxisSize: MainAxisSize.max,
+																			children: <Widget>[
+																				ListTile(
+																					title:  Text('${claims.healthFacility.name}'),
+																					trailing: Text(
+																						'${env.Currency} ${claims.claimed}',
+																						style: TextStyle(
+																							fontSize: 16.0,
+																							fontWeight: FontWeight.bold,
+																							color: Colors.white70
+																						),
+																					),
+																				)
+																				/*Text(
+																					time, //"General",
+																					style: TextStyle(
+																						fontSize: 14.0,
+																						fontFamily: "Open-sans",
+																						fontWeight: FontWeight.w600
+																					),
+																				)*/
+																			],
+																		),
+																	),
+																),
+															],
+														)
+													);
+												}
+											);
+										}
+										else{
+											return Center(child: CircularProgressIndicator());
+										}
+									},
 								),
 							)
 						)
