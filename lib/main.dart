@@ -6,6 +6,7 @@ import 'package:card_app/models/user_location.dart';
 import 'package:card_app/pages/card.dart';
 import 'package:card_app/pages/faq.dart';
 import 'package:card_app/pages/feedback.dart';
+import 'package:card_app/pages/healthFacilitiesCoordinates.dart';
 import 'package:card_app/pages/notification.dart';
 import 'package:card_app/pages/policy.dart';
 import 'package:card_app/pages/services.dart';
@@ -176,6 +177,13 @@ class _MyAppState extends State<MyApp> {
                             '/claimed_item_services' : (BuildContext context) => ClaimedItemServicesPage(),
 
                             '/PaymentsubmissionPage': (BuildContext context) => SubmissionPage(),
+
+                            //test
+//                            '/profile-info' :(BuildContext context) => HealthFacilityCoordinatesPage(),
+//                            '/services':(BuildContext context) => HealthFacilityCoordinatesPage(),
+//                            '/register':(BuildContext context) => HealthFacilityCoordinatesPage(),
+//                            '/add_card':(BuildContext context) => HealthFacilityCoordinatesPage(),
+//                            '/policy-information':(BuildContext context) => HealthFacilityCoordinatesPage(),
                         },
                     );
                 }));
