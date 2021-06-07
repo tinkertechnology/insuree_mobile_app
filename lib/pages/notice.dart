@@ -43,7 +43,9 @@ class _NoticePageState extends State<NoticePage> {
                                             height: 235,
                                             margin: EdgeInsets.only(bottom: 8.0),
                                             child: GestureDetector(
-                                                onTap: (){},
+                                                onTap: (){
+                                                    print('Notice $index clicked...');
+                                                },
                                                 child: Card(
                                                     shape: RoundedRectangleBorder(
                                                         borderRadius: BorderRadius.circular(10.0)

@@ -67,12 +67,12 @@ class _ShowCardState extends State<ShowCard> {
                                                 children: [
                                                     // CARD
                                                     Container(
-                                                        // height: 250,
                                                         child: Card(
                                                             shape: RoundedRectangleBorder(
-                                                                borderRadius: BorderRadius.circular(8)
+                                                                borderRadius: BorderRadius.circular(8),
+                                                                side: BorderSide(color: CustomTheme.lightTheme.primaryColor, width: 1.0)
                                                             ),
-                                                            color: CustomTheme.lightTheme.splashColor,
+                                                            // color: CustomTheme.lightTheme.splashColor,
                                                             //Colors.orange,
                                                             child: Container(
                                                                 padding: EdgeInsets.all(16.0),
@@ -98,7 +98,6 @@ class _ShowCardState extends State<ShowCard> {
 			                                                                                style: TextStyle(
 				                                                                                fontSize: 14.0,
 				                                                                                fontWeight: FontWeight.normal,
-				                                                                                color: Colors.white
 			                                                                                ),
 		                                                                                ),
 		                                                                                Text(
@@ -106,7 +105,6 @@ class _ShowCardState extends State<ShowCard> {
 			                                                                                style: TextStyle(
 				                                                                                fontSize: 14.0,
 				                                                                                fontWeight: FontWeight.normal,
-				                                                                                color: Colors.white
 			                                                                                ),
 		                                                                                ),
 	                                                                                ],
@@ -140,12 +138,22 @@ class _ShowCardState extends State<ShowCard> {
 		                                                                    mainAxisSize: MainAxisSize.max,
 		                                                                    children: [
 			                                                                    Text(
-				                                                                    'नामथर: ' + '${policyprofile.otherNames} ${policyprofile.lastName}',
+				                                                                    'नामथर: ',
 				                                                                    style: TextStyle(
 					                                                                    fontSize: 16.0,
 					                                                                    fontWeight: FontWeight.normal,
 				                                                                    ),
 			                                                                    ),
+                                                                                SizedBox(width: 8.0),
+                                                                                Text(
+                                                                                    '${policyprofile.otherNames} ${policyprofile.lastName}',
+                                                                                    style: TextStyle(
+                                                                                        fontSize: 16.0,
+                                                                                        fontWeight: FontWeight.normal,
+                                                                                        decoration: TextDecoration.underline,
+                                                                                        decorationStyle: TextDecorationStyle.dotted,
+                                                                                    ),
+                                                                                ),
 		                                                                    ],
 	                                                                    ),
                                                                         
@@ -173,15 +181,26 @@ class _ShowCardState extends State<ShowCard> {
 	
 	                                                                    SizedBox(height: 8.0),
 	                                                                    Row(
-		                                                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+		                                                                    mainAxisAlignment: MainAxisAlignment.start,
+		                                                                    mainAxisSize: MainAxisSize.max,
 		                                                                    children: [
 			                                                                    Text(
-				                                                                    'प्रथम स्वास्थ्य संस्था: 2078-01-01',
+				                                                                    'प्रथम स्वास्थ्य संस्था:',
 				                                                                    style: TextStyle(
 					                                                                    fontSize: 16.0,
 					                                                                    fontWeight: FontWeight.normal,
 				                                                                    ),
 			                                                                    ),
+                                                                                SizedBox(width: 8.0),
+                                                                                Text(
+                                                                                    'Patan' + 'Hospital',
+                                                                                    style: TextStyle(
+                                                                                        fontSize: 16.0,
+                                                                                        fontWeight: FontWeight.normal,
+                                                                                        decoration: TextDecoration.underline,
+                                                                                        decorationStyle: TextDecorationStyle.dotted,
+                                                                                    ),
+                                                                                ),
 		                                                                    ],
 	                                                                    ),
                                                                     ],
