@@ -29,58 +29,41 @@ import 'package:card_app/profile/pages/profile_info.dart';
 import 'card/sync.dart';
 import 'package:card_app/auth/validate_otp_card.dart';
 import 'package:card_app/services/location_service.dart';
-import 'localization/locale_constant.dart';
-import 'localization/localizations_delegate.dart';
+import 'langlang/app_localization_deligate.dart';
 import 'package:card_app/auth/verify_insuree.dart';
 import 'package:card_app/services/connectivity.dart';
 import 'package:card_app/pages/notification.dart';
 import 'package:card_app/pages/claimed_item_services.dart';
 import 'package:card_app/pages/submission_page.dart';
+import 'package:card_app/langlang/application.dart';
 
 
-
-void main() async{
+void main() async {
     WidgetsFlutterBinding.ensureInitialized();
-    runApp(MyApp());
+    runApp(MyApp(
+    ));
 }
-
 
 //  WidgetsFlutterBinding.ensureInitialized();
 //  final Locale locale = Locale('en');
 class MyApp extends StatefulWidget {
-    static void setLocale(BuildContext context, Locale newLocale) {
-        var state = context.findAncestorStateOfType<_MyAppState>();
-        state.setLocale(newLocale);
-    }
+    
     @override
     _MyAppState createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
+    AppTranslationsDelegate _newLocaleDelegate;
     Insuree insuree;
     DarkThemeProvider themeChangeProvider = new DarkThemeProvider();
     ConnectivityService connectivityStatus = new ConnectivityService();
 
-    Locale _locale;
-    void setLocale(Locale locale) {
-        setState(() {
-            _locale = locale;
-        });
-    }
-
-    @override
-    void didChangeDependencies() async {
-        getLocale().then((locale) {
-            setState(() {
-                _locale = locale;
-            });
-        });
-        super.didChangeDependencies();
-    }
 
     @override
     void initState() {
         super.initState();
+        _newLocaleDelegate = AppTranslationsDelegate(newLocale: null);
+        application.onLocaleChanged = onLocaleChange;
         getCurrentAppTheme();
     }
 
@@ -89,6 +72,11 @@ class _MyAppState extends State<MyApp> {
         await themeChangeProvider.darkThemePreference.getTheme();
     }
 
+    void onLocaleChange(Locale locale) {
+        setState(() {
+            _newLocaleDelegate = AppTranslationsDelegate(newLocale: locale);
+        });
+    }
     @override
     Widget build(BuildContext context) {
         return MultiProvider(
@@ -107,27 +95,18 @@ class _MyAppState extends State<MyApp> {
             child: Consumer<DarkThemeProvider>(
                 builder: (BuildContext context, value, Widget child) {
                     return MaterialApp(
-                        locale: _locale,
-                        supportedLocales: [
-                            Locale('en', ''),
-                            Locale('ar', ''),
-                            Locale('hi', '')
-                        ],
+
                         localizationsDelegates: [
-                            AppLocalizationsDelegate(),
+                            _newLocaleDelegate,
+                            //provides localised strings
                             GlobalMaterialLocalizations.delegate,
+                            //provides RTL support
                             GlobalWidgetsLocalizations.delegate,
-                            GlobalCupertinoLocalizations.delegate,
                         ],
-                        localeResolutionCallback: (locale, supportedLocales) {
-                            for (var supportedLocale in supportedLocales) {
-                                if (supportedLocale?.languageCode == locale?.languageCode &&
-                                    supportedLocale?.countryCode == locale?.countryCode) {
-                                    return supportedLocale;
-                                }
-                            }
-                            return supportedLocales?.first;
-                        },
+                        supportedLocales: [
+                            const Locale("en", ""),
+                            const Locale("es", ""),
+                        ],
                         // locale: locale,
                         debugShowCheckedModeBanner: false,
                         theme: Styles.themeData(themeChangeProvider.darkTheme, context),
@@ -136,7 +115,7 @@ class _MyAppState extends State<MyApp> {
                             '/ggg': (BuildContext context) => Auth(),
                             '/card' :(BuildContext context) => Display(initIndex: null,),
                             '/profile' :(BuildContext context) => ProfilePageView(),
-                            
+
                             '/sync' :(BuildContext context) => Sync(),
                             '/splash':(BuildContext context) => SplashScreen(),
                             '/':(BuildContext context) => LoginScreen(), //OTP this is
@@ -144,31 +123,31 @@ class _MyAppState extends State<MyApp> {
                             '/add_card':(BuildContext context) => AddCard(affiliate_id: null, cardpk: null,),
                             '/otp-verify' :(BuildContext context) => OtpScreen(),
                             '/insuree_verify' :(BuildContext context) => VerifyInsuree(),
-                            
+
                             // SIGN UP
                             '/reset-password':(BuildContext context) => ResetPassword(),
-                            
+
                             //POLICY INFORMATION
                             '/policy-information':(BuildContext context) => PolicyInformationPage(),
-    
+
                             // SERVICES
                             '/services':(BuildContext context) => ClaimedItemServicesPage(),
-    
+
                             // NOTIFICATIONS
                             '/notifications':(BuildContext context) => NotificationPage(),
-    
+
                             // FEEDBACK
                             '/feedback':(BuildContext context) => FeedbackPage(),
-    
+
                             // PROFILE INFO
                             '/profile-info' :(BuildContext context) => ProfileInfo(),
-    
+
                             // USER HISTORY
                             '/user-history' :(BuildContext context) => UserHistory(),
-    
+
                             // SHOW VIRTUAL CARD
                             '/show-card' :(BuildContext context) => ShowCard(),
-    
+
                             // FAQ
                             '/faq' :(BuildContext context) => FAQ(),
 

@@ -43,6 +43,8 @@ flutter:
     - assets/images/100-welcome.png
     - assets/images/smcard/
     - assets/images/
+    - assets/locale/localization_en.json
+    - assets/locale/localization_hi.json
 
 
   fonts:

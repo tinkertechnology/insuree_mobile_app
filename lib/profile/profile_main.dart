@@ -13,6 +13,9 @@ import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
 import 'package:card_app/blocks/auth_block.dart';
+import 'package:card_app/langlang/app_translation.dart';
+import 'package:card_app/langlang/application.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfilePageView extends StatefulWidget {
 	@override
@@ -20,6 +23,18 @@ class ProfilePageView extends StatefulWidget {
 }
 
 class _ProfilePageViewState extends State<ProfilePageView> {
+	Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+	static final List<String> languagesList = application.supportedLanguages;
+	static final List<String> languageCodesList =
+			application.supportedLanguagesCodes;
+
+	final Map<dynamic, dynamic> languagesMap = {
+		languagesList[0]: languageCodesList[0],
+		languagesList[1]: languageCodesList[1],
+	};
+
+	String label = languagesList[0];
+
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
     File _image;
 	final picker = ImagePicker();
@@ -36,6 +51,33 @@ class _ProfilePageViewState extends State<ProfilePageView> {
       }
     }
 
+	@override
+	void initState() {
+		super.initState();
+		application.onLocaleChanged = onLocaleChange;
+//		onLocaleChange(Locale(languagesMap["Hindi"]));
+	}
+
+	void onLocaleChange(Locale locale) async {
+		setState(() {
+			AppTranslations.load(locale);
+		});
+	}
+
+	void _select(String language) async {
+		print("dd "+language);
+		final SharedPreferences prefs = await _prefs;
+		var jpt = Locale(languagesMap[language]);
+		prefs.setString('language', jpt.languageCode);
+		onLocaleChange(Locale(languagesMap[language]));
+		setState(() {
+			if (language == "Hindi") {
+				label = "हिंदी";
+			} else {
+				label = language;
+			}
+		});
+	}
     Future uploadPic() async{
       final dynamic fileName = basename(_image.path);
       //  StorageReference firebaseStorageRef = FirebaseStorage.instance.ref().child(fileName);
@@ -227,7 +269,7 @@ class _ProfilePageViewState extends State<ProfilePageView> {
 													},
 													
 													child: ListTile(
-														title: Text('Notifications'),
+														title: Text(AppTranslations.of(context).text("key_first_name"),),
 														//subtitle: Text('write a feedback'),
 														leading: Icon(Icons.notifications),
 														trailing: Icon(Icons.arrow_forward_ios),
@@ -350,7 +392,22 @@ class _ProfilePageViewState extends State<ProfilePageView> {
 								)
 							),
 						),
-						
+						Container(
+							child: PopupMenuButton<String>(
+								// overflow menu
+								onSelected: _select,
+								icon: new Icon(Icons.language, color: Colors.white),
+								itemBuilder: (BuildContext context) {
+									return languagesList
+											.map<PopupMenuItem<String>>((String choice) {
+										return PopupMenuItem<String>(
+											value: choice,
+											child: Text(choice),
+										);
+									}).toList();
+								},
+							),
+						),
 						// DARK/LIGHT THEME
 						/*Container(
 							margin: EdgeInsets.fromLTRB(20, 0, 20, 20),

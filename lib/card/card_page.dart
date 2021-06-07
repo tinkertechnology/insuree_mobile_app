@@ -9,8 +9,6 @@ import 'package:card_app/card/card_homepage.dart';
 import 'package:card_app/services/bottom_nav_bar_service.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:card_app/profile/profile_main.dart';
-import 'package:card_app/localization/language/languages.dart';
-import 'package:card_app/localization/locale_constant.dart';
 import 'package:card_app/models/language_data.dart';
 
 class Display extends StatefulWidget {
@@ -41,35 +39,35 @@ class _DisplayState extends State<Display> {
 
     List<String> titleList = ["openIMIS", "History", "Policy Information", "My Services", "Settings"];
 
-    _createLanguageDropDown() {
-        return DropdownButton<LanguageData>(
-            iconSize: 30,
-            hint: Text(Languages
-                .of(context)
-                .labelSelectLanguage),
-            onChanged: (LanguageData language) {
-                changeLanguage(context, language.languageCode);
-            },
-            items: LanguageData.languageList()
-                .map<DropdownMenuItem<LanguageData>>(
-                    (e) =>
-                    DropdownMenuItem<LanguageData>(
-                        value: e,
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: <Widget>[
-                                Text(
-                                    e.flag,
-                                    style: TextStyle(fontSize: 30),
-                                ),
-                                Text(e.name)
-                            ],
-                        ),
-                    ),
-            )
-                .toList(),
-        );
-    }
+//    _createLanguageDropDown() {
+//        return DropdownButton<LanguageData>(
+//            iconSize: 30,
+//            hint: Text(Languages
+//                .of(context)
+//                .labelSelectLanguage),
+//            onChanged: (LanguageData language) {
+//               // changeLanguage(context, language.languageCode);
+//            },
+//            items: LanguageData.languageList()
+//                .map<DropdownMenuItem<LanguageData>>(
+//                    (e) =>
+//                    DropdownMenuItem<LanguageData>(
+//                        value: e,
+//                        child: Row(
+//                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+//                            children: <Widget>[
+//                                Text(
+//                                    e.flag,
+//                                    style: TextStyle(fontSize: 30),
+//                                ),
+//                                Text(e.name)
+//                            ],
+//                        ),
+//                    ),
+//            )
+//                .toList(),
+//        );
+//    }
     
     Widget build(BuildContext context) {
         final bottom_nav = Provider.of<BottomNavigationBarProvider>(context);
