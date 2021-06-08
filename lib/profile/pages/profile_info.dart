@@ -444,7 +444,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
 										Container(
 											padding: EdgeInsets.fromLTRB(12, 8, 12, 10),
 											width: double.infinity,
-											child: RaisedButton(
+											/*child: RaisedButton(
 												onPressed: () async {
 													uploadPic();
 												},
@@ -455,6 +455,25 @@ class _ProfileInfoState extends State<ProfileInfo> {
 												color: CustomTheme.lightTheme.splashColor,
 												child: Text(
 													"save changes".toUpperCase(),
+													style: TextStyle(
+														fontSize: 18.0,
+														fontWeight: FontWeight.bold,
+														fontFamily: "Open-sans",
+														color: Colors.white
+													),
+												),
+											),*/
+											child: RaisedButton(
+												onPressed: () async {
+													uploadPic();
+												},
+												padding: EdgeInsets.all(16.0),
+												shape: RoundedRectangleBorder(
+													borderRadius: BorderRadius.all(Radius.circular(10.0)),
+												),
+												color: CustomTheme.lightTheme.primaryColor,
+												child: Text(
+													"submit".toUpperCase(),
 													style: TextStyle(
 														fontSize: 18.0,
 														fontWeight: FontWeight.bold,

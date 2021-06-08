@@ -4,12 +4,12 @@ import 'package:card_app/theme/custom_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:card_app/common/env.dart' as env;
 
-class UserHistory extends StatefulWidget {
+class UserHistoryPage extends StatefulWidget {
 	@override
-	_UserHistoryState createState() => _UserHistoryState();
+	_UserHistoryPageState createState() => _UserHistoryPageState();
 }
 
-class _UserHistoryState extends State<UserHistory> {
+class _UserHistoryPageState extends State<UserHistoryPage> {
 	Future<Claims> _insureeclaims;
 	
 	@override

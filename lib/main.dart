@@ -28,7 +28,7 @@ import 'package:card_app/ui/splash_screen.dart';
 import 'package:card_app/services/bottom_nav_bar_service.dart';
 import 'package:card_app/auth/login_card.dart';
 import 'package:card_app/card/add_card.dart';
-import 'package:card_app/profile/profile_main.dart';
+import 'file:///E:/AndroidStudioProjects/openimis_mobile_app/lib/pages/settings.dart';
 import 'package:card_app/profile/pages/profile_info.dart';
 import 'card/sync.dart';
 import 'package:card_app/auth/validate_otp_card.dart';
@@ -119,7 +119,7 @@ class _MyAppState extends State<MyApp> {
                         routes: <String, WidgetBuilder>{
                             '/ggg': (BuildContext context) => Auth(),
                             '/card' :(BuildContext context) => Display(initIndex: null,),
-                            '/profile' :(BuildContext context) => ProfilePageView(),
+                            '/profile' :(BuildContext context) => SettingsPage(),
 
                             '/sync' :(BuildContext context) => Sync(),
                             '/splash':(BuildContext context) => SplashScreen(),
@@ -148,7 +148,7 @@ class _MyAppState extends State<MyApp> {
                             '/profile-info' :(BuildContext context) => ProfileInfo(),
 
                             // USER HISTORY
-                            '/user-history' :(BuildContext context) => UserHistory(),
+                            '/user-history' :(BuildContext context) => UserHistoryPage(),
 
                             // SHOW VIRTUAL CARD
                             '/show-card' :(BuildContext context) => ShowCard(),

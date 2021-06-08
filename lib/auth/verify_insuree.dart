@@ -373,7 +373,7 @@ class _VerifyInsureeState extends State<VerifyInsuree> {
                                                                 borderRadius:
                                                                 BorderRadius.all(Radius.circular(10.0)),
                                                             ),
-                                                            color: CustomTheme.lightTheme.splashColor.withOpacity(0.8), //Color.fromRGBO(254, 196, 45, 50),
+                                                            color: CustomTheme.lightTheme.primaryColor, //Color.fromRGBO(254, 196, 45, 50),
                                                             child: VerifyInsureeService().isLoading
                                                                 ? CircularProgressIndicator(
                                                                 valueColor:
@@ -381,13 +381,14 @@ class _VerifyInsureeState extends State<VerifyInsuree> {
                                                                 : Text(
                                                                 "Verify".toUpperCase(),
                                                                 style: TextStyle(
-                                                                    fontSize: 16.0,
+                                                                    fontSize: 18.0,
                                                                     fontWeight: FontWeight.bold,
                                                                     fontFamily: "Open-sans",
                                                                     color: Colors.white
                                                                 ),
                                                             ),
-                                                        )),
+                                                        )
+                                                    ),
                                                 ],
                                             ),
                                         )
@@ -402,16 +403,6 @@ class _VerifyInsureeState extends State<VerifyInsuree> {
                 child: Container(
                     height: 50,
                     color: CustomTheme.lightTheme.primaryColor,
-                    /*decoration: BoxDecoration(
-						gradient: LinearGradient(
-							begin: Alignment.topRight,
-							end: Alignment.topLeft,
-							colors: [
-								CustomTheme.lightTheme.primaryColor,
-								CustomTheme.lightTheme.splashColor
-							]
-						)
-					),*/
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[

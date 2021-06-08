@@ -45,29 +45,30 @@ class _OfficePageState extends State<OfficePage> {
 											),*/
 											child: Card(
 												shape: RoundedRectangleBorder(
-													borderRadius: BorderRadius.circular(10.0),
+													borderRadius: BorderRadius.circular(0.0),
 													// side: BorderSide(color: CustomTheme.lightTheme.primaryColor),
 												),
 												elevation: 5,
 												shadowColor: CustomTheme.lightTheme.primaryColor,
 												child: Container(
-													padding: EdgeInsets.all(16.0),
+													padding: EdgeInsets.fromLTRB(24, 16, 16, 16),
 													child: Column(
 														crossAxisAlignment: CrossAxisAlignment.start,
 														mainAxisSize: MainAxisSize.max,
 														children: [
 															Text(
-																'openIMIS',
+																'Kathmandu Branch',
 																style: TextStyle(
 																	fontSize: 16.0,
-																	fontWeight: FontWeight.normal,
+																	letterSpacing: 0.5,
+																	fontWeight: FontWeight.bold,
 																),
 															),
 															SizedBox(height: 4.0),
 															Text(
 																'Kathmandu, Nepal',
 																style: TextStyle(
-																	fontSize: 16.0,
+																	fontSize: 14.0,
 																	fontWeight: FontWeight.normal,
 																),
 															),
@@ -75,7 +76,7 @@ class _OfficePageState extends State<OfficePage> {
 															Text(
 																'openimis@gmail.com',
 																style: TextStyle(
-																	fontSize: 16.0,
+																	fontSize: 14.0,
 																	fontWeight: FontWeight.normal,
 																),
 															),
@@ -83,7 +84,7 @@ class _OfficePageState extends State<OfficePage> {
 															Text(
 																'01-42xxxxx',
 																style: TextStyle(
-																	fontSize: 16.0,
+																	fontSize: 14.0,
 																	fontWeight: FontWeight.normal,
 																),
 															),

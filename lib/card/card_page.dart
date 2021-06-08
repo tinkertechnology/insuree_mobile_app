@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:card_app/card/card_homepage.dart';
 import 'package:card_app/services/bottom_nav_bar_service.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:card_app/profile/profile_main.dart';
+import 'file:///E:/AndroidStudioProjects/openimis_mobile_app/lib/pages/settings.dart';
 import 'package:card_app/models/language_data.dart';
 import 'package:card_app/langlang/app_translation.dart';
 import 'package:card_app/langlang/application.dart';
@@ -46,7 +46,7 @@ class _DisplayState extends State<Display> {
             case 3:
                 return new ServicesPage();
             case 4:
-                return new ProfilePageView();
+                return new SettingsPage();
             default:
                 return new Text("Error");
         }

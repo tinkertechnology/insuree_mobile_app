@@ -18,12 +18,12 @@ import 'package:card_app/langlang/app_translation.dart';
 import 'package:card_app/langlang/application.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class ProfilePageView extends StatefulWidget {
+class SettingsPage extends StatefulWidget {
 	@override
-	_ProfilePageViewState createState() => _ProfilePageViewState();
+	_SettingsPageState createState() => _SettingsPageState();
 }
 
-class _ProfilePageViewState extends State<ProfilePageView> {
+class _SettingsPageState extends State<SettingsPage> {
 	Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 	static final List<String> languagesList = application.supportedLanguages;
 	static final List<String> languageCodesList =
@@ -40,6 +40,7 @@ class _ProfilePageViewState extends State<ProfilePageView> {
     File _image;
 	final picker = ImagePicker();
 	AuthBlock auth;
+	
 	Future getImage() async {
       var image = await picker.getImage(source: ImageSource.camera);
   
@@ -116,76 +117,12 @@ class _ProfilePageViewState extends State<ProfilePageView> {
 					children: <Widget>[
 						// PROFILE INFO
 						Container(
-							margin: EdgeInsets.fromLTRB(20, 8, 20, 20),
+							margin: EdgeInsets.fromLTRB(20, 8, 20, 0),
 							child: Card(
 								shape: RoundedRectangleBorder(
 									side: BorderSide(color: Colors.white70, width: 1),
 									borderRadius: BorderRadius.circular(20),
 								),
-								/*child: InkWell(
-									onTap: (){
-										print('Profile Clicked');
-										Navigator.pushNamed(context, '/profile-info');
-									},
-									child: Container(
-										padding: EdgeInsets.only(left: 16, top: 8, right: 16, bottom: 8),
-										child: Row(
-											mainAxisAlignment: MainAxisAlignment.spaceBetween,
-											mainAxisSize: MainAxisSize.min,
-											children: <Widget>[
-												Expanded(
-													child: Row(
-														children: <Widget>[
-															InkWell(
-																onTap:  getImage,
-																child: Container(
-																	height: 80,
-																	width: 80,
-																	padding: EdgeInsets.all(8.0),
-																	child: Card(
-																		semanticContainer: true,
-																		clipBehavior: Clip.antiAliasWithSaveLayer,
-																		child: (_image!=null)?Image.file(_image, fit: BoxFit.fill,):
-																		Image.network("https://images.unsplash.com/photo-1502164980785-f8aa41d53611?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60", fit: BoxFit.fill,),//Image.asset('assets/images/card.png', fit: BoxFit.cover,),
-																		shape: RoundedRectangleBorder(
-																			borderRadius: BorderRadius.circular(10.0),
-																		),
-																		// margin: EdgeInsets.all(10),
-																	),
-																),
-															),
-															
-															Column(
-																crossAxisAlignment: CrossAxisAlignment.start,
-																children: <Widget>[
-																	Text(
-																		"Hari Bahadur Thapa",
-																		softWrap: true,
-																		style: TextStyle(
-																			fontSize: 14.0,
-																			fontFamily: "Open-sans"
-																		),
-																	),
-																	SizedBox(height: 8.0),
-																	Text("9841-xxx-xxx")
-																],
-															)
-														],
-													),
-												),
-												
-												SizedBox(
-													child: Row(
-														children: <Widget>[
-															SizedBox(width: 10.0),
-															Icon(Icons.arrow_forward_ios, size: 25, color: Colors.grey.withOpacity(0.2),)
-														],
-													),
-												)
-											],
-										),
-									),
-								)*/
 								child: InkWell(
 									onTap: (){
 										print('Profile Clicked');
@@ -220,7 +157,7 @@ class _ProfilePageViewState extends State<ProfilePageView> {
 						
 						// GENERAL
 						Container(
-							margin: EdgeInsets.fromLTRB(20, 0, 20, 20),
+							margin: EdgeInsets.fromLTRB(20, 4, 20, 4),
 							child: Card(
 								shape: RoundedRectangleBorder(
 									side: BorderSide(color: Colors.white70, width: 1),
@@ -344,34 +281,8 @@ class _ProfilePageViewState extends State<ProfilePageView> {
 						),
 						
 						// UPDATE LANGUAGE
-						/*Container(
-							margin: EdgeInsets.fromLTRB(20, 0, 20, 20),
-							child: Card(
-								color: Colors.white,
-								shape: RoundedRectangleBorder(
-									side: BorderSide(color: Colors.white70, width: 1),
-									borderRadius: BorderRadius.circular(20),
-								),
-								child: Container(
-									padding: EdgeInsets.all(8.0),
-									child: SwitchListTile(
-										title: Text('Update Language'),
-										subtitle: Text('change language to your preferred language'),
-										secondary: Icon(Icons.language),
-										value: _flutter,
-										activeColor: Colors.yellow[500],
-										inactiveTrackColor: Colors.grey,
-										onChanged: (bool val){
-											setState(() {
-												_flutter = val;
-											});
-										}
-									),
-								),
-							),
-						),*/
 						Container(
-							margin: EdgeInsets.fromLTRB(16, 8, 16, 8),
+							margin: EdgeInsets.fromLTRB(16, 4, 16, 4),
 							child: Card(
 								shape: RoundedRectangleBorder(
 									side: BorderSide(color: Colors.white70, width: 1),
@@ -379,63 +290,38 @@ class _ProfilePageViewState extends State<ProfilePageView> {
 								),
 								child: Container(
 									padding: EdgeInsets.all(8.0),
-									child: SwitchListTile(
+									child: ListTile(
 										title: Text('Update Language'),
 										subtitle: Text('Change language to your preferred language'),
-										secondary: Icon(Icons.language, size: 30,),
-										value: _flutter,
-										activeColor: Colors.white.withOpacity(0.25),
-										inactiveTrackColor: Colors.grey,
-										onChanged: (bool value) {
-											_flutter = value;
-										},
+										leading: Icon(Icons.language, size: 30,),
+										trailing: DropdownButton<String>(
+											focusColor: CustomTheme.lightTheme.primaryColor,
+											style: TextStyle(color: CustomTheme.lightTheme.primaryColor),
+											iconEnabledColor: CustomTheme.lightTheme.primaryColor,
+											items: languagesList.map<DropdownMenuItem<String>>((String choice){
+												return DropdownMenuItem<String>(
+													value: choice,
+													child: Text(
+														choice,
+														style: TextStyle(
+															color: Colors.black,
+															fontSize: 16,
+															fontWeight: FontWeight.w600
+														),
+													),
+												);
+											}).toList(),
+											onChanged: _select,
+											hint: Text('Select'),
+										),
 									),
-								)
+								),
 							),
 						),
-						Container(
-							child: PopupMenuButton<String>(
-								// overflow menu
-								onSelected: _select,
-								icon: new Icon(Icons.language, color: Colors.white),
-								itemBuilder: (BuildContext context) {
-									return languagesList
-											.map<PopupMenuItem<String>>((String choice) {
-										return PopupMenuItem<String>(
-											value: choice,
-											child: Text(choice),
-										);
-									}).toList();
-								},
-							),
-						),
+						
 						// DARK/LIGHT THEME
-						/*Container(
-							margin: EdgeInsets.fromLTRB(20, 0, 20, 20),
-							child: Card(
-								color: Colors.white,
-								shape: RoundedRectangleBorder(
-									side: BorderSide(color: Colors.white70, width: 1),
-									borderRadius: BorderRadius.circular(20),
-								),
-								child: Container(
-									padding: EdgeInsets.all(8.0),
-									child: SwitchListTile(
-										title: Text('Dark/Light Theme'),
-										subtitle: Text('Change theme color'),
-										secondary: Icon(Icons.brightness_6),
-										value: themeChange.darkTheme,
-										activeColor: Colors.red,
-										inactiveTrackColor: Colors.grey,
-										onChanged: (bool value) {
-											themeChange.darkTheme = value;
-										},
-									),
-								),
-							),
-						),*/
 						Container(
-							margin: EdgeInsets.fromLTRB(16, 8, 16, 8),
+							margin: EdgeInsets.fromLTRB(16, 4, 16, 4),
 							child: Card(
 								shape: RoundedRectangleBorder(
 									side: BorderSide(color: Colors.white70, width: 1),
@@ -459,7 +345,7 @@ class _ProfilePageViewState extends State<ProfilePageView> {
 						
 						// CONTACT US
 						Container(
-							margin: EdgeInsets.fromLTRB(16, 8, 16, 8),
+							margin: EdgeInsets.fromLTRB(16, 4, 16, 4),
 							child: Card(
 								shape: RoundedRectangleBorder(
 									side: BorderSide(color: Colors.white70, width: 1),
@@ -483,7 +369,7 @@ class _ProfilePageViewState extends State<ProfilePageView> {
 						
 						// LOGOUT
 						Container(
-							margin: EdgeInsets.fromLTRB(20, 0, 20, 20),
+							margin: EdgeInsets.fromLTRB(20, 4, 20, 20),
 							child: Card(
 								shape: RoundedRectangleBorder(
 									side: BorderSide(color: Colors.white70, width: 1),

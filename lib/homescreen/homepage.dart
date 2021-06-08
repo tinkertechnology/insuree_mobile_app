@@ -25,15 +25,9 @@ class _HomeScreenState extends State<HomeScreen> {
 	Future<MedicalServices> _medicalservices;
 	Future<Claims> _insureeclaims;
 	Future<Claimed> _claimed;
-  UserLocation userLocation;
+    UserLocation userLocation;
   
-//	final double _initFabHeight = 120.0;
-//	double _fabHeight = 0;
-//	double _panelHeightOpen = 0.0;
-//	double _panelHeightClosed = 20.0;
-//	double _initialChildSize = 0.0;
-//
-	double min = 0.03, initial = 0.7, max = 0.7;
+	double min = 0.03, initial = 0.65, max = 0.7;
 	
 	@override
 	void initState() {
@@ -45,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
 	@override
 	Widget build(BuildContext context) {
 		var userLocation = Provider.of<UserLocation>(context);
-//		_panelHeightOpen = MediaQuery.of(context).size.height * .52;
+ 
 		Size deviceSize = MediaQuery.of(context).size;
 		return DraggableScrollableSheet(
 			initialChildSize: initial, //0.65,
