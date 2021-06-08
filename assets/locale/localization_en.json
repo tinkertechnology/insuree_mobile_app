@@ -8,5 +8,19 @@
   "key_enter_last_name": "Enter last name",
   "key_first_name": "First name",
   "key_enter_first_name": "Enter first name",
-  "key_next": "Next"
+  "key_next": "Next",
+  "history": "history",
+  "see_all" : "See all",
+  "explore_services" : "Explore Services",
+
+
+  "general" : "General",
+  "notifications" : "Notifications",
+  "notifications" : "Notice",
+  "service_provider_list" : "Service Provider List",
+  "notice": "Notice",
+  "feedback" : "feedback",
+  "dark_light_theme": "Dark/Light Theme",
+  "contact_us" : "Contact Us",
+  "logout" : "Logout"
 }

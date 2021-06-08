@@ -242,8 +242,7 @@ class _ProfilePageViewState extends State<ProfilePageView> {
 													mainAxisAlignment: MainAxisAlignment.spaceBetween,
 													mainAxisSize: MainAxisSize.max,
 													children: <Widget>[
-														Text(
-															"General",
+															Text(AppTranslations.of(context).text("general"),
 															style: TextStyle(
 																fontSize: 16.0,
 																fontFamily: "Open-sans",
@@ -269,7 +268,7 @@ class _ProfilePageViewState extends State<ProfilePageView> {
 													},
 													
 													child: ListTile(
-														title: Text(AppTranslations.of(context).text("key_first_name"),),
+														title: Text(AppTranslations.of(context).text("notifications"),),
 														//subtitle: Text('write a feedback'),
 														leading: Icon(Icons.notifications),
 														trailing: Icon(Icons.arrow_forward_ios),
@@ -291,7 +290,7 @@ class _ProfilePageViewState extends State<ProfilePageView> {
 														Navigator.pushNamed(context, '/services');
 													},
 													child: ListTile(
-														title: Text('Service Provider List'),
+														title: Text(AppTranslations.of(context).text("service_provider_list"),),
 														//subtitle: Text('write a feedback'),
 														leading: Icon(Icons.list),
 														trailing: Icon(Icons.arrow_forward_ios),
@@ -313,7 +312,7 @@ class _ProfilePageViewState extends State<ProfilePageView> {
 														Navigator.pushNamed(context, '/notice');
 													},
 													child: ListTile(
-														title: Text('Notice'),
+														title: Text(AppTranslations.of(context).text("notice"),),
 														//subtitle: Text('write a feedback'),
 														leading: Icon(Icons.note),
 														trailing: Icon(Icons.arrow_forward_ios),
@@ -330,7 +329,7 @@ class _ProfilePageViewState extends State<ProfilePageView> {
 														Navigator.pushNamed(context, '/feedback');
 													},
 													child: ListTile(
-														title: Text('Feedback'),
+														title: Text(AppTranslations.of(context).text("feedback"),),
 														//subtitle: Text('write a feedback'),
 														leading: Icon(Icons.feedback,),
 														trailing: Icon(Icons.arrow_forward_ios),
@@ -443,7 +442,7 @@ class _ProfilePageViewState extends State<ProfilePageView> {
 								),
 								child: Container(
 									child: SwitchListTile(
-										title: Text('Dark/Light Theme'),
+										title: Text(AppTranslations.of(context).text("dark_light_theme"),),
 										subtitle: Text('Change theme color'),
 										secondary: Icon(Icons.brightness_6, size: 30,),
 										value: themeChange.darkTheme,
@@ -467,7 +466,7 @@ class _ProfilePageViewState extends State<ProfilePageView> {
 								),
 								child: Container(
 									child: ListTile(
-										title: Text('Contact Us'),
+										title: Text(AppTranslations.of(context).text("contact_us"),),
 										subtitle: Text('Change theme color'),
 										leading: Icon(
 											Icons.info_outline,
@@ -518,9 +517,7 @@ class _ProfilePageViewState extends State<ProfilePageView> {
 																	children: <Widget>[
 																		Icon(Icons.lock_outline, size: 30,),
 																		SizedBox(width: 20.0),
-																		Text(
-																			"Logout"
-																		),
+																		Text(AppTranslations.of(context).text("logout"),),
 
 																	],
 

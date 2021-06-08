@@ -11,12 +11,12 @@ class Application {
 
   final List<String> supportedLanguages = [
     "English",
-    "Hindi",
+    "Nepali",
   ];
 
   final List<String> supportedLanguagesCodes = [
     "en",
-    "hi",
+    "np",
   ];
   //returns the list of supported Locales
   Iterable<Locale> supportedLocales() =>

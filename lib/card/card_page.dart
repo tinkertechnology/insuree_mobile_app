@@ -10,6 +10,8 @@ import 'package:card_app/services/bottom_nav_bar_service.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:card_app/profile/profile_main.dart';
 import 'package:card_app/models/language_data.dart';
+import 'package:card_app/langlang/app_translation.dart';
+import 'package:card_app/langlang/application.dart';
 
 class Display extends StatefulWidget {
   final int initIndex;
@@ -20,6 +22,19 @@ class Display extends StatefulWidget {
 }
 
 class _DisplayState extends State<Display> {
+
+    @override
+    initState(){
+        super.initState();
+        application.onLocaleChanged = onLocaleChange;
+
+    }
+
+    void onLocaleChange(Locale locale) async {
+        setState(() {
+            AppTranslations.load(locale);
+        });
+    }
     _getDrawerItemWidget(int pos) {
         switch (pos) {
             case 0:

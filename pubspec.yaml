@@ -44,7 +44,7 @@ flutter:
     - assets/images/smcard/
     - assets/images/
     - assets/locale/localization_en.json
-    - assets/locale/localization_hi.json
+    - assets/locale/localization_np.json
 
 
   fonts:

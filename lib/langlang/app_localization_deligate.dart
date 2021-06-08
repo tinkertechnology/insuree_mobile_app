@@ -24,7 +24,7 @@ class AppTranslationsDelegate extends LocalizationsDelegate<AppTranslations> {
       case 'en':
         locale = Locale(__locale, 'US');
         break;
-      case 'hi':
+      case 'np':
         locale = Locale(__locale, 'ET');
         break;
       default:
