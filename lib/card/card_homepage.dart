@@ -1,5 +1,6 @@
 import 'package:card_app/pages/claimed_item_services.dart';
 import 'package:card_app/profile/profile_main.dart';
+import 'package:card_app/screen_size_reducers.dart';
 import 'package:card_app/theme/custom_theme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -11,9 +12,10 @@ import 'package:card_app/models/claimed_services_items.dart';
 import 'package:card_app/services/api_graphql_services.dart';
 import 'package:card_app/models/claimed.dart';
 import 'package:card_app/models/insuree_claims.dart';
+import 'package:flutter/services.dart';
+
 
 class CardHome extends StatefulWidget {
-	
   @override
   _CardHomeState createState() => _CardHomeState();
 }
@@ -34,10 +36,11 @@ class _CardHomeState extends State<CardHome> {
 	}
 	
 	Widget build(BuildContext context) {
-		final orientation = MediaQuery
-			.of(context)
-			.orientation;
-		
+//        Size deviceSize = MediaQuery.of(context).size;
+//        double height = deviceSize.height;
+//        double width = deviceSize.width;
+//        var padding = MediaQuery.of(context).padding;
+        
 		return Scaffold(
             backgroundColor: CustomTheme.lightTheme.backgroundColor.withOpacity(0.5),
             body: Stack(
@@ -49,7 +52,7 @@ class _CardHomeState extends State<CardHome> {
                                     children: [
                                         // OPENIMIS LOGO & CURRENT BALANCE
                                         Container(
-                                            height: 220,
+                                            height: screenHeight(context, dividedBy: 4), //220,
                                             padding: EdgeInsets.all(20),
                                             width: double.infinity,
                                             decoration: BoxDecoration(

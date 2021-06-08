@@ -9,26 +9,17 @@ class PolicyInformationPage extends StatefulWidget {
 }
 
 class _PolicyInformationPageState extends State<PolicyInformationPage> {
-	/*Future<PolicyInformation> _policyinformation;
-
-	@override
-	void initState() {
-    // TODO: implement initState
-    super.initState();
-		_policyinformation = ApiGraphQlServices().PolicyInformationServicesGQL(1);
-  }*/
 
 	@override
 	Widget build(BuildContext context) {
 		return Scaffold(
 			backgroundColor: CustomTheme.lightTheme.primaryColor,//Color.fromRGBO(41,127,141, 25)
-			
 			body: Column(
 				children: <Widget>[
 					Expanded(
 						child: Container(
 							decoration: BoxDecoration(
-								color: Colors.white,
+								color: CustomTheme.lightTheme.backgroundColor,
 								borderRadius: BorderRadius.only(
 									topLeft: Radius.circular(30),
 									topRight: Radius.circular(30)
@@ -39,10 +30,10 @@ class _PolicyInformationPageState extends State<PolicyInformationPage> {
 								child: ListView.builder(
 									itemBuilder: (BuildContext context, int index){
 										return Container(
-											//margin: EdgeInsets.all(8.0),
+											margin: EdgeInsets.only(left: 16.0, right: 16.0),
 											decoration: BoxDecoration(
 												border: Border(
-													bottom: BorderSide(color: Colors.grey.withOpacity(0.25), width: 1.0)
+													bottom: BorderSide(color: Colors.grey.withOpacity(0.5), width: 1.0)
 												)
 											),
 											child: ListTile(

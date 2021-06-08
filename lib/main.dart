@@ -17,6 +17,7 @@ import 'package:card_app/theme/dark_theme_provider.dart';
 import 'package:card_app/theme/dark_theme_styles.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:card_app/auth/auth.dart';
@@ -44,6 +45,8 @@ import 'package:card_app/pages/submission_page.dart';
 
 void main() async{
     WidgetsFlutterBinding.ensureInitialized();
+    SystemChrome.setPreferredOrientations(
+        [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
     runApp(MyApp());
 }
 

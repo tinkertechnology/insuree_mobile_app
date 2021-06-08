@@ -1,4 +1,5 @@
 import 'package:card_app/common/env.dart';
+import 'package:card_app/theme/custom_theme.dart';
 import 'package:card_app/theme/dark_theme_provider.dart';
 import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:flutter/cupertino.dart';
@@ -67,7 +68,7 @@ class _ProfilePageViewState extends State<ProfilePageView> {
 		final themeChange = Provider.of<DarkThemeProvider>(context);
 
 		return Scaffold(
-			backgroundColor: Color.fromRGBO(234, 239, 255, 50),
+			backgroundColor: CustomTheme.lightTheme.backgroundColor, //Color.fromRGBO(234, 239, 255, 50),
 			body: SingleChildScrollView(
 				child: Column(
 					children: <Widget>[
