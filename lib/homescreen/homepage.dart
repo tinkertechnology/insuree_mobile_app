@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:card_app/langlang/app_translation.dart';
 import 'package:card_app/models/claimed.dart';
 import 'package:card_app/models/insuree_claims.dart';
 import 'package:card_app/models/user_location.dart';
@@ -87,8 +88,7 @@ class _HomeScreenState extends State<HomeScreen> {
 							Row(
 								mainAxisAlignment: MainAxisAlignment.center,
 								children: <Widget>[
-									Text(
-										"Explore Services",
+									Text(AppTranslations.of(context).text("explore_services"),
 										style: TextStyle(
 											fontWeight: FontWeight.normal,
 											fontSize: 24.0,

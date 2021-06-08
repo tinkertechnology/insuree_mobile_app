@@ -1,4 +1,4 @@
-import 'package:card_app/localization/locale_constant.dart';
+
 
 class LanguageData {
   final String flag;
