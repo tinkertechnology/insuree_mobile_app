@@ -52,38 +52,8 @@ class _DisplayState extends State<Display> {
         }
     }
 
-    List<String> titleList = ["openIMIS", "History", "Policy Information", "My Services", "Settings"];
+    List<String> titleList = ["page_title_openimis", "page_title_history", "page_title_policy_information", "My Services", "page_title_settings"];
 
-//    _createLanguageDropDown() {
-//        return DropdownButton<LanguageData>(
-//            iconSize: 30,
-//            hint: Text(Languages
-//                .of(context)
-//                .labelSelectLanguage),
-//            onChanged: (LanguageData language) {
-//               // changeLanguage(context, language.languageCode);
-//            },
-//            items: LanguageData.languageList()
-//                .map<DropdownMenuItem<LanguageData>>(
-//                    (e) =>
-//                    DropdownMenuItem<LanguageData>(
-//                        value: e,
-//                        child: Row(
-//                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-//                            children: <Widget>[
-//                                Text(
-//                                    e.flag,
-//                                    style: TextStyle(fontSize: 30),
-//                                ),
-//                                Text(e.name)
-//                            ],
-//                        ),
-//                    ),
-//            )
-//                .toList(),
-//        );
-//    }
-    
     Widget build(BuildContext context) {
         final bottom_nav = Provider.of<BottomNavigationBarProvider>(context);
         var connectionStatus = Provider.of<ConnectivityResult>(context);
@@ -104,11 +74,11 @@ class _DisplayState extends State<Display> {
                         }
                     )
                 ],
-                title: Text(titleList[bottom_nav.currentIndex], textAlign: TextAlign.center,),
+                title: Text(AppTranslations.of(context).text(titleList[bottom_nav.currentIndex]), textAlign: TextAlign.center,),
 
             ),
             body : connectionStatus==ConnectivityResult.none ?
-                    Container(child: Center(child: Text('No Internet Connection'),),)
+                    Container(child: Center(child: Text(AppTranslations.of(context).text('no_internet_connection')),),)
                 :_getDrawerItemWidget(bottom_nav.currentIndex),
             bottomNavigationBar: CurvedNavigationBar(
                 color: CustomTheme.lightTheme.primaryColor,

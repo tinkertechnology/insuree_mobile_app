@@ -8,6 +8,8 @@ import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
 import 'package:card_app/pages/card.dart';
 import 'package:card_app/common/env.dart' as env;
+import 'package:card_app/langlang/app_translation.dart';
+import 'package:card_app/langlang/application.dart';
 
 class SubmissionPage extends StatefulWidget {
   @override
@@ -21,10 +23,19 @@ class _SubmissionPageState extends State<SubmissionPage> {
   final picker = ImagePicker();
   final _formKey = GlobalKey<FormState>();
   var _passKey = GlobalKey<FormFieldState>();
+
   @override
   void initState() {
     super.initState();
+    application.onLocaleChanged = onLocaleChange;
   }
+
+  void onLocaleChange(Locale locale) async {
+    setState(() {
+        AppTranslations.load(locale);
+    });
+    }
+  
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
     bool isLoading = false;
@@ -132,7 +143,7 @@ class _SubmissionPageState extends State<SubmissionPage> {
       backgroundColor: Color.fromRGBO(41,127,141, 25), //mainColor,
       appBar: AppBar(
         elevation: 0.0,
-        title: Text('Submit your Paid Voucher'),
+        title: Text(AppTranslations.of(context).text('page_payment_submission'),),
         backgroundColor: Color.fromRGBO(41,127,141, 0), //mainColor,
       ),
       body:
@@ -194,7 +205,7 @@ class _SubmissionPageState extends State<SubmissionPage> {
                 color: CustomTheme.lightTheme.primaryColor,
                 //Color.fromRGBO(41,127,141, 100),
                 child: Text(
-                  "Submit".toUpperCase(),
+                        AppTranslations.of(context).text('submit_payment_button').toUpperCase(),
                   style: TextStyle(
                       fontSize: 18.0,
                       fontWeight: FontWeight.bold,

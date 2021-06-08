@@ -13,6 +13,9 @@ import 'package:card_app/services/api_graphql_services.dart';
 import 'package:card_app/models/claimed.dart';
 import 'package:card_app/models/insuree_claims.dart';
 import 'package:flutter/services.dart';
+import 'package:card_app/langlang/application.dart';
+import 'package:card_app/langlang/app_translation.dart';
+
 
 
 class CardHome extends StatefulWidget {
@@ -306,7 +309,7 @@ class _CardHomeState extends State<CardHome> {
                                         children: [
                                             ListTile(
                                                 title: Text(
-                                                    'History',
+                                                    AppTranslations.of(context).text("history"),
                                                     style: TextStyle(
                                                         fontSize: 18.0,
                                                         fontWeight: FontWeight.normal
@@ -318,7 +321,7 @@ class _CardHomeState extends State<CardHome> {
                                                         Navigator.pushNamed(context, '/user-history');
                                                     },
                                                     child: Text(
-                                                        'View All',
+                                                        AppTranslations.of(context).text('see_all'),
                                                         style: TextStyle(
                                                             fontSize: 16.0,
                                                             fontWeight: FontWeight.normal
