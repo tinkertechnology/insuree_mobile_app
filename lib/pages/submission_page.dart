@@ -159,7 +159,7 @@ class _SubmissionPageState extends State<SubmissionPage> {
                             ),
                             child: Padding(
                                 padding: const EdgeInsets.all(16.0),
-                                child: Column(
+                                child: ListView(
                                     children: [
                                         SizedBox(height: 8.0),
                                         Text(
