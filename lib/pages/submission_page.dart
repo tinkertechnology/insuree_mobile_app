@@ -168,6 +168,7 @@ class _SubmissionPageState extends State<SubmissionPage> {
                                                 fontSize: 16.0,
                                                 fontWeight: FontWeight.w300
                                             ),
+                                            textAlign: TextAlign.center,
                                         ),
     
                                         Container(
