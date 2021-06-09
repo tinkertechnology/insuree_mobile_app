@@ -1,18 +1,14 @@
 {
-  "key_password": "पारण शब्द",
-  "key_must_be_at_least_6_characters": "कम से कम 6 अक्षर का होना चाहिए",
-  "key_email": "ईमेल",
-  "key_please_enter_valid_email": "कृपया वैध ईमेल दर्ज़ करें",
-  "key_last_name": "अंतिम नाम",
-  "key_enter_last_name": "अंतिम नाम दर्ज करो",
-  "key_first_name": "पहला नाम",
-  "key_enter_first_name": "पहला नाम डालो",
-  "key_next": "आगामी",
+  "page_title_openimis" : "Openimis",
+  "page_title_history": "ईतिहाँस",
+  "page_title_policy_information" : "नीति जानकारी",
+  "page_title_settings" : "सेटिङ्स्",
+  "page_card_details" : "कार्ड विवरण",
+  "page_payment_submission" : "भौचर को फोटो अपलोड गर्नुहोस",
+
   "history": "ईतिहास",
   "see_all" : "सवै",
   "explore_services" : "सेवाहरु खोज्नुहोस्",
-
-
   "general" : "सामान्य",
   "notifications" : "सूचना आयो",
   "service_provider_list" : "सेवा प्रदान गर्ने संस्थाहरु",
@@ -20,7 +16,19 @@
   "feedback" : "प्रतिकृया",
   "dark_light_theme": "कालो सेतो थेम",
   "contact_us" : "सम्पर्क गर्नुहोस",
-  "logout" : "बाईरिनुहोस"
+  "logout" : "बाईरिनुहोस",
 
+  "full_name": "पुरा नाम",
+  "card_number" : "कार्ड नंबर",
+  "expiry_date" : "सक्कीने मिति",
+  "renew_submission" : "सेवा रीन्यू गर्नुहोस",
+  "submit_payment_button" : "चयन गर्नुहोस",
+  "no_internet_connection" : "ईन्टरनेट कनेक्सनमा समस्या छ ",
+
+  "update_language" : "भाषा परिवर्तन",
+  "change_language_text" : "आफ्मो भाषा छान्नुहोस",
+  "change_theme_color" : "थेम कलर परिवर्तन गर्नुहोस"
+
+  
 
 }

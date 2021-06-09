@@ -10,52 +10,6 @@ class _TabbarViewState extends State<TabbarView> {
   @override
   Widget build(BuildContext context) {
   	// Default TabBar
-    /*return DefaultTabController(
-	    length: 3,
-	    child: Scaffold(
-		    appBar: AppBar(
-			    bottom: TabBar(
-				    // TabBar Color
-				    // indicatorColor: Colors.black,
-				    
-				    // Change size of tab
-				    // indicatorSize: TabBarIndicatorSize.label,
-				    
-				    // Height of tab
-				    // indicatorWeight: 5,
-				    
-				    // Change the indicator
-				    indicator: BoxDecoration(
-					    borderRadius: BorderRadius.circular(50),
-					    color: Colors.greenAccent,
-					    // Background Image
-					    image: DecorationImage(
-						    image: AssetImage('assets/images/'),
-						    fit: BoxFit.fitWidth,
-					    )
-				    ),
-				    
-				    // Tabs
-				    tabs: <Widget>[
-				    	Tab(icon: Icon(Icons.flight)),
-					    Tab(icon: Icon(Icons.directions_transit)),
-					    Tab(icon: Icon(Icons.directions_walk)),
-				    ],
-			    ),
-			    
-			    // Title
-			    title: Text('Tabs Demo'),
-		    ),
-		    body: TabBarView(
-			    children: [
-			    	Icon(Icons.flight, size: 350),
-				    Icon(Icons.directions_transit, size: 350),
-				    Icon(Icons.directions_walk, size: 350),
-			    ]
-		    ),
-	    ),
-    );*/
-    
     return DefaultTabController(
 	    length: 10,
 	    child: Scaffold(

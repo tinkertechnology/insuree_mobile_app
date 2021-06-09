@@ -4,12 +4,12 @@ import 'package:card_app/theme/custom_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:card_app/common/env.dart' as env;
 
-class UserHistory extends StatefulWidget {
+class UserHistoryPage extends StatefulWidget {
 	@override
-	_UserHistoryState createState() => _UserHistoryState();
+	_UserHistoryPageState createState() => _UserHistoryPageState();
 }
 
-class _UserHistoryState extends State<UserHistory> {
+class _UserHistoryPageState extends State<UserHistoryPage> {
 	Future<Claims> _insureeclaims;
 	
 	@override
@@ -56,11 +56,6 @@ class _UserHistoryState extends State<UserHistory> {
 												itemCount: snapshot.data.data.insureeProfile.insureeClaim.length,
 												itemBuilder: (BuildContext context, int index){
 													var claims = snapshot.data.data.insureeProfile.insureeClaim[index];
-													/*return ListTile(
-														title: Text('${claims.healthFacility.name}'),
-														subtitle: Text('${claims.dateClaimed}'),
-														trailing: Text('${env.Currency} ${claims.claimed}'),
-													);*/
 													return Container(
 														padding: EdgeInsets.all(2),
 														child: Column(
@@ -99,15 +94,7 @@ class _UserHistoryState extends State<UserHistory> {
 																							color: Colors.white70
 																						),
 																					),
-																				)
-																				/*Text(
-																					time, //"General",
-																					style: TextStyle(
-																						fontSize: 14.0,
-																						fontFamily: "Open-sans",
-																						fontWeight: FontWeight.w600
-																					),
-																				)*/
+																				),
 																			],
 																		),
 																	),

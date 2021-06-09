@@ -1,6 +1,7 @@
 // To parse this JSON data, do
 //
 //     final policyInformation = policyInformationFromJson(jsonString);
+//this model is for homepage of the app
 
 import 'dart:convert';
 

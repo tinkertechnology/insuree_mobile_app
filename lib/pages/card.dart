@@ -2,6 +2,8 @@ import 'package:card_app/models/policy_information.dart';
 import 'package:card_app/services/api_graphql_services.dart';
 import 'package:card_app/theme/custom_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:card_app/langlang/app_translation.dart';
+import 'package:card_app/langlang/application.dart';
 
 class ShowCard extends StatefulWidget {
     final String message;
@@ -17,6 +19,7 @@ class _ShowCardState extends State<ShowCard> {
     void initState() {
         // TODO: implement initState
         super.initState();
+        application.onLocaleChanged = onLocaleChange;
         _policyinformation = ApiGraphQlServices().PolicyInformationServicesGQL(1);
         Future(() {
             if (widget.message != null && widget.message.isNotEmpty) {
@@ -24,6 +27,11 @@ class _ShowCardState extends State<ShowCard> {
             }
         });
 
+    }
+        void onLocaleChange(Locale locale) async {
+        setState(() {
+            AppTranslations.load(locale);
+        });
     }
     final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
@@ -38,7 +46,7 @@ class _ShowCardState extends State<ShowCard> {
 	        appBar: AppBar(
 		        elevation: 0.0,
 		        title: Text(
-			        'Card Details',
+			       AppTranslations.of(context).text('page_card_details'),
 			        style: TextStyle(
 				        color: Colors.white
 			        ),
@@ -218,7 +226,7 @@ class _ShowCardState extends State<ShowCard> {
                                                             mainAxisSize: MainAxisSize.min,
                                                             children: <Widget>[
                                                                 Text(
-                                                                    "Full Name",
+                                                                    AppTranslations.of(context).text('full_name'),
                                                                     style: TextStyle(
                                                                         fontSize: 16,
                                                                         fontWeight: FontWeight.w400,
@@ -272,7 +280,7 @@ class _ShowCardState extends State<ShowCard> {
                                                             mainAxisSize: MainAxisSize.min,
                                                             children: <Widget>[
                                                                 Text(
-                                                                    "Card Number",
+                                                                    AppTranslations.of(context).text('card_number'),
                                                                     style: TextStyle(
                                                                         fontSize: 16,
                                                                         fontWeight: FontWeight.w400,
@@ -327,7 +335,7 @@ class _ShowCardState extends State<ShowCard> {
                                                             mainAxisSize: MainAxisSize.min,
                                                             children: <Widget>[
                                                                 Text(
-                                                                    "Expiry Date",
+                                                                    AppTranslations.of(context).text('expiry_date'),
                                                                     style: TextStyle(
                                                                         fontSize: 16,
                                                                         fontWeight: FontWeight.w400,
@@ -378,7 +386,7 @@ class _ShowCardState extends State<ShowCard> {
                                                     Container(
                                                         padding: EdgeInsets.fromLTRB(12, 8, 12, 10),
                                                         width: double.infinity,
-                                                        child: RaisedButton(
+                                                        /*child: RaisedButton(
                                                             onPressed: () async {
                                                                 Navigator.pushNamed(context, '/PaymentsubmissionPage');
                                                             },
@@ -390,7 +398,7 @@ class _ShowCardState extends State<ShowCard> {
                                                             color: CustomTheme.lightTheme.primaryColor,
                                                             //Color.fromRGBO(41,127,141, 100),
                                                             child: Text(
-                                                                "renew submission".toUpperCase(),
+                                                                AppTranslations.of(context).text('renew_submission').toUpperCase(),
                                                                 style: TextStyle(
                                                                     fontSize: 18.0,
                                                                     fontWeight: FontWeight.bold,
@@ -398,7 +406,27 @@ class _ShowCardState extends State<ShowCard> {
                                                                     color: Colors.white
                                                                 ),
                                                             ),
-                                                        ),
+                                                        ),*/
+	
+	                                                    child: RaisedButton(
+		                                                    onPressed: () async {
+			                                                    Navigator.pushNamed(context, '/PaymentsubmissionPage');
+		                                                    },
+		                                                    padding: EdgeInsets.all(16.0),
+		                                                    shape: RoundedRectangleBorder(
+			                                                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+		                                                    ),
+		                                                    color: CustomTheme.lightTheme.primaryColor,
+		                                                    child: Text(
+			                                                    AppTranslations.of(context).text('renew_submission').toUpperCase(),
+			                                                    style: TextStyle(
+				                                                    fontSize: 18.0,
+				                                                    fontWeight: FontWeight.bold,
+				                                                    fontFamily: "Open-sans",
+				                                                    color: Colors.white
+			                                                    ),
+		                                                    ),
+	                                                    ),
                                                     ),
                                                 ],
                                             );

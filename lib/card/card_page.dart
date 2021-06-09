@@ -1,6 +1,8 @@
+import 'package:card_app/homescreen/homepage.dart';
 import 'package:card_app/pages/history.dart';
 import 'package:card_app/pages/policy.dart';
 import 'package:card_app/pages/services.dart';
+import 'package:card_app/screen_size_reducers.dart';
 import 'package:card_app/theme/custom_theme.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +10,7 @@ import 'package:provider/provider.dart';
 import 'package:card_app/card/card_homepage.dart';
 import 'package:card_app/services/bottom_nav_bar_service.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:card_app/profile/profile_main.dart';
+import 'package:card_app/pages/settings.dart';
 import 'package:card_app/models/language_data.dart';
 import 'package:card_app/langlang/app_translation.dart';
 import 'package:card_app/langlang/application.dart';
@@ -46,44 +48,14 @@ class _DisplayState extends State<Display> {
             case 3:
                 return new ServicesPage();
             case 4:
-                return new ProfilePageView();
+                return new SettingsPage();
             default:
                 return new Text("Error");
         }
     }
 
-    List<String> titleList = ["openIMIS", "History", "Policy Information", "My Services", "Settings"];
+    List<String> titleList = ["page_title_openimis", "page_title_history", "page_title_policy_information", "My Services", "page_title_settings"];
 
-//    _createLanguageDropDown() {
-//        return DropdownButton<LanguageData>(
-//            iconSize: 30,
-//            hint: Text(Languages
-//                .of(context)
-//                .labelSelectLanguage),
-//            onChanged: (LanguageData language) {
-//               // changeLanguage(context, language.languageCode);
-//            },
-//            items: LanguageData.languageList()
-//                .map<DropdownMenuItem<LanguageData>>(
-//                    (e) =>
-//                    DropdownMenuItem<LanguageData>(
-//                        value: e,
-//                        child: Row(
-//                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-//                            children: <Widget>[
-//                                Text(
-//                                    e.flag,
-//                                    style: TextStyle(fontSize: 30),
-//                                ),
-//                                Text(e.name)
-//                            ],
-//                        ),
-//                    ),
-//            )
-//                .toList(),
-//        );
-//    }
-    
     Widget build(BuildContext context) {
         final bottom_nav = Provider.of<BottomNavigationBarProvider>(context);
         var connectionStatus = Provider.of<ConnectivityResult>(context);
@@ -92,23 +64,30 @@ class _DisplayState extends State<Display> {
         return Scaffold(
             appBar: AppBar(
                 automaticallyImplyLeading: false,
-                backgroundColor: CustomTheme.lightTheme.primaryColor,//Color.fromRGBO(234, 239, 255, 50),
+                backgroundColor: CustomTheme.lightTheme.primaryColor, //Color.fromRGBO(234, 239, 255, 50),
                 elevation: 0.0,
                 actions: <Widget>[
                     // _createLanguageDropDown()
                     IconButton(
-                        icon: Icon(Icons.credit_card, color: Colors.white, size: 30,),
+                        icon: Icon(Icons.credit_card_rounded, color: Colors.white, size: 30,),
                         onPressed: (){
                             print('Show Card Clicked...');
                             Navigator.pushNamed(context, '/show-card');
                         }
                     )
                 ],
-                title: Text(titleList[bottom_nav.currentIndex], textAlign: TextAlign.center,),
-
+                title: Text(
+                    AppTranslations.of(context).text(titleList[bottom_nav.currentIndex]),
+                    style: TextStyle(
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.w500
+                    ),
+                    textAlign: TextAlign.center,
+                ),
             ),
+           
             body : connectionStatus==ConnectivityResult.none ?
-                    Container(child: Center(child: Text('No Internet Connection'),),)
+                    Container(child: Center(child: Text(AppTranslations.of(context).text('no_internet_connection')),),)
                 :_getDrawerItemWidget(bottom_nav.currentIndex),
             bottomNavigationBar: CurvedNavigationBar(
                 color: CustomTheme.lightTheme.primaryColor,
@@ -129,12 +108,12 @@ class _DisplayState extends State<Display> {
                         color: Colors.white,
                     ),
                     Icon(
-                        Icons.credit_card,
+                        Icons.policy_rounded,
                         size: 30,
                         color: Colors.white,
                     ),
                     Icon(
-                        Icons.camera,
+                        Icons.medical_services_rounded,
                         size: 30,
                         color: Colors.white,
                     ),
