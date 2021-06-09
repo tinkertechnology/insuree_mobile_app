@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:card_app/langlang/app_translation.dart';
 import 'package:card_app/models/claimed.dart';
 import 'package:card_app/models/insuree_claims.dart';
+import 'package:card_app/models/insuree_policy_information.dart';
 import 'package:card_app/models/user_location.dart';
 import 'package:card_app/screen_size_reducers.dart';
 import 'package:card_app/theme/custom_theme.dart';
@@ -25,7 +26,8 @@ class _HomeScreenState extends State<HomeScreen> {
 	Future<MedicalServices> _medicalservices;
 	Future<Claims> _insureeclaims;
 	Future<Claimed> _claimed;
-    UserLocation userLocation;
+	UserLocation userLocation;
+	Future<InsureePolicyInformation> _insureepolicyinformation;
   
 	double min = 0.03, initial = 0.65, max = 0.7;
 	
@@ -34,6 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
 		super.initState();
 		_medicalservices = ApiGraphQlServices().MedicalServicesGQL('medicalservice');
 		_insureeclaims = ApiGraphQlServices().ClaimsServicesGQL();
+		_insureepolicyinformation = ApiGraphQlServices().InsureePolicyInformationServicesGQL(1);
 	}
 	
 	@override

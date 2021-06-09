@@ -291,8 +291,8 @@ class _SettingsPageState extends State<SettingsPage> {
 								child: Container(
 									padding: EdgeInsets.all(8.0),
 									child: ListTile(
-										title: Text('Update Language'),
-										subtitle: Text('Change language to your preferred language'),
+										title: Text(AppTranslations.of(context).text("update_language"),),
+										subtitle: Text(AppTranslations.of(context).text("change_language_text"),),
 										leading: Icon(Icons.language, size: 30,),
 										trailing: DropdownButton<String>(
 											focusColor: CustomTheme.lightTheme.primaryColor,
@@ -330,7 +330,7 @@ class _SettingsPageState extends State<SettingsPage> {
 								child: Container(
 									child: SwitchListTile(
 										title: Text(AppTranslations.of(context).text("dark_light_theme"),),
-										subtitle: Text('Change theme color'),
+										subtitle: Text(AppTranslations.of(context).text("change_theme_color")),
 										secondary: Icon(Icons.brightness_6, size: 30,),
 										value: themeChange.darkTheme,
 										activeColor: Colors.white.withOpacity(0.25),
@@ -354,7 +354,7 @@ class _SettingsPageState extends State<SettingsPage> {
 								child: Container(
 									child: ListTile(
 										title: Text(AppTranslations.of(context).text("contact_us"),),
-										subtitle: Text('Change theme color'),
+										subtitle: Text(''),
 										leading: Icon(
 											Icons.info_outline,
 											size: 30,

@@ -70,4 +70,29 @@ class openimisGqlQueries {
       "variables": null
     };
   }
+
+  openimis_insuree_policy_information_lists(chfid){ //for policyinformationpage
+    var query = """
+    query {
+        insureeProfile(insureeCHFID:${chfid}){
+          insureePolicies{
+            policy{
+              legacyId
+              effectiveDate
+              expiryDate
+              validityFrom
+              validityTo
+              status
+              value
+            }
+          }
+        }
+      }
+   """;
+    return {
+      "query":"query {\n  insureeProfile(insureeCHFID:${chfid}){\n    insureePolicies{\n      policy{\n        legacyId\n        effectiveDate\n        expiryDate\n        validityFrom\n        validityTo\n        status\n        value\n      }\n    }\n  }\n}","variables":null
+    };
+  }
+
 }
+

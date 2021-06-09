@@ -1,5 +1,5 @@
 import 'package:card_app/pages/claimed_item_services.dart';
-import 'file:///E:/AndroidStudioProjects/openimis_mobile_app/lib/pages/settings.dart';
+import 'package:card_app/pages/settings.dart';
 import 'package:card_app/screen_size_reducers.dart';
 import 'package:card_app/theme/custom_theme.dart';
 import 'package:flutter/foundation.dart';

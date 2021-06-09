@@ -24,5 +24,9 @@
   "renew_submission" : "Renew Submission",
   "submit_payment_button" : "Submit",
 
-  "no_internet_connection" : "Your Connection has been broke"
+  "no_internet_connection" : "Your Connection has been broke",
+
+  "update_language" : "Update Language",
+  "change_language_text" : "Change to your preferred language",
+  "change_theme_color" : "Change theme color"
 }

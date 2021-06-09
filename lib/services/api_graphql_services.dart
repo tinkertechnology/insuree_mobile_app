@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:card_app/models/health_facility_coordinates.dart';
+import 'package:card_app/models/insuree_policy_information.dart';
 import 'package:http/http.dart' as http;
 import 'package:card_app/models/medical_services.dart';
 import 'package:card_app/models/insuree_claims.dart';
@@ -19,6 +20,7 @@ class ApiGraphQlServices {
   ClaimedItems claimeditems = ClaimedItems();
   HealthFacilityCoordinates healthFacilityCoordinates = HealthFacilityCoordinates();
   PolicyInformation policyinformation = PolicyInformation();
+  InsureePolicyInformation insureepolicyinformation = InsureePolicyInformation();
 
 
   Future<MedicalServices> MedicalServicesGQL(String args) async {
@@ -149,7 +151,7 @@ class ApiGraphQlServices {
     return healthFacilityCoordinates;
   }
 
-  Future<PolicyInformation> PolicyInformationServicesGQL(chfid) async { //todo pass claim id from widget
+  Future<PolicyInformation> PolicyInformationServicesGQL(chfid) async { //todo pass claim id from widget // this is for the homepage
     try {
       final response = await http.post(Uri.parse(env.API_BASE_URL),
           headers: {
@@ -168,5 +170,27 @@ class ApiGraphQlServices {
     }
     return policyinformation;
   }
+
+
+  Future<InsureePolicyInformation> InsureePolicyInformationServicesGQL(chfid) async { //todo pass claim id from widget // this is for the list of policies of insuree
+    try {
+      final response = await http.post(Uri.parse(env.API_BASE_URL),
+          headers: {
+            "Content-Type": "application/json",
+//                "Accept" : "application/json"
+          },
+          body: jsonEncode(openimisGqlQueries().openimis_insuree_policy_information_lists(chfid)) //todo map qs filtering
+      );
+      var jsonMap = json.decode(response.body);
+      insureepolicyinformation = InsureePolicyInformation.fromJson(jsonMap);
+      print(insureepolicyinformation);
+
+    } catch (Exception) {
+      return  insureepolicyinformation;//claimeditems;
+    }
+    return insureepolicyinformation;
+  }
+
+
 
 }

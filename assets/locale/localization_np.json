@@ -23,7 +23,11 @@
   "expiry_date" : "सक्कीने मिति",
   "renew_submission" : "सेवा रीन्यू गर्नुहोस",
   "submit_payment_button" : "चयन गर्नुहोस",
-  "no_internet_connection" : "ईन्टरनेट कनेक्सनमा समस्या छ "
+  "no_internet_connection" : "ईन्टरनेट कनेक्सनमा समस्या छ ",
+
+  "update_language" : "भाषा परिवर्तन",
+  "change_language_text" : "आफ्मो भाषा छान्नुहोस",
+  "change_theme_color" : "थेम कलर परिवर्तन गर्नुहोस"
 
   
 
