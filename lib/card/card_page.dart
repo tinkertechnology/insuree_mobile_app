@@ -1,6 +1,8 @@
+import 'package:card_app/homescreen/homepage.dart';
 import 'package:card_app/pages/history.dart';
 import 'package:card_app/pages/policy.dart';
 import 'package:card_app/pages/services.dart';
+import 'package:card_app/screen_size_reducers.dart';
 import 'package:card_app/theme/custom_theme.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
@@ -62,21 +64,28 @@ class _DisplayState extends State<Display> {
         return Scaffold(
             appBar: AppBar(
                 automaticallyImplyLeading: false,
-                backgroundColor: CustomTheme.lightTheme.primaryColor,//Color.fromRGBO(234, 239, 255, 50),
+                backgroundColor: CustomTheme.lightTheme.primaryColor, //Color.fromRGBO(234, 239, 255, 50),
                 elevation: 0.0,
                 actions: <Widget>[
                     // _createLanguageDropDown()
                     IconButton(
-                        icon: Icon(Icons.credit_card, color: Colors.white, size: 30,),
+                        icon: Icon(Icons.credit_card_rounded, color: Colors.white, size: 30,),
                         onPressed: (){
                             print('Show Card Clicked...');
                             Navigator.pushNamed(context, '/show-card');
                         }
                     )
                 ],
-                title: Text(AppTranslations.of(context).text(titleList[bottom_nav.currentIndex]), textAlign: TextAlign.center,),
-
+                title: Text(
+                    AppTranslations.of(context).text(titleList[bottom_nav.currentIndex]),
+                    style: TextStyle(
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.w500
+                    ),
+                    textAlign: TextAlign.center,
+                ),
             ),
+           
             body : connectionStatus==ConnectivityResult.none ?
                     Container(child: Center(child: Text(AppTranslations.of(context).text('no_internet_connection')),),)
                 :_getDrawerItemWidget(bottom_nav.currentIndex),
@@ -99,12 +108,12 @@ class _DisplayState extends State<Display> {
                         color: Colors.white,
                     ),
                     Icon(
-                        Icons.credit_card,
+                        Icons.policy_rounded,
                         size: 30,
                         color: Colors.white,
                     ),
                     Icon(
-                        Icons.camera,
+                        Icons.medical_services_rounded,
                         size: 30,
                         color: Colors.white,
                     ),

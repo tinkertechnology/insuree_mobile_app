@@ -38,11 +38,6 @@ class _OfficePageState extends State<OfficePage> {
 									itemBuilder: (BuildContext context, int index){
 										return Container(
 											padding: EdgeInsets.only(top: 4.0, bottom: 4.0),
-											/*decoration: BoxDecoration(
-												border: Border(
-													bottom: BorderSide(color: Colors.orangeAccent)
-												)
-											),*/
 											child: Card(
 												shape: RoundedRectangleBorder(
 													borderRadius: BorderRadius.circular(0.0),
@@ -95,9 +90,9 @@ class _OfficePageState extends State<OfficePage> {
 										);
 									}
 								)
-								),
-							)
+							),
 						),
+					),
 				],
 			),
 		);

@@ -30,7 +30,7 @@ class _PolicyInformationPageState extends State<PolicyInformationPage> {
 								child: ListView.builder(
 									itemBuilder: (BuildContext context, int index){
 										return Container(
-											margin: EdgeInsets.only(left: 16.0, right: 16.0),
+											margin: EdgeInsets.only(left: 8.0, right: 8.0),
 											decoration: BoxDecoration(
 												border: Border(
 													bottom: BorderSide(color: Colors.grey.withOpacity(0.5), width: 1.0)

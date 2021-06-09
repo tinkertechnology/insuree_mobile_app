@@ -12,216 +12,239 @@ import 'package:card_app/langlang/app_translation.dart';
 import 'package:card_app/langlang/application.dart';
 
 class SubmissionPage extends StatefulWidget {
-  @override
-  _SubmissionPageState createState() => _SubmissionPageState();
-
+    @override
+    _SubmissionPageState createState() => _SubmissionPageState();
+    
 }
 
 class _SubmissionPageState extends State<SubmissionPage> {
-  File _image;
-  String message;
-  final picker = ImagePicker();
-  final _formKey = GlobalKey<FormState>();
-  var _passKey = GlobalKey<FormFieldState>();
-
-  @override
-  void initState() {
-    super.initState();
-    application.onLocaleChanged = onLocaleChange;
-  }
-
-  void onLocaleChange(Locale locale) async {
-    setState(() {
-        AppTranslations.load(locale);
-    });
+    File _image;
+    String message;
+    final picker = ImagePicker();
+    final _formKey = GlobalKey<FormState>();
+    var _passKey = GlobalKey<FormFieldState>();
+    
+    @override
+    void initState() {
+        super.initState();
+        application.onLocaleChanged = onLocaleChange;
     }
-  
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-
+    
+    void onLocaleChange(Locale locale) async {
+        setState(() {
+            AppTranslations.load(locale);
+        });
+    }
+    
+    final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+    
     bool isLoading = false;
-
-  _imgFromCamera() async {
-    // File image = (await _picker.getImage(source: ImageSource.camera, imageQuality: 50)) as File;  // await ImagePicker.getImage(
-    //source: ImageSource.camera, imageQuality: 50
-    //);
-    PickedFile image = await picker.getImage(source: ImageSource.camera);
-    setState(() {
-      if (image != null) {
-        _image = File(image.path);
-      } else {
-        print('No image selected.');
-      }
-    });
-  }
-
-  _imgFromGallery() async {
-    PickedFile image = await picker.getImage(source: ImageSource.gallery);
-    setState(() {
-      if (image != null) {
-        _image = File(image.path);
-      } else {
-        print('No image selected.');
-      }
-    });
-  }
-
-  Future uploadPic() async{
-    setState(() {
-      isLoading = !isLoading;
-    });
-    String url = env.API_BASE_URL;
-    var request = new http.MultipartRequest("POST", Uri.parse(url));
+    
+    _imgFromCamera() async {
+        // File image = (await _picker.getImage(source: ImageSource.camera, imageQuality: 50)) as File;  // await ImagePicker.getImage(
+        //source: ImageSource.camera, imageQuality: 50
+        //);
+        PickedFile image = await picker.getImage(source: ImageSource.camera);
+        setState(() {
+            if (image != null) {
+                _image = File(image.path);
+            } else {
+                print('No image selected.');
+            }
+        });
+    }
+    
+    _imgFromGallery() async {
+        PickedFile image = await picker.getImage(source: ImageSource.gallery);
+        setState(() {
+            if (image != null) {
+                _image = File(image.path);
+            } else {
+                print('No image selected.');
+            }
+        });
+    }
+    
+    Future uploadPic() async{
+        setState(() {
+            isLoading = !isLoading;
+        });
+        String url = env.API_BASE_URL;
+        var request = new http.MultipartRequest("POST", Uri.parse(url));
 //		request.headers.addAll(headers);
-    request.files.add(new http.MultipartFile.fromBytes('file', await File.fromUri(Uri.parse(_image.path)).readAsBytes(), filename: "jpt.jpg"));
+        request.files.add(new http.MultipartFile.fromBytes('file', await File.fromUri(Uri.parse(_image.path)).readAsBytes(), filename: "jpt.jpg"));
 //		request.fields['address'] = 'address';
 //		request.fields['query'] ='mutation {createVoucherPayment(file: ${Uri.parse(_image.path)}){   ok  }  }","variables":null"}';
-    request.fields['query'] ='mutation {createVoucherPayment(file: "file"){   ok  }  }';
-    print(request);
-    request.send().then((response) {
-      print(response.stream.bytesToString().toString());
-      if (response.statusCode == 200) {
-        if (response.reasonPhrase == "OK") {
-          RedirectToCardPage('Uplaad Bhayo la bhai haru');
-        }
-        else{
-          RedirectToCardPage('Server Error cha hai bhai haru');
-        }
-        setState(() {
-          isLoading = !isLoading;
-          //_scaffoldKey.currentState.showSnackBar(SnackBar(content: Text('Profile Picture Uploaded')));
+        request.fields['query'] ='mutation {createVoucherPayment(file: "file"){   ok  }  }';
+        print(request);
+        request.send().then((response) {
+            print(response.stream.bytesToString().toString());
+            if (response.statusCode == 200) {
+                if (response.reasonPhrase == "OK") {
+                     RedirectToCardPage('Uplaad Bhayo la bhai haru');
+                }
+                else{
+                    RedirectToCardPage('Server Error cha hai bhai haru');
+                }
+                setState(() {
+                    isLoading = !isLoading;
+                    //_scaffoldKey.currentState.showSnackBar(SnackBar(content: Text('Profile Picture Uploaded')));
+                });
+            }
         });
-      }
-    });
-
-  }
-
-
-  void _showPicker(context) {
-    showModalBottomSheet(
-        context: context,
-        builder: (BuildContext bc) {
-          return SafeArea(
-            child: Container(
-              child: new Wrap(
+        
+    }
+    
+    void _showPicker(context) {
+        showModalBottomSheet(
+            context: context,
+            builder: (BuildContext bc) {
+                return SafeArea(
+                    child: Container(
+                        child: new Wrap(
+                            children: <Widget>[
+                                new ListTile(
+                                    leading: new Icon(Icons.photo_library),
+                                    title: new Text('Photo Library'),
+                                    onTap: () {
+                                        _imgFromGallery();
+                                        Navigator.of(context).pop();
+                                    }),
+                                new ListTile(
+                                    leading: new Icon(Icons.photo_camera),
+                                    title: new Text('Camera'),
+                                    onTap: () {
+                                        _imgFromCamera();
+                                        Navigator.of(context).pop();
+                                    },
+                                ),
+                            ],
+                        ),
+                    ),
+                );
+            }
+        );
+    }
+    
+    void RedirectToCardPage(String value) {
+        Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(builder: (c) => ShowCard(message: value)),
+                (route) => false);
+    }
+    
+    void showMessage(String val){
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(val), duration: Duration(milliseconds: 3000),),);
+    }
+    
+    
+    @override
+    Widget build(BuildContext context) {
+        return Scaffold(
+            backgroundColor: CustomTheme.lightTheme.primaryColor,
+            appBar: AppBar(
+                elevation: 0.0,
+                title: Text(AppTranslations.of(context).text('page_payment_submission'),),
+                backgroundColor: CustomTheme.lightTheme.primaryColor,
+            ),
+            body: Column(
                 children: <Widget>[
-                  new ListTile(
-                      leading: new Icon(Icons.photo_library),
-                      title: new Text('Photo Library'),
-                      onTap: () {
-                        _imgFromGallery();
-                        Navigator.of(context).pop();
-                      }),
-                  new ListTile(
-                    leading: new Icon(Icons.photo_camera),
-                    title: new Text('Camera'),
-                    onTap: () {
-                      _imgFromCamera();
-                      Navigator.of(context).pop();
-                    },
-                  ),
+                    Expanded(
+                        child: Container(
+                            decoration: BoxDecoration(
+                                color: CustomTheme.lightTheme.backgroundColor,
+                                borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(30),
+                                    topRight: Radius.circular(30)
+                                ),
+                            ),
+                            child: Padding(
+                                padding: const EdgeInsets.all(16.0),
+                                child: Column(
+                                    children: [
+                                        SizedBox(height: 8.0),
+                                        Text(
+                                            'Upload image of your paid voucher',
+                                            style: TextStyle(
+                                                fontSize: 16.0,
+                                                fontWeight: FontWeight.w300
+                                            ),
+                                        ),
+    
+                                        Container(
+                                            padding: EdgeInsets.all(16.0),
+                                            child: Column(
+                                                children: [
+                                                    _image != null ?
+                                                        GestureDetector(
+                                                            onTap: (){
+                                                                _showPicker(context);
+                                                            },
+                                                            child: Card(
+                                                                child: Image.file(
+                                                                    _image,
+                                                                    fit: BoxFit.fill,
+                                                                ),
+                                                            ),
+                                                        )
+                                                        : GestureDetector(
+                                                        onTap: (){
+                                                            _showPicker(context);
+                                                        },
+                                                        child: Card(
+                                                            elevation: 3.0,
+                                                            child: Container(
+                                                                height: 120,
+                                                                width: 120,
+                                                                child: Center(
+                                                                    child: Icon(Icons.note_add, size: 30, color: Colors.grey.withOpacity(0.5),),
+                                                                )
+                                                            ),
+                                                        ),
+                                                    )
+                                                ],
+                                            )
+                                        ),
+    
+                                        isLoading ?
+                                        Center(
+                                            child: CircularProgressIndicator()
+                                        )
+                                        :Center(
+                                            child: Container(
+                                                padding: EdgeInsets.fromLTRB(16, 16, 16, 16),
+                                                width: double.infinity,
+                                                child: RaisedButton(
+                                                    onPressed: () async {
+                                                        _image!=null ? uploadPic(): showMessage('Please upload image of your Paid Voucher ');
+                                                    },
+                                                    padding: EdgeInsets.all(16.0),
+                                                    shape: RoundedRectangleBorder(
+                                                        borderRadius: BorderRadius.all(
+                                                            Radius.circular(10.0)),
+                                                    ),
+                                                    color: CustomTheme.lightTheme.primaryColor,
+                                                    child: Text(
+                                                        AppTranslations.of(context).text('submit_payment_button').toUpperCase(),
+                                                        style: TextStyle(
+                                                            fontSize: 18.0,
+                                                            fontWeight: FontWeight.bold,
+                                                            fontFamily: "Open-sans",
+                                                            color: Colors.white
+                                                        ),
+                                                    ),
+                                                ),
+                                            ),
+                                        ),
+                                    ],
+                                )
+                            )
+                        )
+                    ),
                 ],
-              ),
             ),
-          );
-        }
-    );
-  }
-  void RedirectToCardPage(String value) {
-
-      Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (c) => ShowCard(message: value)),
-              (route) => false);
-  }
-  void showMessage(String val){
-    ScaffoldMessenger.of(context).showSnackBar( SnackBar( content: Text(val), duration: Duration(milliseconds: 3000), ), );
-  }
-
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color.fromRGBO(41,127,141, 25), //mainColor,
-      appBar: AppBar(
-        elevation: 0.0,
-        title: Text(AppTranslations.of(context).text('page_payment_submission'),),
-        backgroundColor: Color.fromRGBO(41,127,141, 0), //mainColor,
-      ),
-      body:
-      Column(
-        children: <Widget>[
-          SizedBox(
-            height: 32,
-          ),
-          Center(
-            child: GestureDetector(
-              onTap: () {
-                _showPicker(context);
-              },
-              child: CircleAvatar(
-                radius: 200,
-                backgroundColor: Color(0xffFDCF09),
-                child: _image != null
-                    ? ClipRRect(
-                  borderRadius: BorderRadius.circular(50),
-                  child: Image.file(
-                    _image,
-                    width: 400,
-                    height: 400,
-                    fit: BoxFit.fitHeight,
-                  ),
-                )
-                    : Container(
-                  decoration: BoxDecoration(
-                      color: Colors.grey[200],
-                      borderRadius: BorderRadius.circular(50)),
-                  width: 100,
-                  height: 100,
-                  child: Icon(
-                    Icons.camera_alt,
-                    color: Colors.grey[800],
-                  ),
-                ),
-              ),
-            ),
-          ),
-
-          SizedBox(
-            height: 10.0
-          ),
-          isLoading ? Center(child: CircularProgressIndicator()):Center(
-            child:
-            Container(
-              padding: EdgeInsets.fromLTRB(12, 8, 12, 10),
-              width: double.infinity,
-              child: RaisedButton(
-                onPressed: () async {
-                 _image!=null ? uploadPic(): showMessage('Please Select Image of your Paid Voucher ');
-                  },
-                padding: EdgeInsets.all(20.0),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(
-                      Radius.circular(10.0)),
-                ),
-                color: CustomTheme.lightTheme.primaryColor,
-                //Color.fromRGBO(41,127,141, 100),
-                child: Text(
-                        AppTranslations.of(context).text('submit_payment_button').toUpperCase(),
-                  style: TextStyle(
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: "Open-sans",
-                      color: Colors.white
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-
-    );
-  }
-
+        );
+    }
+    
 }
 
 

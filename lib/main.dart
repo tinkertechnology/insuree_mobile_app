@@ -29,7 +29,7 @@ import 'package:card_app/services/bottom_nav_bar_service.dart';
 import 'package:card_app/auth/login_card.dart';
 import 'package:card_app/card/add_card.dart';
 import 'file:///E:/AndroidStudioProjects/openimis_mobile_app/lib/pages/settings.dart';
-import 'package:card_app/profile/pages/profile_info.dart';
+import 'file:///E:/AndroidStudioProjects/openimis_mobile_app/lib/pages/profile_info.dart';
 import 'card/sync.dart';
 import 'package:card_app/auth/validate_otp_card.dart';
 import 'package:card_app/services/location_service.dart';
@@ -92,7 +92,7 @@ class _MyAppState extends State<MyApp> {
                 ChangeNotifierProvider(create: (_) {
                     return themeChangeProvider;
                 }),
-                 StreamProvider<UserLocation>.value(value: LocationService().locationStream),
+	            StreamProvider<UserLocation>.value(value: LocationService().locationStream),
                 StreamProvider(
                     create: (context) => Connectivity().onConnectivityChanged),
 
