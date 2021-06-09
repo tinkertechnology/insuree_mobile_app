@@ -9,6 +9,7 @@ import 'package:card_app/pages/notice.dart';
 import 'package:card_app/pages/notification.dart';
 import 'package:card_app/pages/office.dart';
 import 'package:card_app/pages/policy.dart';
+import 'package:card_app/pages/profile_info.dart';
 import 'package:card_app/pages/userhistory.dart';
 import 'package:card_app/theme/dark_theme_provider.dart';
 import 'package:card_app/theme/dark_theme_styles.dart';
@@ -24,7 +25,6 @@ import 'package:card_app/ui/splash_screen.dart';
 import 'package:card_app/services/bottom_nav_bar_service.dart';
 import 'package:card_app/auth/login_card.dart';
 import 'package:card_app/pages/settings.dart';
-import 'package:card_app/profile/pages/profile_info.dart';
 import 'card/sync.dart';
 import 'package:card_app/auth/validate_otp_card.dart';
 import 'package:card_app/services/location_service.dart';
@@ -85,7 +85,7 @@ class _MyAppState extends State<MyApp> {
                 ChangeNotifierProvider(create: (_) {
                     return themeChangeProvider;
                 }),
-                 StreamProvider<UserLocation>.value(value: LocationService().locationStream),
+	            StreamProvider<UserLocation>.value(value: LocationService().locationStream),
                 StreamProvider(
                     create: (context) => Connectivity().onConnectivityChanged),
 

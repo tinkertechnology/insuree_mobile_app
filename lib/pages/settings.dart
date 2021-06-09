@@ -40,10 +40,10 @@ class _SettingsPageState extends State<SettingsPage> {
     File _image;
 	final picker = ImagePicker();
 	AuthBlock auth;
-	
+
 	Future getImage() async {
       var image = await picker.getImage(source: ImageSource.camera);
-  
+
       setState(() {
         _image = image as File;
           print('Image Path $_image');
@@ -86,27 +86,27 @@ class _SettingsPageState extends State<SettingsPage> {
       //  StorageUploadTask uploadTask = firebaseStorageRef.putFile(_image);
       //  StorageTaskSnapshot taskSnapshot=await uploadTask.onComplete;
       var uri = Uri.parse("/api/profile/");
-      
+
       var request = new http.MultipartRequest("POST", uri);
       request.files.add(new http.MultipartFile.fromBytes('file', await File.fromUri(Uri.parse(fileName)).readAsBytes(), contentType: new MediaType('image', 'jpeg')));
       request.fields['address'] = 'address';
       request.send().then((response) {
-      if (response.statusCode == 200) 
+      if (response.statusCode == 200)
       print("Uploaded!");
       setState(() {
           print("Profile Picture uploaded");
           _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text('Profile Picture Uploaded')));
        });
     });
-       
+
     }
 
 	bool _flutter = false;
 	@override
 	Widget build(BuildContext context) {
     final bottom_nav = Provider.of<BottomNavigationBarProvider>(context);
-   
-    
+
+
     final auth = Provider.of<AuthBlock>(context);
 		final themeChange = Provider.of<DarkThemeProvider>(context);
 
@@ -154,7 +154,7 @@ class _SettingsPageState extends State<SettingsPage> {
 								),
 							),
 						),
-						
+
 						// GENERAL
 						Container(
 							margin: EdgeInsets.fromLTRB(20, 4, 20, 4),
@@ -190,7 +190,7 @@ class _SettingsPageState extends State<SettingsPage> {
 													],
 												),
 											),
-											
+
 											// NOTIFICATIONS
 											Container(
 												//padding: EdgeInsets.only(top: 16.0, bottom: 16.0),
@@ -204,7 +204,7 @@ class _SettingsPageState extends State<SettingsPage> {
 														print("Notifications clicked...");
 														Navigator.pushNamed(context, '/notifications');
 													},
-													
+
 													child: ListTile(
 														title: Text(AppTranslations.of(context).text("notifications"),),
 														//subtitle: Text('write a feedback'),
@@ -213,7 +213,7 @@ class _SettingsPageState extends State<SettingsPage> {
 													)
 												)
 											),
-											
+
 											// SERVICE PROVIDER LIST
 											Container(
 												// padding: EdgeInsets.only(top: 16.0, bottom: 16.0),
@@ -235,7 +235,7 @@ class _SettingsPageState extends State<SettingsPage> {
 													)
 												)
 											),
-											
+
 											// NOTICE
 											Container(
 												// padding: EdgeInsets.only(top: 16.0, bottom: 16.0),
@@ -257,7 +257,7 @@ class _SettingsPageState extends State<SettingsPage> {
 													)
 												)
 											),
-											
+
 											// FEEDBACK
 											Container(
 												//padding: EdgeInsets.only(top: 16.0, bottom: 16.0),
@@ -279,7 +279,7 @@ class _SettingsPageState extends State<SettingsPage> {
 								)
 							),
 						),
-						
+
 						// UPDATE LANGUAGE
 						Container(
 							margin: EdgeInsets.fromLTRB(16, 4, 16, 4),
@@ -318,7 +318,7 @@ class _SettingsPageState extends State<SettingsPage> {
 								),
 							),
 						),
-						
+
 						// DARK/LIGHT THEME
 						Container(
 							margin: EdgeInsets.fromLTRB(16, 4, 16, 4),
@@ -342,7 +342,7 @@ class _SettingsPageState extends State<SettingsPage> {
 								)
 							),
 						),
-						
+
 						// CONTACT US
 						Container(
 							margin: EdgeInsets.fromLTRB(16, 4, 16, 4),
@@ -366,7 +366,7 @@ class _SettingsPageState extends State<SettingsPage> {
 								)
 							),
 						),
-						
+
 						// LOGOUT
 						Container(
 							margin: EdgeInsets.fromLTRB(20, 4, 20, 20),
@@ -410,7 +410,7 @@ class _SettingsPageState extends State<SettingsPage> {
 
 																),
 															),
-															
+
 															Icon(Icons.arrow_forward_ios, size: 25)
 														],
 													),

@@ -110,11 +110,11 @@ class _ClaimedItemServicesPageState extends State<ClaimedItemServicesPage> {
                                                                                     ),
                                                                                 ),
                                                                                 trailing: Text(
-                                                                                    '${env.Currency}' + '${claimeditems.item.price.toString()}',
+                                                                                    '${env.Currency} ' + '${claimeditems.item.price.toString()}',
                                                                                     style: TextStyle(
                                                                                         fontSize: 16.0,
                                                                                         fontWeight: FontWeight.bold,
-                                                                                        color: Colors.green
+                                                                                        color: CustomTheme.lightTheme.primaryColor
                                                                                     ),
                                                                                 ),
                                                                             ),
@@ -180,11 +180,11 @@ class _ClaimedItemServicesPageState extends State<ClaimedItemServicesPage> {
                                                                                     ),
                                                                                 ),
                                                                                 trailing: Text(
-                                                                                    '${env.Currency}' + '${claimedservices.service.price.toString()}',
+                                                                                    '${env.Currency} ' + '${claimedservices.service.price.toString()}',
                                                                                     style: TextStyle(
                                                                                         fontSize: 16.0,
                                                                                         fontWeight: FontWeight.bold,
-                                                                                        color: Colors.green
+                                                                                        color: CustomTheme.lightTheme.primaryColor
                                                                                     ),
                                                                                 ),
                                                                             ),
