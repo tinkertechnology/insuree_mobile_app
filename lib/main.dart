@@ -40,7 +40,6 @@ import 'package:card_app/pages/claimed_item_services.dart';
 import 'package:card_app/pages/submission_page.dart';
 import 'package:card_app/langlang/application.dart';
 
-
 void main() async {
     WidgetsFlutterBinding.ensureInitialized();
     runApp(MyApp(
@@ -50,7 +49,6 @@ void main() async {
 //  WidgetsFlutterBinding.ensureInitialized();
 //  final Locale locale = Locale('en');
 class MyApp extends StatefulWidget {
-    
     @override
     _MyAppState createState() => _MyAppState();
 }
@@ -60,7 +58,6 @@ class _MyAppState extends State<MyApp> {
     Insuree insuree;
     DarkThemeProvider themeChangeProvider = new DarkThemeProvider();
     ConnectivityService connectivityStatus = new ConnectivityService();
-
 
     @override
     void initState() {

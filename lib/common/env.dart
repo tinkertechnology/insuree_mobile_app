@@ -164,7 +164,7 @@ String USER_MOBILE_NO = "";
 
 
 
-String API_BASE_LOCAL_URL = "https://oi.tinker.com.np/api/graphql";//API_BASE_LOCAL_URL="http://10.0.2.2:8000/api/graphql" //API_BASE_LOCAL_URL="http://10.0.2.2:8055/api/graphql"
+String API_BASE_LOCAL_URL = "https://oi.tinker.com.np/api/graphql";//API_BASE_LOCAL_URL="http://10.0.2.2:8000/api/graphql" //env.API_BASE_URL="http://10.0.2.2:8055/api/graphql"
 String API_IOS_BASE_LOCAL_URL = "http://localhost:8000/api/graphql";
 String API_BASE_LOCAL_MOBILE_URL = "http://192.168.31.221:8000/api/graphql";
 String API_HIB_URL = '';

@@ -14,12 +14,12 @@ import 'package:provider/provider.dart';
 
 
 
-class HomeScreen extends StatefulWidget {
+class HealthFacilitiesCoordinatesWidget extends StatefulWidget {
 	@override
-	_HomeScreenState createState() => _HomeScreenState();
+	_HealthFacilitiesCoordinatesWidgetState createState() => _HealthFacilitiesCoordinatesWidgetState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HealthFacilitiesCoordinatesWidgetState extends State<HealthFacilitiesCoordinatesWidget> {
 	
 	Future<MedicalServices> _medicalservices;
 	Future<Claims> _insureeclaims;
@@ -36,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
 		super.initState();
 		//_medicalservices = ApiGraphQlServices().MedicalServicesGQL('medicalservice');
 		//_insureeclaims = ApiGraphQlServices().ClaimsServicesGQL();
-
+		print('HealthFacilitiesCoordinatesWidget');
 
 	}
 	
@@ -57,19 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
 							topRight: Radius.circular(20),
 							topLeft: Radius.circular(20)
 						),
-//						border: Border(
-//							top: BorderSide(color: Colors.orangeAccent)
-//						),
 						color:CustomTheme.lightTheme.backgroundColor,
-						/*gradient: LinearGradient(
-							begin: Alignment.bottomRight,
-							end: Alignment.topLeft,
-							colors: [
-								CustomTheme.lightTheme.primaryColor,
-								CustomTheme.lightTheme.splashColor,
-								CustomTheme.lightTheme.accentColor
-							]
-						),*/
 					),
 					child:  ListView(
 						controller: scrollController,
@@ -95,7 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
 							Row(
 								mainAxisAlignment: MainAxisAlignment.center,
 								children: <Widget>[
-									Text(AppTranslations.of(context).text("explore_services"),
+									Text(AppTranslations.of(context).text("explore_services") + 'jpt',
 										style: TextStyle(
 											fontWeight: FontWeight.normal,
 											fontSize: 24.0,
