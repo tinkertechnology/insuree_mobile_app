@@ -224,7 +224,7 @@ class _SubmissionPageState extends State<SubmissionPage> {
                                                     ),
                                                     color: CustomTheme.lightTheme.primaryColor,
                                                     child: Text(
-                                                        AppTranslations.of(context).text('submit_payment_button').toUpperCase(),
+                                                        AppTranslations.of(context).text('submit').toUpperCase(),
                                                         style: TextStyle(
                                                             fontSize: 18.0,
                                                             fontWeight: FontWeight.bold,

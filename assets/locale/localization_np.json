@@ -22,13 +22,17 @@
   "card_number" : "कार्ड नंबर",
   "expiry_date" : "सक्कीने मिति",
   "renew_submission" : "सेवा रीन्यू गर्नुहोस",
-  "submit_payment_button" : "चयन गर्नुहोस",
+  "submit" : "चयन गर्नुहोस",
   "no_internet_connection" : "ईन्टरनेट कनेक्सनमा समस्या छ ",
 
   "update_language" : "भाषा परिवर्तन",
   "change_language_text" : "आफ्मो भाषा छान्नुहोस",
-  "change_theme_color" : "थेम कलर परिवर्तन गर्नुहोस"
+  "change_theme_color" : "थेम कलर परिवर्तन गर्नुहोस",
 
-  
+  "mobile_number" : "मोबाईल नंबर",
+  "email_address" : "ईमेल ठौगाना",
+  "description" : "प्रतिकृया  विवरण",
+  "Cancel" : "रद्द गर्नुहोस्",
+  "feedback_title" : "यस एपमा केहि समस्या आएमा अथवा ः केहि गुनासो भयो फारम भर्नुहोस है"
 
 }

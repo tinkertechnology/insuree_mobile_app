@@ -1,6 +1,9 @@
 import 'package:card_app/theme/custom_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:card_app/langlang/application.dart';
+import 'package:card_app/langlang/application.dart';
+import 'package:card_app/langlang/app_translation.dart';
 
 class FeedbackPage extends StatefulWidget {
     @override
@@ -8,6 +11,20 @@ class FeedbackPage extends StatefulWidget {
 }
 
 class _FeedbackPageState extends State<FeedbackPage> {
+    
+    @override
+    void initState() {
+        // TODO: implement initState
+        super.initState();
+        application.onLocaleChanged = onLocaleChange;
+      }
+
+    void onLocaleChange(Locale locale) async {
+        setState(() {
+            AppTranslations.load(locale);
+        });
+    }
+
     final double circleRadius = 30.0;
     final double circleBorderWidth = 8.0;
     Color mainColor = Color(0xFF177767);
@@ -47,7 +64,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
                                                 ),
                                                 SizedBox(height: 16.0),
                                                 Text(
-                                                    'Fill in your query if you have any issue regarding our app',
+                                                    AppTranslations.of(context).text('feedback_title'),
                                                     style: TextStyle(
                                                         color: Colors.black54,
                                                     ),
@@ -63,7 +80,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
                                                 mainAxisSize: MainAxisSize.min,
                                                 children: <Widget>[
                                                     Text(
-                                                        "Full Name",
+                                                        AppTranslations.of(context).text('full_name'),
                                                         style: TextStyle(
                                                             fontSize: 16,
                                                             fontWeight: FontWeight.w400,
@@ -116,7 +133,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
                                                 mainAxisSize: MainAxisSize.min,
                                                 children: <Widget>[
                                                     Text(
-                                                        "Mobile Number",
+                                                        AppTranslations.of(context).text('mobile_number'),
                                                         style: TextStyle(
                                                             fontSize: 16,
                                                             fontWeight: FontWeight.w400,
@@ -170,7 +187,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
                                                 mainAxisSize: MainAxisSize.min,
                                                 children: <Widget>[
                                                     Text(
-                                                        "Email Address",
+                                                        AppTranslations.of(context).text('email_address'),
                                                         style: TextStyle(
                                                             fontSize: 16,
                                                             fontWeight: FontWeight.w400,
@@ -224,7 +241,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
                                                 mainAxisSize: MainAxisSize.min,
                                                 children: <Widget>[
                                                     Text(
-                                                        "Query Description (max. 150 words)",
+                                                        AppTranslations.of(context).text('description'),
                                                         style: TextStyle(
                                                             fontSize: 16,
                                                             fontWeight: FontWeight.w400,
@@ -283,7 +300,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
                                                         ),
                                                         color: Colors.red.shade500,
                                                         child: Text(
-                                                            "cancel".toUpperCase(),
+                                                            AppTranslations.of(context).text('cancel').toUpperCase(),
                                                             style: TextStyle(
                                                                 fontSize: 18.0,
                                                                 fontWeight: FontWeight.bold,
@@ -304,7 +321,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
                                                         ),
                                                         color: CustomTheme.lightTheme.primaryColor,
                                                         child: Text(
-                                                            "submit".toUpperCase(),
+                                                            AppTranslations.of(context).text('submit').toUpperCase(),
                                                             style: TextStyle(
                                                                 fontSize: 18.0,
                                                                 fontWeight: FontWeight.bold,

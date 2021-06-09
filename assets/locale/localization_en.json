@@ -22,11 +22,17 @@
   "card_number" : "Card Number",
   "expiry_date" : "Expiry Date",
   "renew_submission" : "Renew Submission",
-  "submit_payment_button" : "Submit",
+  "submit" : "Submit",
 
   "no_internet_connection" : "Your Connection has been broke",
 
   "update_language" : "Update Language",
   "change_language_text" : "Change to your preferred language",
-  "change_theme_color" : "Change theme color"
+  "change_theme_color" : "Change theme color",
+
+  "mobile_number" : "Mobile Number",
+  "email_address" : "Email Address",
+  "description" : "Query Description",
+  "cancel" : "Cancel",
+  "feedback_title" : "Fill in your query if you have any issue regarding our App"
 }
