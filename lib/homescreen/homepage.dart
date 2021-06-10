@@ -1,6 +1,5 @@
 import 'dart:ui';
 
-import 'package:card_app/homescreen/healthFacilitiesCoordinatesWidget.dart';
 import 'package:card_app/langlang/app_translation.dart';
 import 'package:card_app/models/claimed.dart';
 import 'package:card_app/models/insuree_claims.dart';
@@ -12,10 +11,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:card_app/models/medical_services.dart';
 import 'package:card_app/services/api_graphql_services.dart';
-import 'package:card_app/services/location_service.dart';
 import 'package:provider/provider.dart';
-
-
 
 class HomeScreen extends StatefulWidget {
 	@override
@@ -97,16 +93,6 @@ class _HomeScreenState extends State<HomeScreen> {
 							SizedBox(
 								height: screenHeight(context, dividedBy: 40),
 							),
-							
-							/*Row(
-								mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-								children: <Widget>[
-									_button("Service1", Icons.medical_services_rounded, CustomTheme.lightTheme.splashColor),
-									_button("Service2", Icons.medical_services_sharp, CustomTheme.lightTheme.splashColor),
-									_button("Service3", Icons.medical_services_outlined, CustomTheme.lightTheme.splashColor),
-									_button("Service4", Icons.medical_services, CustomTheme.lightTheme.splashColor),
-								],
-							),*/
 							
 							ConstrainedBox(
 								constraints: BoxConstraints(maxHeight: 1000),
