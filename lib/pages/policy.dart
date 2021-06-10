@@ -40,10 +40,10 @@ class _PolicyInformationPageState extends State<PolicyInformationPage> {
 
 								  builder: (context, snapshot) {
 								  	if(snapshot.hasData) {
-								  		var _data = snapshot.data.data.insureeProfile.insureePolicies[0];
 											return ListView.builder(
 													itemCount: snapshot.data.data.insureeProfile.insureePolicies.length,
 													itemBuilder: (BuildContext context, int index) {
+														var _data = snapshot.data.data.insureeProfile.insureePolicies[index];
 														return Container(
 															margin: EdgeInsets.only(left: 16.0, right: 16.0),
 															decoration: BoxDecoration(
@@ -57,20 +57,27 @@ class _PolicyInformationPageState extends State<PolicyInformationPage> {
 																title: Column(
 																	crossAxisAlignment: CrossAxisAlignment.start,
 																	children: [
-																		Text(_data.policy.value.toString())
-//																		Text('Patan Hospital')
+																		//Text(_data.policy.value.toString()),
+																		Text('Health Facility Name')
 																	],
 																),
 																leading: Text('HIB-3500'),
-																subtitle: Text('Expiry date: 2021-06-04'),
+																subtitle: Text('Expiry date: ' + _data.policy.expiryDate.toString()),
 																trailing: Row(
 																	mainAxisAlignment: MainAxisAlignment
 																			.spaceBetween,
 																	mainAxisSize: MainAxisSize.min,
 																	children: [
-																		Text('Balance'),
+																		Text(_data.policy.value.toString()),
 																		SizedBox(width: 4.0),
-																		Text('Status')
+																		Text(
+																			_data.policy.status.toString(),
+																			style: TextStyle(
+																				fontSize: 16.0,
+																				fontWeight: FontWeight.bold,
+																				color: CustomTheme.lightTheme.primaryColor
+																			),
+																		),
 																	],
 																),
 															),

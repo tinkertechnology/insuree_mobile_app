@@ -46,15 +46,13 @@ class _DisplayState extends State<Display> {
             case 2:
                 return new PolicyInformationPage();
             case 3:
-                return new ServicesPage();
-            case 4:
                 return new SettingsPage();
             default:
                 return new Text("Error");
         }
     }
 
-    List<String> titleList = ["page_title_openimis", "page_title_history", "page_title_policy_information", "My Services", "page_title_settings"];
+    List<String> titleList = ["page_title_openimis", "page_title_history", "page_title_policy_information", "page_title_settings"];
 
     Widget build(BuildContext context) {
         final bottom_nav = Provider.of<BottomNavigationBarProvider>(context);
@@ -109,11 +107,6 @@ class _DisplayState extends State<Display> {
                     ),
                     Icon(
                         Icons.policy_rounded,
-                        size: 30,
-                        color: Colors.white,
-                    ),
-                    Icon(
-                        Icons.medical_services_rounded,
                         size: 30,
                         color: Colors.white,
                     ),

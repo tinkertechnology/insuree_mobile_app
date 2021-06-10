@@ -1,3 +1,4 @@
+import 'package:card_app/langlang/app_translation.dart';
 import 'package:card_app/theme/custom_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -7,7 +8,9 @@ import 'package:card_app/models/medical_services.dart';
 import 'package:card_app/services/api_graphql_services.dart';
 import 'package:card_app/models/claimed.dart';
 import 'package:card_app/models/insuree_claims.dart';
+import 'package:intl/intl.dart';
 
+import '../screen_size_reducers.dart';
 import 'claimed_item_services.dart';
 
 class HistoryPage extends StatefulWidget {
@@ -24,8 +27,6 @@ class _HistoryPageState extends State<HistoryPage> {
 		super.initState();
 		_medicalservices = ApiGraphQlServices().MedicalServicesGQL('medicalservice');
 		_insureeclaims = ApiGraphQlServices().ClaimsServicesGQL();
-
-		
 	}
 	
 	@override
@@ -41,7 +42,7 @@ class _HistoryPageState extends State<HistoryPage> {
 									children: [
 										// OPENIMIS LOGO & CURRENT BALANCE
 										Container(
-											height: 220,
+											height: screenHeight(context, dividedBy: 4), //220,
 											padding: EdgeInsets.all(20),
 											width: double.infinity,
 											decoration: BoxDecoration(
@@ -295,20 +296,25 @@ class _HistoryPageState extends State<HistoryPage> {
 										children: [
 											ListTile(
 												title: Text(
-													'History',
+													AppTranslations.of(context).text("history"),
 													style: TextStyle(
 														fontSize: 18.0,
 														fontWeight: FontWeight.normal
 													),
 												),
 												leading: Icon(Icons.history, color: Colors.green, size: 30,),
-												trailing: Text(
-													'View All',
-													style: TextStyle(
-														fontSize: 16.0,
-														fontWeight: FontWeight.normal
+												trailing: GestureDetector(
+													onTap: (){
+														Navigator.pushNamed(context, '/user-history');
+													},
+													child: Text(
+														AppTranslations.of(context).text('see_all'),
+														style: TextStyle(
+															fontSize: 16.0,
+															fontWeight: FontWeight.normal
+														),
 													),
-												),
+												)
 											),
 											FutureBuilder<Claims>(
 												future: _insureeclaims,
@@ -321,10 +327,17 @@ class _HistoryPageState extends State<HistoryPage> {
 															itemCount: snapshot.data.data.insureeProfile.insureeClaim.length,
 															itemBuilder: (BuildContext context, int index){
 																var claims = snapshot.data.data.insureeProfile.insureeClaim[index];
+																var date = '${claims.dateClaimed}';
 																return ListTile(
-																	trailing: Text('${env.Currency} ${claims.claimed}'),
-																	title: Text('${claims.dateClaimed}'),
-																	subtitle: Text('${claims.healthFacility.name}'),
+																	title: Text('${claims.healthFacility.name}'),
+																	subtitle: Text('${claims.dateClaimed}'),
+																	trailing: Text(
+																		'${env.Currency} ${claims.claimed}',
+																		style: TextStyle(
+																			fontSize: 16.0,
+																			fontWeight: FontWeight.w400
+																		),
+																	),
 																	onTap: () {
 																		Navigator.push(
 																			context,
