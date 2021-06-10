@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:card_app/homescreen/healthFacilitiesCoordinatesWidget.dart';
 import 'package:card_app/langlang/app_translation.dart';
 import 'package:card_app/models/claimed.dart';
 import 'package:card_app/models/insuree_claims.dart';
@@ -156,6 +157,7 @@ class _HomeScreenState extends State<HomeScreen> {
 									Text('Latitude: ${userLocation?.longitude}  Longitude: ${userLocation?.longitude}')
 								],
 							),
+							Container(height:500, child: HealthFacilitiesCoordinatesWidget())
 						],
 					),
 				);
