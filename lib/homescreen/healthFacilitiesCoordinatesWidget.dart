@@ -35,87 +35,100 @@ class _HealthFacilitiesCoordinatesWidgetState extends State<HealthFacilitiesCoor
 			_isLoad = true;
 		}
 
-		return  Column(
-					children: [
-						Expanded(
-							child: Container(
-								padding: EdgeInsets.all(16.0),
-								decoration: BoxDecoration(
-									color: Colors.white,
-									borderRadius: BorderRadius.only(
-											topLeft: Radius.circular(30),
-											topRight: Radius.circular(30)),
-								),
-								child: Column(
-									crossAxisAlignment: CrossAxisAlignment.start,
-									mainAxisSize: MainAxisSize.min,
-									children: [
-										Container(
-											child: Column(
-												crossAxisAlignment: CrossAxisAlignment.start,
-												mainAxisSize: MainAxisSize.max,
-												children: [
-													Container(
-														padding: EdgeInsets.only(left:8.0, top: 16.0, bottom: 8.0),
-														decoration: BoxDecoration(
-																border: Border(
-																		bottom: BorderSide(
-																				color: Colors.grey
-																						.withOpacity(0.25)))),
-														width: double.infinity,
-														child: Text(
-															'Nearby Health Facilities/Approx. Distance (km) ',
-															style: TextStyle(
-																	fontSize: 20.0,
-																	fontWeight: FontWeight.bold
-															),
+		return  Scaffold(
+			backgroundColor: CustomTheme.lightTheme.primaryColor,
+			appBar: AppBar(
+				elevation: 0.0,
+				title: Text(
+					'Service Provider List',
+					style: TextStyle(
+						color: Colors.white
+					),
+				),
+				backgroundColor: CustomTheme.lightTheme.primaryColor,
+			),
+			body: Column(
+				children: [
+					Expanded(
+						child: Container(
+							padding: EdgeInsets.all(16.0),
+							decoration: BoxDecoration(
+								color: Colors.white,
+								borderRadius: BorderRadius.only(
+									topLeft: Radius.circular(30),
+									topRight: Radius.circular(30)),
+							),
+							child: Column(
+								crossAxisAlignment: CrossAxisAlignment.start,
+								mainAxisSize: MainAxisSize.min,
+								children: [
+									Container(
+										child: Column(
+											crossAxisAlignment: CrossAxisAlignment.start,
+											mainAxisSize: MainAxisSize.max,
+											children: [
+												Container(
+													padding: EdgeInsets.only(left:8.0, top: 16.0, bottom: 8.0),
+													decoration: BoxDecoration(
+														border: Border(
+															bottom: BorderSide(
+																color: Colors.grey
+																	.withOpacity(0.25)))),
+													width: double.infinity,
+													child: Text(
+														'Nearby Health Facilities/Approx. Distance (km) ',
+														style: TextStyle(
+															fontSize: 20.0,
+															fontWeight: FontWeight.bold
 														),
 													),
-													SizedBox(height: 8.0),
-													Container(
-														child: FutureBuilder<HealthFacilityCoordinates>(
-																future: _healthFacilityCoordinates,
-																builder: (context, snapshot) {
-																	if (snapshot.hasData) {
-																		return ListView.builder(
-																				shrinkWrap: true,
-																				physics: NeverScrollableScrollPhysics(),
-																				itemCount: snapshot.data.data.healthFacilityCoordinate.length,
-																				itemBuilder: (BuildContext context, int index) {
-																					var item = snapshot.data.data.healthFacilityCoordinate[index];
-																					return Container(
-																						child: ListTile(
-																							title: Text(
-																								'${item.healthFacility.name}',
-																								style: TextStyle(
-																										fontSize: 14.0,
-																										fontWeight: FontWeight.normal
-																								),
-																							),
-																							trailing: Text(
-																								'${item.distance}',
-																								style: TextStyle(
-																										fontSize: 16.0,
-																										fontWeight: FontWeight.bold,
-																										color: CustomTheme.lightTheme.primaryColor
-																								),
-																							),
-																						),
-																					);
-																				});
-																	} else {
-																		return Center(
-																				child: CircularProgressIndicator());
-																	}
-																}),
-													)
-												],
-											),
+												),
+												SizedBox(height: 8.0),
+												Container(
+													child: FutureBuilder<HealthFacilityCoordinates>(
+														future: _healthFacilityCoordinates,
+														builder: (context, snapshot) {
+															if (snapshot.hasData) {
+																return ListView.builder(
+																	shrinkWrap: true,
+																	physics: NeverScrollableScrollPhysics(),
+																	itemCount: snapshot.data.data.healthFacilityCoordinate.length,
+																	itemBuilder: (BuildContext context, int index) {
+																		var item = snapshot.data.data.healthFacilityCoordinate[index];
+																		return Container(
+																			child: ListTile(
+																				title: Text(
+																					'${item.healthFacility.name}',
+																					style: TextStyle(
+																						fontSize: 14.0,
+																						fontWeight: FontWeight.normal
+																					),
+																				),
+																				trailing: Text(
+																					'${item.distance}',
+																					style: TextStyle(
+																						fontSize: 16.0,
+																						fontWeight: FontWeight.bold,
+																						color: CustomTheme.lightTheme.primaryColor
+																					),
+																				),
+																			),
+																		);
+																	});
+															} else {
+																return Center(
+																	child: CircularProgressIndicator());
+															}
+														}),
+												)
+											],
 										),
-									],
-								),),
-						),
-					],
-			);
+									),
+								],
+							),),
+					),
+				],
+			),
+		);
 	}
 }

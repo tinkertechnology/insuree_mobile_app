@@ -1,5 +1,6 @@
 import 'package:card_app/auth/register_card.dart';
 import 'package:card_app/auth/reset-password.dart';
+import 'package:card_app/homescreen/healthFacilitiesCoordinatesWidget.dart';
 import 'package:card_app/models/insuree.dart';
 import 'package:card_app/models/user_location.dart';
 import 'package:card_app/pages/card.dart';
@@ -126,7 +127,7 @@ class _MyAppState extends State<MyApp> {
                             '/policy-information':(BuildContext context) => PolicyInformationPage(),
 
                             // SERVICES
-                            '/services':(BuildContext context) => ClaimedItemServicesPage(),
+                            '/services':(BuildContext context) => HealthFacilitiesCoordinatesWidget(),
 
                             // NOTIFICATIONS
                             '/notifications':(BuildContext context) => NotificationPage(),

@@ -157,7 +157,6 @@ class _HomeScreenState extends State<HomeScreen> {
 									Text('Latitude: ${userLocation?.longitude}  Longitude: ${userLocation?.longitude}')
 								],
 							),
-							Container(height:500, child: HealthFacilitiesCoordinatesWidget())
 						],
 					),
 				);
