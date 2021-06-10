@@ -46,11 +46,12 @@ class openimisGqlQueries {
   health_facility_coordinate(args) {
       var query="""
         query {
-          healthFacilityCoordinate(inputLatitude:"1", inputLongitude:"1"){
+          healthFacilityCoordinate(inputLatitude:"${args['inputLatitude']}", inputLongitude:"${args['inputLongitude']}"){
             id,
             distance,
             healthFacility{
-              id
+              id,
+              name
             }
           }
         }

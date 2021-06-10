@@ -1,18 +1,13 @@
-import 'dart:ui';
-
-import 'package:card_app/langlang/app_translation.dart';
-import 'package:card_app/models/claimed.dart';
-import 'package:card_app/models/insuree_claims.dart';
+import 'package:card_app/models/claimeditems.dart';
+import 'package:card_app/models/claimedservices.dart';
+import 'package:card_app/models/health_facility_coordinates.dart';
 import 'package:card_app/models/user_location.dart';
 import 'package:card_app/theme/custom_theme.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:card_app/models/medical_services.dart';
+import 'package:card_app/common/env.dart' as env;
 import 'package:card_app/services/api_graphql_services.dart';
-import 'package:card_app/services/location_service.dart';
+import 'package:card_app/common/env.dart' as env;
 import 'package:provider/provider.dart';
-
-
 
 class HealthFacilitiesCoordinatesWidget extends StatefulWidget {
 	@override
@@ -20,127 +15,107 @@ class HealthFacilitiesCoordinatesWidget extends StatefulWidget {
 }
 
 class _HealthFacilitiesCoordinatesWidgetState extends State<HealthFacilitiesCoordinatesWidget> {
-	
-	Future<MedicalServices> _medicalservices;
-	Future<Claims> _insureeclaims;
-	Future<Claimed> _claimed;
-  UserLocation userLocation;
-  
-	final double _initFabHeight = 120.0;
-	double _fabHeight = 0;
-	double _panelHeightOpen = 0.0;
-	double _panelHeightClosed = 20.0;
-	
+	Future<HealthFacilityCoordinates> _healthFacilityCoordinates;
+	bool _isLoad=false;
 	@override
-	void initState() {
+	initState(){
 		super.initState();
-		//_medicalservices = ApiGraphQlServices().MedicalServicesGQL('medicalservice');
-		//_insureeclaims = ApiGraphQlServices().ClaimsServicesGQL();
-		print('HealthFacilitiesCoordinatesWidget');
-
+		//_healthFacilityCoordinates = ApiGraphQlServices().HealthFacilityCoordinatesServicesGQL({});
 	}
 	
 	@override
 	Widget build(BuildContext context) {
 		var userLocation = Provider.of<UserLocation>(context);
+		if(!_isLoad){
+			_healthFacilityCoordinates =
+					ApiGraphQlServices().HealthFacilityCoordinatesServicesGQL({
+						"inputLatitude": userLocation?.latitude,
+						"inputLongitude": userLocation?.longitude
+					});
+			_isLoad = true;
+		}
 
-		_panelHeightOpen = MediaQuery.of(context).size.height * .52;
-		
-		return DraggableScrollableSheet(
-			initialChildSize: 0.65,
-			minChildSize: 0.03,
-			maxChildSize: 0.65,
-			builder: (BuildContext context, ScrollController scrollController){
-				return Container(
-					decoration: BoxDecoration(
-						borderRadius: BorderRadius.only(
-							topRight: Radius.circular(20),
-							topLeft: Radius.circular(20)
-						),
-						color:CustomTheme.lightTheme.backgroundColor,
-					),
-					child:  ListView(
-						controller: scrollController,
-						children: [
-							SizedBox(
-								height: 12.0,
-							),
-							Row(
-								mainAxisAlignment: MainAxisAlignment.center,
-								children: <Widget>[
-									Container(
-										width: 40,
-										height: 5,
-										decoration: BoxDecoration(
-											color: Colors.black54,
-											borderRadius: BorderRadius.all(Radius.circular(12.0))),
-									),
-								],
-							),
-							SizedBox(
-								height: 18.0,
-							),
-							Row(
-								mainAxisAlignment: MainAxisAlignment.center,
-								children: <Widget>[
-									Text(AppTranslations.of(context).text("explore_services") + 'jpt',
-										style: TextStyle(
-											fontWeight: FontWeight.normal,
-											fontSize: 24.0,
+		return  Column(
+					children: [
+						Expanded(
+							child: Container(
+								padding: EdgeInsets.all(16.0),
+								decoration: BoxDecoration(
+									color: Colors.white,
+									borderRadius: BorderRadius.only(
+											topLeft: Radius.circular(30),
+											topRight: Radius.circular(30)),
+								),
+								child: Column(
+									crossAxisAlignment: CrossAxisAlignment.start,
+									mainAxisSize: MainAxisSize.min,
+									children: [
+										Container(
+											child: Column(
+												crossAxisAlignment: CrossAxisAlignment.start,
+												mainAxisSize: MainAxisSize.max,
+												children: [
+													Container(
+														padding: EdgeInsets.only(left:8.0, top: 16.0, bottom: 8.0),
+														decoration: BoxDecoration(
+																border: Border(
+																		bottom: BorderSide(
+																				color: Colors.grey
+																						.withOpacity(0.25)))),
+														width: double.infinity,
+														child: Text(
+															'Nearby Health Facilities/Approx. Distance (km) ',
+															style: TextStyle(
+																	fontSize: 20.0,
+																	fontWeight: FontWeight.bold
+															),
+														),
+													),
+													SizedBox(height: 8.0),
+													Container(
+														child: FutureBuilder<HealthFacilityCoordinates>(
+																future: _healthFacilityCoordinates,
+																builder: (context, snapshot) {
+																	if (snapshot.hasData) {
+																		return ListView.builder(
+																				shrinkWrap: true,
+																				physics: NeverScrollableScrollPhysics(),
+																				itemCount: snapshot.data.data.healthFacilityCoordinate.length,
+																				itemBuilder: (BuildContext context, int index) {
+																					var item = snapshot.data.data.healthFacilityCoordinate[index];
+																					return Container(
+																						child: ListTile(
+																							title: Text(
+																								'${item.healthFacility.name}',
+																								style: TextStyle(
+																										fontSize: 14.0,
+																										fontWeight: FontWeight.normal
+																								),
+																							),
+																							trailing: Text(
+																								'${item.distance}',
+																								style: TextStyle(
+																										fontSize: 16.0,
+																										fontWeight: FontWeight.bold,
+																										color: CustomTheme.lightTheme.primaryColor
+																								),
+																							),
+																						),
+																					);
+																				});
+																	} else {
+																		return Center(
+																				child: CircularProgressIndicator());
+																	}
+																}),
+													)
+												],
+											),
 										),
-									),
-								],
-							),
-							SizedBox(
-								height: 18.0,
-							),
-							Row(
-								mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-								children: <Widget>[
-									_button("Service1", Icons.medical_services_rounded, CustomTheme.lightTheme.splashColor),
-									_button("Service2", Icons.medical_services_sharp, CustomTheme.lightTheme.splashColor),
-									_button("Service3", Icons.medical_services_outlined, CustomTheme.lightTheme.splashColor),
-									_button("Service4", Icons.medical_services, CustomTheme.lightTheme.splashColor),
-
-								],
-
-							),
-							Row(
-								mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-								children: [
-									Text('Latitude: ${userLocation?.longitude}  Longitude: ${userLocation?.longitude}')
-								],
-							),
-						],
-					),
-				);
-			}
-		);
-	}
-	
-	Widget _button(String label, IconData icon, Color color) {
-		return Column(
-			children: <Widget>[
-				Container(
-					padding: const EdgeInsets.all(16.0),
-					child: Icon(
-						icon,
-						color: Colors.white,
-					),
-					decoration:
-					BoxDecoration(color: color, shape: BoxShape.circle, boxShadow: [
-						BoxShadow(
-							color: Color.fromRGBO(0, 0, 0, 0.15),
-							blurRadius: 8.0,
-						)
-					]),
-				),
-				SizedBox(
-					height: 12.0,
-				),
-				Text(label),
-
-			],
-		);
+									],
+								),),
+						),
+					],
+			);
 	}
 }
