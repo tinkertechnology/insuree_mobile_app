@@ -3,13 +3,10 @@ import 'package:card_app/theme/custom_theme.dart';
 import 'package:flutter/material.dart';
 
 import 'package:card_app/common/env.dart' as env;
-import 'package:http/http.dart' as http;
 import 'package:card_app/models/medical_services.dart';
 import 'package:card_app/services/api_graphql_services.dart';
 import 'package:card_app/models/claimed.dart';
 import 'package:card_app/models/insuree_claims.dart';
-import 'package:intl/intl.dart';
-
 import '../screen_size_reducers.dart';
 import 'claimed_item_services.dart';
 

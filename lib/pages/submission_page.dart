@@ -1,12 +1,10 @@
-import 'dart:convert';
 import 'dart:io';
 import 'package:card_app/theme/custom_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
-import 'package:http_parser/http_parser.dart';
-import 'package:card_app/pages/card.dart';
+import 'package:card_app/pages/card_details.dart';
 import 'package:card_app/common/env.dart' as env;
 import 'package:card_app/langlang/app_translation.dart';
 import 'package:card_app/langlang/application.dart';
@@ -128,7 +126,7 @@ class _SubmissionPageState extends State<SubmissionPage> {
     
     void RedirectToCardPage(String value) {
         Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(builder: (c) => ShowCard(message: value)),
+            MaterialPageRoute(builder: (c) => CardDetailPage(message: value)),
                 (route) => false);
     }
     
@@ -176,32 +174,8 @@ class _SubmissionPageState extends State<SubmissionPage> {
                                             child: Column(
                                                 children: [
                                                     _image != null ?
-                                                        GestureDetector(
-                                                            onTap: (){
-                                                                _showPicker(context);
-                                                            },
-                                                            child: Card(
-                                                                child: Image.file(
-                                                                    _image,
-                                                                    fit: BoxFit.fill,
-                                                                ),
-                                                            ),
-                                                        )
-                                                        : GestureDetector(
-                                                        onTap: (){
-                                                            _showPicker(context);
-                                                        },
-                                                        child: Card(
-                                                            elevation: 3.0,
-                                                            child: Container(
-                                                                height: 120,
-                                                                width: 120,
-                                                                child: Center(
-                                                                    child: Icon(Icons.note_add, size: 30, color: Colors.grey.withOpacity(0.5),),
-                                                                )
-                                                            ),
-                                                        ),
-                                                    )
+                                                        _imageCardWidget()
+                                                        : _addImageCardWidget()
                                                 ],
                                             )
                                         ),
@@ -211,30 +185,7 @@ class _SubmissionPageState extends State<SubmissionPage> {
                                             child: CircularProgressIndicator()
                                         )
                                         :Center(
-                                            child: Container(
-                                                padding: EdgeInsets.fromLTRB(16, 16, 16, 16),
-                                                width: double.infinity,
-                                                child: RaisedButton(
-                                                    onPressed: () async {
-                                                        _image!=null ? uploadPic(): showMessage('Please upload image of your Paid Voucher ');
-                                                    },
-                                                    padding: EdgeInsets.all(16.0),
-                                                    shape: RoundedRectangleBorder(
-                                                        borderRadius: BorderRadius.all(
-                                                            Radius.circular(10.0)),
-                                                    ),
-                                                    color: CustomTheme.lightTheme.primaryColor,
-                                                    child: Text(
-                                                        AppTranslations.of(context).text('submit').toUpperCase(),
-                                                        style: TextStyle(
-                                                            fontSize: 18.0,
-                                                            fontWeight: FontWeight.bold,
-                                                            fontFamily: "Open-sans",
-                                                            color: Colors.white
-                                                        ),
-                                                    ),
-                                                ),
-                                            ),
+                                            child: _uploadImageValidationWidget(),
                                         ),
                                     ],
                                 )
@@ -246,6 +197,64 @@ class _SubmissionPageState extends State<SubmissionPage> {
         );
     }
     
+    Widget _imageCardWidget(){
+        return GestureDetector(
+            onTap: (){
+                _showPicker(context);
+            },
+            child: Card(
+                child: Image.file(
+                    _image,
+                    fit: BoxFit.fill,
+                ),
+            ),
+        );
+    }
+    
+    Widget _addImageCardWidget(){
+        return GestureDetector(
+            onTap: (){
+                _showPicker(context);
+            },
+            child: Card(
+                elevation: 3.0,
+                child: Container(
+                    height: 120,
+                    width: 120,
+                    child: Center(
+                        child: Icon(Icons.note_add, size: 30, color: Colors.grey.withOpacity(0.5),),
+                    )
+                ),
+            ),
+        );
+    }
+    
+    Widget _uploadImageValidationWidget(){
+        return Container(
+            padding: EdgeInsets.fromLTRB(16, 16, 16, 16),
+            width: double.infinity,
+            child: RaisedButton(
+                onPressed: () async {
+                    _image!=null ? uploadPic(): showMessage('Please upload image of your Paid Voucher ');
+                },
+                padding: EdgeInsets.all(16.0),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(
+                        Radius.circular(10.0)),
+                ),
+                color: CustomTheme.lightTheme.primaryColor,
+                child: Text(
+                    AppTranslations.of(context).text('submit').toUpperCase(),
+                    style: TextStyle(
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: "Open-sans",
+                        color: Colors.white
+                    ),
+                ),
+            ),
+        );
+    }
 }
 
 

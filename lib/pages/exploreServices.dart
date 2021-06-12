@@ -13,13 +13,12 @@ import 'package:card_app/models/medical_services.dart';
 import 'package:card_app/services/api_graphql_services.dart';
 import 'package:provider/provider.dart';
 
-class HomeScreen extends StatefulWidget {
+class ExploreServicesPage extends StatefulWidget {
 	@override
-	_HomeScreenState createState() => _HomeScreenState();
+	_ExploreServicesPageState createState() => _ExploreServicesPageState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
-	
+class _ExploreServicesPageState extends State<ExploreServicesPage> {
 	Future<MedicalServices> _medicalservices;
 	Future<Claims> _insureeclaims;
 	Future<Claimed> _claimed;
@@ -39,8 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
 	@override
 	Widget build(BuildContext context) {
 		var userLocation = Provider.of<UserLocation>(context);
- 
-		Size deviceSize = MediaQuery.of(context).size;
+		
 		return DraggableScrollableSheet(
 			initialChildSize: initial, //0.65,
 			minChildSize: min,
@@ -94,45 +92,7 @@ class _HomeScreenState extends State<HomeScreen> {
 								height: screenHeight(context, dividedBy: 40),
 							),
 							
-							ConstrainedBox(
-								constraints: BoxConstraints(maxHeight: 1000),
-								child: FutureBuilder<MedicalServices>(
-									future: _medicalservices,
-									builder: (context, snapshot) {
-										if(snapshot.hasData) {
-											return GridView.builder(
-												gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
-												physics: ScrollPhysics(),
-												shrinkWrap: true,
-												itemCount: snapshot.data.data.medicalServicesStr.edges.length,
-												itemBuilder: (BuildContext context, int index) {
-													var medical_services = snapshot.data.data
-														.medicalServicesStr.edges[index];
-													return Container(
-														padding: EdgeInsets.all(4.0),
-														child: Row(
-															mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-															mainAxisSize: MainAxisSize.max,
-															children: [
-																Expanded(
-																	child: _button(
-																		'${medical_services.node.name} $index',
-																		Icons.medical_services_rounded,
-																		CustomTheme.lightTheme.splashColor
-																	),
-																),
-															],
-														),
-													);
-												}
-											);
-										}
-										else{
-											return Center(child: CircularProgressIndicator());
-										}
-									}
-								),
-							),
+							_exploreServicesItemWidget(),
 							
 							SizedBox(
 								height: screenHeight(context, dividedBy: 30),
@@ -147,6 +107,48 @@ class _HomeScreenState extends State<HomeScreen> {
 					),
 				);
 			}
+		);
+	}
+	
+	Widget _exploreServicesItemWidget(){
+		return ConstrainedBox(
+			constraints: BoxConstraints(maxHeight: 1000),
+			child: FutureBuilder<MedicalServices>(
+				future: _medicalservices,
+				builder: (context, snapshot) {
+					if(snapshot.hasData) {
+						return GridView.builder(
+							gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+							physics: ScrollPhysics(),
+							shrinkWrap: true,
+							itemCount: snapshot.data.data.medicalServicesStr.edges.length,
+							itemBuilder: (BuildContext context, int index) {
+								var medical_services = snapshot.data.data
+									.medicalServicesStr.edges[index];
+								return Container(
+									padding: EdgeInsets.all(4.0),
+									child: Row(
+										mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+										mainAxisSize: MainAxisSize.max,
+										children: [
+											Expanded(
+												child: _button(
+													'${medical_services.node.name} $index',
+													Icons.medical_services_rounded,
+													CustomTheme.lightTheme.splashColor
+												),
+											),
+										],
+									),
+								);
+							}
+						);
+					}
+					else{
+						return Center(child: CircularProgressIndicator());
+					}
+				}
+			),
 		);
 	}
 	

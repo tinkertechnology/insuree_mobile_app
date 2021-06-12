@@ -1,15 +1,16 @@
 import 'package:card_app/auth/register_card.dart';
 import 'package:card_app/auth/reset-password.dart';
-import 'package:card_app/homescreen/healthFacilitiesCoordinatesWidget.dart';
 import 'package:card_app/models/insuree.dart';
 import 'package:card_app/models/user_location.dart';
-import 'package:card_app/pages/card.dart';
+import 'package:card_app/pages/base.dart';
+import 'package:card_app/pages/card_details.dart';
 import 'package:card_app/pages/faq.dart';
 import 'package:card_app/pages/feedback.dart';
+import 'package:card_app/pages/service_provider.dart';
 import 'package:card_app/pages/notice.dart';
 import 'package:card_app/pages/notification.dart';
 import 'package:card_app/pages/office.dart';
-import 'package:card_app/pages/policy.dart';
+import 'package:card_app/pages/policy_information.dart';
 import 'package:card_app/pages/profile_info.dart';
 import 'package:card_app/pages/userhistory.dart';
 import 'package:card_app/theme/dark_theme_provider.dart';
@@ -21,12 +22,10 @@ import 'package:provider/provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:card_app/auth/auth.dart';
 import 'package:card_app/blocks/auth_block.dart';
-import 'package:card_app/card/card_page.dart';
 import 'package:card_app/ui/splash_screen.dart';
 import 'package:card_app/services/bottom_nav_bar_service.dart';
 import 'package:card_app/auth/login_card.dart';
 import 'package:card_app/pages/settings.dart';
-import 'card/sync.dart';
 import 'package:card_app/auth/validate_otp_card.dart';
 import 'package:card_app/services/location_service.dart';
 import 'langlang/app_localization_deligate.dart';
@@ -111,8 +110,7 @@ class _MyAppState extends State<MyApp> {
                             '/ggg': (BuildContext context) => Auth(),
                             '/card' :(BuildContext context) => Display(initIndex: null,),
                             '/profile' :(BuildContext context) => SettingsPage(),
-
-                            '/sync' :(BuildContext context) => Sync(),
+                            
                             '/splash':(BuildContext context) => SplashScreen(),
                             '/':(BuildContext context) => LoginScreen(), //OTP this is
                             '/register':(BuildContext context) => RegisterScreen(),
@@ -127,7 +125,7 @@ class _MyAppState extends State<MyApp> {
                             '/policy-information':(BuildContext context) => PolicyInformationPage(),
 
                             // SERVICES
-                            '/services':(BuildContext context) => HealthFacilitiesCoordinatesWidget(),
+                            '/service-provider-list':(BuildContext context) => ServiceProviderPage(),
 
                             // NOTIFICATIONS
                             '/notifications':(BuildContext context) => NotificationPage(),
@@ -142,7 +140,7 @@ class _MyAppState extends State<MyApp> {
                             '/user-history' :(BuildContext context) => UserHistoryPage(),
 
                             // SHOW VIRTUAL CARD
-                            '/show-card' :(BuildContext context) => ShowCard(),
+                            '/show-card' :(BuildContext context) => CardDetailPage(),
 
                             // FAQ
                             '/faq' :(BuildContext context) => FAQ(),

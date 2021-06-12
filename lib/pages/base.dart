@@ -1,19 +1,16 @@
-import 'package:card_app/homescreen/homepage.dart';
 import 'package:card_app/pages/history.dart';
-import 'package:card_app/pages/policy.dart';
-import 'package:card_app/pages/services.dart';
-import 'package:card_app/screen_size_reducers.dart';
+import 'package:card_app/pages/policy_information.dart';
 import 'package:card_app/theme/custom_theme.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:card_app/card/card_homepage.dart';
 import 'package:card_app/services/bottom_nav_bar_service.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:card_app/pages/settings.dart';
-import 'package:card_app/models/language_data.dart';
 import 'package:card_app/langlang/app_translation.dart';
 import 'package:card_app/langlang/application.dart';
+
+import 'homepage.dart';
 
 class Display extends StatefulWidget {
   final int initIndex;
@@ -29,7 +26,6 @@ class _DisplayState extends State<Display> {
     initState(){
         super.initState();
         application.onLocaleChanged = onLocaleChange;
-
     }
 
     void onLocaleChange(Locale locale) async {
@@ -40,7 +36,7 @@ class _DisplayState extends State<Display> {
     _getDrawerItemWidget(int pos) {
         switch (pos) {
             case 0:
-                return new CardHome();
+                return new Homepage();
 	        case 1:
 		        return new HistoryPage();
             case 2:
@@ -118,7 +114,5 @@ class _DisplayState extends State<Display> {
                 ],
             ),
         );
-
-
     }
 }

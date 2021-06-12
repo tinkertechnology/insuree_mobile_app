@@ -4,7 +4,6 @@ import 'package:card_app/theme/custom_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:card_app/common/env.dart' as env;
 import 'package:card_app/services/api_graphql_services.dart';
-import 'package:card_app/common/env.dart' as env;
 
 class ClaimedItemServicesPage extends StatefulWidget {
     final int claimid;
@@ -18,13 +17,12 @@ class _ClaimedItemServicesPageState extends State<ClaimedItemServicesPage> {
     bool hasNotification = false;
     Future<ClaimedServices> _claimedservices;
     Future<ClaimedItems> _claimeditems;
+    
     @override
     void initState() {
         // TODO: implement initState
-        var hasStory = true;
         super.initState();
-        _claimedservices =
-            ApiGraphQlServices().ClaimedServicesServicesGQL(widget.claimid);
+        _claimedservices = ApiGraphQlServices().ClaimedServicesServicesGQL(widget.claimid);
         _claimeditems = ApiGraphQlServices().ClaimedItemServicesGQL(widget.claimid);
     }
     
@@ -77,55 +75,7 @@ class _ClaimedItemServicesPageState extends State<ClaimedItemServicesPage> {
                                                     ),
                                                 ),
                                                 SizedBox(height: 8.0),
-                                                Container(
-                                                    child: FutureBuilder<ClaimedItems>(
-                                                        future: _claimeditems,
-                                                        builder: (context, snapshot) {
-                                                            if (snapshot.hasData) {
-                                                                return ListView.builder(
-                                                                    shrinkWrap: true,
-                                                                    physics: NeverScrollableScrollPhysics(),
-                                                                    itemCount: snapshot.data.data
-                                                                        .insureeClaim[0].items.length,
-                                                                    itemBuilder: (BuildContext context,
-                                                                        int index) {
-                                                                        var claimeditems = snapshot
-                                                                            .data
-                                                                            .data
-                                                                            .insureeClaim[0]
-                                                                            .items[index];
-                                                                        return Container(
-                                                                            /*decoration: BoxDecoration(
-                                                                                    color: (true == true)
-                                                                                        ? Theme.of(context)
-                                                                                        .highlightColor
-                                                                                        : Colors.transparent
-                                                                                ),*/
-                                                                            child: ListTile(
-                                                                                title: Text(
-                                                                                    '${claimeditems.item.name}',
-                                                                                    style: TextStyle(
-                                                                                        fontSize: 14.0,
-                                                                                        fontWeight: FontWeight.normal
-                                                                                    ),
-                                                                                ),
-                                                                                trailing: Text(
-                                                                                    '${env.Currency} ' + '${claimeditems.item.price.toString()}',
-                                                                                    style: TextStyle(
-                                                                                        fontSize: 16.0,
-                                                                                        fontWeight: FontWeight.bold,
-                                                                                        color: CustomTheme.lightTheme.primaryColor
-                                                                                    ),
-                                                                                ),
-                                                                            ),
-                                                                        );
-                                                                    });
-                                                            } else {
-                                                                return Center(
-                                                                    child: CircularProgressIndicator());
-                                                            }
-                                                        }),
-                                                )
+                                                _claimItemListWidget(),
                                             ],
                                         ),
                                     ),
@@ -151,52 +101,7 @@ class _ClaimedItemServicesPageState extends State<ClaimedItemServicesPage> {
                                                     ),
                                                 ),
                                                 SizedBox(height: 8.0),
-                                                Container(
-                                                    child: FutureBuilder<ClaimedServices>(
-                                                        future: _claimedservices,
-                                                        builder: (context, snapshot) {
-                                                            if (snapshot.hasData) {
-                                                                return ListView.builder(
-                                                                    shrinkWrap: true,
-                                                                    physics: NeverScrollableScrollPhysics(),
-                                                                    itemCount: snapshot
-                                                                        .data.data.insureeClaim[0].services.length,
-                                                                    itemBuilder: (BuildContext context, int index) {
-                                                                        var claimedservices = snapshot
-                                                                            .data.data.insureeClaim[0].services[index];
-                                                                        return Container(
-                                                                            /*decoration: BoxDecoration(
-                                                                                color: (true == true)
-                                                                                    ? Theme.of(context)
-                                                                                    .highlightColor
-                                                                                    : Colors.transparent
-                                                                            ),*/
-                                                                            child: ListTile(
-                                                                                title: Text(
-                                                                                    '${claimedservices.service.name}',
-                                                                                    style: TextStyle(
-                                                                                        fontSize: 14.0,
-                                                                                        fontWeight: FontWeight.normal
-                                                                                    ),
-                                                                                ),
-                                                                                trailing: Text(
-                                                                                    '${env.Currency} ' + '${claimedservices.service.price.toString()}',
-                                                                                    style: TextStyle(
-                                                                                        fontSize: 16.0,
-                                                                                        fontWeight: FontWeight.bold,
-                                                                                        color: CustomTheme.lightTheme.primaryColor
-                                                                                    ),
-                                                                                ),
-                                                                            ),
-                                                                        );
-                                                                    });
-                                                            } else {
-                                                                return Center(
-                                                                    child: CircularProgressIndicator()
-                                                                );
-                                                            }
-                                                        }),
-                                                )
+                                                _claimServicesListWidget()
                                             ],
                                         ),
                                     ),
@@ -204,6 +109,96 @@ class _ClaimedItemServicesPageState extends State<ClaimedItemServicesPage> {
                             ),),
                     ),
                 ],
-            ));
+            )
+        );
+    }
+    
+    Widget _claimItemListWidget(){
+        return Container(
+            child: FutureBuilder<ClaimedItems>(
+                future: _claimeditems,
+                builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                        return ListView.builder(
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                            itemCount: snapshot.data.data
+                                .insureeClaim[0].items.length,
+                            itemBuilder: (BuildContext context,
+                                int index) {
+                                var claimeditems = snapshot
+                                    .data
+                                    .data
+                                    .insureeClaim[0]
+                                    .items[index];
+                                return Container(
+                                    child: ListTile(
+                                        title: Text(
+                                            '${claimeditems.item.name}',
+                                            style: TextStyle(
+                                                fontSize: 14.0,
+                                                fontWeight: FontWeight.normal
+                                            ),
+                                        ),
+                                        trailing: Text(
+                                            '${env.Currency} ' + '${claimeditems.item.price.toString()}',
+                                            style: TextStyle(
+                                                fontSize: 16.0,
+                                                fontWeight: FontWeight.bold,
+                                                color: CustomTheme.lightTheme.primaryColor
+                                            ),
+                                        ),
+                                    ),
+                                );
+                            });
+                    } else {
+                        return Center(
+                            child: CircularProgressIndicator());
+                    }
+                }),
+        );
+    }
+    
+    Widget _claimServicesListWidget(){
+        return Container(
+            child: FutureBuilder<ClaimedServices>(
+                future: _claimedservices,
+                builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                        return ListView.builder(
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                            itemCount: snapshot
+                                .data.data.insureeClaim[0].services.length,
+                            itemBuilder: (BuildContext context, int index) {
+                                var claimedservices = snapshot
+                                    .data.data.insureeClaim[0].services[index];
+                                return Container(
+                                    child: ListTile(
+                                        title: Text(
+                                            '${claimedservices.service.name}',
+                                            style: TextStyle(
+                                                fontSize: 14.0,
+                                                fontWeight: FontWeight.normal
+                                            ),
+                                        ),
+                                        trailing: Text(
+                                            '${env.Currency} ' + '${claimedservices.service.price.toString()}',
+                                            style: TextStyle(
+                                                fontSize: 16.0,
+                                                fontWeight: FontWeight.bold,
+                                                color: CustomTheme.lightTheme.primaryColor
+                                            ),
+                                        ),
+                                    ),
+                                );
+                            });
+                    } else {
+                        return Center(
+                            child: CircularProgressIndicator()
+                        );
+                    }
+                }),
+        );
     }
 }
