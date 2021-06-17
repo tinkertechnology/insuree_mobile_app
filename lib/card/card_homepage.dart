@@ -356,6 +356,14 @@ class _CardHomeState extends State<CardHome> {
                                                             }
                                                         );
                                                     }
+                                                    else if(snapshot.hasError){
+                                                        return Center(child: Text('Failed To Fetch the data'));
+                                                    }
+                                                    else if(snapshot.hasData && snapshot.data.data.insureeProfile.insureeClaim.isEmpty) {
+                                                        // got data from snapshot but it is empty
+
+                                                        return Center(child:Text("No Health Facility Available "));
+                                                    }
                                                     else{
                                                         return Center(child: CircularProgressIndicator());
                                                     }
