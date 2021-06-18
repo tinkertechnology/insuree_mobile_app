@@ -1,3 +1,5 @@
+import 'package:card_app/models/notices.dart';
+import 'package:card_app/services/api_graphql_services.dart';
 import 'package:card_app/theme/custom_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -8,6 +10,14 @@ class NoticePage extends StatefulWidget {
 
 class _NoticePageState extends State<NoticePage> {
     bool hasNotification = false;
+
+    Future<Notice> _notice;
+    @override
+    initState(){
+        super.initState();
+        _notice = ApiGraphQlServices().NoticesServicesGQL();
+    }
+    
     @override
     Widget build(BuildContext context) {
         int _itemCount = 5;
@@ -36,112 +46,81 @@ class _NoticePageState extends State<NoticePage> {
                             ),
                             child: Padding(
                                 padding: const EdgeInsets.only(left: 12.0, right: 12.0, top: 10.0),
-                                child: ListView.builder(
-                                    itemCount: _itemCount,
-                                    itemBuilder: (BuildContext context, int index){
-                                        return Container(
-                                            height: 235,
-                                            margin: EdgeInsets.only(bottom: 8.0),
-                                            child: GestureDetector(
-                                                onTap: (){
-                                                    print('Notice $index clicked...');
-                                                },
-                                                child: Card(
-                                                    shape: RoundedRectangleBorder(
-                                                        borderRadius: BorderRadius.circular(10.0)
-                                                    ),
-                                                    child: Column(
-                                                        children: [
-                                                            Container(
-                                                                height: 160,
-                                                                width: double.infinity,
-                                                                /*decoration: BoxDecoration(
-                                                                border: Border(
-                                                                    bottom: BorderSide(color: Colors.red, width: 1.0)
-                                                                )
-                                                            ),*/
-                                                                child: Image.asset(
-                                                                    'assets/images/100-welcome.png',
-                                                                    fit: BoxFit.fitWidth,
+                                child: FutureBuilder<Notice>(
+                                    future: _notice,
+                                    builder: (context, snapshot) {
+                                        if(snapshot.hasData) {
+                                            return ListView.builder(
+                                                itemCount: snapshot.data.data.notices.edges.length,
+                                                itemBuilder: (BuildContext context, int index) {
+                                                    var notices = snapshot.data.data.notices.edges[index];
+                                                    return Container(
+                                                        height: 235,
+                                                        margin: EdgeInsets.only(bottom: 8.0),
+                                                        child: GestureDetector(
+                                                            onTap: (){
+                                                                print('Notice $index clicked...');
+                                                            },
+                                                            child: Card(
+                                                                shape: RoundedRectangleBorder(
+                                                                    borderRadius: BorderRadius.circular(10.0)
                                                                 ),
-                                                            ),
-            
-                                                            Expanded(
-                                                                child: ListTile(
-                                                                    title: Text(
-                                                                        'Notice about COVID-19',
-                                                                        style: TextStyle(
-                                                                            fontWeight: FontWeight.bold,
-                                                                            color: CustomTheme.lightTheme.primaryColor
-                                                                        ),
-                                                                        textAlign: TextAlign.center,
-                                                                    ),
-                                                                    subtitle: Padding(
-                                                                        padding: EdgeInsets.only(top: 4.0),
-                                                                        child: Text(
-                                                                            'ajdfslksafklasdfjsdflsfaljsflsfaj',
-                                                                            style: TextStyle(
-                                                                                fontWeight: FontWeight.normal,
+                                                                child: Column(
+                                                                    children: [
+                                                                        Container(
+                                                                            height: 160,
+                                                                            width: double.infinity,
+                                                                            decoration: BoxDecoration(
+                                                                                border: Border(
+                                                                                    bottom: BorderSide(color: Colors.red, width: 1.0)
+                                                                                )
                                                                             ),
-                                                                            textAlign: TextAlign.center,
+                                                                            child: Image.asset(
+                                                                                'assets/images/100-welcome.png',
+                                                                                fit: BoxFit.fitWidth,
+                                                                            ),
                                                                         ),
-                                                                    )
+                    
+                                                                        Expanded(
+                                                                            child: ListTile(
+                                                                                title: Text(
+                                                                                    '${notices.node.title}',
+                                                                                    style: TextStyle(
+                                                                                        fontWeight: FontWeight.bold,
+                                                                                        color: CustomTheme.lightTheme.primaryColor
+                                                                                    ),
+                                                                                    textAlign: TextAlign.center,
+                                                                                ),
+                                                                                subtitle: Padding(
+                                                                                    padding: EdgeInsets.only(top: 4.0),
+                                                                                    child: Text(
+                                                                                        '${notices.node.description}',
+                                                                                        style: TextStyle(
+                                                                                            fontWeight: FontWeight.normal,
+                                                                                        ),
+                                                                                        textAlign: TextAlign.center,
+                                                                                    ),
+                                                                                )
+                                                                            ),
+                                                                        ),
+                                                                    ],
                                                                 ),
                                                             ),
-                                                        ],
-                                                    ),
-                                                ),
-                                            )
-                                        );
+                                                        )
+                                                    );
+                                                }
+                                            );
+                                        }
+                                        else{
+                                            return Center(child: CircularProgressIndicator());
+                                        }
                                     }
-                                )
+                                ),
                             )
                         )
                     )
                 ],
             ),
-        );
-    }
-    
-    List<Widget> _getNotifications() {
-        List<Widget> notifications = [];
-        notifications.add(_getNotification(
-            'You have memories with Taliah Rossi and Mabel Quintero to look back on today.', '3 hours ago', false));
-        notifications.add(_getNotification(
-            'Susan Preece changed his profile picture.', 'Yesterday at 11:22pm', true));
-        notifications.add(_getNotification(
-            'David Beckham changed his profile picture.', 'Yesterday at 8:28pm', false));
-        notifications.add(_getNotification(
-            'Macaulay Dolan\'s birthday was yesterday.', '10 hours ago', true));
-        notifications.add(_getNotification(
-            'David Beckham changed his profile picture.', 'Yesterday at 8:28pm', false));
-        notifications.add(_getNotification(
-            'David Beckham changed his profile picture.', 'Yesterday at 8:28pm', false));
-        notifications.add(_getNotification(
-            'David Beckham changed his profile picture.', 'Yesterday at 8:28pm', false));
-        notifications.add(_getNotification(
-            'David Beckham changed his profile picture.', 'Yesterday at 8:28pm', false));
-        notifications.add(_getNotification(
-            'David Beckham changed his profile picture.', 'Yesterday at 8:28pm', false));
-        return notifications;
-    }
-    
-    Widget _getNotification(String notificaiton, String time, bool hasStory) {
-        return Container(
-            decoration: BoxDecoration(
-                color: (hasStory == true) ? Theme.of(context).highlightColor : Colors.transparent
-            ),
-            child: Card(
-                child: Column(
-                    children: [
-                        Expanded(
-                            child: Container(
-                                child: Image.asset('assets/images/100-welcom.png'),
-                            )
-                        )
-                    ],
-                )
-            )
         );
     }
 }

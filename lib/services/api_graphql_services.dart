@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:card_app/models/health_facility_coordinates.dart';
 import 'package:card_app/models/insuree_policy_information.dart';
+import 'package:card_app/models/notices.dart';
 import 'package:http/http.dart' as http;
 import 'package:card_app/models/medical_services.dart';
 import 'package:card_app/models/insuree_claims.dart';
@@ -10,54 +11,55 @@ import 'package:card_app/models/claimedservices.dart';
 import 'package:card_app/models/policy_information.dart';
 import 'package:card_app/graphql/gql_queries.dart';
 import 'package:card_app/common/env.dart' as env;
-
+import "package:card_app/graphql/gql_mutations.dart";
 class ApiGraphQlServices {
-  bool isLoading = false;
-  MedicalServices medicalServices = MedicalServices();
-  Claims insuree_claims = Claims();
-  Claimed claimed = Claimed();
-  ClaimedServices claimedservices = ClaimedServices();
-  ClaimedItems claimeditems = ClaimedItems();
-  HealthFacilityCoordinates healthFacilityCoordinates = HealthFacilityCoordinates();
-  PolicyInformation policyinformation = PolicyInformation();
-  InsureePolicyInformation insureepolicyinformation = InsureePolicyInformation();
-
-
-  Future<MedicalServices> MedicalServicesGQL(String args) async {
-    try {
-      final response = await http.post(Uri.parse(env.API_BASE_URL),
-          headers: {
-            "Content-Type": "application/json",
+    bool isLoading = false;
+    MedicalServices medicalServices = MedicalServices();
+    Claims insuree_claims = Claims();
+    Claimed claimed = Claimed();
+    ClaimedServices claimedservices = ClaimedServices();
+    ClaimedItems claimeditems = ClaimedItems();
+    HealthFacilityCoordinates healthFacilityCoordinates = HealthFacilityCoordinates();
+    PolicyInformation policyinformation = PolicyInformation();
+    InsureePolicyInformation insureepolicyinformation = InsureePolicyInformation();
+    Notice notices = Notice();
+    
+    
+    Future<MedicalServices> MedicalServicesGQL(String args) async {
+        try {
+            final response = await http.post(Uri.parse(env.API_BASE_URL),
+                headers: {
+                    "Content-Type": "application/json",
 //                "Accept" : "application/json"
-          },
-          body: jsonEncode(openimisGqlQueries()
-              .openimis_gql_medical_services(5)) //todo map qs filtering
-          );
-      var jsonMap = json.decode(response.body);
-      medicalServices = MedicalServices.fromJson(jsonMap);
-    } catch (Exception) {
-      return medicalServices;
+                },
+                body: jsonEncode(openimisGqlQueries()
+                    .openimis_gql_medical_services(5)) //todo map qs filtering
+            );
+            var jsonMap = json.decode(response.body);
+            medicalServices = MedicalServices.fromJson(jsonMap);
+        } catch (Exception) {
+            return medicalServices;
+        }
+        return medicalServices;
     }
-    return medicalServices;
-  }
-
-  Future<Claims> ClaimsServicesGQL() async {
-    try {
-      final response = await http.post(Uri.parse(env.API_BASE_URL),
-          headers: {
-            "Content-Type": "application/json",
-                "Accept" : "application/json"
-          },
-          body: jsonEncode(openimisGqlQueries().openimis_gql_insuree_claims(1))
-
-          );
-        var jsonMap = response.body;
-        insuree_claims = Claims.fromJson(jsonDecode(jsonMap));
-    } catch (Exception) {
-      return insuree_claims;
+    
+    Future<Claims> ClaimsServicesGQL() async {
+        try {
+            final response = await http.post(Uri.parse(env.API_BASE_URL),
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept" : "application/json"
+                },
+                body: jsonEncode(openimisGqlQueries().openimis_gql_insuree_claims(1))
+            
+            );
+            var jsonMap = response.body;
+            insuree_claims = Claims.fromJson(jsonDecode(jsonMap));
+        } catch (Exception) {
+            return insuree_claims;
+        }
+        return insuree_claims;
     }
-    return insuree_claims;
-  }
 
 
 //  Future<Claimed> ClaimedServicesGQL() async {
@@ -96,101 +98,137 @@ class ApiGraphQlServices {
 //    }
 //    return claimedServicesItems;
 //  }
- // Services api
-  Future<ClaimedServices> ClaimedServicesServicesGQL(int claimid) async { //todo pass claim id from widget
-    try {
-      final response = await http.post(Uri.parse(env.API_BASE_URL),
-          headers: {
-            "Content-Type": "application/json",
+    // Services api
+    Future<ClaimedServices> ClaimedServicesServicesGQL(int claimid) async { //todo pass claim id from widget
+        try {
+            final response = await http.post(Uri.parse(env.API_BASE_URL),
+                headers: {
+                    "Content-Type": "application/json",
 //                "Accept" : "application/json"
-          },
-          body: jsonEncode(openimisGqlQueries()
-              .openimis_gql_insuree_claimed_services(claimid)) //todo map qs filtering
-      );
-      var jsonMap = json.decode(response.body);
-      claimedservices = ClaimedServices.fromJson(jsonMap);
-    } catch (Exception) {
-      return claimedservices;
+                },
+                body: jsonEncode(openimisGqlQueries()
+                    .openimis_gql_insuree_claimed_services(claimid)) //todo map qs filtering
+            );
+            var jsonMap = json.decode(response.body);
+            claimedservices = ClaimedServices.fromJson(jsonMap);
+        } catch (Exception) {
+            return claimedservices;
+        }
+        return claimedservices;
     }
-    return claimedservices;
-  }
-
-  Future<ClaimedItems> ClaimedItemServicesGQL(int claimid) async { //todo pass claim id from widget
-    try {
-      final response = await http.post(Uri.parse(env.API_BASE_URL),
-          headers: {
-            "Content-Type": "application/json",
+    
+    Future<ClaimedItems> ClaimedItemServicesGQL(int claimid) async { //todo pass claim id from widget
+        try {
+            final response = await http.post(Uri.parse(env.API_BASE_URL),
+                headers: {
+                    "Content-Type": "application/json",
 //                "Accept" : "application/json"
-          },
-          body: jsonEncode(openimisGqlQueries()
-              .openimis_gql_insuree_claimed_items(claimid)) //todo map qs filtering
-      );
-      var jsonMap = json.decode(response.body);
-      claimeditems = ClaimedItems.fromJson(jsonMap);
-
-
-    } catch (Exception) {
-      return  claimeditems;//claimeditems;
+                },
+                body: jsonEncode(openimisGqlQueries()
+                    .openimis_gql_insuree_claimed_items(claimid)) //todo map qs filtering
+            );
+            var jsonMap = json.decode(response.body);
+            claimeditems = ClaimedItems.fromJson(jsonMap);
+            
+            
+        } catch (Exception) {
+            return  claimeditems;//claimeditems;
+        }
+        return claimeditems;
     }
-    return claimeditems;
-  }
-
-  Future<HealthFacilityCoordinates> HealthFacilityCoordinatesServicesGQL(args) async {
-    try {
-      final response = await http.post(Uri.parse(env.API_BASE_URL),
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: jsonEncode(openimisGqlQueries().health_facility_coordinate(args))
-      );
-      var jsonMap = json.decode(response.body);
-      healthFacilityCoordinates = HealthFacilityCoordinates.fromJson(jsonMap);
-    } catch (Exception) {
-      return  healthFacilityCoordinates;
+    
+    Future<HealthFacilityCoordinates> HealthFacilityCoordinatesServicesGQL(args) async {
+        try {
+            final response = await http.post(Uri.parse(env.API_BASE_URL),
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: jsonEncode(openimisGqlQueries().health_facility_coordinate(args))
+            );
+            var jsonMap = json.decode(response.body);
+            healthFacilityCoordinates = HealthFacilityCoordinates.fromJson(jsonMap);
+        } catch (Exception) {
+            return  healthFacilityCoordinates;
+        }
+        return healthFacilityCoordinates;
     }
-    return healthFacilityCoordinates;
-  }
-
-  Future<PolicyInformation> PolicyInformationServicesGQL(chfid) async { //todo pass claim id from widget // this is for the homepage
-    try {
-      final response = await http.post(Uri.parse(env.API_BASE_URL),
-          headers: {
-            "Content-Type": "application/json",
+    
+    Future<PolicyInformation> PolicyInformationServicesGQL(chfid) async { //todo pass claim id from widget // this is for the homepage
+        try {
+            final response = await http.post(Uri.parse(env.API_BASE_URL),
+                headers: {
+                    "Content-Type": "application/json",
 //                "Accept" : "application/json"
-          },
-          body: jsonEncode(openimisGqlQueries()
-              .openimis_gql_insuree_policy_information(chfid)) //todo map qs filtering
-      );
-      var jsonMap = json.decode(response.body);
-      policyinformation = PolicyInformation.fromJson(jsonMap);
-
-
-    } catch (Exception) {
-      return  policyinformation;//claimeditems;
+                },
+                body: jsonEncode(openimisGqlQueries()
+                    .openimis_gql_insuree_policy_information(chfid)) //todo map qs filtering
+            );
+            var jsonMap = json.decode(response.body);
+            policyinformation = PolicyInformation.fromJson(jsonMap);
+            
+            
+        } catch (Exception) {
+            return  policyinformation;//claimeditems;
+        }
+        return policyinformation;
     }
-    return policyinformation;
-  }
-
-
-  Future<InsureePolicyInformation> InsureePolicyInformationServicesGQL(chfid) async { //todo pass claim id from widget // this is for the list of policies of insuree
-    try {
-      final response = await http.post(Uri.parse(env.API_BASE_URL),
-          headers: {
-            "Content-Type": "application/json",
+    
+    
+    Future<InsureePolicyInformation> InsureePolicyInformationServicesGQL(chfid) async { //todo pass claim id from widget // this is for the list of policies of insuree
+        try {
+            final response = await http.post(Uri.parse(env.API_BASE_URL),
+                headers: {
+                    "Content-Type": "application/json",
 //                "Accept" : "application/json"
-          },
-          body: jsonEncode(openimisGqlQueries().openimis_insuree_policy_information_lists(chfid)) //todo map qs filtering
-      );
-      var jsonMap = json.decode(response.body);
-      insureepolicyinformation = InsureePolicyInformation.fromJson(jsonMap);
-      print(insureepolicyinformation);
-
-    } catch (Exception) {
-      return  insureepolicyinformation;//claimeditems;
+                },
+                body: jsonEncode(openimisGqlQueries().openimis_insuree_policy_information_lists(chfid)) //todo map qs filtering
+            );
+            var jsonMap = json.decode(response.body);
+            insureepolicyinformation = InsureePolicyInformation.fromJson(jsonMap);
+            print(insureepolicyinformation);
+            
+        } catch (Exception) {
+            return  insureepolicyinformation;//claimeditems;
+        }
+        return insureepolicyinformation;
     }
-    return insureepolicyinformation;
-  }
+    
+    Future<Notice> NoticesServicesGQL() async {
+        try {
+            final response = await http.post(Uri.parse(env.API_BASE_URL),
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: jsonEncode(openimisGqlQueries().openimis_gql_notices())
+            );
+            var jsonMap = json.decode(response.body);
+            notices = Notice.fromJson(jsonMap);
+        } catch (Exception) {
+            return  notices;
+        }
+        return notices;
+    }
 
+    Future<Map>  createFeedback(fullname, email, mobile_no, queries) async {
+        var jpt;
+        try {
+            final response = await http.post(Uri.parse(env.API_BASE_URL),
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: jsonEncode(openimisGQLMutation().createFeedbackMutation(fullname, email, mobile_no, queries))
 
+            );
 
+            var jsonMap = json.decode(response.body);
+            jpt = jsonMap;
+            print('chutiya');
+        } catch (Exception) {
+            return null;
+        }
+        return  jsonDecode(jpt);;
+    }
+
+    
+    
 }

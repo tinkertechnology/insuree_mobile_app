@@ -4,8 +4,6 @@ import 'package:card_app/screen_size_reducers.dart';
 import 'package:card_app/theme/custom_theme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-
-import 'package:card_app/homescreen/homepage.dart';
 import 'package:card_app/common/env.dart' as env;
 import 'package:card_app/models/medical_services.dart';
 import 'package:card_app/models/claimed_services_items.dart';
@@ -13,6 +11,7 @@ import 'package:card_app/services/api_graphql_services.dart';
 import 'package:card_app/models/claimed.dart';
 import 'package:card_app/models/insuree_claims.dart';
 import 'package:flutter/services.dart';
+import 'package:card_app/pages/homepage.dart';
 import 'package:card_app/langlang/application.dart';
 import 'package:card_app/langlang/app_translation.dart';
 
@@ -375,7 +374,7 @@ class _CardHomeState extends State<CardHome> {
                             ],
                         ),
                     ),
-                    HomeScreen(),
+                
                 ],
             ),
         );

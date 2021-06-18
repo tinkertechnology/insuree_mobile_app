@@ -1,8 +1,8 @@
 import 'package:card_app/models/insuree_policy_information.dart';
 import 'package:card_app/theme/custom_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:card_app/models/policy_information.dart';
 import 'package:card_app/services/api_graphql_services.dart';
+import 'package:card_app/common/env.dart' as env;
 
 class PolicyInformationPage extends StatefulWidget {
 	@override
@@ -11,12 +11,14 @@ class PolicyInformationPage extends StatefulWidget {
 
 class _PolicyInformationPageState extends State<PolicyInformationPage> {
 	Future<InsureePolicyInformation> _insureepolicyinformation;
+	
 	@override
 	void initState() {
-    // TODO: implement initState
-    super.initState();
-    _insureepolicyinformation = ApiGraphQlServices().InsureePolicyInformationServicesGQL(1);
-  }
+        // TODO: implement initState
+        super.initState();
+        _insureepolicyinformation = ApiGraphQlServices().InsureePolicyInformationServicesGQL(1);
+    }
+    
 	@override
 	Widget build(BuildContext context) {
 		return Scaffold(
@@ -40,54 +42,64 @@ class _PolicyInformationPageState extends State<PolicyInformationPage> {
 
 								  builder: (context, snapshot) {
 								  	if(snapshot.hasData) {
-								  		var _data = snapshot.data.data.insureeProfile.insureePolicies[0];
 											return ListView.builder(
 													itemCount: snapshot.data.data.insureeProfile.insureePolicies.length,
 													itemBuilder: (BuildContext context, int index) {
-														return Container(
-															margin: EdgeInsets.only(left: 16.0, right: 16.0),
-															decoration: BoxDecoration(
-																	border: Border(
-																			bottom: BorderSide(
-																					color: Colors.grey.withOpacity(0.5),
-																					width: 1.0)
-																	)
-															),
-															child: ListTile(
-																title: Column(
-																	crossAxisAlignment: CrossAxisAlignment.start,
-																	children: [
-																		Text(_data.policy.value.toString())
-//																		Text('Patan Hospital')
-																	],
-																),
-																leading: Text('HIB-3500'),
-																subtitle: Text('Expiry date: 2021-06-04'),
-																trailing: Row(
-																	mainAxisAlignment: MainAxisAlignment
-																			.spaceBetween,
-																	mainAxisSize: MainAxisSize.min,
-																	children: [
-																		Text('Balance'),
-																		SizedBox(width: 4.0),
-																		Text('Status')
-																	],
-																),
-															),
-														);
+														var _data = snapshot.data.data.insureeProfile.insureePolicies[index];
+														return _policyInformationListWidget(_data);
 													}
 											);
 										}
-								  	else {
-								  		return Center(child: CircularProgressIndicator(),);
-										}
-								  }
-
+									    else {
+									        return Center(child: CircularProgressIndicator(),);
+											}
+									  }
 								),
 							),
 						)
 					)
 				],
+			),
+		);
+	}
+	
+	Widget _policyInformationListWidget(_data){
+		return Container(
+			margin: EdgeInsets.only(left: 16.0, right: 16.0),
+			decoration: BoxDecoration(
+				border: Border(
+					bottom: BorderSide(
+						color: Colors.grey.withOpacity(0.5),
+						width: 1.0,
+					),
+				),
+			),
+			child: ListTile(
+				title: Column(
+					crossAxisAlignment: CrossAxisAlignment.start,
+					children: [
+						//Text(_data.policy.value.toString()),
+						Text('Health Facility Name')
+					],
+				),
+				leading: Text('HIB-3500'),
+				subtitle: Text('Expiry date: ' + _data.policy.expiryDate.toString()),
+				trailing: Row(
+					mainAxisAlignment: MainAxisAlignment.spaceBetween,
+					mainAxisSize: MainAxisSize.min,
+					children: [
+						Text('${env.Currency}' + _data.policy.value.toString()),
+						SizedBox(width: 4.0),
+						Text(
+							_data.policy.status.toString(),
+							style: TextStyle(
+								fontSize: 16.0,
+								fontWeight: FontWeight.bold,
+								color: CustomTheme.lightTheme.primaryColor
+							),
+						),
+					],
+				),
 			),
 		);
 	}

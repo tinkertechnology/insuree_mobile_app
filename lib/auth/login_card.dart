@@ -11,7 +11,7 @@ import 'dart:ui';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/cupertino.dart';
 import  'package:card_app/common/env.dart' as env;
-import 'package:card_app/card/card_page.dart';
+import 'package:card_app/pages/base.dart';
 import 'package:card_app/models/insuree.dart';
 class LoginScreen extends StatefulWidget {
 	@override

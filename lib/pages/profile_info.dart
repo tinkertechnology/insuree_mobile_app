@@ -70,7 +70,6 @@ class _ProfileInfoState extends State<ProfileInfo> {
 		
 	}
 	
-	
 	void _showPicker(context) {
 		showModalBottomSheet(
 			context: context,
@@ -101,8 +100,6 @@ class _ProfileInfoState extends State<ProfileInfo> {
 			}
 		);
 	}
-	
-
 	
 	@override
 	Widget build(BuildContext context) {
@@ -170,325 +167,330 @@ class _ProfileInfoState extends State<ProfileInfo> {
 										),
 										
 										// FULL NAME
-										SizedBox(height: 20.0),
-										Container(
-											padding: EdgeInsets.symmetric(horizontal: 10.0),
-											child: Column(
-												crossAxisAlignment: CrossAxisAlignment.start,
-												mainAxisSize: MainAxisSize.min,
-												children: <Widget>[
-													Text(
-														"Full Name",
-														style: TextStyle(
-															fontSize: 16,
-															fontWeight: FontWeight.w400,
-															fontFamily: "Open-sans",
-															color: Colors.grey
-														),
-													),
-													SizedBox(height: 8.0),
-													TextFormField(
-														keyboardType: TextInputType.text,
-														validator: (value) {
-															if (value.isEmpty) {
-																return 'Please enter full name';
-															}
-															return null;
-														},
-														onSaved: (value) {
-															setState(() {
-																// userCredential.usernameOrEmail = value;
-															});
-														},
-														decoration: InputDecoration(
-															border: OutlineInputBorder(
-																borderRadius: BorderRadius.all(
-																	Radius.circular(10.0)
-																),
-																borderSide: BorderSide(
-																	color: Colors.white,
-																)
-															),
-															hintText: 'Full Name',
-															hintStyle: TextStyle(
-																fontFamily: 'Open-sans'
-															),
-															filled: true,
-															contentPadding: EdgeInsets.all(16.0),
-															prefixIcon: Icon(Icons.person_outline),
-														),
-													),
-												],
-											),
-										),
+										SizedBox(height: 16.0),
+										_buildFullnameWidget(),
 										
 										// DATE OF BIRTH
-										SizedBox(height: 20.0),
-										Container(
-											padding: EdgeInsets.symmetric(horizontal: 10.0),
-											child: Column(
-												crossAxisAlignment: CrossAxisAlignment.start,
-												mainAxisSize: MainAxisSize.min,
-												children: <Widget>[
-													Text(
-														"Date of Birth",
-														style: TextStyle(
-															fontSize: 16,
-															fontWeight: FontWeight.w400,
-															fontFamily: "Open-sans",
-															color: Colors.grey
-														),
-													),
-													SizedBox(height: 8.0),
-													TextFormField(
-                                                        keyboardType: TextInputType.text,
-                                                        validator: (value) {
-                                                            if (value.isEmpty) {
-                                                                return 'Please enter date of birth';
-                                                            }
-                                                            return null;
-                                                        },
-                                                        onSaved: (value) {
-                                                            setState(() {
-                                                                // userCredential.usernameOrEmail = value;
-                                                            });
-                                                        },
-                                                        decoration: InputDecoration(
-                                                            border: OutlineInputBorder(
-                                                                borderRadius: BorderRadius.all(
-                                                                    Radius.circular(10.0)
-                                                                ),
-                                                                borderSide: BorderSide(
-                                                                    color: Colors.white,
-                                                                )
-                                                            ),
-                        
-                                                            hintText: 'DOB',
-                                                            hintStyle: TextStyle(
-                                                                fontFamily: 'Open-sans'
-                                                            ),
-                                                            filled: true,
-                                                            contentPadding: EdgeInsets.all(16.0),
-                                                            prefixIcon: Icon(Icons.person_outline),
-                                                        ),
-                                                    ),
-												],
-											),
-										),
+										SizedBox(height: 16.0),
+										_buildDOBWidget(),
 										
 										// ADDRESS
-										SizedBox(height: 20.0),
-										Container(
-											padding: EdgeInsets.symmetric(horizontal: 10.0),
-											child: Column(
-												crossAxisAlignment: CrossAxisAlignment.start,
-												mainAxisSize: MainAxisSize.min,
-												children: <Widget>[
-													Text(
-														"Address",
-														style: TextStyle(
-															fontSize: 16,
-															fontWeight: FontWeight.w400,
-															fontFamily: "Open-sans",
-															color: Colors.grey
-														),
-													),
-													SizedBox(height: 8.0),
-													TextFormField(
-														keyboardType: TextInputType.text,
-														validator: (value) {
-															if (value.isEmpty) {
-																return 'Please enter address';
-															}
-															return null;
-														},
-														onSaved: (value) {
-															setState(() {
-																// userCredential.usernameOrEmail = value;
-															});
-														},
-														decoration: InputDecoration(
-															border: OutlineInputBorder(
-																borderRadius: BorderRadius.all(
-																	Radius.circular(10.0)
-																),
-																borderSide: BorderSide(
-																	color: Colors.white,
-																)
-															),
-															
-															hintText: 'Address',
-															hintStyle: TextStyle(
-																fontFamily: 'Open-sans'
-															),
-															filled: true,
-															contentPadding: EdgeInsets.all(16.0),
-															prefixIcon: Icon(Icons.location_on),
-														),
-													),
-												],
-											),
-										),
+										SizedBox(height: 16.0),
+										_buildAddressWidget(),
 										
-										// MOBILE NUMBER
-										SizedBox(height: 20.0),
-										Container(
-											padding: EdgeInsets.symmetric(horizontal: 10.0),
-											child: Column(
-												crossAxisAlignment: CrossAxisAlignment.start,
-												mainAxisSize: MainAxisSize.min,
-												children: <Widget>[
-													Text(
-														"Phone Number",
-														style: TextStyle(
-															fontSize: 16,
-															fontWeight: FontWeight.w400,
-															fontFamily: "Open-sans",
-															color: Colors.grey
-														),
-													),
-													SizedBox(height: 8.0),
-													TextFormField(
-														keyboardType: TextInputType.number,
-														validator: (value) {
-															if (value.isEmpty) {
-																return 'Please enter phone number';
-															}
-															return null;
-														},
-														onSaved: (value) {
-															setState(() {
-																// userCredential.usernameOrEmail = value;
-															});
-														},
-														decoration: InputDecoration(
-															border: OutlineInputBorder(
-																borderRadius: BorderRadius.all(
-																	Radius.circular(10.0)
-																),
-																borderSide: BorderSide(
-																	color: Colors.white,
-																)
-															),
-															
-															hintText: 'Phone Number',
-															hintStyle: TextStyle(
-																fontFamily: 'Open-sans'
-															),
-															filled: true,
-															contentPadding: EdgeInsets.all(16.0),
-															prefixIcon: Icon(Icons.phone),
-														),
-													),
-												],
-											),
-										),
+										// PHONE NUMBER
+										SizedBox(height: 16.0),
+										_buildPhoneWidget(),
 										
 										// EMAIL
-										SizedBox(height: 20.0),
-										Container(
-											padding: EdgeInsets.symmetric(horizontal: 10.0),
-											child: Column(
-												crossAxisAlignment: CrossAxisAlignment.start,
-												mainAxisSize: MainAxisSize.min,
-												children: <Widget>[
-													Text(
-														"Email Address",
-														style: TextStyle(
-															fontSize: 16,
-															fontWeight: FontWeight.w400,
-															fontFamily: "Open-sans",
-															color: Colors.grey
-														),
-													),
-													SizedBox(height: 8.0),
-													TextFormField(
-														keyboardType: TextInputType.emailAddress,
-														validator: (value) {
-															if (value.isEmpty) {
-																return 'Please enter email address';
-															}
-															return null;
-														},
-														onSaved: (value) {
-															setState(() {
-
-																uploadPic();
-															});
-														},
-														decoration: InputDecoration(
-															border: OutlineInputBorder(
-																borderRadius: BorderRadius.all(
-																	Radius.circular(10.0)
-																),
-																borderSide: BorderSide(
-																	color: Colors.white,
-																)
-															),
-															
-															hintText: 'Email Address',
-															hintStyle: TextStyle(
-																fontFamily: 'Open-sans'
-															),
-															filled: true,
-															contentPadding: EdgeInsets.all(16.0),
-															prefixIcon: Icon(Icons.alternate_email),
-														),
-													),
-												],
-											),
-										),
+										SizedBox(height: 16.0),
+										_buildEmailWidget(),
 										
-										// SIGN UP BUTTON
-										SizedBox(height: 20.0),
-										Container(
-											padding: EdgeInsets.fromLTRB(12, 8, 12, 10),
-											width: double.infinity,
-											/*child: RaisedButton(
-												onPressed: () async {
-													uploadPic();
-												},
-												padding: EdgeInsets.all(20.0),
-												shape: RoundedRectangleBorder(
-													borderRadius: BorderRadius.all(Radius.circular(10.0)),
-												),
-												color: CustomTheme.lightTheme.splashColor,
-												child: Text(
-													"save changes".toUpperCase(),
-													style: TextStyle(
-														fontSize: 18.0,
-														fontWeight: FontWeight.bold,
-														fontFamily: "Open-sans",
-														color: Colors.white
-													),
-												),
-											),*/
-											child: RaisedButton(
-												onPressed: () async {
-													uploadPic();
-												},
-												padding: EdgeInsets.all(16.0),
-												shape: RoundedRectangleBorder(
-													borderRadius: BorderRadius.all(Radius.circular(10.0)),
-												),
-												color: CustomTheme.lightTheme.primaryColor,
-												child: Text(
-													"submit".toUpperCase(),
-													style: TextStyle(
-														fontSize: 18.0,
-														fontWeight: FontWeight.bold,
-														fontFamily: "Open-sans",
-														color: Colors.white
-													),
-												),
-											),
-										),
+										// SUBMIT BUTTON
+										SizedBox(height: 16.0),
+										_buildSubmitButton()
 									],
 								),
 							),
 						)
 					)
 				],
+			),
+		);
+	}
+	
+	Widget _buildFullnameWidget(){
+		return Container(
+			padding: EdgeInsets.symmetric(horizontal: 10.0),
+			child: Column(
+				crossAxisAlignment: CrossAxisAlignment.start,
+				mainAxisSize: MainAxisSize.min,
+				children: <Widget>[
+					Text(
+						"Full Name",
+						style: TextStyle(
+							fontSize: 16,
+							fontWeight: FontWeight.w400,
+							fontFamily: "Open-sans",
+							color: Colors.grey
+						),
+					),
+					SizedBox(height: 8.0),
+					TextFormField(
+						keyboardType: TextInputType.text,
+						validator: (value) {
+							if (value.isEmpty) {
+								return 'Please enter full name';
+							}
+							return null;
+						},
+						onSaved: (value) {
+							setState(() {
+								// userCredential.usernameOrEmail = value;
+							});
+						},
+						decoration: InputDecoration(
+							border: OutlineInputBorder(
+								borderRadius: BorderRadius.all(
+									Radius.circular(10.0)
+								),
+								borderSide: BorderSide(
+									color: Colors.white,
+								)
+							),
+							hintText: 'Full Name',
+							hintStyle: TextStyle(
+								fontFamily: 'Open-sans'
+							),
+							filled: true,
+							contentPadding: EdgeInsets.all(16.0),
+							prefixIcon: Icon(Icons.person_outline),
+						),
+					),
+				],
+			),
+		);
+	}
+	
+	Widget _buildDOBWidget(){
+		return Container(
+			padding: EdgeInsets.symmetric(horizontal: 10.0),
+			child: Column(
+				crossAxisAlignment: CrossAxisAlignment.start,
+				mainAxisSize: MainAxisSize.min,
+				children: <Widget>[
+					Text(
+						"Date of Birth",
+						style: TextStyle(
+							fontSize: 16,
+							fontWeight: FontWeight.w400,
+							fontFamily: "Open-sans",
+							color: Colors.grey
+						),
+					),
+					SizedBox(height: 8.0),
+					TextFormField(
+						keyboardType: TextInputType.text,
+						validator: (value) {
+							if (value.isEmpty) {
+								return 'Please enter date of birth';
+							}
+							return null;
+						},
+						onSaved: (value) {
+							setState(() {
+								// userCredential.usernameOrEmail = value;
+							});
+						},
+						decoration: InputDecoration(
+							border: OutlineInputBorder(
+								borderRadius: BorderRadius.all(
+									Radius.circular(10.0)
+								),
+								borderSide: BorderSide(
+									color: Colors.white,
+								)
+							),
+							
+							hintText: 'DOB',
+							hintStyle: TextStyle(
+								fontFamily: 'Open-sans'
+							),
+							filled: true,
+							contentPadding: EdgeInsets.all(16.0),
+							prefixIcon: Icon(Icons.person_outline),
+						),
+					),
+				],
+			),
+		);
+	}
+	
+	Widget _buildAddressWidget(){
+		return Container(
+			padding: EdgeInsets.symmetric(horizontal: 10.0),
+			child: Column(
+				crossAxisAlignment: CrossAxisAlignment.start,
+				mainAxisSize: MainAxisSize.min,
+				children: <Widget>[
+					Text(
+						"Address",
+						style: TextStyle(
+							fontSize: 16,
+							fontWeight: FontWeight.w400,
+							fontFamily: "Open-sans",
+							color: Colors.grey
+						),
+					),
+					SizedBox(height: 8.0),
+					TextFormField(
+						keyboardType: TextInputType.text,
+						validator: (value) {
+							if (value.isEmpty) {
+								return 'Please enter address';
+							}
+							return null;
+						},
+						onSaved: (value) {
+							setState(() {
+								// userCredential.usernameOrEmail = value;
+							});
+						},
+						decoration: InputDecoration(
+							border: OutlineInputBorder(
+								borderRadius: BorderRadius.all(
+									Radius.circular(10.0)
+								),
+								borderSide: BorderSide(
+									color: Colors.white,
+								)
+							),
+							
+							hintText: 'Address',
+							hintStyle: TextStyle(
+								fontFamily: 'Open-sans'
+							),
+							filled: true,
+							contentPadding: EdgeInsets.all(16.0),
+							prefixIcon: Icon(Icons.location_on),
+						),
+					),
+				],
+			),
+		);
+	}
+	
+	Widget _buildPhoneWidget(){
+		return Container(
+			padding: EdgeInsets.symmetric(horizontal: 10.0),
+			child: Column(
+				crossAxisAlignment: CrossAxisAlignment.start,
+				mainAxisSize: MainAxisSize.min,
+				children: <Widget>[
+					Text(
+						"Phone Number",
+						style: TextStyle(
+							fontSize: 16,
+							fontWeight: FontWeight.w400,
+							fontFamily: "Open-sans",
+							color: Colors.grey
+						),
+					),
+					SizedBox(height: 8.0),
+					TextFormField(
+						keyboardType: TextInputType.number,
+						validator: (value) {
+							if (value.isEmpty) {
+								return 'Please enter phone number';
+							}
+							return null;
+						},
+						onSaved: (value) {
+							setState(() {
+								// userCredential.usernameOrEmail = value;
+							});
+						},
+						decoration: InputDecoration(
+							border: OutlineInputBorder(
+								borderRadius: BorderRadius.all(
+									Radius.circular(10.0)
+								),
+								borderSide: BorderSide(
+									color: Colors.white,
+								)
+							),
+							
+							hintText: 'Phone Number',
+							hintStyle: TextStyle(
+								fontFamily: 'Open-sans'
+							),
+							filled: true,
+							contentPadding: EdgeInsets.all(16.0),
+							prefixIcon: Icon(Icons.phone),
+						),
+					),
+				],
+			),
+		);
+	}
+	
+	Widget _buildEmailWidget(){
+		return Container(
+			padding: EdgeInsets.symmetric(horizontal: 10.0),
+			child: Column(
+				crossAxisAlignment: CrossAxisAlignment.start,
+				mainAxisSize: MainAxisSize.min,
+				children: <Widget>[
+					Text(
+						"Email Address",
+						style: TextStyle(
+							fontSize: 16,
+							fontWeight: FontWeight.w400,
+							fontFamily: "Open-sans",
+							color: Colors.grey
+						),
+					),
+					SizedBox(height: 8.0),
+					TextFormField(
+						keyboardType: TextInputType.emailAddress,
+						validator: (value) {
+							if (value.isEmpty) {
+								return 'Please enter email address';
+							}
+							return null;
+						},
+						onSaved: (value) {
+							setState(() {
+								
+								uploadPic();
+							});
+						},
+						decoration: InputDecoration(
+							border: OutlineInputBorder(
+								borderRadius: BorderRadius.all(
+									Radius.circular(10.0)
+								),
+								borderSide: BorderSide(
+									color: Colors.white,
+								)
+							),
+							
+							hintText: 'Email Address',
+							hintStyle: TextStyle(
+								fontFamily: 'Open-sans'
+							),
+							filled: true,
+							contentPadding: EdgeInsets.all(16.0),
+							prefixIcon: Icon(Icons.alternate_email),
+						),
+					),
+				],
+			),
+		);
+	}
+	
+	Widget _buildSubmitButton(){
+		return Container(
+			padding: EdgeInsets.fromLTRB(12, 8, 12, 10),
+			width: double.infinity,
+			child: RaisedButton(
+				onPressed: () async {
+					uploadPic();
+				},
+				padding: EdgeInsets.all(16.0),
+				shape: RoundedRectangleBorder(
+					borderRadius: BorderRadius.all(Radius.circular(10.0)),
+				),
+				color: CustomTheme.lightTheme.primaryColor,
+				child: Text(
+					"submit".toUpperCase(),
+					style: TextStyle(
+						fontSize: 18.0,
+						fontWeight: FontWeight.bold,
+						fontFamily: "Open-sans",
+						color: Colors.white
+					),
+				),
 			),
 		);
 	}

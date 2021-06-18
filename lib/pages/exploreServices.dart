@@ -1,6 +1,5 @@
 import 'dart:ui';
 
-import 'package:card_app/homescreen/healthFacilitiesCoordinatesWidget.dart';
 import 'package:card_app/langlang/app_translation.dart';
 import 'package:card_app/models/claimed.dart';
 import 'package:card_app/models/insuree_claims.dart';
@@ -12,18 +11,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:card_app/models/medical_services.dart';
 import 'package:card_app/services/api_graphql_services.dart';
-import 'package:card_app/services/location_service.dart';
 import 'package:provider/provider.dart';
 
-
-
-class HomeScreen extends StatefulWidget {
+class ExploreServicesPage extends StatefulWidget {
 	@override
-	_HomeScreenState createState() => _HomeScreenState();
+	_ExploreServicesPageState createState() => _ExploreServicesPageState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
-	
+class _ExploreServicesPageState extends State<ExploreServicesPage> {
 	Future<MedicalServices> _medicalservices;
 	Future<Claims> _insureeclaims;
 	Future<Claimed> _claimed;
@@ -43,8 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
 	@override
 	Widget build(BuildContext context) {
 		var userLocation = Provider.of<UserLocation>(context);
- 
-		Size deviceSize = MediaQuery.of(context).size;
+		
 		return DraggableScrollableSheet(
 			initialChildSize: initial, //0.65,
 			minChildSize: min,
@@ -97,15 +91,9 @@ class _HomeScreenState extends State<HomeScreen> {
 							SizedBox(
 								height: screenHeight(context, dividedBy: 40),
 							),
-							Row(
-								mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-								children: <Widget>[
-									_button("Service1", Icons.medical_services_rounded, CustomTheme.lightTheme.splashColor),
-									_button("Service2", Icons.medical_services_sharp, CustomTheme.lightTheme.splashColor),
-									_button("Service3", Icons.medical_services_outlined, CustomTheme.lightTheme.splashColor),
-									_button("Service4", Icons.medical_services, CustomTheme.lightTheme.splashColor),
-								],
-							),
+							
+							_exploreServicesItemWidget(),
+							
 							SizedBox(
 								height: screenHeight(context, dividedBy: 30),
 							),
@@ -115,11 +103,52 @@ class _HomeScreenState extends State<HomeScreen> {
 									Text('Latitude: ${userLocation?.longitude}  Longitude: ${userLocation?.longitude}')
 								],
 							),
-							Container(height:500, child: HealthFacilitiesCoordinatesWidget())
 						],
 					),
 				);
 			}
+		);
+	}
+	
+	Widget _exploreServicesItemWidget(){
+		return ConstrainedBox(
+			constraints: BoxConstraints(maxHeight: 1000),
+			child: FutureBuilder<MedicalServices>(
+				future: _medicalservices,
+				builder: (context, snapshot) {
+					if(snapshot.hasData) {
+						return GridView.builder(
+							gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+							physics: ScrollPhysics(),
+							shrinkWrap: true,
+							itemCount: snapshot.data.data.medicalServicesStr.edges.length,
+							itemBuilder: (BuildContext context, int index) {
+								var medical_services = snapshot.data.data
+									.medicalServicesStr.edges[index];
+								return Container(
+									padding: EdgeInsets.all(4.0),
+									child: Row(
+										mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+										mainAxisSize: MainAxisSize.max,
+										children: [
+											Expanded(
+												child: _button(
+													'${medical_services.node.name} $index',
+													Icons.medical_services_rounded,
+													CustomTheme.lightTheme.splashColor
+												),
+											),
+										],
+									),
+								);
+							}
+						);
+					}
+					else{
+						return Center(child: CircularProgressIndicator());
+					}
+				}
+			),
 		);
 	}
 	
@@ -143,7 +172,15 @@ class _HomeScreenState extends State<HomeScreen> {
 				SizedBox(
 					height: 12.0,
 				),
-				Text(label),
+				Text(
+					label,
+					style: TextStyle(
+						fontSize: 12.0
+					),
+					textAlign: TextAlign.center,
+					softWrap: true,
+					maxLines: 3,
+				),
 
 			],
 		);
