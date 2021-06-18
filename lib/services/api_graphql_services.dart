@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:card_app/models/feedback.dart';
 import 'package:card_app/models/health_facility_coordinates.dart';
 import 'package:card_app/models/insuree_policy_information.dart';
 import 'package:card_app/models/notices.dart';
@@ -23,6 +24,7 @@ class ApiGraphQlServices {
     PolicyInformation policyinformation = PolicyInformation();
     InsureePolicyInformation insureepolicyinformation = InsureePolicyInformation();
     Notice notices = Notice();
+    Feedback feedback = Feedback();
     
     
     Future<MedicalServices> MedicalServicesGQL(String args) async {
@@ -209,24 +211,24 @@ class ApiGraphQlServices {
         return notices;
     }
 
-    Future<Map>  createFeedback(fullname, email, mobile_no, queries) async {
-        var jpt;
+    Future<Map>  createFeedback(fullname, email, mobile_number, queries) async {
+        var jsonmap;
         try {
-            final response = await http.post(Uri.parse(env.API_BASE_URL),
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: jsonEncode(openimisGQLMutation().createFeedbackMutation(fullname, email, mobile_no, queries))
+               final response = await http.post(Uri.parse(env.API_BASE_URL),
+                   headers: {
+                       "Content-Type": "application/json",
+                   },
+                   body: jsonEncode(
+                       openimisGQLMutation().createFeedbackMutation(
+                           fullname, email, mobile_number, queries))
 
-            );
-
-            var jsonMap = json.decode(response.body);
-            jpt = jsonMap;
-            print('chutiya');
-        } catch (Exception) {
-            return null;
-        }
-        return  jsonDecode(jpt);;
+               );
+               jsonmap = jsonDecode(response.body);
+           } catch (Exception)
+            {
+               return null;
+           }
+        return jsonmap ;
     }
 
     

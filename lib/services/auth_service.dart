@@ -13,7 +13,6 @@ class AuthService {
   final storage = FlutterSecureStorage();
   // Create storage
   final GlobalKey<NavigatorState> navigatorKey = new GlobalKey<NavigatorState>();
-  String dob = "1952-05-07";
   Future<Map> login(UserCredential userCredential) async {
     final response = await http.post(Uri.parse(env.API_BASE_URL),
         headers: {

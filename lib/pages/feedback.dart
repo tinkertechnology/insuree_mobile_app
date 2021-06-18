@@ -6,6 +6,7 @@ import 'package:card_app/langlang/application.dart';
 import 'package:card_app/langlang/app_translation.dart';
 import "package:card_app/services/api_graphql_services.dart";
 import 'package:card_app/graphql/gql_mutations.dart';
+import "package:card_app/models/feedback.dart";
 class FeedbackPage extends StatefulWidget {
     @override
     _FeedbackPageState createState() => _FeedbackPageState();
@@ -124,8 +125,11 @@ class _FeedbackPageState extends State<FeedbackPage> {
                                                 Expanded(
                                                     child: RaisedButton(
                                                         onPressed: ()   async {
+
                                                     var create=  ApiGraphQlServices().createFeedback(fullname.text, email.text, mobile_no.text, queries.text);
-                                                    print(create);
+                                                    if(create!=null){
+                                                        print("milyuo");
+                                                    }
                                                     },
                                                         padding: EdgeInsets.all(16.0),
                                                         shape: RoundedRectangleBorder(
