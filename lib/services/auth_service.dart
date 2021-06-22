@@ -20,8 +20,9 @@ class AuthService {
 //                "Accept" : "application/json"
         },
         body:
-        jsonEncode({"query":"\n\nquery{"
-            "\n  insureeAuthOtp(chfid:""  \n   \"${userCredential.chfid}\", otp: \n    \"${userCredential.otp}\"\n  ){\n    id\n    token\n    \n  }\n}","variables":null}));
+//        jsonEncode({"query":"\n\nquery{"
+//            "\n  insureeAuthOtp(chfid:""  \n   \"${userCredential.chfid}\", otp: \n    \"${userCredential.otp}\"\n  ){\n    id\n    token\n    \n  }\n}","variables":null}));
+        jsonEncode({"query":"# {\n#   {\n#     id\n#     token\n#   }\n# }\n\n\n{\n  insureeAuthOtp(chfid:\"${userCredential.chfid}\", otp:\"${userCredential.otp}\"){\n    token\n    insuree{\n      chfId\n    }\n  }\n}\n\n\n# ","variables":null}));
     print(jsonDecode(response.body));
 
     print('tara baji lai lai');

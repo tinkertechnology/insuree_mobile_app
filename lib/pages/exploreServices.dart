@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:card_app/blocks/auth_block.dart';
 import 'package:card_app/langlang/app_translation.dart';
 import 'package:card_app/models/claimed.dart';
 import 'package:card_app/models/insuree_claims.dart';
@@ -24,6 +25,7 @@ class _ExploreServicesPageState extends State<ExploreServicesPage> {
 	Future<Claimed> _claimed;
 	UserLocation userLocation;
 	Future<InsureePolicyInformation> _insureepolicyinformation;
+	AuthBlock auth;
   
 	double min = 0.03, initial = 0.65, max = 0.7;
 	
@@ -31,7 +33,7 @@ class _ExploreServicesPageState extends State<ExploreServicesPage> {
 	void initState() {
 		super.initState();
 		_medicalservices = ApiGraphQlServices().MedicalServicesGQL('medicalservice');
-		_insureeclaims = ApiGraphQlServices().ClaimsServicesGQL();
+		// _insureeclaims = ApiGraphQlServices().ClaimsServicesGQL(auth.user['data']['insureeAuthOtp']['token']);
 		_insureepolicyinformation = ApiGraphQlServices().InsureePolicyInformationServicesGQL(1);
 	}
 	

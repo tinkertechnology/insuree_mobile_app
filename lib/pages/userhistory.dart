@@ -1,8 +1,10 @@
+import 'package:card_app/blocks/auth_block.dart';
 import 'package:card_app/models/insuree_claims.dart';
 import 'package:card_app/services/api_graphql_services.dart';
 import 'package:card_app/theme/custom_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:card_app/common/env.dart' as env;
+import 'package:provider/provider.dart';
 
 class UserHistoryPage extends StatefulWidget {
 	@override
@@ -11,15 +13,17 @@ class UserHistoryPage extends StatefulWidget {
 
 class _UserHistoryPageState extends State<UserHistoryPage> {
 	Future<Claims> _insureeclaims;
+	AuthBlock auth;
 	
 	@override
 	void initState(){
 		super.initState();
-		_insureeclaims = ApiGraphQlServices().ClaimsServicesGQL();
+		// _insureeclaims = ApiGraphQlServices().ClaimsServicesGQL(auth.user['data']['insureeAuthOtp']['token']);
 	}
 	
 	@override
 	Widget build(BuildContext context) {
+		auth = Provider.of<AuthBlock>(context);
 		return Scaffold(
 			backgroundColor: CustomTheme.lightTheme.primaryColor,
 			appBar: AppBar(
@@ -46,7 +50,11 @@ class _UserHistoryPageState extends State<UserHistoryPage> {
 							child: Padding(
 								padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 16.0),
 								child: FutureBuilder<Claims>(
-									future: _insureeclaims,
+									future: ApiGraphQlServices()
+										.ClaimsServicesGQL(
+										auth.user['data']['insureeAuthOtp']['token'],
+										auth.user['data']['insureeAuthOtp']['insuree']['chfId']
+									),
 									builder: (context, snapshot){
 										if(snapshot.hasData && snapshot.data.data!=null) {
 											return ListView.builder(

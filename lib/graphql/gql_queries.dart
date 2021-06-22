@@ -17,7 +17,7 @@ class openimisGqlQueries {
         //pass insureeCHFID
         return
             {
-                "query": "query{\n  insureeProfile(insureeCHFID: ${insuree_chfid}){\n    insureeClaim{\n"
+                "query": "query{\n  insureeProfile(insureeCHFID: \"${insuree_chfid}\"){\n    insureeClaim{\n"
                     "      id\n      dateClaimed\n      claimed\n      healthFacility{\n        name\n      }\n    }\n  }\n}",
                 "variables": null
             };

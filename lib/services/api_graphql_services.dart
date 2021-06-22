@@ -45,14 +45,14 @@ class ApiGraphQlServices {
         return medicalServices;
     }
     
-    Future<Claims> ClaimsServicesGQL() async {
+    Future<Claims> ClaimsServicesGQL(String token, String chfID) async {
         try {
             final response = await http.post(Uri.parse(env.API_BASE_URL),
                 headers: {
                     "Content-Type": "application/json",
-                    "Accept" : "application/json"
+                    "Insuree-Token" : "${token}"
                 },
-                body: jsonEncode(openimisGqlQueries().openimis_gql_insuree_claims(1))
+                body: jsonEncode(openimisGqlQueries().openimis_gql_insuree_claims(chfID))
             
             );
             var jsonMap = response.body;
@@ -195,11 +195,12 @@ class ApiGraphQlServices {
         return insureepolicyinformation;
     }
     
-    Future<Notice> NoticesServicesGQL() async {
+    Future<Notice> NoticesServicesGQL(String token) async {
         try {
             final response = await http.post(Uri.parse(env.API_BASE_URL),
                 headers: {
                     "Content-Type": "application/json",
+                     "Insuree-Token": '${token}'
                 },
                 body: jsonEncode(openimisGqlQueries().openimis_gql_notices())
             );

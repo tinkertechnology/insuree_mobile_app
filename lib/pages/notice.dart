@@ -1,7 +1,9 @@
+import 'package:card_app/blocks/auth_block.dart';
 import 'package:card_app/models/notices.dart';
 import 'package:card_app/services/api_graphql_services.dart';
 import 'package:card_app/theme/custom_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class NoticePage extends StatefulWidget {
     @override
@@ -12,21 +14,27 @@ class _NoticePageState extends State<NoticePage> {
     bool hasNotification = false;
 
     Future<Notice> _notice;
+    AuthBlock auth;
     @override
     initState(){
         super.initState();
-        _notice = ApiGraphQlServices().NoticesServicesGQL();
+        /*WidgetsBinding.instance.addPostFrameCallback((_){
+            auth = Provider.of<AuthBlock>(context, listen: false);
+        });*/
+        _notice = ApiGraphQlServices().NoticesServicesGQL("332D7B1");
     }
     
     @override
     Widget build(BuildContext context) {
-        int _itemCount = 5;
+        auth = Provider.of<AuthBlock>(context);
+        print(auth.user['data']['insureeAuthOtp']);
+        // print(auth.user['data']['insureeAuthOtp']);
         return Scaffold(
             backgroundColor: CustomTheme.lightTheme.primaryColor,
             appBar: AppBar(
                 elevation: 0.0,
                 title: Text(
-                    'Notice Board',
+                    'Notices',
                     style: TextStyle(
                         color: Colors.white
                     ),
@@ -47,7 +55,7 @@ class _NoticePageState extends State<NoticePage> {
                             child: Padding(
                                 padding: const EdgeInsets.only(left: 12.0, right: 12.0, top: 10.0),
                                 child: FutureBuilder<Notice>(
-                                    future: _notice,
+                                    future: ApiGraphQlServices().NoticesServicesGQL(auth.user['data']['insureeAuthOtp']['token']),
                                     builder: (context, snapshot) {
                                         if(snapshot.hasData) {
                                             return ListView.builder(

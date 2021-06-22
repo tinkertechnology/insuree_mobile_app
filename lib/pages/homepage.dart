@@ -1,3 +1,4 @@
+import 'package:card_app/blocks/auth_block.dart';
 import 'package:card_app/pages/exploreServices.dart';
 import 'package:flutter/material.dart';
 import 'package:card_app/pages/claimed_item_services.dart';
@@ -10,6 +11,7 @@ import 'package:card_app/services/api_graphql_services.dart';
 import 'package:card_app/models/claimed.dart';
 import 'package:card_app/models/insuree_claims.dart';
 import 'package:card_app/langlang/app_translation.dart';
+import 'package:provider/provider.dart';
 
 class Homepage extends StatefulWidget {
   @override
@@ -21,17 +23,23 @@ class _HomepageState extends State<Homepage> {
 	Future<Claims> _insureeclaims;
 	Future<Claimed> _claimed;
 	Future<ClaimedServicesItems> _claimedservicesitems;
+	AuthBlock auth;
 	
 	@override
 	void initState(){
 		super.initState();
 		
 		_medicalservices = ApiGraphQlServices().MedicalServicesGQL('medicalservice');
-		_insureeclaims = ApiGraphQlServices().ClaimsServicesGQL();
+		// _insureeclaims = ApiGraphQlServices().ClaimsServicesGQL();
 
 	}
 	
 	Widget build(BuildContext context) {
+	    auth = Provider.of<AuthBlock>(context);
+	    //const auth_token = auth.user['data']['insureeAuthOtp']['token'];
+//	    print(auth);
+//	    print(auth.user["data"][0]["insureeAuthOTP"]);
+        print(auth.user['data']['insureeAuthOtp']);
 		return Scaffold(
             backgroundColor: CustomTheme.lightTheme.backgroundColor.withOpacity(0.5),
             body: Stack(
@@ -338,7 +346,11 @@ class _HomepageState extends State<Homepage> {
                         )
                     ),
                     FutureBuilder<Claims>(
-                        future: _insureeclaims,
+                        future: ApiGraphQlServices()
+                            .ClaimsServicesGQL(
+                            auth.user['data']['insureeAuthOtp']['token'],
+                            auth.user['data']['insureeAuthOtp']['insuree']['chfId']
+                        ),
                         builder: (context, snapshot) {
                             if(snapshot.hasData && snapshot.data.data!=null) {
                                 return ListView.builder(

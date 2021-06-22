@@ -1,3 +1,4 @@
+import 'package:card_app/blocks/auth_block.dart';
 import 'package:card_app/langlang/app_translation.dart';
 import 'package:card_app/theme/custom_theme.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,7 @@ import 'package:card_app/models/medical_services.dart';
 import 'package:card_app/services/api_graphql_services.dart';
 import 'package:card_app/models/claimed.dart';
 import 'package:card_app/models/insuree_claims.dart';
+import 'package:provider/provider.dart';
 import '../screen_size_reducers.dart';
 import 'claimed_item_services.dart';
 
@@ -19,15 +21,18 @@ class _HistoryPageState extends State<HistoryPage> {
 	Future<MedicalServices> _medicalservices;
 	Future<Claims> _insureeclaims;
 	Future<Claimed> _claimed;
+	AuthBlock auth;
+	
 	@override
 	void initState(){
 		super.initState();
 		_medicalservices = ApiGraphQlServices().MedicalServicesGQL('medicalservice');
-		_insureeclaims = ApiGraphQlServices().ClaimsServicesGQL();
+		// _insureeclaims = ApiGraphQlServices().ClaimsServicesGQL();
 	}
 	
 	@override
 	Widget build(BuildContext context) {
+		auth = Provider.of<AuthBlock>(context);
 		return Scaffold(
 			backgroundColor: CustomTheme.lightTheme.backgroundColor.withOpacity(0.5),
 			body: Stack(
@@ -314,7 +319,11 @@ class _HistoryPageState extends State<HistoryPage> {
 												)
 											),
 											FutureBuilder<Claims>(
-												future: _insureeclaims,
+												future: ApiGraphQlServices()
+													.ClaimsServicesGQL(
+													auth.user['data']['insureeAuthOtp']['token'],
+													auth.user['data']['insureeAuthOtp']['insuree']['chfId']
+												),
 												builder: (context, snapshot) {
 													if(snapshot.hasData && snapshot.data.data!=null) {
 														return ListView.builder(

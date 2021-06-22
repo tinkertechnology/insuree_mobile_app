@@ -27,6 +27,7 @@ getAuthToken(AuthBlock auth1){
 		auth1=auth;
 	}
 	if(auth1.isLoggedIn){
+		print(auth1);
 		return auth1.user['token'];
 	}
 	return "isLoggedIn=false";
@@ -45,6 +46,16 @@ getAuth(){
 		}
 	}
 	return auth;
+}
+
+
+String CHFID;
+
+setCHFID(String s){
+	CHFID =s;
+}
+getCHFID(){
+	return CHFID;
 }
 
 
@@ -164,7 +175,7 @@ String USER_MOBILE_NO = "";
 
 
 
-String API_BASE_LOCAL_URL =  "http://10.0.2.2:8000/api/graphql"; //"https://oi.tinker.com.np/api/graphql";
+String API_BASE_LOCAL_URL = "http://10.0.2.2:8000/api/graphql"; //"https://oi.tinker.com.np/api/graphql";
 String API_IOS_BASE_LOCAL_URL = "http://localhost:8000/api/graphql";
 String API_BASE_LOCAL_MOBILE_URL = "http://192.168.31.221:8000/api/graphql";
 String API_HIB_URL = '';
