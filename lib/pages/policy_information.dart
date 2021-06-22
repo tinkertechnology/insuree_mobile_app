@@ -1,8 +1,10 @@
+import 'package:card_app/blocks/auth_block.dart';
 import 'package:card_app/models/insuree_policy_information.dart';
 import 'package:card_app/theme/custom_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:card_app/services/api_graphql_services.dart';
 import 'package:card_app/common/env.dart' as env;
+import 'package:provider/provider.dart';
 
 class PolicyInformationPage extends StatefulWidget {
 	@override
@@ -11,16 +13,19 @@ class PolicyInformationPage extends StatefulWidget {
 
 class _PolicyInformationPageState extends State<PolicyInformationPage> {
 	Future<InsureePolicyInformation> _insureepolicyinformation;
+	AuthBlock auth;
 	
 	@override
 	void initState() {
         // TODO: implement initState
         super.initState();
-        _insureepolicyinformation = ApiGraphQlServices().InsureePolicyInformationServicesGQL(1);
+//        _insureepolicyinformation = ApiGraphQlServices().InsureePolicyInformationServicesGQL(1);
     }
     
 	@override
 	Widget build(BuildContext context) {
+		auth = Provider.of<AuthBlock>(context);
+		
 		return Scaffold(
 			backgroundColor: CustomTheme.lightTheme.primaryColor,//Color.fromRGBO(41,127,141, 25)
 			body: Column(
@@ -38,7 +43,11 @@ class _PolicyInformationPageState extends State<PolicyInformationPage> {
 								padding: const EdgeInsets.only(top: 8.0),
 
 								child: FutureBuilder<InsureePolicyInformation>(
-								  future: _insureepolicyinformation,
+								  future: ApiGraphQlServices()
+									  .InsureePolicyInformationServicesGQL(
+									  auth.user['data']['insureeAuthOtp']['token'],
+									  auth.user['data']['insureeAuthOtp']['insuree']['chfId']
+								  ),
 
 								  builder: (context, snapshot) {
 								  	if(snapshot.hasData) {

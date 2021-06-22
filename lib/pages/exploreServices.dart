@@ -34,7 +34,7 @@ class _ExploreServicesPageState extends State<ExploreServicesPage> {
 		super.initState();
 		_medicalservices = ApiGraphQlServices().MedicalServicesGQL('medicalservice');
 		// _insureeclaims = ApiGraphQlServices().ClaimsServicesGQL(auth.user['data']['insureeAuthOtp']['token']);
-		_insureepolicyinformation = ApiGraphQlServices().InsureePolicyInformationServicesGQL(1);
+//		_insureepolicyinformation = ApiGraphQlServices().InsureePolicyInformationServicesGQL(1);
 	}
 	
 	@override

@@ -155,20 +155,18 @@ class ApiGraphQlServices {
         return healthFacilityCoordinates;
     }
     
-    Future<PolicyInformation> PolicyInformationServicesGQL(chfid) async { //todo pass claim id from widget // this is for the homepage
+    Future<PolicyInformation> PolicyInformationServicesGQL(String token, chfid) async { //todo pass claim id from widget // this is for the homepage
         try {
             final response = await http.post(Uri.parse(env.API_BASE_URL),
                 headers: {
                     "Content-Type": "application/json",
-//                "Accept" : "application/json"
+                    "Insuree-Token" : "${token}"
                 },
                 body: jsonEncode(openimisGqlQueries()
                     .openimis_gql_insuree_policy_information(chfid)) //todo map qs filtering
             );
             var jsonMap = json.decode(response.body);
             policyinformation = PolicyInformation.fromJson(jsonMap);
-            
-            
         } catch (Exception) {
             return  policyinformation;//claimeditems;
         }
@@ -176,12 +174,12 @@ class ApiGraphQlServices {
     }
     
     
-    Future<InsureePolicyInformation> InsureePolicyInformationServicesGQL(chfid) async { //todo pass claim id from widget // this is for the list of policies of insuree
+    Future<InsureePolicyInformation> InsureePolicyInformationServicesGQL(String token, chfid) async { //todo pass claim id from widget // this is for the list of policies of insuree
         try {
             final response = await http.post(Uri.parse(env.API_BASE_URL),
                 headers: {
                     "Content-Type": "application/json",
-//                "Accept" : "application/json"
+                    "Insuree-Token": "${token}"
                 },
                 body: jsonEncode(openimisGqlQueries().openimis_insuree_policy_information_lists(chfid)) //todo map qs filtering
             );

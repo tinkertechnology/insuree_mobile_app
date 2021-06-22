@@ -65,17 +65,17 @@ class openimisGqlQueries {
     
     
     openimis_gql_insuree_policy_information(chfid) {
-        return {
-            
-            "query": "query{\n  insureeProfile(insureeCHFID: ${chfid}){\n    otherNames\n    lastName\n    chfId\n    insureePolicies{\n      expiryDate\n    }\n    \n  }\n}",
+        /*return {
+            "query": "query{\n  insureeProfile(insureeCHFID: \"${chfid}\"){\n    otherNames\n    lastName\n    chfId\n    insureePolicies{\n      expiryDate\n    }\n    \n  }\n}",
             "variables": null
-        };
+        };*/
+        return {"query":"query{\n  insureeProfile(insureeCHFID: \"2\"){\n    chfId\n    lastName\n    otherNames\n    insureePolicies{\n      policy{\n        expiryDate\n      }\n      insuree{\n        gender{\n          code\n          gender\n        }\n        dob\n        healthFacility{\n          code\n          name\n        }\n      }\n    }\n  }\n}","variables":null};
     }
     
     openimis_insuree_policy_information_lists(chfid){ //for policyinformationpage
         var query = """
     query {
-        insureeProfile(insureeCHFID:${chfid}){
+        insureeProfile(insureeCHFID:\"${chfid}\"){
           insureePolicies{
             policy{
               legacyId
@@ -91,7 +91,7 @@ class openimisGqlQueries {
       }
    """;
         return {
-            "query":"query {\n  insureeProfile(insureeCHFID:${chfid}){\n    insureePolicies{\n      policy{\n        legacyId\n        effectiveDate\n        expiryDate\n        validityFrom\n        validityTo\n        status\n        value\n      }\n    }\n  }\n}","variables":null
+            "query":"query {\n  insureeProfile(insureeCHFID:\"${chfid}\"){\n    insureePolicies{\n      policy{\n        legacyId\n        effectiveDate\n        expiryDate\n        validityFrom\n        validityTo\n        status\n        value\n      }\n    }\n  }\n}","variables":null
         };
     }
     

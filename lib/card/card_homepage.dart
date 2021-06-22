@@ -33,7 +33,7 @@ class _CardHomeState extends State<CardHome> {
 		super.initState();
 		
 		_medicalservices = ApiGraphQlServices().MedicalServicesGQL('medicalservice');
-		_insureeclaims = ApiGraphQlServices().ClaimsServicesGQL();
+		// _insureeclaims = ApiGraphQlServices().ClaimsServicesGQL();
 
 	}
 	

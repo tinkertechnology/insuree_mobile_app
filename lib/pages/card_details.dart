@@ -1,9 +1,11 @@
+import 'package:card_app/blocks/auth_block.dart';
 import 'package:card_app/models/policy_information.dart';
 import 'package:card_app/services/api_graphql_services.dart';
 import 'package:card_app/theme/custom_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:card_app/langlang/app_translation.dart';
 import 'package:card_app/langlang/application.dart';
+import 'package:provider/provider.dart';
 
 class CardDetailPage extends StatefulWidget {
     final String message;
@@ -13,6 +15,7 @@ class CardDetailPage extends StatefulWidget {
 }
 
 class _CardDetailPageState extends State<CardDetailPage> {
+    AuthBlock auth;
     Future<PolicyInformation> _policyinformation;
     final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
     
@@ -21,7 +24,7 @@ class _CardDetailPageState extends State<CardDetailPage> {
         // TODO: implement initState
         super.initState();
         application.onLocaleChanged = onLocaleChange;
-        _policyinformation = ApiGraphQlServices().PolicyInformationServicesGQL(1);
+//        _policyinformation = ApiGraphQlServices().PolicyInformationServicesGQL(auth.user['data']['insureeAuthOtp']['token'], auth.user['data']['insureeAuthOtp']['insuree']['chfId']);
         Future(() {
             if (widget.message != null && widget.message.isNotEmpty) {
                 showInSnackBar(widget.message);
@@ -42,6 +45,7 @@ class _CardDetailPageState extends State<CardDetailPage> {
     
     @override
     Widget build(BuildContext context) {
+        auth = Provider.of<AuthBlock>(context);
         return Scaffold(
             backgroundColor: CustomTheme.lightTheme.primaryColor,
 	        appBar: AppBar(
@@ -68,14 +72,18 @@ class _CardDetailPageState extends State<CardDetailPage> {
                             child: Padding(
                                 padding: const EdgeInsets.only(left: 12.0, right: 12.0, top: 10.0),
                                 child: FutureBuilder<PolicyInformation>(
-                                    future: _policyinformation,
+                                    future: ApiGraphQlServices().PolicyInformationServicesGQL(
+                                        auth.user['data']['insureeAuthOtp']['token'],
+                                        auth.user['data']['insureeAuthOtp']['insuree']['chfId']
+                                    ),
                                     builder: (context, snapshot) {
                                         if(snapshot.hasData) {
                                             var policyprofile = snapshot.data.data.insureeProfile;
+                                            var insureeProfile = snapshot.data.data.insureeProfile.insureePolicies[0];
                                             return ListView(
                                                 children: [
                                                     // CARD
-                                                    _virtualCardWidget(policyprofile),
+                                                    _virtualCardWidget(policyprofile, insureeProfile),
                                                 
                                                     // FULL NAME
                                                     SizedBox(height: 20.0),
@@ -87,7 +95,7 @@ class _CardDetailPageState extends State<CardDetailPage> {
                                                 
                                                     // EXPIRY DATE
                                                     SizedBox(height: 20.0),
-                                                    _buildExpiryDateTF(policyprofile),
+                                                    _buildExpiryDateTF(insureeProfile),
                                                 
                                                     // RENEW SUBMISSION BUTTON
                                                     SizedBox(height: 20.0),
@@ -109,7 +117,7 @@ class _CardDetailPageState extends State<CardDetailPage> {
     }
     
     // ignore: non_constant_identifier_names
-    Widget _virtualCardWidget(policyprofile){
+    Widget _virtualCardWidget(policyprofile, insureeProfile){
         return Container(
             child: Card(
                 shape: RoundedRectangleBorder(
@@ -207,14 +215,14 @@ class _CardDetailPageState extends State<CardDetailPage> {
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
                                     Text(
-                                        'जन्ममिति: 2078-01-01',
+                                        'जन्ममिति:' + '${insureeProfile.insuree.dob}',
                                         style: TextStyle(
                                             fontSize: 16.0,
                                             fontWeight: FontWeight.normal,
                                         ),
                                     ),
                                     Text(
-                                        'लिङ्ग: Male',
+                                        'लिङ्ग:' + '${insureeProfile.insuree.gender.gender}',
                                         style: TextStyle(
                                             fontSize: 16.0,
                                             fontWeight: FontWeight.normal,
@@ -363,7 +371,7 @@ class _CardDetailPageState extends State<CardDetailPage> {
         );
     }
     
-    Widget _buildExpiryDateTF(policyprofile){
+    Widget _buildExpiryDateTF(insureeProfile){
         return Container(
             padding: EdgeInsets.symmetric(horizontal: 10.0),
             child: Column(
@@ -404,7 +412,7 @@ class _CardDetailPageState extends State<CardDetailPage> {
                                 )
                             ),
                     
-                            hintText: '${DateTime.parse(policyprofile.insureePolicies[0].expiryDate.toString())}',
+                            hintText: '${DateTime.parse(insureeProfile.policy.expiryDate.toString())}',
                             hintStyle: TextStyle(
                                 fontFamily: 'Open-sans'
                             ),
