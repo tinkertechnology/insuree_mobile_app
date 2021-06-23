@@ -69,7 +69,7 @@ class openimisGqlQueries {
             "query": "query{\n  insureeProfile(insureeCHFID: \"${chfid}\"){\n    otherNames\n    lastName\n    chfId\n    insureePolicies{\n      expiryDate\n    }\n    \n  }\n}",
             "variables": null
         };*/
-        return {"query":"query{\n  insureeProfile(insureeCHFID: \"2\"){\n    chfId\n    lastName\n    otherNames\n    insureePolicies{\n      policy{\n        expiryDate\n      }\n      insuree{\n        gender{\n          code\n          gender\n        }\n        dob\n        healthFacility{\n          code\n          name\n        }\n      }\n    }\n  }\n}","variables":null};
+        return {"query":"query{\n  insureeProfile(insureeCHFID: \"${chfid}\"){\n    chfId\n    lastName\n    otherNames\n    insureePolicies{\n      policy{\n        expiryDate\n      }\n      insuree{\n        gender{\n          code\n          gender\n        }\n        dob\n        healthFacility{\n          code\n          name\n        }\n      }\n    }\n  }\n}","variables":null};
     }
     
     openimis_insuree_policy_information_lists(chfid){ //for policyinformationpage
@@ -99,6 +99,13 @@ class openimisGqlQueries {
         return {
             "query":"query\n{\n  notices(orderBy:[\"-created_at\"]){\n    edges{\n      node{\n        id\n        title\n        description\n      }\n    }\n  }\n}\n  \n",
             "variables":null
+        };
+    }
+
+
+    openimis_gql_insuree_info (String chfid){
+        return {
+            "query":"{\n  insureeProfile(insureeCHFID: \"${chfid}\"){\n   remainingDays\n    otherNames\n    lastName\n    insureePolicies{\n      policy{\n        value\n        expiryDate\n      }\n      insuree{\n        healthFacility{\n          code\n          name\n        }\n      }\n      \n    }\n  }\n}","variables":null
         };
     }
     

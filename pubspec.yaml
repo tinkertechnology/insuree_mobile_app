@@ -29,6 +29,7 @@ dependencies:
   location :
   connectivity: ^3.0.4
   getwidget: ^1.1.0
+  qr_flutter: ^4.0.0
 
 dev_dependencies:
   flutter_test:

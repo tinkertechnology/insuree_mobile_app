@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:card_app/models/feedback.dart';
 import 'package:card_app/models/health_facility_coordinates.dart';
+import 'package:card_app/models/insuree_info.dart';
 import 'package:card_app/models/insuree_policy_information.dart';
 import 'package:card_app/models/notices.dart';
 import 'package:http/http.dart' as http;
@@ -25,6 +26,7 @@ class ApiGraphQlServices {
     InsureePolicyInformation insureepolicyinformation = InsureePolicyInformation();
     Notice notices = Notice();
     Feedback feedback = Feedback();
+    InsureeInfo insureeinfo = InsureeInfo();
     
     
     Future<MedicalServices> MedicalServicesGQL(String args) async {
@@ -166,6 +168,8 @@ class ApiGraphQlServices {
                     .openimis_gql_insuree_policy_information(chfid)) //todo map qs filtering
             );
             var jsonMap = json.decode(response.body);
+            print(openimisGqlQueries().openimis_gql_insuree_policy_information(chfid));
+
             policyinformation = PolicyInformation.fromJson(jsonMap);
         } catch (Exception) {
             return  policyinformation;//claimeditems;
@@ -210,6 +214,28 @@ class ApiGraphQlServices {
         return notices;
     }
 
+    Future<InsureeInfo> InsureeInfoServicesGQL(String token, String chfid) async {
+        try {
+            final response = await http.post(Uri.parse(env.API_BASE_URL),
+                headers: {
+                    "Content-Type": "application/json",
+                    "Insuree-Token": '${token}'
+                },
+                body: jsonEncode(openimisGqlQueries().openimis_gql_insuree_info(chfid))
+            );
+            var jsonMap = json.decode(response.body);
+            insureeinfo = InsureeInfo.fromJson(jsonMap);
+        } catch (Exception) {
+            return  insureeinfo;
+        }
+        return insureeinfo;
+    }
+
+
+
+
+
+  //mutation
     Future<Map>  createFeedback(fullname, email, mobile_number, queries) async {
         var jsonmap;
         try {

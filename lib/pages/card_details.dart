@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:card_app/langlang/app_translation.dart';
 import 'package:card_app/langlang/application.dart';
 import 'package:provider/provider.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 class CardDetailPage extends StatefulWidget {
     final String message;
@@ -162,10 +163,15 @@ class _CardDetailPageState extends State<CardDetailPage> {
                                         ],
                                     ),
                                     SizedBox(width: 8.0),
-                                    Image.asset(
-                                        'assets/images/openimis-logo.png',
-                                        height: 40,
-                                    )
+//                                    Image.asset(
+//                                        'assets/images/openimis-logo.png',
+//                                        height: 40,
+//                                    )
+                                    QrImage(
+                                        data:  auth.user['data']['insureeAuthOtp']['insuree']['chfId'].toString(),//"1234567890",
+                                        version: QrVersions.auto,
+                                        size: 64.0,
+                                    ),
                                 ],
                             ),
                         
@@ -181,6 +187,7 @@ class _CardDetailPageState extends State<CardDetailPage> {
                                             fontWeight: FontWeight.normal,
                                         ),
                                     ),
+
                                 ],
                             ),
                         
