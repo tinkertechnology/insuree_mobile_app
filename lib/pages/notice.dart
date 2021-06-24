@@ -79,9 +79,9 @@ class _NoticePageState extends State<NoticePage> {
                                                                             height: 160,
                                                                             width: double.infinity,
                                                                             decoration: BoxDecoration(
-                                                                                border: Border(
+                                                                                /*border: Border(
                                                                                     bottom: BorderSide(color: Colors.red, width: 1.0)
-                                                                                )
+                                                                                )*/
                                                                             ),
                                                                             child: Image.asset(
                                                                                 'assets/images/100-welcome.png',

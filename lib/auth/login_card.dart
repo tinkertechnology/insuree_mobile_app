@@ -34,7 +34,7 @@ class _LoginScreenState extends State<LoginScreen> {
 				mainAxisSize: MainAxisSize.min,
 				children: <Widget>[
 					Text(
-						"OTP",
+						"Verification Code",
 						style: TextStyle(
 								fontSize: 16,
 								fontWeight: FontWeight.w400,
@@ -44,10 +44,10 @@ class _LoginScreenState extends State<LoginScreen> {
 					),
 					SizedBox(height: 8.0),
 					TextFormField(
-						keyboardType: TextInputType.emailAddress,
+						keyboardType: TextInputType.text,
 						validator: (value) {
 							if (value.isEmpty) {
-								return 'Please Enter OTP ';
+								return 'Please enter verification code ';
 							}
 							return null;
 						},
@@ -66,7 +66,7 @@ class _LoginScreenState extends State<LoginScreen> {
 									)
 							),
 
-							hintText: 'OTP text',
+							hintText: 'Please enter a verification code',
 							hintStyle: TextStyle(
 									fontFamily: 'Montserrat'
 							),
@@ -167,7 +167,7 @@ class _LoginScreenState extends State<LoginScreen> {
 														SizedBox(height: 10.0),
 														ListTile(
 															title: Text(
-																"Validate OTP",
+																"Verification",
 																style: TextStyle(
 																		fontSize: 24,
 																		fontWeight: FontWeight.w400
@@ -175,7 +175,7 @@ class _LoginScreenState extends State<LoginScreen> {
 																textAlign: TextAlign.center,
 															),
 															subtitle: Text(
-																"Enter the validaton code!",
+																"Enter the verification code !",
 																style: TextStyle(
 																	fontSize: 16,
 																	fontWeight: FontWeight.w300,
@@ -224,12 +224,12 @@ class _LoginScreenState extends State<LoginScreen> {
 																			shape: RoundedRectangleBorder(
 																				borderRadius: BorderRadius.all(Radius.circular(10.0)),
 																			),
-																			color: CustomTheme.lightTheme.splashColor.withOpacity(0.8),
+																			color:CustomTheme.lightTheme.primaryColor,
 																			child: auth.loading && auth.loadingType == 'login'
 																					? CircularProgressIndicator(
 																					valueColor: AlwaysStoppedAnimation<Color>(Colors.white))
 																					: Text(
-																				"Validate OTP".toUpperCase(),
+																				"proceed".toUpperCase(),
 																				style: TextStyle(
 																					fontSize: 16.0,
 																					fontWeight: FontWeight.bold,

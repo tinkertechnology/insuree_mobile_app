@@ -74,7 +74,7 @@ class _PolicyInformationPageState extends State<PolicyInformationPage> {
 	
 	Widget _policyInformationListWidget(_data){
 		return Container(
-			margin: EdgeInsets.only(left: 16.0, right: 16.0),
+			margin: EdgeInsets.only(left: 8.0, right: 8.0),
 			decoration: BoxDecoration(
 				border: Border(
 					bottom: BorderSide(
@@ -87,18 +87,37 @@ class _PolicyInformationPageState extends State<PolicyInformationPage> {
 				title: Column(
 					crossAxisAlignment: CrossAxisAlignment.start,
 					children: [
-						//Text(_data.policy.value.toString()),
-						Text('Health Facility Name')
+						Text(
+                            '${_data.insuree.healthFacility.name}',
+                            style: TextStyle(
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.bold,
+                            ),
+                        )
 					],
 				),
-				leading: Text('HIB-3500'),
-				subtitle: Text('Expiry date: ' + _data.policy.expiryDate.toString()),
-				trailing: Row(
+				leading: Text(
+                    '${_data.insuree.healthFacility.code}',
+                    style: TextStyle(
+                        fontSize: 14.0,
+                        fontWeight: FontWeight.w400,
+                    ),
+                ),
+				subtitle: Text(
+                    'Expiry date: ${_data.policy.expiryDate.year}-${_data.policy.expiryDate.month}-${_data.policy.expiryDate.day}',
+                ),
+				trailing: Column(
 					mainAxisAlignment: MainAxisAlignment.spaceBetween,
 					mainAxisSize: MainAxisSize.min,
 					children: [
-						Text('${env.Currency}' + _data.policy.value.toString()),
-						SizedBox(width: 4.0),
+						Text(
+                            '${env.Currency} ${_data.policy.value}',
+                            style: TextStyle(
+                                fontSize: 14.0,
+                                fontWeight: FontWeight.bold,
+                            ),
+                        ),
+						SizedBox(height: 16.0),
 						Text(
 							_data.policy.status.toString(),
 							style: TextStyle(

@@ -1,5 +1,6 @@
 import 'package:card_app/blocks/auth_block.dart';
 import 'package:card_app/langlang/app_translation.dart';
+import 'package:card_app/models/insuree_info.dart';
 import 'package:card_app/theme/custom_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -61,92 +62,116 @@ class _HistoryPageState extends State<HistoryPage> {
 													]
 												),
 											),
-											child: Row(
-												mainAxisAlignment: MainAxisAlignment.spaceBetween,
-												mainAxisSize: MainAxisSize.min,
-												children: <Widget>[
-													Expanded(
-														child: Column(
-															crossAxisAlignment: CrossAxisAlignment.start,
+											child: FutureBuilder<InsureeInfo>(
+												future: ApiGraphQlServices().InsureeInfoServicesGQL(
+													auth.user['data']['insureeAuthOtp']['token'],
+													auth.user['data']['insureeAuthOtp']['insuree']['chfId']
+												),
+												builder: (context, snapshot) {
+													if(snapshot.hasData && snapshot.data.data.insureeProfile!=null) {
+														var insureeinfo = snapshot.data.data.insureeProfile;
+														var insureepolicy = snapshot.data.data.insureeProfile
+															.insureePolicies[0];
+														return Row(
+															mainAxisAlignment: MainAxisAlignment.spaceBetween,
+															mainAxisSize: MainAxisSize.min,
 															children: <Widget>[
-																CircleAvatar(
-																	radius: 30,
-																	backgroundColor: Colors.white,
-																	child: ClipOval(
-																		child: Image.asset("assets/images/openimis-logo.png", fit: BoxFit.contain,),
-																	),
-																),
-																SizedBox(height: 8),
 																Expanded(
-																	child: Text(
-																		'Hari Bahadur Thapa Magar',
-																		style: TextStyle(
-																			fontSize: 14,
-																			fontWeight: FontWeight.normal,
-																			color: Colors.white
-																		),
-																		maxLines: 3,
-																	),
-																)
-															],
-														),
-													),
-													
-													VerticalDivider(
-														thickness: 1.5,
-														color: Colors.white,
-													),
-													
-													Expanded(
-														child: Column(
-															crossAxisAlignment: CrossAxisAlignment.end,
-															mainAxisSize: MainAxisSize.max,
-															children: <Widget>[
-																Text(
-																	'Current Balance',
-																	style: TextStyle(
-																		fontSize: 14,
-																		fontWeight: FontWeight.normal,
-																		color: Colors.white
+																	child: Column(
+																		crossAxisAlignment: CrossAxisAlignment
+																			.start,
+																		children: <Widget>[
+																			CircleAvatar(
+																				radius: 30,
+																				backgroundColor: Colors.white,
+																				child: ClipOval(
+																					child: Image.asset(
+																						"assets/images/openimis-logo.png",
+																						fit: BoxFit.contain,),
+																				),
+																			),
+																			SizedBox(height: 8),
+																			Expanded(
+																				child: Text(
+																					'${insureeinfo.lastName} ${insureeinfo.otherNames} ',
+																					style: TextStyle(
+																						fontSize: 14,
+																						fontWeight: FontWeight
+																							.normal,
+																						color: Colors.white
+																					),
+																					maxLines: 3,
+																				),
+																			)
+																		],
 																	),
 																),
-																SizedBox(height: 8.0),
-																Text(
-																	'Rs. 450.00',
-																	style: TextStyle(
-																		fontSize: 16,
-																		fontWeight: FontWeight.bold,
-																		color: Colors.white
-																	),
-																),
-																SizedBox(height: 4.0),
-																Divider(
-																	indent: 20.0,
+																
+																VerticalDivider(
 																	thickness: 1.5,
 																	color: Colors.white,
 																),
-																SizedBox(height: 4.0),
-																Text(
-																	'Valid until: 2023-02-21',
-																	style: TextStyle(
-																		fontSize: 14,
-																		fontWeight: FontWeight.normal,
-																		color: Colors.white
+																
+																Expanded(
+																	child: Column(
+																		crossAxisAlignment: CrossAxisAlignment
+																			.end,
+																		mainAxisSize: MainAxisSize.max,
+																		children: <Widget>[
+																			Text(
+																				'Current Balance',
+																				style: TextStyle(
+																					fontSize: 14,
+																					fontWeight: FontWeight.normal,
+																					color: Colors.white
+																				),
+																			),
+																			SizedBox(height: 8.0),
+																			Text(
+																				'${insureepolicy.policy.value}',
+																				style: TextStyle(
+																					fontSize: 16,
+																					fontWeight: FontWeight.bold,
+																					color: Colors.white
+																				),
+																			),
+																			SizedBox(height: 4.0),
+																			Divider(
+																				indent: 20.0,
+																				thickness: 1.5,
+																				color: Colors.white,
+																			),
+																			SizedBox(height: 4.0),
+																			Text(
+																				'${insureepolicy.policy.expiryDate.year}-${insureepolicy.policy.expiryDate.month}-${insureepolicy.policy.expiryDate.day}',
+																				style: TextStyle(
+																					fontSize: 14,
+																					fontWeight: FontWeight.normal,
+																					color: Colors.white
+																				),
+																			),
+																			SizedBox(height: 8.0),
+																			Text(
+																				'${insureepolicy.insuree.healthFacility ?? "N/A"}',
+																				style: TextStyle(
+																					fontSize: 14,
+																					fontWeight: FontWeight.normal,
+																					color: Colors.white
+																				),
+																			)
+																		],
 																	),
 																),
-																SizedBox(height: 8.0),
-																Text(
-																	'First Service Name',
-																	style: TextStyle(
-																		fontSize: 14,
-																		fontWeight: FontWeight.normal,
-																		color: Colors.white
-																	),
-																)
 															],
-														),
-													),
-												],
+														);
+													}
+													else if(snapshot.hasError){
+														return(Center(child: CircularProgressIndicator(),));
+													}
+													else {
+														return(Center(child: CircularProgressIndicator()));
+													}
+												}
 											),
 										),
 										
