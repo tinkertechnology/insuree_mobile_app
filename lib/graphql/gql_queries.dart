@@ -90,9 +90,11 @@ class openimisGqlQueries {
         }
       }
    """;
-        return {
-            "query":"query {\n  insureeProfile(insureeCHFID:\"${chfid}\"){\n    insureePolicies{\n      policy{\n        legacyId\n        effectiveDate\n        expiryDate\n        validityFrom\n        validityTo\n        status\n        value\n      }\n    }\n  }\n}","variables":null
-        };
+//        return {
+//            "query":"query {\n  insureeProfile(insureeCHFID:\"${chfid}\"){\n    insureePolicies{\n      policy{\n        legacyId\n        effectiveDate\n        expiryDate\n        validityFrom\n        validityTo\n        status\n        value\n      }\n    }\n  }\n}","variables":null
+//        };
+    
+    return {"query":"query {insureeProfile(insureeCHFID: \"${chfid}\"){\n    chfId\n    insureePolicies{\n      policy{\n        value\n        expiryDate\n        status\n      }\n      insuree{\n        healthFacility{\n          code\n          name\n        }\n      }\n    }\n  }\n}","variables":null};
     }
     
     openimis_gql_notices(){
