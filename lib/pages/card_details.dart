@@ -101,6 +101,8 @@ class _CardDetailPageState extends State<CardDetailPage> {
                                                     // RENEW SUBMISSION BUTTON
                                                     SizedBox(height: 20.0),
                                                     _buildRenewButtonWidget(),
+                                                    widget.message!=null?
+                                                    _buildBackButtonWidget() : Text(""),
                                                 ],
                                             );
                                         }
@@ -116,6 +118,37 @@ class _CardDetailPageState extends State<CardDetailPage> {
             ),
         );
     }
+
+Widget _buildPopupDialog(BuildContext context) {
+  return new AlertDialog(
+    content: new Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: <Widget>[
+         Container(
+           width: 200,
+        height: 200,
+           child: QrImage(
+              data:  auth.user['data']['insureeAuthOtp']['insuree']['chfId'].toString(),//"1234567890",
+              version: QrVersions.auto,
+              size: 64.0,
+              
+          ),
+         )
+        
+      ],
+    ),
+    // actions: <Widget>[
+    //   new FlatButton(
+    //     onPressed: () {
+    //       Navigator.of(context).pop();
+    //     },
+    //     textColor: Theme.of(context).primaryColor,
+    //     // child: const Text('Close'),
+    //   ),
+    // ],
+  );
+}
     
     // ignore: non_constant_identifier_names
     Widget _virtualCardWidget(policyprofile, insureeProfile){
@@ -167,11 +200,20 @@ class _CardDetailPageState extends State<CardDetailPage> {
 //                                        'assets/images/openimis-logo.png',
 //                                        height: 40,
 //                                    )
-                                    QrImage(
+                                  InkWell(
+                                    onTap: (){
+                                       showDialog(
+              context: context,
+              builder: (BuildContext context) => _buildPopupDialog(context),
+            );
+                                    },
+                                    child: QrImage(
                                         data:  auth.user['data']['insureeAuthOtp']['insuree']['chfId'].toString(),//"1234567890",
                                         version: QrVersions.auto,
                                         size: 64.0,
+                                        
                                     ),
+                                  )
                                 ],
                             ),
                         
@@ -448,6 +490,32 @@ class _CardDetailPageState extends State<CardDetailPage> {
                 color: CustomTheme.lightTheme.primaryColor,
                 child: Text(
                     AppTranslations.of(context).text('renew_submission').toUpperCase(),
+                    style: TextStyle(
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: "Open-sans",
+                        color: Colors.white
+                    ),
+                ),
+            ),
+        );
+    }
+
+        Widget _buildBackButtonWidget(){
+        return Container(
+            padding: EdgeInsets.fromLTRB(12, 8, 12, 10),
+            width: double.infinity,
+            child: RaisedButton(
+                onPressed: () async {
+                    Navigator.pushNamed(context, '/card');
+                },
+                padding: EdgeInsets.all(16.0),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                ),
+                color: CustomTheme.lightTheme.primaryColor,
+                child: Text(
+                    AppTranslations.of(context).text('go_back').toUpperCase(),
                     style: TextStyle(
                         fontSize: 18.0,
                         fontWeight: FontWeight.bold,

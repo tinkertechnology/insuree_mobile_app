@@ -79,10 +79,11 @@ class _SubmissionPageState extends State<SubmissionPage> {
             print(response.stream.bytesToString().toString());
             if (response.statusCode == 200) {
                 if (response.reasonPhrase == "OK") {
-                     RedirectToCardPage('Uplaad Bhayo la bhai haru');
+                     RedirectToCardPage(AppTranslations.of(context).text('payment_voucher_submission'),);
                 }
                 else{
-                    RedirectToCardPage('Server Error cha hai bhai haru');
+                    RedirectToCardPage(AppTranslations.of(context).text('payment_voucher_submission_error'));
+                    
                 }
                 setState(() {
                     isLoading = !isLoading;

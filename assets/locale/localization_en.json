@@ -34,5 +34,10 @@
   "email_address" : "Email Address",
   "description" : "Query Description",
   "cancel" : "Cancel",
-  "feedback_title" : "Fill in your query if you have any issue regarding our App"
+  "feedback_title" : "Fill in your query if you have any issue regarding our App",
+
+
+  "payment_voucher_submission" : "Your Payment Voucher Has been Submitted. Thank you",
+  "payment_voucher_submission_error" : "Submission Error Please Try again",
+  "go_back" : "Back"
 }
