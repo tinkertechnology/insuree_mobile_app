@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:card_app/blocks/auth_block.dart';
 import 'package:card_app/theme/custom_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +9,7 @@ import 'package:card_app/pages/card_details.dart';
 import 'package:card_app/common/env.dart' as env;
 import 'package:card_app/langlang/app_translation.dart';
 import 'package:card_app/langlang/application.dart';
+import 'package:provider/provider.dart';
 
 class SubmissionPage extends StatefulWidget {
     @override
@@ -21,7 +23,7 @@ class _SubmissionPageState extends State<SubmissionPage> {
     final picker = ImagePicker();
     final _formKey = GlobalKey<FormState>();
     var _passKey = GlobalKey<FormFieldState>();
-    
+    AuthBlock auth;
     @override
     void initState() {
         super.initState();
@@ -73,7 +75,7 @@ class _SubmissionPageState extends State<SubmissionPage> {
         request.files.add(new http.MultipartFile.fromBytes('file', await File.fromUri(Uri.parse(_image.path)).readAsBytes(), filename: "jpt.jpg"));
 //		request.fields['address'] = 'address';
 //		request.fields['query'] ='mutation {createVoucherPayment(file: ${Uri.parse(_image.path)}){   ok  }  }","variables":null"}';
-        request.fields['query'] ='mutation {createVoucherPayment(file: "file"){   ok  }  }';
+        request.fields['query'] ='mutation {createVoucherPayment(file: "file", insuree:"${auth.user['data']['insureeAuthOtp']['insuree']['chfId']}"){   ok  }  }';
         print(request);
         request.send().then((response) {
             print(response.stream.bytesToString().toString());
@@ -138,6 +140,7 @@ class _SubmissionPageState extends State<SubmissionPage> {
     
     @override
     Widget build(BuildContext context) {
+        auth = Provider.of<AuthBlock>(context);
         return Scaffold(
             backgroundColor: CustomTheme.lightTheme.primaryColor,
             appBar: AppBar(

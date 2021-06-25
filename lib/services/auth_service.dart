@@ -14,6 +14,7 @@ class AuthService {
   // Create storage
   final GlobalKey<NavigatorState> navigatorKey = new GlobalKey<NavigatorState>();
   Future<Map> login(UserCredential userCredential) async {
+    var q = {"query":"# {\n#   {\n#     id\n#     token\n#   }\n# }\n\n\n{\n  insureeAuthOtp(chfid:\"${userCredential.chfid}\", otp:\"${userCredential.otp}\"){\n    token\n    insuree{\n      chfId\n    }\n  }\n}\n\n\n# ","variables":null};
     final response = await http.post(Uri.parse(env.API_BASE_URL),
         headers: {
           "Content-Type": "application/json",
@@ -22,10 +23,9 @@ class AuthService {
         body:
 //        jsonEncode({"query":"\n\nquery{"
 //            "\n  insureeAuthOtp(chfid:""  \n   \"${userCredential.chfid}\", otp: \n    \"${userCredential.otp}\"\n  ){\n    id\n    token\n    \n  }\n}","variables":null}));
-        jsonEncode({"query":"# {\n#   {\n#     id\n#     token\n#   }\n# }\n\n\n{\n  insureeAuthOtp(chfid:\"${userCredential.chfid}\", otp:\"${userCredential.otp}\"){\n    token\n    insuree{\n      chfId\n    }\n  }\n}\n\n\n# ","variables":null}));
+        jsonEncode(q));
     print(jsonDecode(response.body));
 
-    print('tara baji lai lai');
 
     if (response.statusCode == 200) {
         var jdr = jsonDecode(response.body);
