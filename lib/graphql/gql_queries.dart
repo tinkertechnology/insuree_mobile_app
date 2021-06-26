@@ -111,6 +111,29 @@ class openimisGqlQueries {
             "query":"{\n  insureeProfile(insureeCHFID: \"${chfid}\"){\n   remainingDays\n    otherNames\n    lastName\n    insureePolicies{\n      policy{\n        value\n        expiryDate\n      }\n      insuree{\n        healthFacility{\n          code\n          name\n        }\n      }\n      \n    }\n  }\n}","variables":null
         };
     }
+
+
+    openimis_gql_notifications(String chfid)
+    {
+        var query="""
+        query {
+           notifications(insureeCHFID: "${chfid}"){
+                edges
+                {
+                  node{
+                    message
+                    createdAt
+                  }
+                }
+              }
+        }
+      """;
+        var _ret= {
+            "query": query, //jsonEncode(query),
+            "variables": null
+        };
+        return _ret;
+    }
     
 }
 

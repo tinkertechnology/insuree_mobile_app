@@ -1,5 +1,10 @@
+import 'package:card_app/blocks/auth_block.dart';
+import 'package:card_app/models/notifications.dart';
+import 'package:card_app/services/api_graphql_services.dart';
 import 'package:card_app/theme/custom_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:card_app/models/notifications.dart';
+import 'package:provider/provider.dart';
 
 class NotificationPage extends StatefulWidget {
   NotificationPage({Key key}) : super(key: key);
@@ -7,10 +12,14 @@ class NotificationPage extends StatefulWidget {
   _NotificationPageState createState() => _NotificationPageState();
 }
 
+
 class _NotificationPageState extends State<NotificationPage> {
   bool hasNotification = false;
+  Future<Notifications> _notifications;
+	AuthBlock auth;
   @override
   Widget build(BuildContext context) {
+		auth = Provider.of<AuthBlock>(context);
 	  return Scaffold(
 		  backgroundColor: CustomTheme.lightTheme.primaryColor,
 		  appBar: AppBar(
@@ -59,16 +68,35 @@ class _NotificationPageState extends State<NotificationPage> {
 								  topRight: Radius.circular(30)
 							  )
 						  ),
-						  child: Padding(
-							  padding: const EdgeInsets.only(left: 12.0, right: 12.0, top: 10.0),
-							  child: CustomScrollView(
-								  slivers: <Widget>[
-									  SliverList(
-										  delegate: SliverChildListDelegate(_getNotifications()),
-									  )
-								  ],
-							  ),
-						  )
+					child: FutureBuilder<Notifications>(
+									future: ApiGraphQlServices().NotificationsServicesGQL(
+											auth.user['data']['insureeAuthOtp']['token'],
+											auth.user['data']['insureeAuthOtp']['insuree']['chfId']
+									),
+									builder: (context, snapshot) {
+										if(snapshot.hasData && snapshot.data.data!=null) {
+											return ListView.builder(
+													shrinkWrap: true,
+													scrollDirection: Axis.vertical,
+													physics: NeverScrollableScrollPhysics(),
+													itemCount: snapshot.data.data.notifications.edges.length,
+													itemBuilder: (BuildContext context, int index){
+														var _notifications = snapshot.data.data.notifications.edges[index];
+														var date = "${_notifications.node.createdAt.year}-${_notifications.node.createdAt.month}-${_notifications.node.createdAt.day}";
+														return ListTile(
+															title: Text('${_notifications.node.message}'),
+															subtitle: Text('${date}'),
+															onTap: () {
+															},
+														);
+													}
+											);
+										}
+										else{
+											return Center(child: CircularProgressIndicator());
+										}
+									}
+							)
 					  )
 				  )
 			  ],
@@ -77,6 +105,7 @@ class _NotificationPageState extends State<NotificationPage> {
   }
 
   List<Widget> _getNotifications() {
+
 	  List<Widget> notifications = [];
 	  notifications.add(_getNotification(
 		  'You have memories with Taliah Rossi and Mabel Quintero to look back on today.', '3 hours ago', false));

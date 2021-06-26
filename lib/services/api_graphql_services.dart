@@ -4,6 +4,7 @@ import 'package:card_app/models/health_facility_coordinates.dart';
 import 'package:card_app/models/insuree_info.dart';
 import 'package:card_app/models/insuree_policy_information.dart';
 import 'package:card_app/models/notices.dart';
+import 'package:card_app/models/notifications.dart';
 import 'package:http/http.dart' as http;
 import 'package:card_app/models/medical_services.dart';
 import 'package:card_app/models/insuree_claims.dart';
@@ -27,6 +28,7 @@ class ApiGraphQlServices {
     Notice notices = Notice();
     Feedback feedback = Feedback();
     InsureeInfo insureeinfo = InsureeInfo();
+    Notifications notifications = Notifications();
     
     
     Future<MedicalServices> MedicalServicesGQL(String args) async {
@@ -232,6 +234,22 @@ class ApiGraphQlServices {
     }
 
 
+    Future<Notifications> NotificationsServicesGQL(String token, String chfid) async {
+        try {
+            final response = await http.post(Uri.parse(env.API_BASE_URL),
+                headers: {
+                    "Content-Type": "application/json",
+                    "Insuree-Token": '${token}'
+                },
+                body: jsonEncode(openimisGqlQueries().openimis_gql_notifications(chfid))
+            );
+            var jsonMap = json.decode(response.body);
+            notifications = Notifications.fromJson(jsonMap);
+        } catch (Exception) {
+            return  notifications;
+        }
+        return notifications;
+    }
 
 
 

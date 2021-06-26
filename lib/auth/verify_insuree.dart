@@ -405,14 +405,15 @@ class _VerifyInsureeState extends State<VerifyInsuree> {
                     }
                     var verify = await VerifyInsureeService()
                         .VerifyInsureeData(_insuree);
-                    if (verify == null) {
-                        Fluttertoast.showToast(
-                            msg: "Incorrect Details ",
-                            toastLength: Toast.LENGTH_SHORT,
-                            gravity: ToastGravity.CENTER,
-                            timeInSecForIos: 1,
-                            fontSize: 16.0);
-                    } else {
+
+//                    if (verify == null) {
+//                        Fluttertoast.showToast(
+//                            msg: "Incorrect Details ",
+//                            toastLength: Toast.LENGTH_SHORT,
+//                            gravity: ToastGravity.CENTER,
+//                            timeInSecForIos: 1,
+//                            fontSize: 16.0);
+//                    } else {
                         Fluttertoast.showToast(
                             msg: "Verify Your Otp for Login",
                             toastLength: Toast.LENGTH_SHORT,
@@ -426,7 +427,7 @@ class _VerifyInsureeState extends State<VerifyInsuree> {
                                     chfid: _insuree.chfid,
                                 ),
                             ));
-                    }
+//                    }
                 },
                 padding: EdgeInsets.all(16.0),
                 shape: RoundedRectangleBorder(
