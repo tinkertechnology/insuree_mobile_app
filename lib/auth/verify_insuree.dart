@@ -334,6 +334,7 @@ class _VerifyInsureeState extends State<VerifyInsuree> {
                                             keyboardType: TextInputType.number,
                                             obscureText: false,
                                             controller: _yearController,
+                                            maxLength: 4,
                                         )
                                     ],
                                 )),
@@ -355,6 +356,7 @@ class _VerifyInsureeState extends State<VerifyInsuree> {
                                             keyboardType: TextInputType.number,
                                             obscureText: false,
                                             controller: _monthController,
+                                            maxLength: 2,
                                         )
                                     ],
                                 )),
@@ -376,6 +378,7 @@ class _VerifyInsureeState extends State<VerifyInsuree> {
                                             keyboardType: TextInputType.number,
                                             obscureText: false,
                                             controller: _dayController,
+                                            maxLength: 2,
                                         )
                                     ],
                                 )),

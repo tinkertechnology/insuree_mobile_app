@@ -97,18 +97,18 @@ class Insuree {
   
   Gender gender;
   DateTime dob;
-  dynamic healthFacility;
+  HealthFacility healthFacility;
   
   factory Insuree.fromJson(Map<String, dynamic> json) => Insuree(
     gender: Gender.fromJson(json["gender"]),
     dob: DateTime.parse(json["dob"]),
-    healthFacility: json["healthFacility"],
+    healthFacility: HealthFacility.fromJson(json["healthFacility"]),
   );
   
   Map<String, dynamic> toJson() => {
     "gender": gender.toJson(),
     "dob": "${dob.year.toString().padLeft(4, '0')}-${dob.month.toString().padLeft(2, '0')}-${dob.day.toString().padLeft(2, '0')}",
-    "healthFacility": healthFacility,
+    "healthFacility": healthFacility.toJson(),
   };
 }
 
@@ -132,18 +132,46 @@ class Gender {
   };
 }
 
-class Policy {
-  Policy({
-    this.expiryDate,
+class HealthFacility {
+  HealthFacility({
+    this.code,
+    this.name,
   });
   
-  DateTime expiryDate;
+  String code;
+  String name;
   
-  factory Policy.fromJson(Map<String, dynamic> json) => Policy(
-    expiryDate: DateTime.parse(json["expiryDate"]),
+  factory HealthFacility.fromJson(Map<String, dynamic> json) => HealthFacility(
+    code: json["code"],
+    name: json["name"],
   );
   
   Map<String, dynamic> toJson() => {
+    "code": code,
+    "name": name,
+  };
+}
+
+class Policy {
+  Policy({
+    this.value,
+    this.expiryDate,
+    this.status,
+  });
+  
+  double value;
+  DateTime expiryDate;
+  int status;
+  
+  factory Policy.fromJson(Map<String, dynamic> json) => Policy(
+    value: json["value"],
+    expiryDate: DateTime.parse(json["expiryDate"]),
+    status: json["status"],
+  );
+  
+  Map<String, dynamic> toJson() => {
+    "value": value,
     "expiryDate": "${expiryDate.year.toString().padLeft(4, '0')}-${expiryDate.month.toString().padLeft(2, '0')}-${expiryDate.day.toString().padLeft(2, '0')}",
+    "status": status,
   };
 }
