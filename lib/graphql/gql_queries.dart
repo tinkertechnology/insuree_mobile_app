@@ -134,6 +134,25 @@ class openimisGqlQueries {
         };
         return _ret;
     }
+
+
+    openimis_gql_profile(String chfid)
+    {
+      var query="""
+       {
+          profile(insureeCHFID: "${chfid}") {
+            phone
+            email
+            photo
+          }
+        }
+      """;
+      var _ret= {
+        "query": query, //jsonEncode(query),
+        "variables": null
+      };
+      return _ret;
+    }
     
 }
 

@@ -9,6 +9,10 @@ import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
 import 'package:card_app/common/env.dart' as env;
 import 'package:provider/provider.dart';
+import 'package:card_app/models/profile.dart';
+import 'package:card_app/services/api_graphql_services.dart';
+
+
 
 class ProfileInfo extends StatefulWidget {
 	@override
