@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:card_app/blocks/auth_block.dart';
 import 'package:card_app/theme/custom_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
 import 'package:card_app/common/env.dart' as env;
+import 'package:provider/provider.dart';
 
 class ProfileInfo extends StatefulWidget {
 	@override
@@ -19,6 +21,8 @@ class _ProfileInfoState extends State<ProfileInfo> {
 	final picker = ImagePicker();
 	final _formKey = GlobalKey<FormState>();
 	var _passKey = GlobalKey<FormFieldState>();
+	bool isLoading = false;
+	AuthBlock auth;
 	@override
 	void initState() {
 		super.initState();
@@ -48,26 +52,40 @@ class _ProfileInfoState extends State<ProfileInfo> {
 			}
 		});
 	}
-	
-	Future uploadPic() async{
+
+	Future uploadProfile() async{
+		setState(() {
+			isLoading = !isLoading;
+		});
 		String url = env.API_BASE_URL;
 		var request = new http.MultipartRequest("POST", Uri.parse(url));
 //		request.headers.addAll(headers);
-		request.files.add(new http.MultipartFile.fromBytes('file', await File.fromUri(Uri.parse(_image.path)).readAsBytes(), filename: "jpt.jpg"));
+		if (_image!=null) {
+			request.files.add(new http.MultipartFile.fromBytes(
+					'file', await File.fromUri(Uri.parse(_image.path)).readAsBytes(),
+					filename: "jpt.jpg"));
+		}
 //		request.fields['address'] = 'address';
 //		request.fields['query'] ='mutation {createVoucherPayment(file: ${Uri.parse(_image.path)}){   ok  }  }","variables":null"}';
-		request.fields['query'] ='mutation {createVoucherPayment(file: "file"){   ok  }  }';
+		request.fields['query'] ='mutation {updateProfile(file: "file", email:"jpt@gmail.com", phone: "7777777777", insureeCHFID:"${auth.user['data']['insureeAuthOtp']['insuree']['chfId']}"){   ok  }  }';
 		print(request);
 		request.send().then((response) {
 			print(response.stream.bytesToString().toString());
-			if (response.statusCode == 200)
-				print("Uploaded!");
-			setState(() {
-				print("Profile Picture uploaded");
-				//_scaffoldKey.currentState.showSnackBar(SnackBar(content: Text('Profile Picture Uploaded')));
-			});
+			if (response.statusCode == 200) {
+				if (response.reasonPhrase == "OK") {
+//					RedirectToCardPage(AppTranslations.of(context).text('payment_voucher_submission'),);
+				}
+				else{
+//					RedirectToCardPage(AppTranslations.of(context).text('payment_voucher_submission_error'));
+
+				}
+				setState(() {
+					isLoading = !isLoading;
+					//_scaffoldKey.currentState.showSnackBar(SnackBar(content: Text('Profile Picture Uploaded')));
+				});
+			}
 		});
-		
+
 	}
 	
 	void _showPicker(context) {
@@ -103,6 +121,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
 	
 	@override
 	Widget build(BuildContext context) {
+		auth = Provider.of<AuthBlock>(context);
 		return Scaffold(
 			backgroundColor: Color.fromRGBO(41,127,141, 25), //mainColor,
 			appBar: AppBar(
@@ -442,7 +461,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
 						onSaved: (value) {
 							setState(() {
 								
-								uploadPic();
+								uploadProfile();
 							});
 						},
 						decoration: InputDecoration(
@@ -475,7 +494,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
 			width: double.infinity,
 			child: RaisedButton(
 				onPressed: () async {
-					uploadPic();
+					uploadProfile();
 				},
 				padding: EdgeInsets.all(16.0),
 				shape: RoundedRectangleBorder(
