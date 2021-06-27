@@ -4,6 +4,7 @@ import 'package:card_app/models/insuree.dart';
 import 'package:card_app/models/user_location.dart';
 import 'package:card_app/pages/base.dart';
 import 'package:card_app/pages/card_details.dart';
+import 'package:card_app/pages/contactus.dart';
 import 'package:card_app/pages/faq.dart';
 import 'package:card_app/pages/feedback.dart';
 import 'package:card_app/pages/service_provider.dart';
@@ -155,6 +156,9 @@ class _MyAppState extends State<MyApp> {
                             
                             // OFFICE RELATED TO HIB
                             '/offices': (BuildContext context) => OfficePage(),
+    
+                            // CONTACT US
+                            '/contact': (BuildContext context) => ContactUsPage(),
 
 
                         },

@@ -8,9 +8,17 @@ class Styles {
     static ThemeData themeData(bool isDarkTheme, BuildContext context) {
         return ThemeData(
             primarySwatch: Colors.blue,
-//            primaryColor: isDarkTheme ? Colors.black : Color(0xFF233049),
+            // primaryColor: isDarkTheme ? Colors.black : Color(0xFF233049),
             primaryColor: isDarkTheme ? Colors.black : CustomTheme.lightTheme.primaryColor,
+            
+            primaryIconTheme: Theme.of(context).primaryIconTheme.copyWith(
+                color: isDarkTheme ? Colors.black : Colors.white
+            ),
     
+            iconTheme: Theme.of(context).primaryIconTheme.copyWith(
+                color: isDarkTheme ? Colors.black : Colors.white
+            ),
+            
             accentColor: isDarkTheme ? Colors.black : CustomTheme.lightTheme.accentColor,
             
             backgroundColor: isDarkTheme ? Colors.black : Color(0xffF1F5FB),
@@ -18,9 +26,11 @@ class Styles {
             indicatorColor: isDarkTheme ? Color(0xff0E1D36) : Color(0xffCBDCF8),
             buttonColor: isDarkTheme ? Color(0xff3B3B3B) : Color(0xffF1F5FB),
             
-            hintColor: isDarkTheme ? Color(0xff280C0B) : Color(0xffEECED3),
+            // hintColor: isDarkTheme ? Color(0xff280C0B) : Color(0xffEECED3),
+            hintColor: isDarkTheme ? Colors.black : CustomTheme.lightTheme.primaryColor,
+
             
-//            highlightColor: isDarkTheme ? Color(0xff372901) : Color(0xffFCE192),
+            // highlightColor: isDarkTheme ? Color(0xff372901) : Color(0xffFCE192),
             highlightColor: isDarkTheme ? Color(0xff372901) : CustomTheme.lightTheme.primaryColor,
             hoverColor: isDarkTheme ? Color(0xff3A3A3B) : Color(0xff4285F4),
             focusColor: isDarkTheme ? Color(0xff0B2512) : Color(0xffA8DAB5),

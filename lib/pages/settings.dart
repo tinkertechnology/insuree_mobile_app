@@ -366,18 +366,23 @@ class _SettingsPageState extends State<SettingsPage> {
                     side: BorderSide(color: Colors.white70, width: 1),
                     borderRadius: BorderRadius.circular(20),
                 ),
-                child: Container(
-                    child: ListTile(
-                        title: Text(AppTranslations.of(context).text("contact_us"),),
-                        subtitle: Text(''),
-                        leading: Icon(
-                            Icons.info_outline,
-                            size: 30,
-                        ),
-                        trailing: Icon(
-                            Icons.arrow_forward_ios,
-                        ),
-                    ),
+                child: GestureDetector(
+	                onTap: (){
+	                	Navigator.pushNamed(context, '/contact');
+	                },
+	                child: Container(
+		                child: ListTile(
+			                title: Text(AppTranslations.of(context).text("contact_us"),),
+			                subtitle: Text('Have any queries? Contact us'),
+			                leading: Icon(
+				                Icons.phone_in_talk,
+				                size: 30,
+			                ),
+			                trailing: Icon(
+				                Icons.arrow_forward_ios,
+			                ),
+		                ),
+	                ),
                 )
             ),
         );
@@ -386,20 +391,20 @@ class _SettingsPageState extends State<SettingsPage> {
     Widget _buildLogoutWidget(context){
         final auth = Provider.of<AuthBlock>(context);
         return Container(
-            margin: EdgeInsets.fromLTRB(20, 4, 20, 20),
+	        margin: EdgeInsets.fromLTRB(20, 4, 20, 20),
             child: Card(
                 shape: RoundedRectangleBorder(
                     side: BorderSide(color: Colors.white70, width: 1),
                     borderRadius: BorderRadius.circular(20),
                 ),
                 child: Container(
-                    padding: EdgeInsets.only(left: 16, top: 8, right: 16),
+                    padding: EdgeInsets.only(left: 8, top: 0, right: 8),
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisSize: MainAxisSize.min,
                         children: <Widget>[
                             Container(
-                                padding: EdgeInsets.only(top: 16.0, bottom: 16.0),
+                                // padding: EdgeInsets.only(top: 16.0, bottom: 16.0),
                                 decoration: BoxDecoration(
                                     border: Border(
                                         bottom: BorderSide(color: Colors.grey.withOpacity(0.2), width: 1.0)
@@ -408,28 +413,18 @@ class _SettingsPageState extends State<SettingsPage> {
                                 child: GestureDetector(
                                     onTap: () async {
                                         await auth.logout();
-//                            bottom_nav.currentIndex = 0;
                                         Navigator.of(context)
                                             .pushNamedAndRemoveUntil('/insuree_verify', (Route<dynamic> route) => false);
                                     },
-                                    child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: <Widget>[
-                                            Expanded(
-                                                child: Row(
-                                                    children: <Widget>[
-                                                        Icon(Icons.lock_outline, size: 30,),
-                                                        SizedBox(width: 20.0),
-                                                        Text(AppTranslations.of(context).text("logout"),),
-                                                
-                                                    ],
-                                            
-                                                ),
-                                            ),
-                                        
-                                            Icon(Icons.arrow_forward_ios, size: 25)
-                                        ],
+                                    child: Container(
+	                                    child: ListTile(
+		                                    title: Text(AppTranslations.of(context).text("logout"),),
+		                                    subtitle: Text('Logout from openIMIS app'),
+		                                    leading: Icon(
+			                                    Icons.lock_outline,
+			                                    size: 30,
+		                                    ),
+	                                    ),
                                     ),
                                 )
                             ),

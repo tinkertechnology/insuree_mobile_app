@@ -119,36 +119,36 @@ class _CardDetailPageState extends State<CardDetailPage> {
         );
     }
 
-Widget _buildPopupDialog(BuildContext context) {
-  return new AlertDialog(
-    content: new Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: <Widget>[
-         Container(
-           width: 200,
-        height: 200,
-           child: QrImage(
-              data:  auth.user['data']['insureeAuthOtp']['insuree']['chfId'].toString(),//"1234567890",
-              version: QrVersions.auto,
-              size: 64.0,
-              
-          ),
-         )
-        
-      ],
-    ),
-    // actions: <Widget>[
-    //   new FlatButton(
-    //     onPressed: () {
-    //       Navigator.of(context).pop();
-    //     },
-    //     textColor: Theme.of(context).primaryColor,
-    //     // child: const Text('Close'),
-    //   ),
-    // ],
-  );
-}
+    Widget _buildPopupDialog(BuildContext context) {
+      return new AlertDialog(
+        content: new Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+             Container(
+               width: 200,
+            height: 200,
+               child: QrImage(
+                  data:  auth.user['data']['insureeAuthOtp']['insuree']['chfId'].toString(),//"1234567890",
+                  version: QrVersions.auto,
+                  size: 64.0,
+                  
+              ),
+             )
+            
+          ],
+        ),
+        // actions: <Widget>[
+        //   new FlatButton(
+        //     onPressed: () {
+        //       Navigator.of(context).pop();
+        //     },
+        //     textColor: Theme.of(context).primaryColor,
+        //     // child: const Text('Close'),
+        //   ),
+        // ],
+      );
+    }
     
     // ignore: non_constant_identifier_names
     Widget _virtualCardWidget(policyprofile, insureeProfile){
@@ -203,9 +203,9 @@ Widget _buildPopupDialog(BuildContext context) {
                                   InkWell(
                                     onTap: (){
                                        showDialog(
-              context: context,
-              builder: (BuildContext context) => _buildPopupDialog(context),
-            );
+                                          context: context,
+                                          builder: (BuildContext context) => _buildPopupDialog(context),
+                                        );
                                     },
                                     child: QrImage(
                                         data:  auth.user['data']['insureeAuthOtp']['insuree']['chfId'].toString(),//"1234567890",
@@ -264,7 +264,7 @@ Widget _buildPopupDialog(BuildContext context) {
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
                                     Text(
-                                        'जन्ममिति:' + '${insureeProfile.insuree.dob}',
+                                        'जन्ममिति:' + '${insureeProfile.insuree.dob.year}-${insureeProfile.insuree.dob.month}-${insureeProfile.insuree.dob.day}',
                                         style: TextStyle(
                                             fontSize: 16.0,
                                             fontWeight: FontWeight.normal,
@@ -294,7 +294,7 @@ Widget _buildPopupDialog(BuildContext context) {
                                     ),
                                     SizedBox(width: 8.0),
                                     Text(
-                                        'Patan' + 'Hospital',
+                                        '${insureeProfile.insuree.healthFacility.name}',
                                         style: TextStyle(
                                             fontSize: 16.0,
                                             fontWeight: FontWeight.normal,
@@ -460,8 +460,9 @@ Widget _buildPopupDialog(BuildContext context) {
                                     color: Colors.white,
                                 )
                             ),
-                    
-                            hintText: '${DateTime.parse(insureeProfile.policy.expiryDate.toString())}',
+    
+//                            hintText: '${DateTime.parse(insureeProfile.policy.expiryDate.toString())}',
+                            hintText: '${insureeProfile.policy.expiryDate.year}-${insureeProfile.policy.expiryDate.month}-${insureeProfile.policy.expiryDate.day}',
                             hintStyle: TextStyle(
                                 fontFamily: 'Open-sans'
                             ),

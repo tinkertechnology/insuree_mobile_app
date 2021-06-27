@@ -25,6 +25,8 @@ class _HomepageState extends State<Homepage> {
 	Future<Claimed> _claimed;
 	Future<ClaimedServicesItems> _claimedservicesitems;
 	AuthBlock auth;
+    dynamic insureeCardDetail;
+    // dynamic remainingDays;
 	
 	@override
 	void initState(){
@@ -96,6 +98,8 @@ class _HomepageState extends State<Homepage> {
                       var insureeinfo = snapshot.data.data.insureeProfile;
                       var insureepolicy = snapshot.data.data.insureeProfile
                           .insureePolicies[0];
+                      insureeCardDetail = insureepolicy;
+                      // remainingDays = insureeinfo;
                       return Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           mainAxisSize: MainAxisSize.min,
@@ -240,7 +244,7 @@ class _HomepageState extends State<Homepage> {
                                                 ),
                                             ),
                                             SizedBox(height: 8.0),
-                                            Text('2078-01-01')
+                                            //Text('${insureeCardDetail.policy.expiryDate}')
                                         ],
                                     ),
                                 ),
@@ -263,74 +267,14 @@ class _HomepageState extends State<Homepage> {
                                                 ),
                                                 padding: EdgeInsets.all(4),
                                                 child: Text(
-                                                    'Expiry Date',
+                                                    'Remaining Days',
                                                     style: TextStyle(
                                                         color: Colors.white
                                                     ),
                                                 ),
                                             ),
                                             SizedBox(height: 8.0),
-                                            Text('2078-01-01')
-                                        ],
-                                    ),
-                                ),
-                            ),
-                            Container(
-                                child: Card(
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(8),
-                                        side: BorderSide(color: CustomTheme.lightTheme.primaryColor)
-                                    ),
-                                    child: Column(
-                                        children: [
-                                            Container(
-                                                decoration: BoxDecoration(
-                                                    borderRadius: BorderRadius.only(
-                                                        topRight: Radius.circular(8),
-                                                        topLeft: Radius.circular(8),
-                                                    ),
-                                                    color: CustomTheme.lightTheme.primaryColor
-                                                ),
-                                                padding: EdgeInsets.all(4),
-                                                child: Text(
-                                                    'Expiry Date',
-                                                    style: TextStyle(
-                                                        color: Colors.white
-                                                    ),
-                                                ),
-                                            ),
-                                            SizedBox(height: 8.0),
-                                            Text('2078-01-01')
-                                        ],
-                                    ),
-                                ),
-                            ),
-                            Container(
-                                child: Card(
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(8),
-                                        side: BorderSide(color: CustomTheme.lightTheme.primaryColor)
-                                    ),
-                                    child: Column(
-                                        children: [
-                                            Container(
-                                                decoration: BoxDecoration(
-                                                    borderRadius: BorderRadius.only(
-                                                        topRight: Radius.circular(8),
-                                                        topLeft: Radius.circular(8),
-                                                    ),
-                                                    color: CustomTheme.lightTheme.primaryColor
-                                                ),
-                                                padding: EdgeInsets.all(4),
-                                                child: Text(
-                                                    'Expiry Date',
-                                                    style: TextStyle(
-                                                        color: Colors.white
-                                                    ),
-                                                ),
-                                            ),
-                                            SizedBox(height: 8.0),
-                                            Text('2078-01-01')
+                                            //Text('${remainingDays.lastName}')
                                         ],
                                     ),
                                 ),
