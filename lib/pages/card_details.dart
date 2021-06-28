@@ -294,7 +294,8 @@ class _CardDetailPageState extends State<CardDetailPage> {
                                     ),
                                     SizedBox(width: 8.0),
                                     Text(
-                                        '${insureeProfile.insuree.healthFacility.name}',
+                                        insureeProfile.insuree.healthFacility!=null ?
+                                        '${insureeProfile.insuree.healthFacility.name}' : Text(""),
                                         style: TextStyle(
                                             fontSize: 16.0,
                                             fontWeight: FontWeight.normal,

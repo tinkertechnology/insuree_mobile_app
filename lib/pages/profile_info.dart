@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_app/blocks/auth_block.dart';
 import 'package:card_app/theme/custom_theme.dart';
 import 'package:flutter/cupertino.dart';
@@ -146,73 +147,91 @@ class _ProfileInfoState extends State<ProfileInfo> {
 							),
 							child: Padding(
 								padding: const EdgeInsets.only(left: 12.0, right: 12.0, top: 10.0),
-								child: ListView(
-									children: [
-										SizedBox(height: 20.0),
-										// PROFILE IMAGE
-										Center(
-											child: SizedBox(
-												height: 100,
-												width: 100,
-												child: Stack(
-													children: <Widget>[
-														Ink(
-															decoration: BoxDecoration(
-																shape: BoxShape.rectangle,
-																color: Colors.transparent,
-															),
-															child: Image(
-																image: AssetImage('assets/images/100-welcome.png'),
-																fit: BoxFit.cover,
-//                                                                color: Colors.black,
-																width: 100,
+								child: FutureBuilder<Profile>(
+								  future: ApiGraphQlServices().getProfileInformation("100"),
+								  builder: (context, snapshot) {
+								  	var data = snapshot.data.data.profile;
+										if (snapshot.hasData) {
+											return ListView(
+												children: [
+													SizedBox(height: 20.0),
+													// PROFILE IMAGE
+													Center(
+														child: SizedBox(
 																height: 100,
-																alignment: Alignment.center,
-															)
+																width: 100,
+																child: Stack(
+																	children: <Widget>[
+																		Ink(
+																				decoration: BoxDecoration(
+																					shape: BoxShape.rectangle,
+																					color: Colors.transparent,
+																				),
+																				child: CachedNetworkImage(
+
+																							imageUrl:	data.photo,
+																						placeholder: (context, url) => new CircularProgressIndicator(),
+																						errorWidget: (context, url, error) => new Icon(Icons.error),
+																				),
+//																					fit: BoxFit.cover,
+//                                                                color: Colors.black,
+																					width: 100,
+																					height: 100,
+//																					alignment: Alignment.center,
+																				),
+
+																		Align(
+																			alignment: Alignment(1.5, 1.5),
+																			child: MaterialButton(
+																				minWidth: 0,
+																				child: Icon(Icons.camera_alt),
+																				onPressed: () {
+																					_imgFromCamera();
+																				},
+																				textColor: Colors.white,
+																				color: Theme
+																						.of(context)
+																						.accentColor,
+																				elevation: 0,
+																				shape: CircleBorder(),
+																			),
+																		)
+																	],
+																)
 														),
-														Align(
-															alignment: Alignment(1.5,1.5),
-															child: MaterialButton(
-																minWidth: 0,
-																child: Icon(Icons.camera_alt),
-																onPressed: (){
-																	_imgFromCamera();
-																},
-																textColor: Colors.white,
-																color: Theme.of(context).accentColor,
-																elevation: 0,
-																shape: CircleBorder(),
-															),
-														)
-													],
-												)
-											),
-										),
-										
-										// FULL NAME
-										SizedBox(height: 16.0),
-										_buildFullnameWidget(),
-										
-										// DATE OF BIRTH
-										SizedBox(height: 16.0),
-										_buildDOBWidget(),
-										
-										// ADDRESS
-										SizedBox(height: 16.0),
-										_buildAddressWidget(),
-										
-										// PHONE NUMBER
-										SizedBox(height: 16.0),
-										_buildPhoneWidget(),
-										
-										// EMAIL
-										SizedBox(height: 16.0),
-										_buildEmailWidget(),
-										
-										// SUBMIT BUTTON
-										SizedBox(height: 16.0),
-										_buildSubmitButton()
-									],
+													),
+
+													// FULL NAME
+													SizedBox(height: 16.0),
+													_buildFullnameWidget(),
+
+													// DATE OF BIRTH
+													SizedBox(height: 16.0),
+													_buildDOBWidget(),
+
+													// ADDRESS
+													SizedBox(height: 16.0),
+													_buildAddressWidget(),
+
+													// PHONE NUMBER
+													SizedBox(height: 16.0),
+													_buildPhoneWidget(data.phone),
+
+													// EMAIL
+													SizedBox(height: 16.0),
+													_buildEmailWidget(data.email),
+
+													// SUBMIT BUTTON
+													SizedBox(height: 16.0),
+													_buildSubmitButton()
+												],
+											);
+										}
+										else {
+											return Center(child: CircularProgressIndicator(),);
+										}
+									}
+
 								),
 							),
 						)
@@ -383,7 +402,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
 		);
 	}
 	
-	Widget _buildPhoneWidget(){
+	Widget _buildPhoneWidget(String phone){
 		return Container(
 			padding: EdgeInsets.symmetric(horizontal: 10.0),
 			child: Column(
@@ -423,7 +442,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
 								)
 							),
 							
-							hintText: 'Phone Number',
+							hintText: '${phone}',
 							hintStyle: TextStyle(
 								fontFamily: 'Open-sans'
 							),
@@ -437,7 +456,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
 		);
 	}
 	
-	Widget _buildEmailWidget(){
+	Widget _buildEmailWidget(String email){
 		return Container(
 			padding: EdgeInsets.symmetric(horizontal: 10.0),
 			child: Column(
@@ -478,7 +497,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
 								)
 							),
 							
-							hintText: 'Email Address',
+							hintText: '${email}',
 							hintStyle: TextStyle(
 								fontFamily: 'Open-sans'
 							),

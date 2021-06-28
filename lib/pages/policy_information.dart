@@ -50,18 +50,25 @@ class _PolicyInformationPageState extends State<PolicyInformationPage> {
 								  ),
 
 								  builder: (context, snapshot) {
-								  	if(snapshot.hasData) {
-											return ListView.builder(
-													itemCount: snapshot.data.data.insureeProfile.insureePolicies.length,
-													itemBuilder: (BuildContext context, int index) {
-														var _data = snapshot.data.data.insureeProfile.insureePolicies[index];
-														return _policyInformationListWidget(_data);
-													}
-											);
-										}
+								  	if(snapshot.connectionState==ConnectionState.done){
+												if(snapshot.hasData && snapshot.data.data!=null ) {
+													return ListView.builder(
+															itemCount: snapshot.data.data.insureeProfile.insureePolicies.length,
+															itemBuilder: (BuildContext context, int index) {
+																var _data = snapshot.data.data.insureeProfile.insureePolicies[index];
+																return _policyInformationListWidget(_data);
+															}
+													);
+												}
+
 									    else {
-									        return Center(child: CircularProgressIndicator(),);
-											}
+													return Center(child:Text("NO POLICY AVAIALBE WITH ASSOCIATED HEALTH FACILITY"));
+										}
+									    }
+								  	else {
+								  		;
+											return Center(child: CircularProgressIndicator(),);
+										}
 									  }
 								),
 							),
@@ -88,7 +95,8 @@ class _PolicyInformationPageState extends State<PolicyInformationPage> {
 					crossAxisAlignment: CrossAxisAlignment.start,
 					children: [
 						Text(
-                            '${_data.insuree.healthFacility.name}',
+							_data.insuree.healthFacility!=null ?
+							'${_data.insuree.healthFacility.name}' : Text(""),
                             style: TextStyle(
                                 fontSize: 16.0,
                                 fontWeight: FontWeight.bold,
@@ -97,7 +105,8 @@ class _PolicyInformationPageState extends State<PolicyInformationPage> {
 					],
 				),
 				leading: Text(
-                    '${_data.insuree.healthFacility.code}',
+					_data.insuree.healthFacility.code !=null ?
+					'${_data.insuree.healthFacility.code}': Text(""),
                     style: TextStyle(
                         fontSize: 14.0,
                         fontWeight: FontWeight.w400,
