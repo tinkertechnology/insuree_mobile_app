@@ -13,6 +13,7 @@ import 'package:card_app/models/claimed.dart';
 import 'package:card_app/models/insuree_claims.dart';
 import 'package:card_app/langlang/app_translation.dart';
 import 'package:provider/provider.dart';
+import 'package:card_app/helper/shared_preferences_helper.dart';
 
 class Homepage extends StatefulWidget {
   @override
@@ -26,6 +27,7 @@ class _HomepageState extends State<Homepage> {
 	Future<ClaimedServicesItems> _claimedservicesitems;
 	AuthBlock auth;
     dynamic insureeCardDetail;
+  SessionManager prefs =  SessionManager();
     // dynamic remainingDays;
 	
 	@override
@@ -99,7 +101,7 @@ class _HomepageState extends State<Homepage> {
                       var insureepolicy = snapshot.data.data.insureeProfile
                           .insureePolicies[0];
                       insureeCardDetail = insureepolicy;
-                      // remainingDays = insureeinfo;
+                      prefs.setFullname("${insureeinfo.otherNames} ${insureeinfo.lastName}");
                       return Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           mainAxisSize: MainAxisSize.min,

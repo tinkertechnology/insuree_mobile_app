@@ -12,6 +12,7 @@ import 'package:card_app/blocks/auth_block.dart';
 import 'package:card_app/langlang/app_translation.dart';
 import 'package:card_app/langlang/application.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:card_app/helper/shared_preferences_helper.dart';
 
 class SettingsPage extends StatefulWidget {
 	@override
@@ -28,6 +29,7 @@ class _SettingsPageState extends State<SettingsPage> {
 		languagesList[0]: languageCodesList[0],
 		languagesList[1]: languageCodesList[1],
 	};
+  SessionManager prefs =  SessionManager();
 
 	String label = languagesList[0];
 
@@ -36,7 +38,8 @@ class _SettingsPageState extends State<SettingsPage> {
 	final picker = ImagePicker();
 	AuthBlock auth;
 
-	Future getImage() async {
+
+  Future getImage() async {
       var image = await picker.getImage(source: ImageSource.camera);
 
       setState(() {
@@ -119,28 +122,40 @@ class _SettingsPageState extends State<SettingsPage> {
 										print('Profile Clicked');
 										Navigator.pushNamed(context, '/profile-info');
 									},
-									child: Container(
-										child: ListTile(
-											title: Text('Hari Bahadur Thapa'),
-											subtitle: Text('9841-xxx-xxx'),
-											trailing: Icon(Icons.arrow_forward_ios),
-											leading: Container(
-												padding: EdgeInsets.all(8.0),
-												child: Card(
-													semanticContainer: true,
-													clipBehavior: Clip.antiAliasWithSaveLayer,
-													child: (_image!=null)?Image.file(_image, fit: BoxFit.fill,):
-													Image.network(
-														"https://images.unsplash.com/photo-1502164980785-f8aa41d53611?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
-														fit: BoxFit.fill,
-													),
-													shape: RoundedRectangleBorder(
-														borderRadius: BorderRadius.circular(10.0),
-													),
-													// margin: EdgeInsets.all(10),
-												),
-											),
-										),
+									child: FutureBuilder<String>(
+									  future: prefs.getFullname(),
+									  builder: (context, snapshot) {
+									    var fullname = snapshot.data;
+									    if(snapshot.hasData) {
+                        return Container(
+                          child: ListTile(
+                            title: Text('${fullname}'),
+//									    		subtitle: Text('9841-xxx-xxx'),
+                            trailing: Icon(Icons.arrow_forward_ios),
+                            leading: Container(
+                              padding: EdgeInsets.all(8.0),
+                              child: Card(
+                                semanticContainer: true,
+                                clipBehavior: Clip.antiAliasWithSaveLayer,
+                                child: (_image != null) ? Image.file(
+                                  _image, fit: BoxFit.fill,) :
+                                Image.network(
+                                  "https://images.unsplash.com/photo-1502164980785-f8aa41d53611?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+                                  fit: BoxFit.fill,
+                                ),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                ),
+                                // margin: EdgeInsets.all(10),
+                              ),
+                            ),
+                          ),
+                        );
+                      }
+									    else {
+									      return Text("Profile not set");
+                      }
+									  }
 									),
 								),
 							),

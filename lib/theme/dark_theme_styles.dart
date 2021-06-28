@@ -16,7 +16,7 @@ class Styles {
             ),
     
             iconTheme: Theme.of(context).primaryIconTheme.copyWith(
-                color: isDarkTheme ? Colors.black : Colors.white
+                color: isDarkTheme ? Colors.white : Colors.black
             ),
             
             accentColor: isDarkTheme ? Colors.black : CustomTheme.lightTheme.accentColor,
