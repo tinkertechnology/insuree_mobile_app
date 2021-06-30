@@ -246,6 +246,7 @@ class _HomepageState extends State<Homepage> {
                                                 ),
                                             ),
                                             SizedBox(height: 8.0),
+                                            Text('2021-10-19')
                                             //Text('${insureeCardDetail.policy.expiryDate}')
                                         ],
                                     ),
@@ -269,13 +270,14 @@ class _HomepageState extends State<Homepage> {
                                                 ),
                                                 padding: EdgeInsets.all(4),
                                                 child: Text(
-                                                    'Remaining Days',
+                                                    'Remaining',
                                                     style: TextStyle(
                                                         color: Colors.white
                                                     ),
                                                 ),
                                             ),
                                             SizedBox(height: 8.0),
+                                            Text('125 days')
                                             //Text('${remainingDays.lastName}')
                                         ],
                                     ),

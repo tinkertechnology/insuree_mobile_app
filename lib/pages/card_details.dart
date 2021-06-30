@@ -173,47 +173,47 @@ class _CardDetailPageState extends State<CardDetailPage> {
                                 mainAxisSize: MainAxisSize.max,
                                 children: <Widget>[
                                     Image.asset(
-                                        'assets/images/openimis-logo.png',
+                                        'assets/images/nepal-embelm.png',
                                         height: 40,
                                     ),
-                                    SizedBox(width: 8.0),
+                                    SizedBox(width: 4.0),
+                                    Image.asset(
+                                        'assets/images/shs.png',
+                                        height: 40,
+                                    ),
+                                    SizedBox(width: 4.0),
                                     Column(
                                         children: [
                                             Text(
                                                 'नेपाल सरकार',
                                                 style: TextStyle(
                                                     fontSize: 14.0,
-                                                    fontWeight: FontWeight.normal,
+                                                    fontWeight: FontWeight.bold,
                                                 ),
                                             ),
                                             Text(
-                                                'सामाजिक स्वास्थ्य सुरक्षा विकास समिति',
+                                                'स्वास्थ्य बीमा बोर्ड',
                                                 style: TextStyle(
-                                                    fontSize: 14.0,
-                                                    fontWeight: FontWeight.normal,
+                                                    fontSize: 16.0,
+                                                    fontWeight: FontWeight.bold,
                                                 ),
                                             ),
                                         ],
                                     ),
                                     SizedBox(width: 8.0),
-//                                    Image.asset(
-//                                        'assets/images/openimis-logo.png',
-//                                        height: 40,
-//                                    )
-                                  InkWell(
-                                    onTap: (){
-                                       showDialog(
-                                          context: context,
-                                          builder: (BuildContext context) => _buildPopupDialog(context),
-                                        );
-                                    },
-                                    child: QrImage(
-                                        data:  auth.user['data']['insureeAuthOtp']['insuree']['chfId'].toString(),//"1234567890",
-                                        version: QrVersions.auto,
-                                        size: 64.0,
-                                        
-                                    ),
-                                  )
+                                    InkWell(
+                                        onTap: (){
+                                           showDialog(
+                                              context: context,
+                                              builder: (BuildContext context) => _buildPopupDialog(context),
+                                            );
+                                        },
+                                        child: QrImage(
+                                            data:  auth.user['data']['insureeAuthOtp']['insuree']['chfId'].toString(),//"1234567890",
+                                            version: QrVersions.auto,
+                                            size: 64.0,
+                                        ),
+                                    )
                                 ],
                             ),
                         
@@ -229,7 +229,6 @@ class _CardDetailPageState extends State<CardDetailPage> {
                                             fontWeight: FontWeight.normal,
                                         ),
                                     ),
-
                                 ],
                             ),
                         
@@ -264,14 +263,14 @@ class _CardDetailPageState extends State<CardDetailPage> {
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
                                     Text(
-                                        'जन्ममिति:' + '${insureeProfile.insuree.dob.year}-${insureeProfile.insuree.dob.month}-${insureeProfile.insuree.dob.day}',
+                                        'जन्ममिति: ' + '${insureeProfile.insuree.dob.year}-${insureeProfile.insuree.dob.month}-${insureeProfile.insuree.dob.day}',
                                         style: TextStyle(
                                             fontSize: 16.0,
                                             fontWeight: FontWeight.normal,
                                         ),
                                     ),
                                     Text(
-                                        'लिङ्ग:' + '${insureeProfile.insuree.gender.gender}',
+                                        'लिङ्ग: ' + '${insureeProfile.insuree.gender.gender}',
                                         style: TextStyle(
                                             fontSize: 16.0,
                                             fontWeight: FontWeight.normal,
@@ -502,8 +501,8 @@ class _CardDetailPageState extends State<CardDetailPage> {
             ),
         );
     }
-
-        Widget _buildBackButtonWidget(){
+    
+    Widget _buildBackButtonWidget(){
         return Container(
             padding: EdgeInsets.fromLTRB(12, 8, 12, 10),
             width: double.infinity,

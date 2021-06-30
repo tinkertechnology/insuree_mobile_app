@@ -127,34 +127,34 @@ class _SettingsPageState extends State<SettingsPage> {
 									  builder: (context, snapshot) {
 									    var fullname = snapshot.data;
 									    if(snapshot.hasData) {
-                        return Container(
-                          child: ListTile(
-                            title: Text('${fullname}'),
-//									    		subtitle: Text('9841-xxx-xxx'),
-                            trailing: Icon(Icons.arrow_forward_ios),
-                            leading: Container(
-                              padding: EdgeInsets.all(8.0),
-                              child: Card(
-                                semanticContainer: true,
-                                clipBehavior: Clip.antiAliasWithSaveLayer,
-                                child: (_image != null) ? Image.file(
-                                  _image, fit: BoxFit.fill,) :
-                                Image.network(
-                                  "https://images.unsplash.com/photo-1502164980785-f8aa41d53611?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
-                                  fit: BoxFit.fill,
-                                ),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                                // margin: EdgeInsets.all(10),
-                              ),
-                            ),
-                          ),
-                        );
-                      }
-									    else {
-									      return Text("Profile not set");
-                      }
+					                        return Container(
+					                          child: ListTile(
+					                            title: Text('${fullname}'),
+					//									    		subtitle: Text('9841-xxx-xxx'),
+					                            trailing: Icon(Icons.arrow_forward_ios),
+					                            leading: Container(
+					                              padding: EdgeInsets.all(8.0),
+					                              child: Card(
+					                                semanticContainer: true,
+					                                clipBehavior: Clip.antiAliasWithSaveLayer,
+					                                child: (_image != null) ? Image.file(
+					                                  _image, fit: BoxFit.fill,) :
+					                                Image.network(
+					                                  "https://images.unsplash.com/photo-1502164980785-f8aa41d53611?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+					                                  fit: BoxFit.fill,
+					                                ),
+					                                shape: RoundedRectangleBorder(
+					                                  borderRadius: BorderRadius.circular(10.0),
+					                                ),
+					                                // margin: EdgeInsets.all(10),
+					                              ),
+					                            ),
+					                          ),
+					                        );
+					                        }
+									        else {
+									        	return Text("Profile not set");
+					                        }
 									  }
 									),
 								),
