@@ -144,6 +144,11 @@ class openimisGqlQueries {
             phone
             email
             photo
+            insuree{
+               otherNames
+               lastName
+               validityTo
+            }
           }
         }
       """;

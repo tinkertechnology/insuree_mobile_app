@@ -1,4 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 //class SessionManager {
 //  final String auth_token = "auth_token";
@@ -35,4 +36,10 @@ class SessionManager {
     fullname = pref.getString(this.fullname) ?? "";
     return fullname;
   }
+
+  Future<void> setUserInfo(String fullname) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString(this.fullname, fullname);
+  }
 }
+

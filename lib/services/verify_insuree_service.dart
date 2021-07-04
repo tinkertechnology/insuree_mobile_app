@@ -10,7 +10,7 @@ bool isLoading=false;
     var body = {"query":"\n\nquery {\n "
         " insureeAuth(insureeCHFID: \"${_verifyInsuree.chfid.toString()}\", familyHeadCHFID: \""
         "${_verifyInsuree.fhchfid.toString()}\", dob:\"${_verifyInsuree.dob}\"){\n    id\n  }\n}"};
-    body = {"query":"\n\nquery {\n  insureeAuth(insureeCHFID: \"100\", familyHeadCHFID: \"200\", dob:\"1952-05-07\"){\n    id\n  }\n}\n","variables":null};
+    //body = {"query":"\n\nquery {\n  insureeAuth(insureeCHFID: \"100\", familyHeadCHFID: \"200\", dob:\"1952-05-07\"){\n    id\n  }\n}\n","variables":null};
     final response = await http.post(Uri.parse(env.API_BASE_URL),
         headers: {
           "Content-Type": "application/json",

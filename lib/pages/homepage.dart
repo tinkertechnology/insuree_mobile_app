@@ -14,6 +14,7 @@ import 'package:card_app/models/insuree_claims.dart';
 import 'package:card_app/langlang/app_translation.dart';
 import 'package:provider/provider.dart';
 import 'package:card_app/helper/shared_preferences_helper.dart';
+import 'package:card_app/models/profile.dart';
 
 class Homepage extends StatefulWidget {
   @override
@@ -25,25 +26,21 @@ class _HomepageState extends State<Homepage> {
 	Future<Claims> _insureeclaims;
 	Future<Claimed> _claimed;
 	Future<ClaimedServicesItems> _claimedservicesitems;
+	Future<Profile> _profile;
 	AuthBlock auth;
-    dynamic insureeCardDetail;
+	dynamic insureeCardDetail;
   SessionManager prefs =  SessionManager();
     // dynamic remainingDays;
 	
 	@override
 	void initState(){
 		super.initState();
-		
 		_medicalservices = ApiGraphQlServices().MedicalServicesGQL('medicalservice');
-		// _insureeclaims = ApiGraphQlServices().ClaimsServicesGQL();
 
 	}
 	
 	Widget build(BuildContext context) {
 	    auth = Provider.of<AuthBlock>(context);
-	    //const auth_token = auth.user['data']['insureeAuthOtp']['token'];
-//	    print(auth);
-//	    print(auth.user["data"][0]["insureeAuthOTP"]);
 		return Scaffold(
             backgroundColor: CustomTheme.lightTheme.backgroundColor.withOpacity(0.5),
             body: Stack(
@@ -111,14 +108,23 @@ class _HomepageState extends State<Homepage> {
                                       crossAxisAlignment: CrossAxisAlignment
                                           .start,
                                       children: <Widget>[
-                                          CircleAvatar(
-                                              radius: 30,
-                                              backgroundColor: Colors.white,
-                                              child: ClipOval(
-                                                  child: Image.asset(
-                                                      "assets/images/openimis-logo.png",
-                                                      fit: BoxFit.contain,),
-                                              ),
+                                          FutureBuilder<Profile>(
+                                            future: _profile,
+                                            builder: (context, snapshot) {
+                                              return CircleAvatar(
+                                                  radius: 30,
+                                                  backgroundColor: Colors.white,
+                                                  child: ClipOval(
+
+                                                      child: FadeInImage.assetNetwork(
+                                                          image: snapshot.hasData ? snapshot.data.data.profile.photo :
+                                                              "assets/images/openimis-logo.png",
+                                                          placeholder: "assets/images/openimis-logo.png",
+
+                                                          fit: BoxFit.contain,),
+                                                  ),
+                                              );
+                                            }
                                           ),
                                           SizedBox(height: 8),
                                           Expanded(
@@ -246,7 +252,7 @@ class _HomepageState extends State<Homepage> {
                                                 ),
                                             ),
                                             SizedBox(height: 8.0),
-                                            //Text('${insureeCardDetail.policy.expiryDate}')
+                                            Text('2021-10-12')
                                         ],
                                     ),
                                 ),
@@ -269,14 +275,14 @@ class _HomepageState extends State<Homepage> {
                                                 ),
                                                 padding: EdgeInsets.all(4),
                                                 child: Text(
-                                                    'Remaining Days',
+                                                    'Remaining',
                                                     style: TextStyle(
                                                         color: Colors.white
                                                     ),
                                                 ),
                                             ),
                                             SizedBox(height: 8.0),
-                                            //Text('${remainingDays.lastName}')
+                                            Text('210')
                                         ],
                                     ),
                                 ),

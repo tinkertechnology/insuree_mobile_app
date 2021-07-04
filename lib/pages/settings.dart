@@ -140,7 +140,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                 child: (_image != null) ? Image.file(
                                   _image, fit: BoxFit.fill,) :
                                 Image.network(
-                                  "https://images.unsplash.com/photo-1502164980785-f8aa41d53611?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+                                  "https://png.pngtree.com/png-vector/20191125/ourlarge/pngtree-beautiful-profile-line-vector-icon-png-image_2035279.jpg",
                                   fit: BoxFit.fill,
                                 ),
                                 shape: RoundedRectangleBorder(

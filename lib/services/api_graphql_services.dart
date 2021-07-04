@@ -16,6 +16,7 @@ import 'package:card_app/models/policy_information.dart';
 import 'package:card_app/graphql/gql_queries.dart';
 import 'package:card_app/common/env.dart' as env;
 import "package:card_app/graphql/gql_mutations.dart";
+import "package:card_app/mock_api/profile.dart";
 class ApiGraphQlServices {
     bool isLoading = false;
     MedicalServices medicalServices = MedicalServices();
@@ -291,8 +292,11 @@ class ApiGraphQlServices {
       jsonmap = jsonDecode(response.body);
       profile =  Profile.fromJson(jsonmap);
     } catch (Exception)
-    {
-      return profile;
+
+      {
+
+        return profile;
+
     }
     return profile;
   }
