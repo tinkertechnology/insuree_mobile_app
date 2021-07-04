@@ -1,6 +1,7 @@
 import 'package:card_app/blocks/auth_block.dart';
 import 'package:card_app/langlang/app_translation.dart';
 import 'package:card_app/models/insuree_info.dart';
+import 'package:card_app/pages/homepage.dart';
 import 'package:card_app/theme/custom_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -72,6 +73,8 @@ class _HistoryPageState extends State<HistoryPage> {
 														var insureeinfo = snapshot.data.data.insureeProfile;
 														var insureepolicy = snapshot.data.data.insureeProfile
 															.insureePolicies[0];
+//														insureeCardDetail = insureepolicy;
+//														prefs.setFullname("${insureeinfo.otherNames} ${insureeinfo.lastName}");
 														return Row(
 															mainAxisAlignment: MainAxisAlignment.spaceBetween,
 															mainAxisSize: MainAxisSize.min,
@@ -215,7 +218,8 @@ class _HistoryPageState extends State<HistoryPage> {
 																				),
 																			),
 																			SizedBox(height: 8.0),
-																			Text('2078-01-01')
+																			Text('2021-10-19')
+																			//Text('${insureeCardDetail.policy.expiryDate}')
 																		],
 																	),
 																),
@@ -238,74 +242,15 @@ class _HistoryPageState extends State<HistoryPage> {
 																				),
 																				padding: EdgeInsets.all(4),
 																				child: Text(
-																					'Expiry Date',
+																					'Remaining',
 																					style: TextStyle(
 																						color: Colors.white
 																					),
 																				),
 																			),
 																			SizedBox(height: 8.0),
-																			Text('2078-01-01')
-																		],
-																	),
-																),
-															),
-															Container(
-																child: Card(
-																	shape: RoundedRectangleBorder(
-																		borderRadius: BorderRadius.circular(8),
-																		side: BorderSide(color: CustomTheme.lightTheme.primaryColor)
-																	),
-																	child: Column(
-																		children: [
-																			Container(
-																				decoration: BoxDecoration(
-																					borderRadius: BorderRadius.only(
-																						topRight: Radius.circular(8),
-																						topLeft: Radius.circular(8),
-																					),
-																					color: CustomTheme.lightTheme.primaryColor
-																				),
-																				padding: EdgeInsets.all(4),
-																				child: Text(
-																					'Expiry Date',
-																					style: TextStyle(
-																						color: Colors.white
-																					),
-																				),
-																			),
-																			SizedBox(height: 8.0),
-																			Text('2078-01-01')
-																		],
-																	),
-																),
-															),
-															Container(
-																child: Card(
-																	shape: RoundedRectangleBorder(
-																		borderRadius: BorderRadius.circular(8),
-																		side: BorderSide(color: CustomTheme.lightTheme.primaryColor)
-																	),
-																	child: Column(
-																		children: [
-																			Container(
-																				decoration: BoxDecoration(
-																					borderRadius: BorderRadius.only(
-																						topRight: Radius.circular(8),
-																						topLeft: Radius.circular(8),
-																					),
-																					color: CustomTheme.lightTheme.primaryColor
-																				),
-																				padding: EdgeInsets.all(4),
-																				child: Text(
-																					'Expiry Date',
-																					style: TextStyle(
-																						color: Colors.white
-																					),
-																				),
-																			),
-																			SizedBox(height: 8.0),
-																			Text('2078-01-01')
+																			Text('125 days')
+																			//Text('${remainingDays.lastName}')
 																		],
 																	),
 																),
@@ -395,5 +340,6 @@ class _HistoryPageState extends State<HistoryPage> {
 				],
 			),
 		);
+		
 	}
 }

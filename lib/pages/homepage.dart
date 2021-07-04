@@ -252,7 +252,8 @@ class _HomepageState extends State<Homepage> {
                                                 ),
                                             ),
                                             SizedBox(height: 8.0),
-                                            Text('2021-10-12')
+                                            Text('2021-10-19')
+                                            //Text('${insureeCardDetail.policy.expiryDate}')
                                         ],
                                     ),
                                 ),
@@ -282,7 +283,8 @@ class _HomepageState extends State<Homepage> {
                                                 ),
                                             ),
                                             SizedBox(height: 8.0),
-                                            Text('210')
+                                            Text('125 days')
+                                            //Text('${remainingDays.lastName}')
                                         ],
                                     ),
                                 ),
