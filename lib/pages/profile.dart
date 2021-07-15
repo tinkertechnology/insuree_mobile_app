@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_app/blocks/auth_block.dart';
 import 'package:card_app/mock_api/profile.dart';
+import 'package:card_app/models/insuree_info.dart';
 import 'package:card_app/theme/custom_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -29,17 +30,15 @@ class _ProfileInfoState extends State<ProfileInfo> {
 	var _passKey = GlobalKey<FormFieldState>();
 	TextEditingController phoneController = TextEditingController();
 	TextEditingController emailController = TextEditingController();
-	Future<Profile> _profile;
+
 	var abc;
 	bool isLoading = false;
 	AuthBlock auth;
 	@override
 	void initState() {
 		super.initState();
-		_profile = ApiGraphQlServices().getProfileInformation("100");
-		print('noob');
 	}
-	
+
 	_imgFromCamera() async {
 		// File image = (await _picker.getImage(source: ImageSource.camera, imageQuality: 50)) as File;  // await ImagePicker.getImage(
 		//source: ImageSource.camera, imageQuality: 50
@@ -77,8 +76,6 @@ class _ProfileInfoState extends State<ProfileInfo> {
 					'file', await File.fromUri(Uri.parse(_image.path)).readAsBytes(),
 					filename: "jpt.jpg"));
 		}
-//		request.fields['address'] = 'address';
-//		request.fields['query'] ='mutation {createVoucherPayment(file: ${Uri.parse(_image.path)}){   ok  }  }","variables":null"}';
 		request.fields['query'] ='mutation {updateProfile(file: "file", email:"${emailController.text}", phone: "${phoneController.text}", insureeCHFID:"${auth.user['data']['insureeAuthOtp']['insuree']['chfId']}"){   ok  }  }';
 		print(request);
 		request.send().then((response) {
@@ -99,7 +96,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
 		});
 
 	}
-	
+
 	void _showPicker(context) {
 		showModalBottomSheet(
 			context: context,
@@ -130,7 +127,40 @@ class _ProfileInfoState extends State<ProfileInfo> {
 			}
 		);
 	}
-	
+
+	Widget _imageCardWidget(){
+		return GestureDetector(
+			onTap: (){
+				_showPicker(context);
+			},
+			child: Card(
+				child: Image.file(
+					_image,
+					fit: BoxFit.fill,
+				),
+			),
+		);
+	}
+
+	Widget _addImageCardWidget(){
+		return GestureDetector(
+			onTap: (){
+				_showPicker(context);
+			},
+//			child: Card(
+//				elevation: 3.0,
+//				child: Container(
+//						height: 120,
+//						width: 120,
+//						child: Center(
+//							child: Icon(Icons.note_add, size: 30, color: Colors.grey.withOpacity(0.5),),
+//						)
+//				),
+//			),
+		);
+	}
+
+
 	@override
 	Widget build(BuildContext context) {
 		auth = Provider.of<AuthBlock>(context);
@@ -141,7 +171,8 @@ class _ProfileInfoState extends State<ProfileInfo> {
 				title: Text('Profile'),
 				backgroundColor: Color.fromRGBO(41,127,141, 0), //mainColor,
 			),
-			body: Column(
+			body: isLoading ? Center(child: CircularProgressIndicator(),) :
+			Column(
 				children: <Widget>[
 					Expanded(
 						child: Container(
@@ -154,14 +185,15 @@ class _ProfileInfoState extends State<ProfileInfo> {
 							),
 							child: Padding(
 								padding: const EdgeInsets.only(left: 12.0, right: 12.0, top: 10.0),
-								child: FutureBuilder<Profile>(
-								  future: _profile,
+								child: FutureBuilder<InsureeData>(
+								  future: ApiGraphQlServices().InsureeInfoServicesGQL(
+										auth.user['data']['insureeAuthOtp']['token'],
+										auth.user['data']['insureeAuthOtp']['insuree']['chfId'].toString(),
+									),
 								  builder: (context, snapshot) {
-										if (snapshot.data.data!=null) {
-												abc = snapshot.data.data.profile;
-										}
 										if (snapshot.hasData) {
 											return ListView(
+
 												children: [
 													SizedBox(height: 20.0),
 													// PROFILE IMAGE
@@ -178,33 +210,35 @@ class _ProfileInfoState extends State<ProfileInfo> {
 																				),
 																				child: CachedNetworkImage(
 
-																							imageUrl:	"https://cdn.sstatic.net/Img/teams/teams-illo-free-sidebar-promo.svg?v=47faa659a05e",
+																						imageUrl:	snapshot.data.data.profile.photo, //"https://cdn.sstatic.net/Img/teams/teams-illo-free-sidebar-promo.svg?v=47faa659a05e",
 																						placeholder: (context, url) => new CircularProgressIndicator(),
 																						errorWidget: (context, url, error) => new Icon(Icons.error),
-																				),
-//																					fit: BoxFit.cover,
-//                                                                color: Colors.black,
-																					width: 100,
-																					height: 100,
-//																					alignment: Alignment.center,
+																						fit: BoxFit.fill
 																				),
 
-																		Align(
-																			alignment: Alignment(1.5, 1.5),
-																			child: MaterialButton(
-																				minWidth: 0,
-																				child: Icon(Icons.camera_alt),
-																				onPressed: () {
-																					_imgFromCamera();
-																				},
-																				textColor: Colors.white,
-																				color: Theme
-																						.of(context)
-																						.accentColor,
-																				elevation: 0,
-																				shape: CircleBorder(),
-																			),
-																		)
+//                                                                color: Colors.black,
+
+//																					alignment: Alignment.center,
+																				),
+																		_image != null ?
+																		_imageCardWidget()
+																				: _addImageCardWidget(),
+//																		Align(
+//																			alignment: Alignment(1.5, 1.5),
+//																			child: MaterialButton(
+//																				minWidth: 0,
+//																				child: Icon(Icons.camera_alt),
+//																				onPressed: () {
+//																					_imageCardWidget();
+//																				},
+//																				textColor: Colors.white,
+//																				color: Theme
+//																						.of(context)
+//																						.accentColor,
+//																				elevation: 0,
+//																				shape: CircleBorder(),
+//																			),
+//																		)
 																	],
 																)
 														),
@@ -216,19 +250,19 @@ class _ProfileInfoState extends State<ProfileInfo> {
 
 													// DATE OF BIRTH
 													SizedBox(height: 16.0),
-													_buildDOBWidget(),
+													_buildDOBWidget(snapshot.data.data.profile.insuree.dob),
 
 													// ADDRESS
 													SizedBox(height: 16.0),
-													_buildAddressWidget(),
+													_buildAddressWidget(snapshot.data.data.profile.insuree.currentAddress),
 
 													// PHONE NUMBER
 													SizedBox(height: 16.0),
-													_buildPhoneWidget(abc!=null ? abc.phone : " "),
+													_buildPhoneWidget(snapshot.data.data.profile.phone),
 
 													// EMAIL
 													SizedBox(height: 16.0),
-													_buildEmailWidget(abc!=null ? abc.email : " "),
+													_buildEmailWidget(snapshot.data.data.profile.email),
 
 													// SUBMIT BUTTON
 													SizedBox(height: 16.0),
@@ -303,7 +337,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
 		);
 	}
 	
-	Widget _buildDOBWidget(){
+	Widget _buildDOBWidget(dob){
 		return Container(
 			padding: EdgeInsets.symmetric(horizontal: 10.0),
 			child: Column(
@@ -343,7 +377,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
 								)
 							),
 							
-							hintText: 'DOB',
+							hintText: '${dob}',
 							hintStyle: TextStyle(
 								fontFamily: 'Open-sans'
 							),
@@ -357,7 +391,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
 		);
 	}
 	
-	Widget _buildAddressWidget(){
+	Widget _buildAddressWidget(current_address){
 		return Container(
 			padding: EdgeInsets.symmetric(horizontal: 10.0),
 			child: Column(
@@ -397,7 +431,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
 								)
 							),
 							
-							hintText: 'Address',
+							hintText: '${current_address}',
 							hintStyle: TextStyle(
 								fontFamily: 'Open-sans'
 							),
@@ -411,7 +445,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
 		);
 	}
 	
-	Widget _buildPhoneWidget(String phone){
+	Widget _buildPhoneWidget(String phone_number){
 		return Container(
 			padding: EdgeInsets.symmetric(horizontal: 10.0),
 			child: Column(
@@ -453,7 +487,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
 								)
 							),
 							
-							hintText: '${phone}',
+							hintText: '${phone_number}',
 							hintStyle: TextStyle(
 								fontFamily: 'Open-sans'
 							),

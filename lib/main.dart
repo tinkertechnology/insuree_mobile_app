@@ -12,7 +12,7 @@ import 'package:card_app/pages/notice.dart';
 import 'package:card_app/pages/notification.dart';
 import 'package:card_app/pages/office.dart';
 import 'package:card_app/pages/policy_information.dart';
-import 'package:card_app/pages/profile_info.dart';
+import 'package:card_app/pages/profile.dart';
 import 'package:card_app/pages/userhistory.dart';
 import 'package:card_app/theme/dark_theme_provider.dart';
 import 'package:card_app/theme/dark_theme_styles.dart';

@@ -29,9 +29,9 @@ class ApiGraphQlServices {
     InsureePolicyInformation insureepolicyinformation = InsureePolicyInformation();
     Notice notices = Notice();
     Feedback feedback = Feedback();
-    InsureeInfo insureeinfo = InsureeInfo();
+    InsureeData insureedata = InsureeData();
     Notifications notifications = Notifications();
-    Profile profile = Profile();
+
     
     
     Future<MedicalServices> MedicalServicesGQL(String args) async {
@@ -219,7 +219,7 @@ class ApiGraphQlServices {
         return notices;
     }
 
-    Future<InsureeInfo> InsureeInfoServicesGQL(String token, String chfid) async {
+    Future<InsureeData> InsureeInfoServicesGQL(String token, String chfid) async {
         try {
             final response = await http.post(Uri.parse(env.API_BASE_URL),
                 headers: {
@@ -229,11 +229,11 @@ class ApiGraphQlServices {
                 body: jsonEncode(openimisGqlQueries().openimis_gql_insuree_info(chfid))
             );
             var jsonMap = json.decode(response.body);
-            insureeinfo = InsureeInfo.fromJson(jsonMap);
+            insureedata = InsureeData.fromJson(jsonMap);
         } catch (Exception) {
-            return  insureeinfo;
+            return  insureedata;
         }
-        return insureeinfo;
+        return insureedata;
     }
 
 
@@ -279,26 +279,26 @@ class ApiGraphQlServices {
 
 
 
-  Future<Profile>  getProfileInformation(String chfid) async {
-    var jsonmap;
-    try {
-      final response = await http.post(Uri.parse(env.API_BASE_URL),
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: jsonEncode(
-              openimisGqlQueries().openimis_gql_profile(chfid))
-      );
-      jsonmap = jsonDecode(response.body);
-      profile =  Profile.fromJson(jsonmap);
-    } catch (Exception)
-
-      {
-
-        return profile;
-
-    }
-    return profile;
-  }
+//  Future<Profile>  getProfileInformation(String chfid) async {
+//    var jsonmap;
+//    try {
+//      final response = await http.post(Uri.parse(env.API_BASE_URL),
+//          headers: {
+//            "Content-Type": "application/json",
+//          },
+//          body: jsonEncode(
+//              openimisGqlQueries().openimis_gql_profile(chfid))
+//      );
+//      jsonmap = jsonDecode(response.body);
+//      profile =  Profile.fromJson(jsonmap);
+//    } catch (Exception)
+//
+//      {
+//
+//        return profile;
+//
+//    }
+//    return profile;
+//  }
     
 }

@@ -102,7 +102,7 @@ class _CardDetailPageState extends State<CardDetailPage> {
                                                 
                                                     // RENEW SUBMISSION BUTTON
                                                     SizedBox(height: 20.0),
-                                                    differenceInDays <=60 ?
+                                                    differenceInDays >0 ?
                                                     _buildRenewButtonWidget() : Text(""),
                                                     widget.message!=null?
                                                     _buildBackButtonWidget() : Text(""),
