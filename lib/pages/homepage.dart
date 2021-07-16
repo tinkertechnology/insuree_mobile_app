@@ -1,6 +1,7 @@
 import 'package:card_app/blocks/auth_block.dart';
 import 'package:card_app/models/insuree_info.dart';
 import 'package:card_app/pages/exploreServices.dart';
+import 'package:card_app/services/bottom_nav_bar_service.dart';
 import 'package:flutter/material.dart';
 import 'package:card_app/pages/claimed_item_services.dart';
 import 'package:card_app/screen_size_reducers.dart';
@@ -14,7 +15,8 @@ import 'package:card_app/models/insuree_claims.dart';
 import 'package:card_app/langlang/app_translation.dart';
 import 'package:provider/provider.dart';
 import 'package:card_app/helper/shared_preferences_helper.dart';
-import 'package:card_app/models/profile.dart';
+
+
 
 class Homepage extends StatefulWidget {
   @override
@@ -40,6 +42,7 @@ class _HomepageState extends State<Homepage> {
 	
 	Widget build(BuildContext context) {
 	    auth = Provider.of<AuthBlock>(context);
+      final bottom_nav = Provider.of<BottomNavigationBarProvider>(context);
 		return Scaffold(
             backgroundColor: CustomTheme.lightTheme.backgroundColor.withOpacity(0.5),
             body: Stack(
@@ -76,17 +79,12 @@ class _HomepageState extends State<Homepage> {
                         ),
                     ),
                     
-                    ExploreServicesPage(),
+                    bottom_nav.currentIndex== 0 ? ExploreServicesPage() : Text(""),
                 ],
             ),
         );
 	}
-	getRemainingDays(remaining_days){
-    return remaining_days;
 
-  }
-
-	
 	Widget _InsureeInfoWidget(snapshot){
 	    return Container(
             height: screenHeight(context, dividedBy: 4), //220,
@@ -281,7 +279,7 @@ class _HomepageState extends State<Homepage> {
                                                 ),
                                             ),
                                             SizedBox(height: 8.0),
-                                            Text('${snapshot.data.data.profile.insuree.insureePolicies[0].policy.expiryDate}')
+                                            Text('  ${snapshot.data.data.profile.insuree.insureePolicies[0].policy.expiryDate.year}-${snapshot.data.data.profile.insuree.insureePolicies[0].policy.expiryDate.month}-${snapshot.data.data.profile.insuree.insureePolicies[0].policy.expiryDate.day}  ')
                                             //Text('${remainingDays.lastName}')
                                         ],
                                     ),
