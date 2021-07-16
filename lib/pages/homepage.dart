@@ -15,6 +15,7 @@ import 'package:card_app/models/insuree_claims.dart';
 import 'package:card_app/langlang/app_translation.dart';
 import 'package:provider/provider.dart';
 import 'package:card_app/helper/shared_preferences_helper.dart';
+import 'package:card_app/common/loaders.dart';
 
 
 
@@ -56,8 +57,13 @@ class _HomepageState extends State<Homepage> {
                                             auth.user['data']['insureeAuthOtp']['insuree']['chfId']
                                         ),
                                   builder: (context, snapshot) {
-                                      if (snapshot.hasData) {
+                                      if (snapshot.connectionState != ConnectionState.done) {
+                                        return Container(child: Center(child: CircularProgressIndicator()));
 
+                                      }
+                                      if (snapshot.hasData ) {
+                                          prefs.setFullname("${snapshot.data.data.profile.insuree.otherNames} ${snapshot.data.data.profile.insuree.lastName}");
+                                          prefs.setImage("${snapshot.data.data.profile.photo}");
                                           return Stack(
                                               children: [
                                                   // OPENIMIS LOGO & CURRENT BALANCE
@@ -67,6 +73,9 @@ class _HomepageState extends State<Homepage> {
                                                   _InsureeCardWidget(snapshot),
                                               ],
                                           );
+                                      }
+                                      if (snapshot.hasError){
+                                        return Center(child: Text("${snapshot.error.toString()}"));
                                       }
                                       else {
                                           return Center(child: CircularProgressIndicator(),);
@@ -349,6 +358,9 @@ class _HomepageState extends State<Homepage> {
                                         );
                                     }
                                 );
+                            }
+                            if(snapshot.hasError){
+                              return Center(child: CircularProgressIndicator());
                             }
                             else{
                                 return Center(child: CircularProgressIndicator());

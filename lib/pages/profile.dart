@@ -209,10 +209,10 @@ class _ProfileInfoState extends State<ProfileInfo> {
 																					color: Colors.transparent,
 																				),
 																				child: CachedNetworkImage(
-
+                                            
 																						imageUrl:	snapshot.data.data.profile.photo, //"https://cdn.sstatic.net/Img/teams/teams-illo-free-sidebar-promo.svg?v=47faa659a05e",
 																						placeholder: (context, url) => new CircularProgressIndicator(),
-																						errorWidget: (context, url, error) => new Icon(Icons.error),
+																						errorWidget: (context, url, error) =>  _image==null ? new Image.asset('assets/images/openimis-logo.png') : _addImageCardWidget(),
 																						fit: BoxFit.fill
 																				),
 
