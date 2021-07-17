@@ -106,11 +106,46 @@ class openimisGqlQueries {
     }
 
 
-    openimis_gql_insuree_info (String chfid){
-        return {
-            "query":"{\n  insureeProfile(insureeCHFID: \"${chfid}\"){\n   remainingDays\n    otherNames\n    lastName\n    insureePolicies{\n      policy{\n        value\n        expiryDate\n      }\n      insuree{\n        healthFacility{\n          code\n          name\n        }\n      }\n      \n    }\n  }\n}","variables":null
-        };
+    openimis_gql_insuree_info (String chfid)
+    {
+      var query="""
+        query {
+           profile(insureeCHFID: "${chfid}"){
+             phone
+                email
+                photo
+                remainingDays
+                insuree {
+                  insureePolicies {
+                    policy {
+                      value
+                      expiryDate
+                    }
+                  }
+                  otherNames
+                  lastName
+                  dob
+                  currentAddress
+                  validityTo
+                  healthFacility {
+                    name
+                  }
+                }
+              }
+        }
+      """;
+      var _ret= {
+        "query": query, //jsonEncode(query),
+        "variables": null
+      };
+      return _ret;
     }
+
+    ///{
+//        return {
+//            "query":"{\n  insureeProfile(insureeCHFID: \"${chfid}\"){\n   remainingDays\n    otherNames\n    lastName\n    insureePolicies{\n      policy{\n        value\n        expiryDate\n      }\n      insuree{\n        healthFacility{\n          code\n          name\n        }\n      }\n      \n    }\n  }\n}","variables":null
+//        };
+   // }
 
 
     openimis_gql_notifications(String chfid)
@@ -144,6 +179,13 @@ class openimisGqlQueries {
             phone
             email
             photo
+            insuree{
+               otherNames
+               lastName
+               dob
+               currentAddress
+               validityTo
+            }
           }
         }
       """;

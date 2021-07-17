@@ -19,6 +19,7 @@ class _CardDetailPageState extends State<CardDetailPage> {
     AuthBlock auth;
     Future<PolicyInformation> _policyinformation;
     final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+    DateTime dateTimeNow = DateTime.now();
     
     @override
     void initState() {
@@ -81,6 +82,7 @@ class _CardDetailPageState extends State<CardDetailPage> {
                                         if(snapshot.hasData) {
                                             var policyprofile = snapshot.data.data.insureeProfile;
                                             var insureeProfile = snapshot.data.data.insureeProfile.insureePolicies[0];
+                                            var differenceInDays = dateTimeNow.difference(insureeProfile.policy.expiryDate).inDays;
                                             return ListView(
                                                 children: [
                                                     // CARD
@@ -100,7 +102,8 @@ class _CardDetailPageState extends State<CardDetailPage> {
                                                 
                                                     // RENEW SUBMISSION BUTTON
                                                     SizedBox(height: 20.0),
-                                                    _buildRenewButtonWidget(),
+                                                    differenceInDays >0 ?
+                                                    _buildRenewButtonWidget() : Text(""),
                                                     widget.message!=null?
                                                     _buildBackButtonWidget() : Text(""),
                                                 ],

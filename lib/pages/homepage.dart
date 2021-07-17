@@ -1,6 +1,7 @@
 import 'package:card_app/blocks/auth_block.dart';
 import 'package:card_app/models/insuree_info.dart';
 import 'package:card_app/pages/exploreServices.dart';
+import 'package:card_app/services/bottom_nav_bar_service.dart';
 import 'package:flutter/material.dart';
 import 'package:card_app/pages/claimed_item_services.dart';
 import 'package:card_app/screen_size_reducers.dart';
@@ -14,6 +15,9 @@ import 'package:card_app/models/insuree_claims.dart';
 import 'package:card_app/langlang/app_translation.dart';
 import 'package:provider/provider.dart';
 import 'package:card_app/helper/shared_preferences_helper.dart';
+import 'package:card_app/common/loaders.dart';
+
+
 
 class Homepage extends StatefulWidget {
   @override
@@ -26,24 +30,20 @@ class _HomepageState extends State<Homepage> {
 	Future<Claimed> _claimed;
 	Future<ClaimedServicesItems> _claimedservicesitems;
 	AuthBlock auth;
-    dynamic insureeCardDetail;
+	dynamic insureeCardDetail;
   SessionManager prefs =  SessionManager();
     // dynamic remainingDays;
 	
 	@override
 	void initState(){
 		super.initState();
-		
 		_medicalservices = ApiGraphQlServices().MedicalServicesGQL('medicalservice');
-		// _insureeclaims = ApiGraphQlServices().ClaimsServicesGQL();
 
 	}
 	
 	Widget build(BuildContext context) {
 	    auth = Provider.of<AuthBlock>(context);
-	    //const auth_token = auth.user['data']['insureeAuthOtp']['token'];
-//	    print(auth);
-//	    print(auth.user["data"][0]["insureeAuthOTP"]);
+      final bottom_nav = Provider.of<BottomNavigationBarProvider>(context);
 		return Scaffold(
             backgroundColor: CustomTheme.lightTheme.backgroundColor.withOpacity(0.5),
             body: Stack(
@@ -51,27 +51,50 @@ class _HomepageState extends State<Homepage> {
                     SingleChildScrollView(
                         child: Column(
                             children: [
-                                Stack(
-                                    children: [
-                                        // OPENIMIS LOGO & CURRENT BALANCE
-                                        _InsureeInfoWidget(),
-                            
-                                        // CARD
-                                        _InsureeCardWidget(),
-                                    ],
+                                FutureBuilder<InsureeData>(
+                                  future: ApiGraphQlServices().InsureeInfoServicesGQL(
+                                            auth.user['data']['insureeAuthOtp']['token'],
+                                            auth.user['data']['insureeAuthOtp']['insuree']['chfId']
+                                        ),
+                                  builder: (context, snapshot) {
+                                      if (snapshot.connectionState != ConnectionState.done) {
+                                        return Container(child: Center(child: CircularProgressIndicator()));
+
+                                      }
+                                      if (snapshot.hasData ) {
+                                          prefs.setFullname("${snapshot.data.data.profile.insuree.otherNames} ${snapshot.data.data.profile.insuree.lastName}");
+                                          prefs.setImage("${snapshot.data.data.profile.photo}");
+                                          return Stack(
+                                              children: [
+                                                  // OPENIMIS LOGO & CURRENT BALANCE
+                                                  _InsureeInfoWidget(snapshot),
+
+                                                  // CARD
+                                                  _InsureeCardWidget(snapshot),
+                                              ],
+                                          );
+                                      }
+                                      if (snapshot.hasError){
+                                        return Center(child: Text("${snapshot.error.toString()}"));
+                                      }
+                                      else {
+                                          return Center(child: CircularProgressIndicator(),);
+                                      }
+                                  }
+
                                 ),
                                 _ClaimHistoryWidget(),
                             ],
                         ),
                     ),
                     
-                    ExploreServicesPage(),
+                    bottom_nav.currentIndex== 0 ? ExploreServicesPage() : Text(""),
                 ],
             ),
         );
 	}
-	
-	Widget _InsureeInfoWidget(){
+
+	Widget _InsureeInfoWidget(snapshot){
 	    return Container(
             height: screenHeight(context, dividedBy: 4), //220,
             padding: EdgeInsets.all(20),
@@ -90,19 +113,8 @@ class _HomepageState extends State<Homepage> {
                     ]
                 ),
             ),
-            child: FutureBuilder<InsureeInfo>(
-              future: ApiGraphQlServices().InsureeInfoServicesGQL(
-                  auth.user['data']['insureeAuthOtp']['token'],
-                  auth.user['data']['insureeAuthOtp']['insuree']['chfId']
-              ),
-              builder: (context, snapshot) {
-                  if(snapshot.hasData && snapshot.data.data.insureeProfile!=null) {
-                      var insureeinfo = snapshot.data.data.insureeProfile;
-                      var insureepolicy = snapshot.data.data.insureeProfile
-                          .insureePolicies[0];
-                      insureeCardDetail = insureepolicy;
-                      prefs.setFullname("${insureeinfo.otherNames} ${insureeinfo.lastName}");
-                      return Row(
+            child:
+                       Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           mainAxisSize: MainAxisSize.min,
                           children: <Widget>[
@@ -111,19 +123,25 @@ class _HomepageState extends State<Homepage> {
                                       crossAxisAlignment: CrossAxisAlignment
                                           .start,
                                       children: <Widget>[
-                                          CircleAvatar(
-                                              radius: 30,
-                                              backgroundColor: Colors.white,
-                                              child: ClipOval(
-                                                  child: Image.asset(
-                                                      "assets/images/openimis-logo.png",
-                                                      fit: BoxFit.contain,),
+                                               CircleAvatar(
+                                                  radius: 30,
+                                                  backgroundColor: Colors.white,
+                                                  child: ClipOval(
+
+                                                      child: FadeInImage.assetNetwork(
+                                                          image: snapshot.hasData ? snapshot.data.data.profile.photo:
+                                                              "assets/images/openimis-logo.png",
+                                                          placeholder: "assets/images/openimis-logo.png",
+
+                                                          fit: BoxFit.contain,),
+                                                  ),
                                               ),
-                                          ),
+
+
                                           SizedBox(height: 8),
                                           Expanded(
                                               child: Text(
-                                                  '${insureeinfo.lastName} ${insureeinfo.otherNames} ',
+                                                  '${snapshot.data.data.profile.insuree.otherNames} ${snapshot.data.data.profile.insuree.lastName}',
                                                   style: TextStyle(
                                                       fontSize: 14,
                                                       fontWeight: FontWeight
@@ -158,7 +176,7 @@ class _HomepageState extends State<Homepage> {
                                           ),
                                           SizedBox(height: 8.0),
                                           Text(
-                                              '${insureepolicy.policy.value}',
+                                              '${snapshot.data.data.profile.insuree.insureePolicies[0].policy.value}',
                                               style: TextStyle(
                                                   fontSize: 16,
                                                   fontWeight: FontWeight.bold,
@@ -173,7 +191,7 @@ class _HomepageState extends State<Homepage> {
                                           ),
                                           SizedBox(height: 4.0),
                                           Text(
-                                              '${insureepolicy.policy.expiryDate.year}-${insureepolicy.policy.expiryDate.month}-${insureepolicy.policy.expiryDate.day}',
+                                              '${123}',
                                               style: TextStyle(
                                                   fontSize: 14,
                                                   fontWeight: FontWeight.normal,
@@ -182,7 +200,7 @@ class _HomepageState extends State<Homepage> {
                                           ),
                                           SizedBox(height: 8.0),
                                           Text(
-                                              '${insureepolicy.insuree.healthFacility ?? "N/A"}',
+                                              '${snapshot.data.data.profile.insuree.healthFacility.name ?? "N/A"}',
                                               style: TextStyle(
                                                   fontSize: 14,
                                                   fontWeight: FontWeight.normal,
@@ -193,20 +211,13 @@ class _HomepageState extends State<Homepage> {
                                   ),
                               ),
                           ],
-                      );
+                      )
+      );
                   }
-                  else if(snapshot.hasError){
-                      return(Center(child: CircularProgressIndicator(),));
-                  }
-                  else {
-                      return(Center(child: CircularProgressIndicator()));
-                  }
-                  }
-            ),
-        );
-    }
+
+
     
-    Widget _InsureeCardWidget(){
+    Widget _InsureeCardWidget(snapshot){
 	    return Container(
             height: 100,
             padding: EdgeInsets.all(8.0),
@@ -239,14 +250,14 @@ class _HomepageState extends State<Homepage> {
                                                 ),
                                                 padding: EdgeInsets.all(4),
                                                 child: Text(
-                                                    'Expiry Date',
+                                                    'Remaining',
                                                     style: TextStyle(
                                                         color: Colors.white
                                                     ),
                                                 ),
                                             ),
                                             SizedBox(height: 8.0),
-                                            Text('2021-10-19')
+                                            Text('${snapshot.data.data.profile.remainingDays}')
                                             //Text('${insureeCardDetail.policy.expiryDate}')
                                         ],
                                     ),
@@ -270,14 +281,14 @@ class _HomepageState extends State<Homepage> {
                                                 ),
                                                 padding: EdgeInsets.all(4),
                                                 child: Text(
-                                                    'Remaining',
+                                                    'Expiry',
                                                     style: TextStyle(
                                                         color: Colors.white
                                                     ),
                                                 ),
                                             ),
                                             SizedBox(height: 8.0),
-                                            Text('125 days')
+                                            Text('  ${snapshot.data.data.profile.insuree.insureePolicies[0].policy.expiryDate.year}-${snapshot.data.data.profile.insuree.insureePolicies[0].policy.expiryDate.month}-${snapshot.data.data.profile.insuree.insureePolicies[0].policy.expiryDate.day}  ')
                                             //Text('${remainingDays.lastName}')
                                         ],
                                     ),
@@ -347,6 +358,9 @@ class _HomepageState extends State<Homepage> {
                                         );
                                     }
                                 );
+                            }
+                            if(snapshot.hasError){
+                              return Center(child: CircularProgressIndicator());
                             }
                             else{
                                 return Center(child: CircularProgressIndicator());

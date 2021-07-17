@@ -27,25 +27,23 @@ class _ExploreServicesPageState extends State<ExploreServicesPage> {
 	UserLocation userLocation;
 	Future<InsureePolicyInformation> _insureepolicyinformation;
 	AuthBlock auth;
-  
+
 	double min = 0.03, initial = 0.65, max = 0.7;
 	
 	@override
 	void initState() {
 		super.initState();
 		_medicalservices = ApiGraphQlServices().MedicalServicesGQL('medicalservice');
-		// _insureeclaims = ApiGraphQlServices().ClaimsServicesGQL(auth.user['data']['insureeAuthOtp']['token']);
-//		_insureepolicyinformation = ApiGraphQlServices().InsureePolicyInformationServicesGQL(1);
+
 	}
 	
 	@override
 	Widget build(BuildContext context) {
 		var userLocation = Provider.of<UserLocation>(context);
-		final bottomNav = Provider.of<BottomNavigationBarProvider>(context);
-
+		final bottom_nav = Provider.of<BottomNavigationBarProvider>(context);
 		return DraggableScrollableSheet(
 			//initialChildSize: initial, //0.65,
-			initialChildSize: bottomNav.currentIndex == 1 ? min : initial,
+			initialChildSize: initial,
 			minChildSize: min,
 			maxChildSize: max,
 			builder: (BuildContext context, ScrollController scrollController){
@@ -102,12 +100,12 @@ class _ExploreServicesPageState extends State<ExploreServicesPage> {
 							SizedBox(
 								height: screenHeight(context, dividedBy: 30),
 							),
-							Row(
-								mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-								children: [
-									Text('Latitude: ${userLocation?.longitude}  Longitude: ${userLocation?.longitude}')
-								],
-							),
+//							Row(
+//								mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//								children: [
+//									Text('Latitude: ${userLocation?.longitude}  Longitude: ${userLocation?.longitude}')
+//								],
+//							),
 						],
 					),
 				);

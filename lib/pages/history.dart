@@ -64,119 +64,122 @@ class _HistoryPageState extends State<HistoryPage> {
 													]
 												),
 											),
-											child: FutureBuilder<InsureeInfo>(
-												future: ApiGraphQlServices().InsureeInfoServicesGQL(
-													auth.user['data']['insureeAuthOtp']['token'],
-													auth.user['data']['insureeAuthOtp']['insuree']['chfId']
-												),
-												builder: (context, snapshot) {
-													if(snapshot.hasData && snapshot.data.data.insureeProfile!=null) {
-														var insureeinfo = snapshot.data.data.insureeProfile;
-														var insureepolicy = snapshot.data.data.insureeProfile
-															.insureePolicies[0];
-//														insureeCardDetail = insureepolicy;
-//														prefs.setFullname("${insureeinfo.otherNames} ${insureeinfo.lastName}");
-														return Row(
-															mainAxisAlignment: MainAxisAlignment.spaceBetween,
-															mainAxisSize: MainAxisSize.min,
-															children: <Widget>[
-																Expanded(
-																	child: Column(
-																		crossAxisAlignment: CrossAxisAlignment
-																			.start,
-																		children: <Widget>[
-																			CircleAvatar(
-																				radius: 30,
-																				backgroundColor: Colors.white,
-																				child: ClipOval(
-																					child: Image.asset(
-																						"assets/images/openimis-logo.png",
-																						fit: BoxFit.contain,),
-																				),
-																			),
-																			SizedBox(height: 8),
-																			Expanded(
-																				child: Text(
-																					'${insureeinfo.lastName} ${insureeinfo.otherNames} ',
-																					style: TextStyle(
-																						fontSize: 14,
-																						fontWeight: FontWeight
-																							.normal,
-																						color: Colors.white
+											child: FutureBuilder<InsureeData>(
+													future: ApiGraphQlServices().InsureeInfoServicesGQL(
+															auth.user['data']['insureeAuthOtp']['token'],
+															auth.user['data']['insureeAuthOtp']['insuree']['chfId']
+													),
+													builder: (context, snapshot) {
+														if(snapshot.hasData) {
+															return Row(
+																mainAxisAlignment: MainAxisAlignment.spaceBetween,
+																mainAxisSize: MainAxisSize.min,
+																children: <Widget>[
+																	Expanded(
+																		child: Column(
+																			crossAxisAlignment: CrossAxisAlignment
+																					.start,
+																			children: <Widget>[
+																				CircleAvatar(
+																					radius: 30,
+																					backgroundColor: Colors.white,
+																					child: ClipOval(
+
+																						child: FadeInImage.assetNetwork(
+																							image: snapshot.hasData ? snapshot.data.data.profile.photo:
+																							"assets/images/openimis-logo.png",
+																							placeholder: "assets/images/openimis-logo.png",
+
+																							fit: BoxFit.contain,),
 																					),
-																					maxLines: 3,
 																				),
-																			)
-																		],
+
+
+																				SizedBox(height: 8),
+																				Expanded(
+																					child: Text(
+																						'${snapshot.data.data.profile.insuree.otherNames} ${snapshot.data.data.profile.insuree.lastName}',
+																						style: TextStyle(
+																								fontSize: 14,
+																								fontWeight: FontWeight
+																										.normal,
+																								color: Colors.white
+																						),
+																						maxLines: 3,
+																					),
+																				)
+																			],
+																		),
 																	),
-																),
-																
-																VerticalDivider(
-																	thickness: 1.5,
-																	color: Colors.white,
-																),
-																
-																Expanded(
-																	child: Column(
-																		crossAxisAlignment: CrossAxisAlignment
-																			.end,
-																		mainAxisSize: MainAxisSize.max,
-																		children: <Widget>[
-																			Text(
-																				'Current Balance',
-																				style: TextStyle(
-																					fontSize: 14,
-																					fontWeight: FontWeight.normal,
-																					color: Colors.white
-																				),
-																			),
-																			SizedBox(height: 8.0),
-																			Text(
-																				'${insureepolicy.policy.value}',
-																				style: TextStyle(
-																					fontSize: 16,
-																					fontWeight: FontWeight.bold,
-																					color: Colors.white
-																				),
-																			),
-																			SizedBox(height: 4.0),
-																			Divider(
-																				indent: 20.0,
-																				thickness: 1.5,
-																				color: Colors.white,
-																			),
-																			SizedBox(height: 4.0),
-																			Text(
-																				'${insureepolicy.policy.expiryDate.year}-${insureepolicy.policy.expiryDate.month}-${insureepolicy.policy.expiryDate.day}',
-																				style: TextStyle(
-																					fontSize: 14,
-																					fontWeight: FontWeight.normal,
-																					color: Colors.white
-																				),
-																			),
-																			SizedBox(height: 8.0),
-																			Text(
-																				'${insureepolicy.insuree.healthFacility ?? "N/A"}',
-																				style: TextStyle(
-																					fontSize: 14,
-																					fontWeight: FontWeight.normal,
-																					color: Colors.white
-																				),
-																			)
-																		],
+
+																	VerticalDivider(
+																		thickness: 1.5,
+																		color: Colors.white,
 																	),
-																),
-															],
-														);
+
+																	Expanded(
+																		child: Column(
+																			crossAxisAlignment: CrossAxisAlignment
+																					.end,
+																			mainAxisSize: MainAxisSize.max,
+																			children: <Widget>[
+																				Text(
+																					'Current Balance',
+																					style: TextStyle(
+																							fontSize: 14,
+																							fontWeight: FontWeight.normal,
+																							color: Colors.white
+																					),
+																				),
+																				SizedBox(height: 8.0),
+																				Text(
+																					'${snapshot.data.data.profile.insuree.insureePolicies[0].policy.value}',
+																					style: TextStyle(
+																							fontSize: 16,
+																							fontWeight: FontWeight.bold,
+																							color: Colors.white
+																					),
+																				),
+																				SizedBox(height: 4.0),
+																				Divider(
+																					indent: 20.0,
+																					thickness: 1.5,
+																					color: Colors.white,
+																				),
+																				SizedBox(height: 4.0),
+																				Text(
+																					'${123}',
+																					style: TextStyle(
+																							fontSize: 14,
+																							fontWeight: FontWeight.normal,
+																							color: Colors.white
+																					),
+																				),
+																				SizedBox(height: 8.0),
+																				Text(
+																					'${snapshot.data.data.profile.insuree.healthFacility.name ?? "N/A"}',
+																					style: TextStyle(
+																							fontSize: 14,
+																							fontWeight: FontWeight.normal,
+																							color: Colors.white
+																					),
+																				)
+																			],
+																		),
+																	),
+																],
+															);
+														}
+														else if(snapshot.hasError){
+															return(Center(child: CircularProgressIndicator(),));
+														}
+														else {
+															return(Center(child: CircularProgressIndicator()));
+														}
 													}
-													else if(snapshot.hasError){
-														return(Center(child: CircularProgressIndicator(),));
-													}
-													else {
-														return(Center(child: CircularProgressIndicator()));
-													}
-												}
 											),
+
+
 										),
 										
 										// CARD

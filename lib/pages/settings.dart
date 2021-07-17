@@ -134,19 +134,24 @@ class _SettingsPageState extends State<SettingsPage> {
 					                            trailing: Icon(Icons.arrow_forward_ios),
 					                            leading: Container(
 					                              padding: EdgeInsets.all(8.0),
-					                              child: Card(
-					                                semanticContainer: true,
-					                                clipBehavior: Clip.antiAliasWithSaveLayer,
-					                                child: (_image != null) ? Image.file(
-					                                  _image, fit: BoxFit.fill,) :
-					                                Image.network(
-					                                  "https://images.unsplash.com/photo-1502164980785-f8aa41d53611?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
-					                                  fit: BoxFit.fill,
-					                                ),
-					                                shape: RoundedRectangleBorder(
-					                                  borderRadius: BorderRadius.circular(10.0),
-					                                ),
-					                                // margin: EdgeInsets.all(10),
+					                              child: FutureBuilder<String>(
+					                                future: prefs.getImage(),
+					                                builder: (context, snapshot) {
+					                                  return Card(
+					                                    semanticContainer: true,
+					                                    clipBehavior: Clip.antiAliasWithSaveLayer,
+					                                    child: (_image != null) ? Image.file(
+					                                      _image, fit: BoxFit.fill,) :
+					                                    Image.asset(
+					                                       'assets/images/openimis-logo.png',
+					                                      fit: BoxFit.fill,
+					                                    ),
+					                                    shape: RoundedRectangleBorder(
+					                                      borderRadius: BorderRadius.circular(10.0),
+					                                    ),
+					                                    // margin: EdgeInsets.all(10),
+					                                  );
+					                                }
 					                              ),
 					                            ),
 					                          ),
