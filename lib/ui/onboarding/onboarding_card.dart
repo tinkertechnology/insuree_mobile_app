@@ -5,7 +5,7 @@ import 'package:intro_views_flutter/intro_views_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
-class SmartWalletOnboardingPage extends StatelessWidget {
+class OpenimisOnboardingPage extends StatelessWidget {
 	static final String path = "lib/src/ui/onboarding/onboarding_card.dart";
 	final pages = [
 		PageViewModel(
@@ -21,7 +21,7 @@ class SmartWalletOnboardingPage extends StatelessWidget {
 						),
 					),
 					Text(
-						'Carry your cards everywhere anytime.',
+						'A Moments of Caring Future. Enjoy the Life at Every stage.',
 						style: TextStyle(
 							color: Colors.black54,
 							fontSize: 16.0
@@ -44,13 +44,13 @@ class SmartWalletOnboardingPage extends StatelessWidget {
 			body: Column(
 				children: <Widget>[
 					Text(
-						'One Touch card Verify',
+						'Your Insurance is in your hand',
 						style: TextStyle(
 							color: Colors.grey,
 						),
 					),
 					Text(
-						'Organize your important personal and business card digitally.',
+						'In pursuit of Your Heath Vision & Mission, we will help you',
 						style: TextStyle(
 							color: Colors.black54,
 							fontSize: 16.0
@@ -73,13 +73,13 @@ class SmartWalletOnboardingPage extends StatelessWidget {
 			body: Column(
 				children: <Widget>[
 					Text(
-						'Automatically Organize',
+						'Automatically Organize Your Information',
 						style: TextStyle(
 							color: Colors.grey,
 						),
 					),
 					Text(
-						'Organize your expenses and incomes and secure your wallet with pin.',
+						'Organize your Insurance records.',
 						style: TextStyle(
 							color: Colors.black54,
 							fontSize: 16.0

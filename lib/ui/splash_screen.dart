@@ -19,9 +19,9 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Future.delayed(Duration(milliseconds:3000), () async {
-//      checkFirstSeen();
+      checkFirstSeen();
       Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return SmartWalletOnboardingPage(); //PageViewScreen();
+        return OpenimisOnboardingPage(); //PageViewScreen();
       }));
     });
   }
@@ -66,42 +66,6 @@ class _SplashScreenState extends State<SplashScreen> {
          ]
  ),
     );
-    //   Scaffold(
-    //     backgroundColor: Colors.white,
-    //     body: Center(
-    //       child: SizedBox(
-    //         height: 200,
-    //         child: Stack(
-    //           children: <Widget>[
-    //             Center(
-    //                 child: Image.asset(
-    //                   'assets/images/100-welcome.png',
-    //                   height: 200.0,
-    //                   fit: BoxFit.cover,
-    //                 )),
-    //             Padding(
-    //               padding: const EdgeInsets.only(bottom: 25.0),
-    //               child: Container(
-    //                 alignment: Alignment.bottomCenter,
-    //                 child: Row(
-    //                   mainAxisAlignment: MainAxisAlignment.center,
-    //                   children: <Widget>[
-    //                     Text(
-    //                       "Nepal\'s #1 Reseller ",
-    //                       style: TextStyle(fontSize: 18.0,color: Colors.grey),
-    //                     ),
-    //                     Text("APP!",
-    //                         style:
-    //                         TextStyle(color: Colors.pink, fontSize: 18.0)),
-    //                   ],
-    //                 ),
-    //               ),
-    //             ),
-    //           ],
-    //         ),
-    //       ),
-    //     ),
-    //   ),
-    // );
+
   }
 }
