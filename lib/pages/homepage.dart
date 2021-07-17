@@ -16,7 +16,7 @@ import 'package:card_app/langlang/app_translation.dart';
 import 'package:provider/provider.dart';
 import 'package:card_app/helper/shared_preferences_helper.dart';
 import 'package:card_app/common/loaders.dart';
-
+import 'package:card_app/langlang/application.dart';
 
 
 class Homepage extends StatefulWidget {
@@ -37,9 +37,15 @@ class _HomepageState extends State<Homepage> {
 	@override
 	void initState(){
 		super.initState();
+    application.onLocaleChanged = onLocaleChange;
 		_medicalservices = ApiGraphQlServices().MedicalServicesGQL('medicalservice');
 
 	}
+  void onLocaleChange(Locale locale) async {
+    setState(() {
+      AppTranslations.load(locale);
+    });
+  }
 	
 	Widget build(BuildContext context) {
 	    auth = Provider.of<AuthBlock>(context);
@@ -167,7 +173,7 @@ class _HomepageState extends State<Homepage> {
                                       mainAxisSize: MainAxisSize.max,
                                       children: <Widget>[
                                           Text(
-                                              'Current Balance',
+                                            AppTranslations.of(context).text('current_balance'),
                                               style: TextStyle(
                                                   fontSize: 14,
                                                   fontWeight: FontWeight.normal,
@@ -250,7 +256,7 @@ class _HomepageState extends State<Homepage> {
                                                 ),
                                                 padding: EdgeInsets.all(4),
                                                 child: Text(
-                                                    'Remaining',
+      AppTranslations.of(context).text('remaining'),
                                                     style: TextStyle(
                                                         color: Colors.white
                                                     ),
@@ -281,7 +287,7 @@ class _HomepageState extends State<Homepage> {
                                                 ),
                                                 padding: EdgeInsets.all(4),
                                                 child: Text(
-                                                    'Expires On',
+                                                AppTranslations.of(context).text('expire_on'),
                                                     style: TextStyle(
                                                         color: Colors.white
                                                     ),

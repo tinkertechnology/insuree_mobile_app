@@ -35,6 +35,7 @@ import 'package:card_app/services/connectivity.dart';
 import 'package:card_app/pages/claimed_item_services.dart';
 import 'package:card_app/pages/submission_page.dart';
 import 'package:card_app/langlang/application.dart';
+import 'package:card_app/blocks/bool_provider.dart';
 
 void main() async {
     WidgetsFlutterBinding.ensureInitialized();
@@ -80,6 +81,7 @@ class _MyAppState extends State<MyApp> {
             providers: [
                 ChangeNotifierProvider<AuthBlock>.value(value: AuthBlock()),
                 ChangeNotifierProvider<BottomNavigationBarProvider>.value(value: BottomNavigationBarProvider()),
+                ChangeNotifierProvider<LoadingProvider>.value(value: LoadingProvider(),),
                 ChangeNotifierProvider(create: (_) {
                     return themeChangeProvider;
                 }),

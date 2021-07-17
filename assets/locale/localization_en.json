@@ -39,5 +39,11 @@
 
   "payment_voucher_submission" : "Your Payment Voucher Has been Submitted. Thank you",
   "payment_voucher_submission_error" : "Submission Error Please Try again",
-  "go_back" : "Back"
+  "go_back" : "Back",
+
+  "current_balance" : "Current Balance",
+  "remaining" : "Remaininig",
+  "expire_on" : "Expire On"
+
+
 }

@@ -16,7 +16,7 @@ import 'package:card_app/models/policy_information.dart';
 import 'package:card_app/graphql/gql_queries.dart';
 import 'package:card_app/common/env.dart' as env;
 import "package:card_app/graphql/gql_mutations.dart";
-import "package:card_app/mock_api/profile.dart";
+import 'package:card_app/common/global.dart' as globals;
 class ApiGraphQlServices {
     bool isLoading = false;
     MedicalServices medicalServices = MedicalServices();
@@ -259,6 +259,7 @@ class ApiGraphQlServices {
   //mutation
     Future<Map>  createFeedback(fullname, email, mobile_number, queries) async {
         var jsonmap;
+        globals.isLoading = true;
         try {
                final response = await http.post(Uri.parse(env.API_BASE_URL),
                    headers: {
@@ -272,8 +273,10 @@ class ApiGraphQlServices {
                jsonmap = jsonDecode(response.body);
            } catch (Exception)
             {
+                globals.isLoading = false;
                return null;
            }
+       globals.isLoading = false;
         return jsonmap ;
     }
 

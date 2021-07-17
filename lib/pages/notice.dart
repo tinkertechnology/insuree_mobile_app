@@ -1,10 +1,12 @@
 import 'package:card_app/blocks/auth_block.dart';
+import 'package:card_app/langlang/app_translation.dart';
 import 'package:card_app/models/notices.dart';
 import 'package:card_app/screen_size_reducers.dart';
 import 'package:card_app/services/api_graphql_services.dart';
 import 'package:card_app/theme/custom_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:card_app/langlang/application.dart';
 
 class NoticePage extends StatefulWidget {
     @override
@@ -22,7 +24,14 @@ class _NoticePageState extends State<NoticePage> {
         /*WidgetsBinding.instance.addPostFrameCallback((_){
             auth = Provider.of<AuthBlock>(context, listen: false);
         });*/
+        application.onLocaleChanged = onLocaleChange;
         _notice = ApiGraphQlServices().NoticesServicesGQL("332D7B1");
+    }
+
+    void onLocaleChange(Locale locale) async {
+        setState(() {
+            AppTranslations.load(locale);
+        });
     }
     
     @override
@@ -35,7 +44,7 @@ class _NoticePageState extends State<NoticePage> {
             appBar: AppBar(
                 elevation: 0.0,
                 title: Text(
-                    'Notices',
+                    AppTranslations.of(context).text('notice'),
                     style: TextStyle(
                         color: Colors.white
                     ),

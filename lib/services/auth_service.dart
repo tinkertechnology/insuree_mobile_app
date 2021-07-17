@@ -21,8 +21,6 @@ class AuthService {
 //                "Accept" : "application/json"
         },
         body:
-//        jsonEncode({"query":"\n\nquery{"
-//            "\n  insureeAuthOtp(chfid:""  \n   \"${userCredential.chfid}\", otp: \n    \"${userCredential.otp}\"\n  ){\n    id\n    token\n    \n  }\n}","variables":null}));
         jsonEncode(q));
     print(jsonDecode(response.body));
 

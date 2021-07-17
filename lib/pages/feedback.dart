@@ -2,11 +2,14 @@ import 'package:card_app/theme/custom_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:card_app/langlang/application.dart';
-import 'package:card_app/langlang/application.dart';
 import 'package:card_app/langlang/app_translation.dart';
 import "package:card_app/services/api_graphql_services.dart";
 import 'package:card_app/graphql/gql_mutations.dart';
 import "package:card_app/models/feedback.dart";
+import "package:card_app/blocks/bool_provider.dart";
+import "package:card_app/common/global.dart" as globals;
+import 'package:provider/provider.dart';
+
 class FeedbackPage extends StatefulWidget {
     @override
     _FeedbackPageState createState() => _FeedbackPageState();
@@ -21,7 +24,6 @@ class _FeedbackPageState extends State<FeedbackPage> {
     TextEditingController email = TextEditingController();
     TextEditingController mobile_no = TextEditingController();
     TextEditingController queries = TextEditingController();
-    
     @override
     void initState() {
         // TODO: implement initState
@@ -37,17 +39,19 @@ class _FeedbackPageState extends State<FeedbackPage> {
 
     @override
     Widget build(BuildContext context) {
+        var isLoading = Provider.of<LoadingProvider>(context);
         return Scaffold(
             backgroundColor: Color.fromRGBO(41,127,141, 25), //mainColor,
             appBar: AppBar(
                 elevation: 0.0,
-                title: Text('Feedback'),
+                title: Text(AppTranslations.of(context).text('feedback'),),
                 backgroundColor: Color.fromRGBO(41,127,141, 0), //mainColor,
             ),
             body: Column(
                 children: <Widget>[
                     Expanded(
-                        child: Container(
+                        child: isLoading.loading ? Container(child: Center(child: CircularProgressIndicator(),),)
+                        :Container(
                             decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.only(
@@ -102,8 +106,9 @@ class _FeedbackPageState extends State<FeedbackPage> {
                                                 Expanded(
                                                     child: RaisedButton(
                                                         onPressed: () async {
-                                                           var create=  openimisGQLMutation().createFeedbackMutation(fullname.text, email.text, mobile_no.text, queries.text);
-                                                           print(create);
+                                                            setState(() {
+                                                            //  isLoading = true;
+                                                            });
                                                         },
                                                         padding: EdgeInsets.all(16.0),
                                                         shape: RoundedRectangleBorder(
@@ -125,11 +130,8 @@ class _FeedbackPageState extends State<FeedbackPage> {
                                                 Expanded(
                                                     child: RaisedButton(
                                                         onPressed: ()   async {
-
+                                                            isLoading.setLoading(globals.isLoading);
                                                     var create=  ApiGraphQlServices().createFeedback(fullname.text, email.text, mobile_no.text, queries.text);
-                                                    if(create!=null){
-                                                        print("milyuo");
-                                                    }
                                                     },
                                                         padding: EdgeInsets.all(16.0),
                                                         shape: RoundedRectangleBorder(
