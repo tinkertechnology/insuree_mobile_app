@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:card_app/models/medical_services.dart';
 import 'package:card_app/services/api_graphql_services.dart';
 import 'package:provider/provider.dart';
+import 'package:card_app/services/bottom_nav_bar_service.dart';
 
 class ExploreServicesPage extends StatefulWidget {
 	@override
@@ -40,9 +41,11 @@ class _ExploreServicesPageState extends State<ExploreServicesPage> {
 	@override
 	Widget build(BuildContext context) {
 		var userLocation = Provider.of<UserLocation>(context);
-		
+		final bottomNav = Provider.of<BottomNavigationBarProvider>(context);
+
 		return DraggableScrollableSheet(
-			initialChildSize: initial, //0.65,
+			//initialChildSize: initial, //0.65,
+			initialChildSize: bottomNav.currentIndex == 1 ? min : initial,
 			minChildSize: min,
 			maxChildSize: max,
 			builder: (BuildContext context, ScrollController scrollController){

@@ -13,6 +13,7 @@ import 'package:card_app/models/insuree_claims.dart';
 import 'package:provider/provider.dart';
 import '../screen_size_reducers.dart';
 import 'claimed_item_services.dart';
+import 'exploreServices.dart';
 
 class HistoryPage extends StatefulWidget {
 	@override
@@ -337,6 +338,8 @@ class _HistoryPageState extends State<HistoryPage> {
 							],
 						),
 					),
+					
+					ExploreServicesPage(),
 				],
 			),
 		);
