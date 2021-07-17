@@ -32,31 +32,6 @@ class _NotificationPageState extends State<NotificationPage> {
 			  ),
 			  backgroundColor: CustomTheme.lightTheme.primaryColor,
 		  ),
-		  /*body: CustomScrollView(
-			  slivers: <Widget>[
-				  SliverAppBar(
-					  title: Text('Notifications'),
-					  backgroundColor: Color.fromRGBO(41,127,141,50), //Colors.white,
-					  centerTitle: false,
-					  actions: <Widget>[
-						  Container(
-							  child: IconButton(
-								  icon: Icon(Icons.notifications),
-								  color: Colors.black,
-								  disabledColor: Colors.black,
-								  splashColor: Theme.of(context).accentColor,
-								  onPressed: () {},
-							  ),
-						  ),
-						  Padding(
-							  padding: EdgeInsets.only(right: 10),
-						  ),
-					  ]),
-				  SliverList(
-					  delegate: SliverChildListDelegate(_getNotifications()),
-				  )
-			  ],
-		  ),*/
 		  body: Column(
 			  children: <Widget>[
 				  Expanded(
@@ -83,11 +58,51 @@ class _NotificationPageState extends State<NotificationPage> {
 													itemBuilder: (BuildContext context, int index){
 														var _notifications = snapshot.data.data.notifications.edges[index];
 														var date = "${_notifications.node.createdAt.year}-${_notifications.node.createdAt.month}-${_notifications.node.createdAt.day}";
-														return ListTile(
+														/*return ListTile(
 															title: Text('${_notifications.node.message}'),
 															subtitle: Text('${date}'),
 															onTap: () {
 															},
+														);*/
+														
+														return Container(
+															padding: EdgeInsets.all(12.0),
+															child: Card(
+																shape: RoundedRectangleBorder(
+																	borderRadius: BorderRadius.circular(0.0),
+																),
+																elevation: 5,
+																shadowColor: CustomTheme.lightTheme.primaryColor,
+																child: Container(
+																	padding: EdgeInsets.only(left: 4.0),
+																	child: Column(
+																		crossAxisAlignment: CrossAxisAlignment.start,
+																		mainAxisSize: MainAxisSize.max,
+																		children: [
+																			ListTile(
+																				title: Text(
+																					'${_notifications.node.message}',
+																					style: TextStyle(
+																						fontSize: 16.0,
+																						fontWeight: FontWeight.normal
+																					),
+																				),
+																				
+																				subtitle: Padding(
+																					padding: EdgeInsets.only(top: 8.0),
+																					child: Text(
+																						'${date}',
+																						style: TextStyle(
+																							fontSize: 14.0,
+																							fontWeight: FontWeight.w400,
+																						),
+																					),
+																				)
+																			),
+																		],
+																	),
+																),
+															)
 														);
 													}
 											);

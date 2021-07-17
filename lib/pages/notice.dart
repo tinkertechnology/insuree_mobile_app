@@ -1,5 +1,6 @@
 import 'package:card_app/blocks/auth_block.dart';
 import 'package:card_app/models/notices.dart';
+import 'package:card_app/screen_size_reducers.dart';
 import 'package:card_app/services/api_graphql_services.dart';
 import 'package:card_app/theme/custom_theme.dart';
 import 'package:flutter/material.dart';
@@ -63,7 +64,7 @@ class _NoticePageState extends State<NoticePage> {
                                                 itemBuilder: (BuildContext context, int index) {
                                                     var notices = snapshot.data.data.notices.edges[index];
                                                     return Container(
-                                                        height: 235,
+                                                        height: screenHeight(context, dividedBy: 3),//200,
                                                         margin: EdgeInsets.only(bottom: 8.0),
                                                         child: GestureDetector(
                                                             onTap: (){
@@ -76,7 +77,7 @@ class _NoticePageState extends State<NoticePage> {
                                                                 child: Column(
                                                                     children: [
                                                                         Container(
-                                                                            height: 160,
+                                                                            height: screenHeight(context, dividedBy: 6),
                                                                             width: double.infinity,
                                                                             decoration: BoxDecoration(
                                                                                 /*border: Border(

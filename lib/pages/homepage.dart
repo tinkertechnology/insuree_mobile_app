@@ -257,7 +257,7 @@ class _HomepageState extends State<Homepage> {
                                                 ),
                                             ),
                                             SizedBox(height: 8.0),
-                                            Text('${snapshot.data.data.profile.remainingDays}')
+                                            Text('${snapshot.data.data.profile.remainingDays}' + ' Days')
                                             //Text('${insureeCardDetail.policy.expiryDate}')
                                         ],
                                     ),
@@ -281,7 +281,7 @@ class _HomepageState extends State<Homepage> {
                                                 ),
                                                 padding: EdgeInsets.all(4),
                                                 child: Text(
-                                                    'Expiry',
+                                                    'Expires On',
                                                     style: TextStyle(
                                                         color: Colors.white
                                                     ),

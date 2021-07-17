@@ -19,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Future.delayed(Duration(milliseconds:3000), () async {
-      checkFirstSeen();
+//      checkFirstSeen();
       Navigator.push(context, MaterialPageRoute(builder: (context) {
         return SmartWalletOnboardingPage(); //PageViewScreen();
       }));

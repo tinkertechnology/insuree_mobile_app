@@ -303,6 +303,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
 					SizedBox(height: 8.0),
 					TextFormField(
 						keyboardType: TextInputType.text,
+						readOnly: true,
 						validator: (value) {
 							if (value.isEmpty) {
 								return 'Please enter full name';
@@ -356,6 +357,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
 					SizedBox(height: 8.0),
 					TextFormField(
 						keyboardType: TextInputType.text,
+						readOnly: true,
 						validator: (value) {
 							if (value.isEmpty) {
 								return 'Please enter date of birth';
@@ -410,6 +412,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
 					SizedBox(height: 8.0),
 					TextFormField(
 						keyboardType: TextInputType.text,
+						readOnly: true,
 						validator: (value) {
 							if (value.isEmpty) {
 								return 'Please enter address';
