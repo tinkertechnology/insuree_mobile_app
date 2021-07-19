@@ -39,7 +39,6 @@ class _ExploreServicesPageState extends State<ExploreServicesPage> {
 	
 	@override
 	Widget build(BuildContext context) {
-		var userLocation = Provider.of<UserLocation>(context);
 		final bottom_nav = Provider.of<BottomNavigationBarProvider>(context);
 		return DraggableScrollableSheet(
 			//initialChildSize: initial, //0.65,
@@ -119,7 +118,7 @@ class _ExploreServicesPageState extends State<ExploreServicesPage> {
 			child: FutureBuilder<MedicalServices>(
 				future: _medicalservices,
 				builder: (context, snapshot) {
-					if(snapshot.hasData) {
+					if(snapshot.hasData && snapshot.data.data!=null) {
 						return GridView.builder(
 							gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
 							physics: ScrollPhysics(),
@@ -148,7 +147,7 @@ class _ExploreServicesPageState extends State<ExploreServicesPage> {
 						);
 					}
 					else{
-						return Center(child: CircularProgressIndicator());
+						return Center(child:CircularProgressIndicator());
 					}
 				}
 			),

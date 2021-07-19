@@ -42,6 +42,8 @@
 
   "current_balance" : "हालको ब्यालेन्स",
   "remaining" : "बाँकी दिन",
-  "expire_on" : "समाप्त हुने"
+  "expire_on" : "समाप्त हुने",
+
+  "service_provider_list" : "नजिक रहेका सेवा प्रदाई कार्यालयहरु"
 
 }

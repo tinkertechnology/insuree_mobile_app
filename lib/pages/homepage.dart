@@ -63,11 +63,8 @@ class _HomepageState extends State<Homepage> {
                                             auth.user['data']['insureeAuthOtp']['insuree']['chfId']
                                         ),
                                   builder: (context, snapshot) {
-                                      if (snapshot.connectionState != ConnectionState.done) {
-                                        return Container(child: Center(child: CircularProgressIndicator()));
 
-                                      }
-                                      if (snapshot.hasData ) {
+                                      if (snapshot.hasData && snapshot.data.data!=null ) {
                                           prefs.setFullname("${snapshot.data.data.profile.insuree.otherNames} ${snapshot.data.data.profile.insuree.lastName}");
                                           prefs.setImage("${snapshot.data.data.profile.photo}");
                                           return Stack(
@@ -80,9 +77,7 @@ class _HomepageState extends State<Homepage> {
                                               ],
                                           );
                                       }
-                                      if (snapshot.hasError){
-                                        return Center(child: Text("${snapshot.error.toString()}"));
-                                      }
+
                                       else {
                                           return Center(child: CircularProgressIndicator(),);
                                       }
@@ -365,9 +360,7 @@ class _HomepageState extends State<Homepage> {
                                     }
                                 );
                             }
-                            if(snapshot.hasError){
-                              return Center(child: CircularProgressIndicator());
-                            }
+
                             else{
                                 return Center(child: CircularProgressIndicator());
                             }

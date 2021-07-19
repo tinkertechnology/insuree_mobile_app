@@ -17,7 +17,6 @@ class _ServiceProviderPageState extends State<ServiceProviderPage> {
 	@override
 	initState(){
 		super.initState();
-		//_healthFacilityCoordinates = ApiGraphQlServices().HealthFacilityCoordinatesServicesGQL({});
 	}
 	
 	@override
@@ -82,7 +81,7 @@ class _ServiceProviderPageState extends State<ServiceProviderPage> {
 			child: FutureBuilder<HealthFacilityCoordinates>(
 				future: _healthFacilityCoordinates,
 				builder: (context, snapshot) {
-					if (snapshot.hasData) {
+					if (snapshot.hasData && snapshot.data.data!=null) {
 						return ListView.builder(
 							shrinkWrap: true,
 							physics: NeverScrollableScrollPhysics(),
@@ -129,9 +128,11 @@ class _ServiceProviderPageState extends State<ServiceProviderPage> {
 									)
 								);
 							});
-					} else {
-						return Center(
-							child: CircularProgressIndicator());
+					}
+
+					else {
+						return Container(child: Center(
+								child: CircularProgressIndicator()));
 					}
 				}),
 		);

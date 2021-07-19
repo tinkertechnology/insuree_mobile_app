@@ -147,16 +147,6 @@ class _ProfileInfoState extends State<ProfileInfo> {
 			onTap: (){
 				_showPicker(context);
 			},
-//			child: Card(
-//				elevation: 3.0,
-//				child: Container(
-//						height: 120,
-//						width: 120,
-//						child: Center(
-//							child: Icon(Icons.note_add, size: 30, color: Colors.grey.withOpacity(0.5),),
-//						)
-//				),
-//			),
 		);
 	}
 
@@ -191,7 +181,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
 										auth.user['data']['insureeAuthOtp']['insuree']['chfId'].toString(),
 									),
 								  builder: (context, snapshot) {
-										if (snapshot.hasData) {
+										if (snapshot.hasData && snapshot.data.data!=null) {
 											return ListView(
 
 												children: [

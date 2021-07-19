@@ -43,7 +43,9 @@
 
   "current_balance" : "Current Balance",
   "remaining" : "Remaininig",
-  "expire_on" : "Expire On"
+  "expire_on" : "Expire On",
+
+  "service_provider_list" : "Service Providers Near You"
 
 
 }

@@ -21,9 +21,6 @@ class _NoticePageState extends State<NoticePage> {
     @override
     initState(){
         super.initState();
-        /*WidgetsBinding.instance.addPostFrameCallback((_){
-            auth = Provider.of<AuthBlock>(context, listen: false);
-        });*/
         application.onLocaleChanged = onLocaleChange;
         _notice = ApiGraphQlServices().NoticesServicesGQL("332D7B1");
     }
@@ -67,7 +64,7 @@ class _NoticePageState extends State<NoticePage> {
                                 child: FutureBuilder<Notice>(
                                     future: ApiGraphQlServices().NoticesServicesGQL(auth.user['data']['insureeAuthOtp']['token']),
                                     builder: (context, snapshot) {
-                                        if(snapshot.hasData) {
+                                        if(snapshot.hasData && snapshot.data.data!=null) {
                                             return ListView.builder(
                                                 itemCount: snapshot.data.data.notices.edges.length,
                                                 itemBuilder: (BuildContext context, int index) {
