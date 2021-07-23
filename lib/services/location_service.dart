@@ -5,14 +5,25 @@ import 'package:location/location.dart';
 class LocationService {
   UserLocation _currentLocation;
   var location = Location();
+  bool _serviceEnabled;
+
+
 
   StreamController<UserLocation> _locationController =
   StreamController<UserLocation>();
   Stream<UserLocation> get locationStream => _locationController.stream;
+
+
+
   LocationService() {
     // Request permission to use location
+//    if(checkService() != false){
+//      return;
+//    }
+
     location.requestPermission().then((granted) {
-      if (granted != null) {
+      if (granted== PermissionStatus.granted) {
+//        location.enableBackgroundMode(enable: true);
         // If granted listen to the onLocationChanged stream and emit over our controller
         location.onLocationChanged.listen((locationData) {
           if (locationData != null) {
@@ -44,4 +55,16 @@ class LocationService {
     }
     return _currentLocation;
   }
+
+  Future<bool> checkService() async {
+    _serviceEnabled = await location.serviceEnabled();
+    if (!_serviceEnabled) {
+      _serviceEnabled = await location.requestService();
+      if (!_serviceEnabled) {
+        return false;
+      }
+    }
+
+  }
+
 }
