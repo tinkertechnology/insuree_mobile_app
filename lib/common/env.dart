@@ -104,78 +104,7 @@ bool hasAuthUserObject(){
 }
 
 
-bool isWaterSupplyUser() {
-	var ret = false;
-	var _auth = getAuth();
-	if (_auth!=null)
-	{
-		if (auth.isLoggedIn) {
-			if (_auth.user != null) {
-				var _value = _auth.user['is_supply_company'];
-				if (_value != null) {
-					if (_value == true) {
-						ret = true;
-					}
-				}
-			}
-		}
-
-	}
-
-	return ret;
-
-}
-
-bool isDeliveryPerson() {
-	var ret = false;
-	var _auth = getAuth();
-	if (_auth!=null)
-	{
-		if(_auth.user!=null) {
-			if (auth.isLoggedIn) {
-				var _value = _auth.user['is_delivery_user'];
-				if (_value != null) {
-					if (_value == true) {
-						ret = true;
-					}
-				}
-			}
-		}
-	}
-
-	return ret;
-
-}
-
-bool isDepoUser() {
-	var ret = false;
-	var a = getAuth();
-	if (a!=null)
-	{
-		if (auth.isLoggedIn) {
-			var v = a.user['is_depo'];
-			if (v != null) {
-				if (v == true) {
-					ret = true;
-				}
-			}
-		}
-
-	}
-
-	return ret;
-
-}
-
-bool isDepo;
-
-
-String USER_MOBILE_NO = "";
-
-
-
-
-String API_BASE_LOCAL_URL =  "http://192.168.31.250:7000/api/graphql";//"https://oi.tinker.com.np/api/graphql";
+String API_BASE_LOCAL_URL =  "https://oi.tinker.com.np/api/graphql";//"http://192.168.31.250:7000/api/graphql";//
 String API_IOS_BASE_LOCAL_URL = "http://localhost:8000/api/graphql";
 String API_BASE_LOCAL_MOBILE_URL = "http://192.168.31.221:8000/api/graphql";
 String API_HIB_URL = '';

@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_app/blocks/auth_block.dart';
+import 'package:card_app/langlang/app_translation.dart';
+import 'package:card_app/langlang/application.dart';
 import 'package:card_app/mock_api/profile.dart';
 import 'package:card_app/models/insuree_info.dart';
 import 'package:card_app/theme/custom_theme.dart';
@@ -37,7 +39,14 @@ class _ProfileInfoState extends State<ProfileInfo> {
 	@override
 	void initState() {
 		super.initState();
+    application.onLocaleChanged = onLocaleChange;
 	}
+
+    void onLocaleChange(Locale locale) async {
+        setState(() {
+            AppTranslations.load(locale);
+        });
+    }
 
 	_imgFromCamera() async {
 		// File image = (await _picker.getImage(source: ImageSource.camera, imageQuality: 50)) as File;  // await ImagePicker.getImage(
@@ -158,7 +167,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
 			backgroundColor: Color.fromRGBO(41,127,141, 25), //mainColor,
 			appBar: AppBar(
 				elevation: 0.0,
-				title: Text('Profile'),
+				title: Text(AppTranslations.of(context).text('page_title_profile')),
 				backgroundColor: Color.fromRGBO(41,127,141, 0), //mainColor,
 			),
 			body: isLoading ? Center(child: CircularProgressIndicator(),) :
@@ -282,7 +291,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
 				mainAxisSize: MainAxisSize.min,
 				children: <Widget>[
 					Text(
-						"Full Name",
+						AppTranslations.of(context).text('full_name'),
 						style: TextStyle(
 							fontSize: 16,
 							fontWeight: FontWeight.w400,
@@ -336,7 +345,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
 				mainAxisSize: MainAxisSize.min,
 				children: <Widget>[
 					Text(
-						"Date of Birth",
+						AppTranslations.of(context).text('date_of_birth'),
 						style: TextStyle(
 							fontSize: 16,
 							fontWeight: FontWeight.w400,
@@ -369,7 +378,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
 								)
 							),
 							
-							hintText: '${dob}',
+							hintText: '${dob.year}-${dob.month}-${dob.day}',
 							hintStyle: TextStyle(
 								fontFamily: 'Open-sans'
 							),
@@ -391,7 +400,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
 				mainAxisSize: MainAxisSize.min,
 				children: <Widget>[
 					Text(
-						"Address",
+						AppTranslations.of(context).text('address'),
 						style: TextStyle(
 							fontSize: 16,
 							fontWeight: FontWeight.w400,
@@ -424,7 +433,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
 								)
 							),
 							
-							hintText: '${current_address}',
+							hintText: '${current_address ?? "Not Available"}',
 							hintStyle: TextStyle(
 								fontFamily: 'Open-sans'
 							),
@@ -446,7 +455,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
 				mainAxisSize: MainAxisSize.min,
 				children: <Widget>[
 					Text(
-						"Phone Number",
+						AppTranslations.of(context).text('mobile_number'),
 						style: TextStyle(
 							fontSize: 16,
 							fontWeight: FontWeight.w400,
@@ -502,7 +511,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
 				mainAxisSize: MainAxisSize.min,
 				children: <Widget>[
 					Text(
-						"Email Address",
+						AppTranslations.of(context).text('email_address'),
 						style: TextStyle(
 							fontSize: 16,
 							fontWeight: FontWeight.w400,
@@ -565,7 +574,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
 				),
 				color: CustomTheme.lightTheme.primaryColor,
 				child: Text(
-					"submit".toUpperCase(),
+					AppTranslations.of(context).text('submit'),
 					style: TextStyle(
 						fontSize: 18.0,
 						fontWeight: FontWeight.bold,

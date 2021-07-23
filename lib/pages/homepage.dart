@@ -346,7 +346,7 @@ class _HomepageState extends State<Homepage> {
                                         var claims = snapshot.data.data.insureeProfile.insureeClaim[index];
                                         return ListTile(
                                             title: Text('${claims.healthFacility.name}'),
-                                            subtitle: Text('${claims.dateClaimed}'),
+                                            subtitle: Text('${claims.dateClaimed.year}-${claims.dateClaimed.month}-${claims.dateClaimed.day}'),
                                             trailing: Text('${env.Currency} ${claims.claimed}'),
                                             onTap: () {
                                                 Navigator.push(
