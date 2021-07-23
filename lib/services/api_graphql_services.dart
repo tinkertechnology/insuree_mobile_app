@@ -5,6 +5,7 @@ import 'package:card_app/models/insuree_info.dart';
 import 'package:card_app/models/insuree_policy_information.dart';
 import 'package:card_app/models/notices.dart';
 import 'package:card_app/models/notifications.dart';
+import 'package:card_app/models/office.dart';
 import 'package:card_app/models/profile.dart';
 import 'package:http/http.dart' as http;
 import 'package:card_app/models/medical_services.dart';
@@ -31,6 +32,7 @@ class ApiGraphQlServices {
     Feedback feedback = Feedback();
     InsureeData insureedata = InsureeData();
     Notifications notifications = Notifications();
+    Offices offices = Offices();
 
     
     
@@ -282,26 +284,25 @@ class ApiGraphQlServices {
 
 
 
-//  Future<Profile>  getProfileInformation(String chfid) async {
-//    var jsonmap;
-//    try {
-//      final response = await http.post(Uri.parse(env.API_BASE_URL),
-//          headers: {
-//            "Content-Type": "application/json",
-//          },
-//          body: jsonEncode(
-//              openimisGqlQueries().openimis_gql_profile(chfid))
-//      );
-//      jsonmap = jsonDecode(response.body);
-//      profile =  Profile.fromJson(jsonmap);
-//    } catch (Exception)
-//
-//      {
-//
-//        return profile;
-//
-//    }
-//    return profile;
-//  }
+ Future<Offices>  getOfficesList() async {
+   var jsonmap;
+   try {
+     final response = await http.get(Uri.parse('https://ag.gov.np/dag1/offices.json'),
+         headers: {
+           "Content-Type": "application/json",
+         },
+         
+     );
+     jsonmap = response.body;
+     offices =  Offices.fromJson(jsonDecode(jsonmap));
+   } catch (Exception)
+
+     {
+
+       return offices;
+
+   }
+   return offices;
+ }
     
 }

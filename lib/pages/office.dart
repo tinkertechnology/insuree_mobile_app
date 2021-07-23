@@ -1,3 +1,5 @@
+import 'package:card_app/models/office.dart';
+import 'package:card_app/services/api_graphql_services.dart';
 import 'package:card_app/theme/custom_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -32,64 +34,77 @@ class _OfficePageState extends State<OfficePage> {
 									topRight: Radius.circular(30)
 								)
 							),
-							child: Padding(
-								padding: const EdgeInsets.all(16.0),
-								child: ListView.builder(
-									itemBuilder: (BuildContext context, int index){
-										return Container(
-											padding: EdgeInsets.only(top: 4.0, bottom: 4.0),
-											child: Card(
-												shape: RoundedRectangleBorder(
-													borderRadius: BorderRadius.circular(0.0),
-													// side: BorderSide(color: CustomTheme.lightTheme.primaryColor),
-												),
-												elevation: 5,
-												shadowColor: CustomTheme.lightTheme.primaryColor,
-												child: Container(
-													padding: EdgeInsets.fromLTRB(24, 16, 16, 16),
-													child: Column(
-														crossAxisAlignment: CrossAxisAlignment.start,
-														mainAxisSize: MainAxisSize.max,
-														children: [
-															Text(
-																'Kathmandu Branch',
-																style: TextStyle(
-																	fontSize: 16.0,
-																	letterSpacing: 0.5,
-																	fontWeight: FontWeight.bold,
-																),
-															),
-															SizedBox(height: 4.0),
-															Text(
-																'Kathmandu, Nepal',
-																style: TextStyle(
-																	fontSize: 14.0,
-																	fontWeight: FontWeight.normal,
-																),
-															),
-															SizedBox(height: 4.0),
-															Text(
-																'openimis@gmail.com',
-																style: TextStyle(
-																	fontSize: 14.0,
-																	fontWeight: FontWeight.normal,
-																),
-															),
-															SizedBox(height: 4.0),
-															Text(
-																'01-42xxxxx',
-																style: TextStyle(
-																	fontSize: 14.0,
-																	fontWeight: FontWeight.normal,
-																),
-															),
-														],
-													),
-												),
-											)
-										);
-									}
-								)
+							child: FutureBuilder<Offices>(
+							  future: ApiGraphQlServices().getOfficesList(),
+							  builder: (context, snapshot) {
+                  
+                  if(snapshot.hasData){
+							    return Padding(
+							    	padding: const EdgeInsets.all(16.0),
+							    	child: ListView.builder(
+                      itemCount: 4,
+							    		itemBuilder: (BuildContext context, int index){
+                        var offices = snapshot.data;
+							    			return Container(
+							    				padding: EdgeInsets.only(top: 4.0, bottom: 4.0),
+							    				child: Card(
+							    					shape: RoundedRectangleBorder(
+							    						borderRadius: BorderRadius.circular(0.0),
+							    						// side: BorderSide(color: CustomTheme.lightTheme.primaryColor),
+							    					),
+							    					elevation: 5,
+							    					shadowColor: CustomTheme.lightTheme.primaryColor,
+							    					child: Container(
+							    						padding: EdgeInsets.fromLTRB(24, 16, 16, 16),
+							    						child: Column(
+							    							crossAxisAlignment: CrossAxisAlignment.start,
+							    							mainAxisSize: MainAxisSize.max,
+							    							children: [
+							    								Text(
+							    									offices.branch,
+							    									style: TextStyle(
+							    										fontSize: 16.0,
+							    										letterSpacing: 0.5,
+							    										fontWeight: FontWeight.bold,
+							    									),
+							    								),
+							    								SizedBox(height: 4.0),
+							    								// // Text(
+							    								// // 	offices.branch1.address,
+							    								// // 	style: TextStyle(
+							    								// // 		fontSize: 14.0,
+							    								// // 		fontWeight: FontWeight.normal,
+							    								// // 	),
+							    								// // ),
+							    								// // SizedBox(height: 4.0),
+							    								// // Text(
+							    								// // 	offices.branch1.email,
+							    								// // 	style: TextStyle(
+							    								// // 		fontSize: 14.0,
+							    								// // 		fontWeight: FontWeight.normal,
+							    								// // 	),
+							    								// // ),
+							    								// // SizedBox(height: 4.0),
+							    								// // Text(
+							    								// // 	offices.branch1.phone[0].phone1,
+							    								// // 	style: TextStyle(
+							    								// // 		fontSize: 14.0,
+							    								// // 		fontWeight: FontWeight.normal,
+							    								// // 	),
+							    								// ),
+							    							],
+							    						),
+							    					),
+							    				)
+							    			);
+							    		}
+							    	)
+							    );
+                }
+                else{
+                  return Center(child: CircularProgressIndicator());
+                }
+                }
 							),
 						),
 					),
