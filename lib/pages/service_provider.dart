@@ -1,3 +1,5 @@
+import 'package:card_app/langlang/app_translation.dart';
+import 'package:card_app/langlang/application.dart';
 import 'package:card_app/models/health_facility_coordinates.dart';
 import 'package:card_app/models/user_location.dart';
 import 'package:card_app/theme/custom_theme.dart';
@@ -5,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:card_app/common/env.dart' as env;
 import 'package:card_app/services/api_graphql_services.dart';
 import 'package:provider/provider.dart';
+
 
 class ServiceProviderPage extends StatefulWidget {
 	@override
@@ -17,11 +20,19 @@ class _ServiceProviderPageState extends State<ServiceProviderPage> {
 	@override
 	initState(){
 		super.initState();
+		application.onLocaleChanged = onLocaleChange;
+	}
+
+	void onLocaleChange(Locale locale) async {
+		setState(() {
+			AppTranslations.load(locale);
+		});
 	}
 	
 	@override
 	Widget build(BuildContext context) {
 		var userLocation = Provider.of<UserLocation>(context);
+
 		if(!_isLoad){
 			_healthFacilityCoordinates =
 					ApiGraphQlServices().HealthFacilityCoordinatesServicesGQL({
@@ -36,14 +47,14 @@ class _ServiceProviderPageState extends State<ServiceProviderPage> {
 			appBar: AppBar(
 				elevation: 0.0,
 				title: Text(
-					'Service Provider List',
+					AppTranslations.of(context).text('service_provider_list'),
 					style: TextStyle(
 						color: Colors.white
 					),
 				),
 				backgroundColor: CustomTheme.lightTheme.primaryColor,
 			),
-			body: Column(
+			body:  Column(
 				children: [
 					Expanded(
 						child: Container(

@@ -15,7 +15,6 @@ import 'package:card_app/models/insuree_claims.dart';
 import 'package:card_app/langlang/app_translation.dart';
 import 'package:provider/provider.dart';
 import 'package:card_app/helper/shared_preferences_helper.dart';
-import 'package:card_app/common/loaders.dart';
 import 'package:card_app/langlang/application.dart';
 
 
@@ -67,6 +66,7 @@ class _HomepageState extends State<Homepage> {
                                       if (snapshot.hasData && snapshot.data.data!=null ) {
                                           prefs.setFullname("${snapshot.data.data.profile.insuree.otherNames} ${snapshot.data.data.profile.insuree.lastName}");
                                           prefs.setImage("${snapshot.data.data.profile.photo}");
+
                                           return Stack(
                                               children: [
                                                   // OPENIMIS LOGO & CURRENT BALANCE
@@ -191,14 +191,14 @@ class _HomepageState extends State<Homepage> {
                                               color: Colors.white,
                                           ),
                                           SizedBox(height: 4.0),
-                                          Text(
-                                              '${123}',
-                                              style: TextStyle(
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.normal,
-                                                  color: Colors.white
-                                              ),
-                                          ),
+//                                          Text(  //hf-code
+//                                              '${123}',
+//                                              style: TextStyle(
+//                                                  fontSize: 14,
+//                                                  fontWeight: FontWeight.normal,
+//                                                  color: Colors.white
+//                                              ),
+//                                          ),
                                           SizedBox(height: 8.0),
                                           Text(
                                               '${snapshot.data.data.profile.insuree.healthFacility.name ?? "N/A"}',
@@ -251,14 +251,14 @@ class _HomepageState extends State<Homepage> {
                                                 ),
                                                 padding: EdgeInsets.all(4),
                                                 child: Text(
-      AppTranslations.of(context).text('remaining'),
+                                                    AppTranslations.of(context).text('remaining'),
                                                     style: TextStyle(
                                                         color: Colors.white
                                                     ),
                                                 ),
                                             ),
                                             SizedBox(height: 8.0),
-                                            Text('${snapshot.data.data.profile.remainingDays}' + ' Days')
+                                            Text('${int.parse(snapshot.data.data.profile.remainingDays) > 0 ? snapshot.data.data.profile.remainingDays : "Expired" } days')
                                             //Text('${insureeCardDetail.policy.expiryDate}')
                                         ],
                                     ),

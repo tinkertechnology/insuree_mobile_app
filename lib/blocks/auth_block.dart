@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:card_app/models/user.dart';
 import 'package:card_app/services/auth_service.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'dart:async';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthBlock extends ChangeNotifier {
@@ -119,9 +120,10 @@ class AuthBlock extends ChangeNotifier {
   logout() async {
     await _authService.logout();
     isLoggedIn = false;
-    String user = await storage.read(key: 'user');
-    print('---dekete bhako xaina---');
-    print(user);
+//    String user = await storage.read(key: 'user');
+    await storage.deleteAll();
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    await preferences.clear();
     notifyListeners();
   }
 }
