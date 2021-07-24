@@ -1,3 +1,5 @@
+import 'package:card_app/models/faq.dart';
+import 'package:card_app/services/api_graphql_services.dart';
 import 'package:card_app/theme/custom_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
@@ -36,28 +38,43 @@ class _FAQState extends State<FAQ> {
 								)
 							),
 							
-							child: Container(
-								padding: EdgeInsets.only(top: 16.0),
-								child: ListView.builder(
-									itemCount: 20,
-									shrinkWrap: true,
-									itemBuilder: (BuildContext context, int index){
+							child: FutureBuilder<Faq>(
+							  future: ApiGraphQlServices().getFaqs(),
+							  builder: (context, snapshot) {
+							  	if (snapshot.hasData && snapshot.data!=null) {
 										return Container(
-											padding: EdgeInsets.only(bottom: 8.0),
-											child: Card(
-												elevation: 3.0,
-												shape: RoundedRectangleBorder(
-													borderRadius: BorderRadius.circular(8.0)
-												),
-												child: GFAccordion(
-													expandedTitleBackgroundColor: Colors.transparent,
-													title: 'Accordion 1',
-													content: 'GetFlutter is an open source library that comes with pre-build 1000+ UI components.',
-												),
-											),
+												padding: EdgeInsets.only(top: 16.0),
+												child: ListView.builder(
+														itemCount: snapshot.data.faq.length,
+														shrinkWrap: true,
+														itemBuilder: (BuildContext context, int index) {
+															var faqs = snapshot.data.faq[index];
+															return Container(
+																padding: EdgeInsets.only(bottom: 8.0),
+																child: Card(
+																	elevation: 3.0,
+																	shape: RoundedRectangleBorder(
+																			borderRadius: BorderRadius.circular(8.0)
+																	),
+																	child: GFAccordion(
+																		expandedTitleBackgroundColor: Colors
+																				.transparent,
+																		title: '${faqs.question}',
+																		content: '${faqs.answer}',
+																	),
+																),
+															);
+														}
+												)
 										);
 									}
-								)
+							  	if (snapshot.hasError){
+							  		return Center(child: Text('$snapshot.error'),);
+									}
+							  	else {
+							  		return Container(child: Center(child: CircularProgressIndicator(),),);
+									}
+							  }
 							),
 						),
 					),

@@ -104,11 +104,12 @@ bool hasAuthUserObject(){
 }
 
 
-String API_BASE_LOCAL_URL =  "https://oi.tinker.com.np/api/graphql";//"http://192.168.31.250:7000/api/graphql";//
+String API_BASE_LOCAL_URL =  "http://192.168.31.250:7000/api/graphql";//"https://oi.tinker.com.np/api/graphql";
 String API_IOS_BASE_LOCAL_URL = "http://localhost:8000/api/graphql";
 String API_BASE_LOCAL_MOBILE_URL = "http://192.168.31.221:8000/api/graphql";
+String OFFICE_LIST_URL = "https://ag.gov.np/dag1/offices.json";
+String FAQ_LIST_URL = "https://ag.gov.np/dag1/faqs.json";
 String API_HIB_URL = '';
-
 
 String getBaseUrl(){
 	if (kReleaseMode) {

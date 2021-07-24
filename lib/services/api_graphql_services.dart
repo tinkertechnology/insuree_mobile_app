@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:card_app/models/faq.dart';
 import 'package:card_app/models/feedback.dart';
 import 'package:card_app/models/health_facility_coordinates.dart';
 import 'package:card_app/models/insuree_info.dart';
@@ -6,7 +7,7 @@ import 'package:card_app/models/insuree_policy_information.dart';
 import 'package:card_app/models/notices.dart';
 import 'package:card_app/models/notifications.dart';
 import 'package:card_app/models/office.dart';
-import 'package:card_app/models/profile.dart';
+import 'package:card_app/models/faq.dart';
 import 'package:http/http.dart' as http;
 import 'package:card_app/models/medical_services.dart';
 import 'package:card_app/models/insuree_claims.dart';
@@ -33,6 +34,7 @@ class ApiGraphQlServices {
     InsureeData insureedata = InsureeData();
     Notifications notifications = Notifications();
     Offices offices = Offices();
+    Faq faq = Faq();
 
     
     
@@ -287,7 +289,7 @@ class ApiGraphQlServices {
  Future<Offices>  getOfficesList() async {
    var jsonmap;
    try {
-     final response = await http.get(Uri.parse('https://ag.gov.np/dag1/offices.json'),
+     final response = await http.get(Uri.parse(env.OFFICE_LIST_URL),
          headers: {
            "Content-Type": "application/json",
          },
@@ -304,5 +306,27 @@ class ApiGraphQlServices {
    }
    return offices;
  }
+
+
+  Future<Faq>  getFaqs() async {
+    var jsonmap;
+    try {
+      final response = await http.get(Uri.parse(env.FAQ_LIST_URL),
+        headers: {
+          "Content-Type": "application/json",
+        },
+
+      );
+      jsonmap = response.body;
+      faq =  Faq.fromJson(jsonDecode(jsonmap));
+    } catch (Exception)
+
+    {
+
+      return faq;
+
+    }
+    return faq;
+  }
     
 }

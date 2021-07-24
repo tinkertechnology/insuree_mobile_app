@@ -16,6 +16,13 @@ class VerifyInsuree extends StatefulWidget {
 
 class _VerifyInsureeState extends State<VerifyInsuree> {
     final _formKey = GlobalKey<FormState>();
+
+    @override
+    void initState() {
+    // TODO: implement initState
+    super.initState();
+    print("auth/verify_insuree.dart");
+  }
     final Insuree _insuree = Insuree();
     
     final double circleRadius = 100.0;
@@ -164,32 +171,32 @@ class _VerifyInsureeState extends State<VerifyInsuree> {
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
+//                            IconButton(
+//                                icon: Icon(Icons.location_on),
+//                                color: Colors.white,
+//                                onPressed: () => showDialog(
+//                                    context: context,
+//                                    builder: (BuildContext context){
+//                                        return _OfficeDetailWidget();
+//                                    }),
+//                            ),
                             IconButton(
-                                icon: Icon(Icons.location_on),
-                                color: Colors.white,
-                                onPressed: () => showDialog(
-                                    context: context,
-                                    builder: (BuildContext context){
-                                        return _OfficeDetailWidget();
-                                    }),
-                            ),
-                            IconButton(
-                                icon: Icon(Icons.attach_money),
+                                icon: Icon(Icons.work),
                                 color: Colors.white,
                                 onPressed: () {
                                     print('OfficeRelated clicked...');
                                     Navigator.pushNamed(context, '/offices');
                                 },
                             ),
-                            IconButton(
-                                icon: Icon(Icons.phone_in_talk),
-                                color: Colors.white,
-                                onPressed: () => showDialog(
-                                    context: context,
-                                    builder: (BuildContext context){
-                                        return _ContactDetailsWidget();
-                                    }),
-                            ),
+//                            IconButton(
+//                                icon: Icon(Icons.phone_in_talk),
+//                                color: Colors.white,
+//                                onPressed: () => showDialog(
+//                                    context: context,
+//                                    builder: (BuildContext context){
+//                                        return _ContactDetailsWidget();
+//                                    }),
+//                            ),
                             IconButton(
                                 icon: Icon(Icons.info_outline),
                                 color: Colors.white,

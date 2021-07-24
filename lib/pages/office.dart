@@ -42,9 +42,10 @@ class _OfficePageState extends State<OfficePage> {
 							    return Padding(
 							    	padding: const EdgeInsets.all(16.0),
 							    	child: ListView.builder(
-                      itemCount: 4,
+                      itemCount: snapshot.data.branchOfficeDetails.length,
 							    		itemBuilder: (BuildContext context, int index){
-                        var offices = snapshot.data;
+                        var offices = snapshot.data.branchOfficeDetails[index];
+
 							    			return Container(
 							    				padding: EdgeInsets.only(top: 4.0, bottom: 4.0),
 							    				child: Card(
@@ -61,7 +62,7 @@ class _OfficePageState extends State<OfficePage> {
 							    							mainAxisSize: MainAxisSize.max,
 							    							children: [
 							    								Text(
-							    									offices.branch,
+																			offices.name,
 							    									style: TextStyle(
 							    										fontSize: 16.0,
 							    										letterSpacing: 0.5,
@@ -69,29 +70,29 @@ class _OfficePageState extends State<OfficePage> {
 							    									),
 							    								),
 							    								SizedBox(height: 4.0),
-							    								// // Text(
-							    								// // 	offices.branch1.address,
-							    								// // 	style: TextStyle(
-							    								// // 		fontSize: 14.0,
-							    								// // 		fontWeight: FontWeight.normal,
-							    								// // 	),
-							    								// // ),
-							    								// // SizedBox(height: 4.0),
-							    								// // Text(
-							    								// // 	offices.branch1.email,
-							    								// // 	style: TextStyle(
-							    								// // 		fontSize: 14.0,
-							    								// // 		fontWeight: FontWeight.normal,
-							    								// // 	),
-							    								// // ),
-							    								// // SizedBox(height: 4.0),
-							    								// // Text(
-							    								// // 	offices.branch1.phone[0].phone1,
-							    								// // 	style: TextStyle(
-							    								// // 		fontSize: 14.0,
-							    								// // 		fontWeight: FontWeight.normal,
-							    								// // 	),
-							    								// ),
+							    								  Text(
+							    								  	offices.address,
+							    								  	style: TextStyle(
+							    								  		fontSize: 14.0,
+							    								  		fontWeight: FontWeight.normal,
+							    								  	),
+							    								  ),
+							    								  SizedBox(height: 4.0),
+							    								  Text(
+							    								  	offices.email,
+							    								  	style: TextStyle(
+							    								  		fontSize: 14.0,
+							    								  		fontWeight: FontWeight.normal,
+							    								  	),
+							    								  ),
+							    								  SizedBox(height: 4.0),
+							    								  Text(
+							    								  	offices.phone.toString(),
+							    								  	style: TextStyle(
+							    								  		fontSize: 14.0,
+							    								  		fontWeight: FontWeight.normal,
+							    								  	),
+							    								 ),
 							    							],
 							    						),
 							    					),
