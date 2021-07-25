@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
-import 'package:card_app/common/env.dart' as env;
+import 'package:openimis_web_app/common/env.dart' as env;
 
 class OtpPage extends StatefulWidget {
     @override

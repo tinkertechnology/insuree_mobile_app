@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:card_app/services/bottom_nav_bar_service.dart';
+import 'package:openimis_web_app/services/bottom_nav_bar_service.dart';
 
 class TabbarView extends StatefulWidget {
   @override

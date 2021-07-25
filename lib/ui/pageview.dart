@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-// import 'package:card_app/ui/RegisterMobilePage.dart';
+// import 'package:openimis_web_app/ui/RegisterMobilePage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:card_app/auth/auth.dart';
-import 'package:card_app/common/env.dart' as env;
-import 'package:card_app/blocks/auth_block.dart';
+import 'package:openimis_web_app/auth/auth.dart';
+import 'package:openimis_web_app/common/env.dart' as env;
+import 'package:openimis_web_app/blocks/auth_block.dart';
 import 'package:provider/provider.dart';
 class PageViewScreen extends StatefulWidget {
   static const String id = "page_view_screen";
@@ -93,7 +93,7 @@ class _PageViewScreenState extends State<PageViewScreen> {
                                 Center(
                                   child: Image(
                                     image: AssetImage(
-                                      'images/card_app_logo.png',
+                                      'images/openimis_web_app_logo.png',
                                     ),
                                     height: 300.0,
                                     width: 300.0,
@@ -149,7 +149,7 @@ class _PageViewScreenState extends State<PageViewScreen> {
                                         'earn with',
                                       ),
                                       Text(
-                                        ' card_app!',
+                                        ' openimis_web_app!',
                                         style:
                                             TextStyle(color: Colors.pinkAccent),
                                       ),

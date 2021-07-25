@@ -1,13 +1,13 @@
-import 'package:card_app/theme/custom_theme.dart';
+import 'package:openimis_web_app/theme/custom_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:card_app/langlang/application.dart';
-import 'package:card_app/langlang/app_translation.dart';
-import "package:card_app/services/api_graphql_services.dart";
-import 'package:card_app/graphql/gql_mutations.dart';
-import "package:card_app/models/feedback.dart";
-import "package:card_app/blocks/bool_provider.dart";
-import "package:card_app/common/global.dart" as globals;
+import 'package:openimis_web_app/langlang/application.dart';
+import 'package:openimis_web_app/langlang/app_translation.dart';
+import "package:openimis_web_app/services/api_graphql_services.dart";
+import 'package:openimis_web_app/graphql/gql_mutations.dart';
+import "package:openimis_web_app/models/feedback.dart";
+import "package:openimis_web_app/blocks/bool_provider.dart";
+import "package:openimis_web_app/common/global.dart" as globals;
 import 'package:provider/provider.dart';
 
 class FeedbackPage extends StatefulWidget {

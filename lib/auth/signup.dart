@@ -1,6 +1,6 @@
 // import 'package:flutter/material.dart';
-// import 'package:card_app/models/user.dart';
-// import 'package:card_app/blocks/auth_block.dart';
+// import 'package:openimis_web_app/models/user.dart';
+// import 'package:openimis_web_app/blocks/auth_block.dart';
 // import 'package:provider/provider.dart';
 
 // class SignUp extends StatefulWidget {

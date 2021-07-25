@@ -1,8 +1,8 @@
 
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:card_app/langlang/app_translation.dart';
-import 'package:card_app/langlang/application.dart';
+import 'package:openimis_web_app/langlang/app_translation.dart';
+import 'package:openimis_web_app/langlang/application.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:card_app/models/user.dart';
+import 'package:openimis_web_app/models/user.dart';
 import 'dart:ui';
 import 'dart:async';
-import 'package:card_app/blocks/auth_block.dart';
+import 'package:openimis_web_app/blocks/auth_block.dart';
 import 'package:provider/provider.dart';
 class RegisterScreen extends StatefulWidget {
 	@override

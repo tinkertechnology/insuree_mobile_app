@@ -1,14 +1,14 @@
 import 'dart:io';
-import 'package:card_app/blocks/auth_block.dart';
-import 'package:card_app/theme/custom_theme.dart';
+import 'package:openimis_web_app/blocks/auth_block.dart';
+import 'package:openimis_web_app/theme/custom_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
-import 'package:card_app/pages/card_details.dart';
-import 'package:card_app/common/env.dart' as env;
-import 'package:card_app/langlang/app_translation.dart';
-import 'package:card_app/langlang/application.dart';
+import 'package:openimis_web_app/pages/card_details.dart';
+import 'package:openimis_web_app/common/env.dart' as env;
+import 'package:openimis_web_app/langlang/app_translation.dart';
+import 'package:openimis_web_app/langlang/application.dart';
 import 'package:provider/provider.dart';
 
 class SubmissionPage extends StatefulWidget {

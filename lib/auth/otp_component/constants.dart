@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:card_app/auth/otp_component/size_config.dart';
+import 'package:openimis_web_app/auth/otp_component/size_config.dart';
 
 const kPrimaryColor = Color(0xFFFF7643);
 const kPrimaryLightColor = Color(0xFFFFECDF);

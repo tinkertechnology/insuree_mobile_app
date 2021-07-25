@@ -2,10 +2,10 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:card_app/blocks/auth_block.dart';
+import 'package:openimis_web_app/blocks/auth_block.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
-import  'package:card_app/common/env.dart' as env;
+import  'package:openimis_web_app/common/env.dart' as env;
 
 class PasswordResetForm extends StatefulWidget {
     @override

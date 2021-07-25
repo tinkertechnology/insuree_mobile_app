@@ -1,11 +1,11 @@
-import 'package:card_app/langlang/app_translation.dart';
-import 'package:card_app/langlang/application.dart';
-import 'package:card_app/models/health_facility_coordinates.dart';
-import 'package:card_app/models/user_location.dart';
-import 'package:card_app/theme/custom_theme.dart';
+import 'package:openimis_web_app/langlang/app_translation.dart';
+import 'package:openimis_web_app/langlang/application.dart';
+import 'package:openimis_web_app/models/health_facility_coordinates.dart';
+import 'package:openimis_web_app/models/user_location.dart';
+import 'package:openimis_web_app/theme/custom_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:card_app/common/env.dart' as env;
-import 'package:card_app/services/api_graphql_services.dart';
+import 'package:openimis_web_app/common/env.dart' as env;
+import 'package:openimis_web_app/services/api_graphql_services.dart';
 import 'package:provider/provider.dart';
 
 

@@ -1,4 +1,4 @@
-import 'package:card_app/blocks/auth_block.dart';
+import 'package:openimis_web_app/blocks/auth_block.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';

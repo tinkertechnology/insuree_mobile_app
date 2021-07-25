@@ -1,21 +1,21 @@
-import 'package:card_app/blocks/auth_block.dart';
-import 'package:card_app/models/insuree_info.dart';
-import 'package:card_app/pages/exploreServices.dart';
-import 'package:card_app/services/bottom_nav_bar_service.dart';
+import 'package:openimis_web_app/blocks/auth_block.dart';
+import 'package:openimis_web_app/models/insuree_info.dart';
+import 'package:openimis_web_app/pages/exploreServices.dart';
+import 'package:openimis_web_app/services/bottom_nav_bar_service.dart';
 import 'package:flutter/material.dart';
-import 'package:card_app/pages/claimed_item_services.dart';
-import 'package:card_app/screen_size_reducers.dart';
-import 'package:card_app/theme/custom_theme.dart';
-import 'package:card_app/common/env.dart' as env;
-import 'package:card_app/models/medical_services.dart';
-import 'package:card_app/models/claimed_services_items.dart';
-import 'package:card_app/services/api_graphql_services.dart';
-import 'package:card_app/models/claimed.dart';
-import 'package:card_app/models/insuree_claims.dart';
-import 'package:card_app/langlang/app_translation.dart';
+import 'package:openimis_web_app/pages/claimed_item_services.dart';
+import 'package:openimis_web_app/screen_size_reducers.dart';
+import 'package:openimis_web_app/theme/custom_theme.dart';
+import 'package:openimis_web_app/common/env.dart' as env;
+import 'package:openimis_web_app/models/medical_services.dart';
+import 'package:openimis_web_app/models/claimed_services_items.dart';
+import 'package:openimis_web_app/services/api_graphql_services.dart';
+import 'package:openimis_web_app/models/claimed.dart';
+import 'package:openimis_web_app/models/insuree_claims.dart';
+import 'package:openimis_web_app/langlang/app_translation.dart';
 import 'package:provider/provider.dart';
-import 'package:card_app/helper/shared_preferences_helper.dart';
-import 'package:card_app/langlang/application.dart';
+import 'package:openimis_web_app/helper/shared_preferences_helper.dart';
+import 'package:openimis_web_app/langlang/application.dart';
 
 
 class Homepage extends StatefulWidget {

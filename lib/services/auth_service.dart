@@ -1,11 +1,11 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:card_app/models/user.dart';
+import 'package:openimis_web_app/models/user.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:card_app/blocks/auth_block.dart';
-import  'package:card_app/common/env.dart' as env;
+import 'package:openimis_web_app/blocks/auth_block.dart';
+import  'package:openimis_web_app/common/env.dart' as env;
 
 class AuthService {
 

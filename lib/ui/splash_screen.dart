@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:card_app/ui/onboarding/onboarding_card.dart';
-import 'package:card_app/common/env.dart' as env;
-import 'package:card_app/blocks/auth_block.dart';
+import 'package:openimis_web_app/ui/onboarding/onboarding_card.dart';
+import 'package:openimis_web_app/common/env.dart' as env;
+import 'package:openimis_web_app/blocks/auth_block.dart';
 import 'package:provider/provider.dart';
 
 class SplashScreen extends StatefulWidget {

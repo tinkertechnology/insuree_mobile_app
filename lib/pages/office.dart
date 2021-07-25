@@ -1,6 +1,6 @@
-import 'package:card_app/models/office.dart';
-import 'package:card_app/services/api_graphql_services.dart';
-import 'package:card_app/theme/custom_theme.dart';
+import 'package:openimis_web_app/models/office.dart';
+import 'package:openimis_web_app/services/api_graphql_services.dart';
+import 'package:openimis_web_app/theme/custom_theme.dart';
 import 'package:flutter/material.dart';
 
 class OfficePage extends StatefulWidget {

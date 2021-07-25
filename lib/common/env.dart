@@ -1,10 +1,9 @@
 library env;
-//import  'package:card_app/common/env.dart' as env;
+//import  'package:openimis_web_app/common/env.dart' as env;
 import 'dart:convert';
 import 'dart:io' show Platform;
-import 'package:card_app/blocks/auth_block.dart';
+import 'package:openimis_web_app/blocks/auth_block.dart';
 import 'package:flutter/foundation.dart';
-import 'package:card_app/models/user.dart';
 import 'package:http/http.dart' as http;
 import 'dart:io';
 

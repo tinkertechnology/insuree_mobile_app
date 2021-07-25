@@ -1,18 +1,18 @@
-import 'package:card_app/theme/custom_theme.dart';
-import 'package:card_app/theme/dark_theme_provider.dart';
+import 'package:openimis_web_app/theme/custom_theme.dart';
+import 'package:openimis_web_app/theme/dark_theme_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:card_app/services/bottom_nav_bar_service.dart';
+import 'package:openimis_web_app/services/bottom_nav_bar_service.dart';
 import 'package:provider/provider.dart';
 import 'dart:io';
 import 'package:path/path.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
-import 'package:card_app/blocks/auth_block.dart';
-import 'package:card_app/langlang/app_translation.dart';
-import 'package:card_app/langlang/application.dart';
+import 'package:openimis_web_app/blocks/auth_block.dart';
+import 'package:openimis_web_app/langlang/app_translation.dart';
+import 'package:openimis_web_app/langlang/application.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:card_app/helper/shared_preferences_helper.dart';
+import 'package:openimis_web_app/helper/shared_preferences_helper.dart';
 
 class SettingsPage extends StatefulWidget {
 	@override

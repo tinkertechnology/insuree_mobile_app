@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:card_app/models/user_location.dart';
+import 'package:openimis_web_app/models/user_location.dart';
 import 'package:location/location.dart';
 class LocationService {
   UserLocation _currentLocation;

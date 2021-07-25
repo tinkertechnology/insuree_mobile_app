@@ -1,19 +1,19 @@
 import 'dart:ui';
 
-import 'package:card_app/blocks/auth_block.dart';
-import 'package:card_app/langlang/app_translation.dart';
-import 'package:card_app/models/claimed.dart';
-import 'package:card_app/models/insuree_claims.dart';
-import 'package:card_app/models/insuree_policy_information.dart';
-import 'package:card_app/models/user_location.dart';
-import 'package:card_app/screen_size_reducers.dart';
-import 'package:card_app/theme/custom_theme.dart';
+import 'package:openimis_web_app/blocks/auth_block.dart';
+import 'package:openimis_web_app/langlang/app_translation.dart';
+import 'package:openimis_web_app/models/claimed.dart';
+import 'package:openimis_web_app/models/insuree_claims.dart';
+import 'package:openimis_web_app/models/insuree_policy_information.dart';
+import 'package:openimis_web_app/models/user_location.dart';
+import 'package:openimis_web_app/screen_size_reducers.dart';
+import 'package:openimis_web_app/theme/custom_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:card_app/models/medical_services.dart';
-import 'package:card_app/services/api_graphql_services.dart';
+import 'package:openimis_web_app/models/medical_services.dart';
+import 'package:openimis_web_app/services/api_graphql_services.dart';
 import 'package:provider/provider.dart';
-import 'package:card_app/services/bottom_nav_bar_service.dart';
+import 'package:openimis_web_app/services/bottom_nav_bar_service.dart';
 
 class ExploreServicesPage extends StatefulWidget {
 	@override

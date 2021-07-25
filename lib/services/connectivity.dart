@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:connectivity/connectivity.dart';
-import 'package:card_app/models/connectivity_status.dart';
+import 'package:openimis_web_app/models/connectivity_status.dart';
 
 class ConnectivityService {
   // Create our public controller

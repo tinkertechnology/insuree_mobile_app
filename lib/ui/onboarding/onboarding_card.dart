@@ -1,4 +1,4 @@
-import 'package:card_app/theme/custom_theme.dart';
+import 'package:openimis_web_app/theme/custom_theme.dart';
 import 'package:flutter/material.dart';
 
 import 'package:intro_views_flutter/intro_views_flutter.dart';

@@ -1,12 +1,12 @@
-import 'package:card_app/blocks/auth_block.dart';
-import 'package:card_app/langlang/app_translation.dart';
-import 'package:card_app/models/notices.dart';
-import 'package:card_app/screen_size_reducers.dart';
-import 'package:card_app/services/api_graphql_services.dart';
-import 'package:card_app/theme/custom_theme.dart';
+import 'package:openimis_web_app/blocks/auth_block.dart';
+import 'package:openimis_web_app/langlang/app_translation.dart';
+import 'package:openimis_web_app/models/notices.dart';
+import 'package:openimis_web_app/screen_size_reducers.dart';
+import 'package:openimis_web_app/services/api_graphql_services.dart';
+import 'package:openimis_web_app/theme/custom_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:card_app/langlang/application.dart';
+import 'package:openimis_web_app/langlang/application.dart';
 
 class NoticePage extends StatefulWidget {
     @override

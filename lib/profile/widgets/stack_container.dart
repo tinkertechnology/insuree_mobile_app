@@ -1,6 +1,6 @@
 import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:flutter/material.dart';
-import 'package:card_app/profile/utils/custom_clipper.dart';
+import 'package:openimis_web_app/profile/utils/custom_clipper.dart';
 
 // import 'top_bar.dart';
 

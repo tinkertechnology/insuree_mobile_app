@@ -11,7 +11,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="card_app"
+        android:label="HIB"
         android:usesCleartextTraffic="true"
         android:icon="@mipmap/ic_launcher"
         >

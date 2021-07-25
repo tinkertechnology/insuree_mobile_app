@@ -1,7 +1,7 @@
 import 'dart:convert';
-import 'package:card_app/models/insuree.dart';
+import 'package:openimis_web_app/models/insuree.dart';
 import 'package:http/http.dart' as http;
-import 'package:card_app/common/env.dart' as env;
+import 'package:openimis_web_app/common/env.dart' as env;
 class VerifyInsureeService {
 bool isLoading=false;
 

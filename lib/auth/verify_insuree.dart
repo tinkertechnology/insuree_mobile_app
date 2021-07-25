@@ -1,13 +1,13 @@
-import 'package:card_app/auth/login_card.dart';
-import 'package:card_app/theme/custom_theme.dart';
+import 'package:openimis_web_app/auth/login_card.dart';
+import 'package:openimis_web_app/theme/custom_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'dart:ui';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:card_app/services/verify_insuree_service.dart';
-import 'package:card_app/models/insuree.dart';
+import 'package:openimis_web_app/services/verify_insuree_service.dart';
+import 'package:openimis_web_app/models/insuree.dart';
 
 class VerifyInsuree extends StatefulWidget {
     @override

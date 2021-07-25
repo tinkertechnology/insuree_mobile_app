@@ -1,10 +1,10 @@
 // import 'dart:convert';
 // import 'package:ff_navigation_bar/ff_navigation_bar.dart';
-// import 'package:card_app/common/env.dart';
+// import 'package:openimis_web_app/common/env.dart';
 // import 'package:url_launcher/url_launcher.dart';
 // import 'package:flutter/cupertino.dart';
 // import 'package:flutter/material.dart';
-// import 'package:card_app/common/env.dart' as env;
+// import 'package:openimis_web_app/common/env.dart' as env;
 // import 'package:fluttertoast/fluttertoast.dart';
 // import 'package:http/http.dart' as http;
 // import 'package:geolocator/geolocator.dart';

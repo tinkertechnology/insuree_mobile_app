@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:card_app/auth/otp_component/constants.dart';
-import 'package:card_app/auth/otp_component/size_config.dart';
+import 'package:openimis_web_app/auth/otp_component/constants.dart';
+import 'package:openimis_web_app/auth/otp_component/size_config.dart';
 
 import 'otp_form.dart';
 

@@ -1,9 +1,9 @@
-import 'package:card_app/models/claimeditems.dart';
-import 'package:card_app/models/claimedservices.dart';
-import 'package:card_app/theme/custom_theme.dart';
+import 'package:openimis_web_app/models/claimeditems.dart';
+import 'package:openimis_web_app/models/claimedservices.dart';
+import 'package:openimis_web_app/theme/custom_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:card_app/common/env.dart' as env;
-import 'package:card_app/services/api_graphql_services.dart';
+import 'package:openimis_web_app/common/env.dart' as env;
+import 'package:openimis_web_app/services/api_graphql_services.dart';
 
 class ClaimedItemServicesPage extends StatefulWidget {
     final int claimid;

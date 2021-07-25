@@ -1,14 +1,14 @@
-import 'package:card_app/pages/history.dart';
-import 'package:card_app/pages/policy_information.dart';
-import 'package:card_app/theme/custom_theme.dart';
+import 'package:openimis_web_app/pages/history.dart';
+import 'package:openimis_web_app/pages/policy_information.dart';
+import 'package:openimis_web_app/theme/custom_theme.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:card_app/services/bottom_nav_bar_service.dart';
+import 'package:openimis_web_app/services/bottom_nav_bar_service.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:card_app/pages/settings.dart';
-import 'package:card_app/langlang/app_translation.dart';
-import 'package:card_app/langlang/application.dart';
+import 'package:openimis_web_app/pages/settings.dart';
+import 'package:openimis_web_app/langlang/app_translation.dart';
+import 'package:openimis_web_app/langlang/application.dart';
 
 import 'homepage.dart';
 

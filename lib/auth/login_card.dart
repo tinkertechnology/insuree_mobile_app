@@ -1,18 +1,18 @@
-import 'package:card_app/theme/custom_theme.dart';
+import 'package:openimis_web_app/theme/custom_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:local_auth/auth_strings.dart';
 import 'package:flutter/services.dart';
-import 'package:card_app/blocks/auth_block.dart';
-import 'package:card_app/models/user.dart';
+import 'package:openimis_web_app/blocks/auth_block.dart';
+import 'package:openimis_web_app/models/user.dart';
 import 'package:provider/provider.dart';
 import 'dart:async';
 import 'dart:ui';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/cupertino.dart';
-import  'package:card_app/common/env.dart' as env;
-import 'package:card_app/pages/base.dart';
-import 'package:card_app/models/insuree.dart';
+import  'package:openimis_web_app/common/env.dart' as env;
+import 'package:openimis_web_app/pages/base.dart';
+import 'package:openimis_web_app/models/insuree.dart';
 class LoginScreen extends StatefulWidget {
 	@override
 	final String chfid;

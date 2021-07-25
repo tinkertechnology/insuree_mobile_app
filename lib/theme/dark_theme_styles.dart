@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:card_app/theme/custom_theme.dart';
+import 'package:openimis_web_app/theme/custom_theme.dart';
 import 'package:flutter/material.dart';
 
 class Styles {
