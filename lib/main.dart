@@ -112,7 +112,7 @@ class _MyAppState extends State<MyApp> {
                         routes: <String, WidgetBuilder>{
                             '/ggg': (BuildContext context) => Auth(),
                             '/card' :(BuildContext context) => Display(initIndex: null,),
-                            '/profile' :(BuildContext context) => SettingsPage(),
+                            '/profile' :(BuildContext context) => SettingsPage(null),
                             
                             '/splash':(BuildContext context) => SplashScreen(),
                             '/':(BuildContext context) => LoginScreen(), //OTP this is
