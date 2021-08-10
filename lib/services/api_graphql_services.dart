@@ -46,7 +46,7 @@ class ApiGraphQlServices {
 //                "Accept" : "application/json"
                 },
                 body: jsonEncode(openimisGqlQueries()
-                    .openimis_gql_medical_services(5)) //todo map qs filtering
+                    .openimis_gql_medical_services(100)) //todo map qs filtering
             );
             var jsonMap = json.decode(response.body);
             medicalServices = MedicalServices.fromJson(jsonMap);

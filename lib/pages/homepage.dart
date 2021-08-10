@@ -49,6 +49,7 @@ class _HomepageState extends State<Homepage> {
 	Widget build(BuildContext context) {
 		auth = Provider.of<AuthBlock>(context);
 		final bottom_nav = Provider.of<BottomNavigationBarProvider>(context);
+    
 		return Scaffold(
 			backgroundColor: CustomTheme.lightTheme.backgroundColor.withOpacity(0.5),
 			body: Stack(
