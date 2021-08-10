@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:openimis_web_app/blocks/auth_block.dart';
 import  'package:openimis_web_app/common/env.dart' as env;
+import 'package:openimis_web_app/graphql/gql_queries.dart';
 
 class AuthService {
 
@@ -14,11 +15,10 @@ class AuthService {
   // Create storage
   final GlobalKey<NavigatorState> navigatorKey = new GlobalKey<NavigatorState>();
   Future<Map> login(UserCredential userCredential) async {
-    var q = {"query":"# {\n#   {\n#     id\n#     token\n#   }\n# }\n\n\n{\n  insureeAuthOtp(chfid:\"${userCredential.chfid}\", otp:\"${userCredential.otp}\"){\n    token\n    insuree{\n      chfId\n    }\n  }\n}\n\n\n# ","variables":null};
+    var q = openimisGqlQueries().otp_verify({"chfid":"${userCredential.chfid}", "otp": "${userCredential.otp}" });
     final response = await http.post(Uri.parse(env.API_BASE_URL),
         headers: {
           "Content-Type": "application/json",
-//                "Accept" : "application/json"
         },
         body:
         jsonEncode(q));

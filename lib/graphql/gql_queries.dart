@@ -195,6 +195,24 @@ class openimisGqlQueries {
       };
       return _ret;
     }
+
+  otp_verify(args) {
+    var query="""
+    {
+      insureeAuthOtp(chfid:"${args['chfid']}", otp:"${args['otp']}"){
+        token
+        insuree {
+          chfId
+        }
+      }
+    }
+      """;
+    var _ret= {
+      "query": query, //jsonEncode(query),
+      "variables": null
+    };
+    return _ret;
+  }
     
 }
 
