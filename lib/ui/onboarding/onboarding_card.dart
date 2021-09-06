@@ -107,7 +107,7 @@ class OpenimisOnboardingPage extends StatelessWidget {
 							onTapDoneButton: () async{
 								SharedPreferences prefs = await SharedPreferences.getInstance();
 								await prefs.setBool('seen', true);
-								Navigator.popAndPushNamed(context, '/insuree_verify');
+								Navigator.of(context).pushNamedAndRemoveUntil('/insuree_verify',(Route<dynamic> route) => false);
 							},
 							showSkipButton: false,
 							doneText: Text("Get Started",),
