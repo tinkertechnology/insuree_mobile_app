@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:openimis_web_app/common/env.dart' as env;
 import 'package:openimis_web_app/services/api_graphql_services.dart';
 
+import '../screen_size_reducers.dart';
+
 class ClaimedItemServicesPage extends StatefulWidget {
     final int claimid;
     ClaimedItemServicesPage({Key key, this.claimid}) : super(key: key);
@@ -42,6 +44,7 @@ class _ClaimedItemServicesPageState extends State<ClaimedItemServicesPage> {
                 children: [
                     Expanded(
                         child: Container(
+//                            height: screenHeight(context, dividedBy: 1),
                             padding: EdgeInsets.all(16.0),
                             decoration: BoxDecoration(
                                 color: Colors.white,
@@ -51,62 +54,49 @@ class _ClaimedItemServicesPageState extends State<ClaimedItemServicesPage> {
                             ),
                             child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisSize: MainAxisSize.min,
+                                mainAxisSize: MainAxisSize.max,
                                 children: [
                                     Container(
-                                        child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: [
-                                                Container(
-                                                    padding: EdgeInsets.only(left:8.0, top: 16.0, bottom: 8.0),
-                                                    decoration: BoxDecoration(
-                                                        border: Border(
-                                                            bottom: BorderSide(
-                                                                color: Colors.grey
-                                                                    .withOpacity(0.25)))),
-                                                    width: double.infinity,
-                                                    child: Text(
-                                                        'Items',
-                                                        style: TextStyle(
-                                                            fontSize: 20.0,
-                                                            fontWeight: FontWeight.bold
-                                                        ),
-                                                    ),
-                                                ),
-                                                SizedBox(height: 8.0),
-                                                _claimItemListWidget(),
-                                            ],
+                                        padding: EdgeInsets.only(left:8.0, top: 16.0, bottom: 8.0),
+                                        decoration: BoxDecoration(
+                                            border: Border(
+                                                bottom: BorderSide(
+                                                    color: Colors.grey
+                                                        .withOpacity(0.25)))),
+                                        width: double.infinity,
+                                        child: Text(
+                                            'Items',
+                                            style: TextStyle(
+                                                fontSize: 20.0,
+                                                fontWeight: FontWeight.bold
+                                            ),
                                         ),
                                     ),
+                                    SizedBox(height: 8.0),
+                                    _claimItemListWidget(),
                                     Container(
-                                        child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: [
-                                                Container(
-                                                    padding: EdgeInsets.only(left:8.0, top: 16.0, bottom: 8.0),
-                                                    decoration: BoxDecoration(
-                                                        border: Border(
-                                                            bottom: BorderSide(
-                                                                color: Colors.grey
-                                                                    .withOpacity(0.25)))),
-                                                    width: double.infinity,
-                                                    child: Text(
-                                                        'Services',
-                                                        style: TextStyle(
-                                                            fontSize: 20.0,
-                                                            fontWeight: FontWeight.bold
-                                                        ),
-                                                    ),
-                                                ),
-                                                SizedBox(height: 8.0),
-                                                _claimServicesListWidget()
-                                            ],
+                                        padding: EdgeInsets.only(left:8.0, top: 16.0, bottom: 8.0),
+                                        decoration: BoxDecoration(
+                                            border: Border(
+                                                bottom: BorderSide(
+                                                    color: Colors.grey
+                                                        .withOpacity(0.25)))),
+                                        width: double.infinity,
+                                        child: Text(
+                                            'Services',
+                                            style: TextStyle(
+                                                fontSize: 20.0,
+                                                fontWeight: FontWeight.bold
+                                            ),
                                         ),
+                                    ),
+                                    SizedBox(height: 8.0),
+                                    Expanded(
+                                        child: _claimServicesListWidget()
                                     ),
                                 ],
-                            ),),
+                            ),
+                        ),
                     ),
                 ],
             )
@@ -121,7 +111,8 @@ class _ClaimedItemServicesPageState extends State<ClaimedItemServicesPage> {
                     if (snapshot.hasData) {
                         return ListView.builder(
                             shrinkWrap: true,
-                            physics: NeverScrollableScrollPhysics(),
+                            // physics: NeverScrollableScrollPhysics(),
+                            physics: ScrollPhysics(),
                             itemCount: snapshot.data.data
                                 .insureeClaim[0].items.length,
                             itemBuilder: (BuildContext context,
@@ -161,13 +152,14 @@ class _ClaimedItemServicesPageState extends State<ClaimedItemServicesPage> {
     
     Widget _claimServicesListWidget(){
         return Container(
+            // height: screenHeight(context, dividedBy: 2),
             child: FutureBuilder<ClaimedServices>(
                 future: _claimedservices,
                 builder: (context, snapshot) {
                     if (snapshot.hasData) {
                         return ListView.builder(
                             shrinkWrap: true,
-                            physics: NeverScrollableScrollPhysics(),
+                            // physics: NeverScrollableScrollPhysics(),
                             itemCount: snapshot
                                 .data.data.insureeClaim[0].services.length,
                             itemBuilder: (BuildContext context, int index) {
