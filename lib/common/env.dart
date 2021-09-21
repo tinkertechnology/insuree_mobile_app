@@ -103,7 +103,8 @@ bool hasAuthUserObject(){
 }
 
 
-String API_BASE_LOCAL_URL =  "http://10.0.2.2:4000/api/graphql";
+//String API_BASE_LOCAL_URL =  "http://10.0.2.2:4000/api/graphql";
+String API_BASE_LOCAL_URL =  "http://imistest.hib.gov.np/api/graphql";
 String API_IOS_BASE_LOCAL_URL = "http://localhost:8000/api/graphql";
 String API_BASE_LOCAL_MOBILE_URL = "http://192.168.31.221:8000/api/graphql";
 String OFFICE_LIST_URL = "https://ag.gov.np/dag1/offices.json";
