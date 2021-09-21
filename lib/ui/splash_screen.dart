@@ -18,29 +18,35 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(milliseconds:3000), () async {
-      checkFirstSeen();
-      Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return OpenimisOnboardingPage(); //PageViewScreen();
-      }));
+    Future.delayed(Duration(milliseconds:2000), () async {
+      if(auth.isLoggedIn){
+        Navigator.of(context).pushNamedAndRemoveUntil('/card',(Route<dynamic> route) => false);
+      }
+      else {
+        checkFirstSeen();
+
+
+
+      }
+
+
     });
   }
 
   Future checkFirstSeen() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bool _seen = (prefs.getBool('seen') ?? false);
-    if (_seen) {
-      if(auth.isLoggedIn) {
-        Navigator.popAndPushNamed(context, '/card');
-
-      }
-      else {
-      Navigator.popAndPushNamed(context, '/insuree_verify');
-
-      }
+    if(_seen==false){
+      Navigator.push(context, MaterialPageRoute(builder: (context) {
+        return OpenimisOnboardingPage(); //PageViewScreen();
+      }));
+    }
+    else {
+      Navigator.of(context).pushNamedAndRemoveUntil('/insuree_verify',(Route<dynamic> route) => false);
+    }
     }
 
-  }
+
   @override
   Widget build(BuildContext context) {
     if(auth==null) {

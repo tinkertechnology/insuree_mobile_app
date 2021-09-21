@@ -42,7 +42,7 @@ class _DisplayState extends State<Display> {
             case 2:
                 return new PolicyInformationPage();
             case 3:
-                return new SettingsPage();
+                return new SettingsPage(null);
             default:
                 return new Text("Error");
         }

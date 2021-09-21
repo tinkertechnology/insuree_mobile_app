@@ -8,6 +8,7 @@ import 'package:http/http.dart' as http;
 import 'dart:io';
 
 bool registerSuccess = false;
+int ExpiryDate = 60;
 
 setRegisterSuccessFalse(){
 	registerSuccess = false;
@@ -103,13 +104,12 @@ bool hasAuthUserObject(){
 }
 
 
-//String API_BASE_LOCAL_URL =  "http://10.0.2.2:4000/api/graphql";
-String API_BASE_LOCAL_URL =  "http://imistest.hib.gov.np/api/graphql";
+String API_BASE_LOCAL_URL =  "http://10.0.2.2/api/graphql";//"http://imistest.hib.gov.np/api/graphql";//"https://oi.tinker.com.np/api/graphql";
 String API_IOS_BASE_LOCAL_URL = "http://localhost:8000/api/graphql";
 String API_BASE_LOCAL_MOBILE_URL = "http://192.168.31.221:8000/api/graphql";
 String OFFICE_LIST_URL = "https://ag.gov.np/dag1/offices.json";
 String FAQ_LIST_URL = "https://ag.gov.np/dag1/faqs.json";
-String API_HIB_URL = '';
+String API_HIB_URL = 'https://imistest.hib.gov.np/api/graphql';
 
 String getBaseUrl(){
 	if (kReleaseMode) {
@@ -120,7 +120,7 @@ String getBaseUrl(){
 	if (Platform.isAndroid) {
 		return API_BASE_LOCAL_URL;
 	} else if (Platform.isIOS) {
-		return API_BASE_LOCAL_URL;
+		return API_IOS_BASE_LOCAL_URL;
 	}
 }
 

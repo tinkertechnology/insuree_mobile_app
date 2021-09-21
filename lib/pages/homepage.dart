@@ -49,6 +49,7 @@ class _HomepageState extends State<Homepage> {
 	Widget build(BuildContext context) {
 		auth = Provider.of<AuthBlock>(context);
 		final bottom_nav = Provider.of<BottomNavigationBarProvider>(context);
+    
 		return Scaffold(
 			backgroundColor: CustomTheme.lightTheme.backgroundColor.withOpacity(0.5),
 			body: Stack(
@@ -205,8 +206,17 @@ class _HomepageState extends State<Homepage> {
 			)
 		);
 	}
-	
-	
+
+	String _InsureeCardWidgetExpiresOn(args){
+		var insureePolicies = args['insureePolicies'];
+		if( insureePolicies != null){
+			List listInsureePolicies = insureePolicies;
+			var lastPolicy = insureePolicies[listInsureePolicies.length-1];
+			DateTime expiryDate = lastPolicy.policy.expiryDate;
+			return '  ${expiryDate.year}-${expiryDate.month}-${expiryDate.day} ';
+		}
+		return "";
+	}
 	
 	Widget _InsureeCardWidget(snapshot){
 		return Container(
@@ -281,7 +291,8 @@ class _HomepageState extends State<Homepage> {
 												),
 											),
 											SizedBox(height: 8.0),
-											Text('  ${snapshot.data.data.profile.insuree.insureePolicies[0].policy.expiryDate.year}-${snapshot.data.data.profile.insuree.insureePolicies[0].policy.expiryDate.month}-${snapshot.data.data.profile.insuree.insureePolicies[0].policy.expiryDate.day}  ')
+											//Text('  ${snapshot.data.data.profile.insuree.insureePolicies[0].policy.expiryDate.year}-${snapshot.data.data.profile.insuree.insureePolicies[0].policy.expiryDate.month}-${snapshot.data.data.profile.insuree.insureePolicies[0].policy.expiryDate.day}  ')
+											Text( _InsureeCardWidgetExpiresOn({'insureePolicies': snapshot.data.data.profile.insuree.insureePolicies}) )
 											//Text('${remainingDays.lastName}')
 										],
 									),

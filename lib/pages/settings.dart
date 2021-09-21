@@ -1,3 +1,4 @@
+import 'package:openimis_web_app/common/CommonToast.dart';
 import 'package:openimis_web_app/theme/custom_theme.dart';
 import 'package:openimis_web_app/theme/dark_theme_provider.dart';
 import 'package:flutter/material.dart';
@@ -15,8 +16,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:openimis_web_app/helper/shared_preferences_helper.dart';
 
 class SettingsPage extends StatefulWidget {
+  final feedbackMessage;
+  SettingsPage(this.feedbackMessage);
 	@override
 	_SettingsPageState createState() => _SettingsPageState();
+
 }
 
 class _SettingsPageState extends State<SettingsPage> {
@@ -55,7 +59,6 @@ class _SettingsPageState extends State<SettingsPage> {
 	void initState() {
 		super.initState();
 		application.onLocaleChanged = onLocaleChange;
-//		onLocaleChange(Locale(languagesMap["Hindi"]));
 	}
 
 	void onLocaleChange(Locale locale) async {
@@ -68,15 +71,8 @@ class _SettingsPageState extends State<SettingsPage> {
 		print("dd "+language);
 		final SharedPreferences prefs = await _prefs;
 		var jpt = Locale(languagesMap[language]);
-		prefs.setString('language', jpt.languageCode);
 		onLocaleChange(Locale(languagesMap[language]));
-		setState(() {
-			if (language == "Hindi") {
-				label = "हिंदी";
-			} else {
-				label = language;
-			}
-		});
+
 	}
     Future uploadPic() async{
       final dynamic fileName = basename(_image.path);
@@ -99,11 +95,16 @@ class _SettingsPageState extends State<SettingsPage> {
 
     }
 
+    void showMessage(String val, context){
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(val), duration: Duration(milliseconds: 3000),),);
+    }
 	bool _flutter = false;
 	@override
 	Widget build(BuildContext context) {
-        final bottom_nav = Provider.of<BottomNavigationBarProvider>(context);
-        
+    final bottom_nav = Provider.of<BottomNavigationBarProvider>(context);
+    if (widget.feedbackMessage!=null){
+      showMessage(widget.feedbackMessage, context);
+    }    
 		return Scaffold(
 			backgroundColor: CustomTheme.lightTheme.backgroundColor, //Color.fromRGBO(234, 239, 255, 50),
 			body: SingleChildScrollView(
