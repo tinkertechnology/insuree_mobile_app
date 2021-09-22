@@ -284,7 +284,9 @@ class _HomepageState extends State<Homepage> {
 												child: Text(
 													AppTranslations.of(context).text('expire_on'),
 													style: TextStyle(
-														color: Colors.white
+														color: Colors.white,
+														letterSpacing: 2.0,
+														wordSpacing: 0.5
 													),
 												),
 											),
