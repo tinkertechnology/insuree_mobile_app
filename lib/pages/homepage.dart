@@ -130,7 +130,7 @@ class _HomepageState extends State<Homepage> {
 									child: ClipOval(
 										
 										child: FadeInImage.assetNetwork(
-											image: snapshot.hasData ? snapshot.data.data.profile.photo:
+											image: snapshot.hasData ? snapshot.data.data.profile.photo.replaceAll('192.168.15.22', 'imistest.hib.gov.np'):
 											"assets/images/openimis-logo.png",
 											placeholder: "assets/images/openimis-logo.png",
 											

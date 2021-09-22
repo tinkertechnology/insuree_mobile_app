@@ -118,9 +118,9 @@ String getBaseUrl(){
 	}
 
 	if (Platform.isAndroid) {
-		return API_BASE_LOCAL_URL;
+		return API_HIB_URL;
 	} else if (Platform.isIOS) {
-		return API_IOS_BASE_LOCAL_URL;
+		return API_HIB_URL;
 	}
 }
 
