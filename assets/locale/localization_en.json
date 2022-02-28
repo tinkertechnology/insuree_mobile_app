@@ -48,7 +48,13 @@
   "remaining" : "Remaininig",
   "expire_on" : "Expire On",
 
-  "service_provider_list" : "Service Providers Near You"
+  "name_surname" : "Full Name",
+  "dob_date" : "Birth Date",
+  "first_hf" : "First HealthFacility",
+  "gender" : "Gender",
+  "org" : "Service Providers Near You",
+  "member_id" : "ChfID"
+
 
 
   

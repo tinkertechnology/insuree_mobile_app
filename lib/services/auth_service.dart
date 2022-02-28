@@ -86,17 +86,10 @@ class AuthService {
           gravity: ToastGravity.CENTER,
           timeInSecForIos: 1,
           fontSize: 16.0);
-      // return User.fromJson(json.decode(response.body));
-//      return jsonDecode(response.body);
         var u = jsonDecode(response.body);
          u['isRegisterSuccess'] = true;
-//        user.isRegisterSuccess = true;
-//  auth.loading = false;
         return u;
-
-
     } else {
-
       if (response.statusCode == 400) {
         //  auth.loading = false;
         Fluttertoast.showToast(
@@ -156,23 +149,4 @@ class AuthService {
   }
 
 
-Future<bool> CheckTokenExpiryIntersepter() async {
-
-  final url = env.API_BASE_URL + '/api/auth/token/refresh/';
-  final response = await http.post(Uri.parse(url), body: {
-      'token': env.getAuthToken(null)
-    });
-
-    if (response.statusCode == 200) {
-      setUser(response.body);
-     auth.isTokenExpired = false;
-    return false;
-
-    }
-    else {
-      auth.isTokenExpired = true;
-      return false;
-    }
-
-}
 }

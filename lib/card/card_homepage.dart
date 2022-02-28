@@ -33,16 +33,9 @@ class _CardHomeState extends State<CardHome> {
 		super.initState();
 		
 		_medicalservices = ApiGraphQlServices().MedicalServicesGQL('medicalservice');
-		// _insureeclaims = ApiGraphQlServices().ClaimsServicesGQL();
-
 	}
 	
 	Widget build(BuildContext context) {
-//        Size deviceSize = MediaQuery.of(context).size;
-//        double height = deviceSize.height;
-//        double width = deviceSize.width;
-//        var padding = MediaQuery.of(context).padding;
-        
 		return Scaffold(
             backgroundColor: CustomTheme.lightTheme.backgroundColor.withOpacity(0.5),
             body: Stack(
@@ -83,7 +76,7 @@ class _CardHomeState extends State<CardHome> {
                                                                     radius: 30,
                                                                     backgroundColor: Colors.white,
                                                                     child: ClipOval(
-                                                                        child: Image.asset("assets/images/openimis-logo.png", fit: BoxFit.contain,),
+                                                                        child: Image.asset("assets/images/openimis-logo.png", fit: BoxFit.contain,), //todo import image from constant
                                                                     ),
                                                                 ),
                                                                 SizedBox(height: 8),

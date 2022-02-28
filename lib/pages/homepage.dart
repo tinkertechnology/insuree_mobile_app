@@ -130,7 +130,7 @@ class _HomepageState extends State<Homepage> {
 									child: ClipOval(
 										
 										child: FadeInImage.assetNetwork(
-											image: snapshot.hasData ? snapshot.data.data.profile.photo.replaceAll('192.168.15.22', 'imistest.hib.gov.np'):
+											image: snapshot.hasData ? snapshot.data.data.profile.photo.replaceAll('192.168.15.22', 'imistest.hib.gov.np'): //todo server returns local ip but we need domain ip need fix
 											"assets/images/openimis-logo.png",
 											placeholder: "assets/images/openimis-logo.png",
 											
@@ -258,7 +258,7 @@ class _HomepageState extends State<Homepage> {
 												),
 											),
 											SizedBox(height: 8.0),
-											Text('${int.parse(snapshot.data.data.profile.remainingDays) > 0 ? snapshot.data.data.profile.remainingDays : "Expired" } days')
+											Text('${int.parse(snapshot.data.data.profile.remainingDays) > 0 ? snapshot.data.data.profile.remainingDays : "0" } days')
 											//Text('${insureeCardDetail.policy.expiryDate}')
 										],
 									),

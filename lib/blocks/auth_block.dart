@@ -88,19 +88,6 @@ class AuthBlock extends ChangeNotifier {
 
   }
 
-    checkToken() async {
-      loading = true;
-      loadingType = 'check-token';
-      var a = await _authService.CheckTokenExpiryIntersepter();
-      loading = false;
-      if(a==false){
-        isTokenExpired = false;
-      }
-      else {
-        isTokenExpired = true;
-      }
-      notifyListeners();
-  }
 
     validateOtp(UserRegister userRegister) async {
     loading = true;
@@ -120,7 +107,6 @@ class AuthBlock extends ChangeNotifier {
   logout() async {
     await _authService.logout();
     isLoggedIn = false;
-//    String user = await storage.read(key: 'user');
     await storage.deleteAll();
     SharedPreferences preferences = await SharedPreferences.getInstance();
     await preferences.clear();

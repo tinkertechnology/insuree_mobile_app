@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:openimis_web_app/auth/register_card.dart';
 import 'package:openimis_web_app/auth/reset-password.dart';
 import 'package:openimis_web_app/models/insuree.dart';
@@ -39,6 +41,8 @@ import 'package:openimis_web_app/blocks/bool_provider.dart';
 
 void main() async {
     WidgetsFlutterBinding.ensureInitialized();
+    ByteData data = await PlatformAssetBundle().load('assets/ca/lets-encrypt-r3.pem');
+    SecurityContext.defaultContext.setTrustedCertificatesBytes(data.buffer.asUint8List());
     SystemChrome.setPreferredOrientations(
         [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
     runApp(MyApp());
@@ -103,66 +107,48 @@ class _MyAppState extends State<MyApp> {
                         ],
                         supportedLocales: [
                             const Locale("en", ""),
-                            const Locale("es", ""),
+                            const Locale("es", ""), //"np locale is not available set 'es' for proxy for nepali
                         ],
                         // locale: locale,
                         debugShowCheckedModeBanner: false,
                         theme: Styles.themeData(themeChangeProvider.darkTheme, context),
-                        initialRoute: '/splash',
+                        initialRoute: '/card',
                         routes: <String, WidgetBuilder>{
-                            '/ggg': (BuildContext context) => Auth(),
+                            //'/ggg': (BuildContext context) => Auth(),
                             '/card' :(BuildContext context) => Display(initIndex: null,),
                             '/profile' :(BuildContext context) => SettingsPage(null),
-                            
                             '/splash':(BuildContext context) => SplashScreen(),
                             '/':(BuildContext context) => LoginScreen(), //OTP this is
                             '/register':(BuildContext context) => RegisterScreen(),
-
                             '/otp-verify' :(BuildContext context) => OtpScreen(),
                             '/insuree_verify' :(BuildContext context) => VerifyInsuree(),
-
                             // SIGN UP
                             '/reset-password':(BuildContext context) => ResetPassword(),
-
                             //POLICY INFORMATION
                             '/policy-information':(BuildContext context) => PolicyInformationPage(),
-
                             // SERVICES
                             '/service-provider-list':(BuildContext context) => ServiceProviderPage(),
-
                             // NOTIFICATIONS
                             '/notifications':(BuildContext context) => NotificationPage(),
-
                             // FEEDBACK
                             '/feedback':(BuildContext context) => FeedbackPage(),
-
                             // PROFILE INFO
                             '/profile-info' :(BuildContext context) => ProfileInfo(),
-
                             // USER HISTORY
                             '/user-history' :(BuildContext context) => UserHistoryPage(),
-
                             // SHOW VIRTUAL CARD
                             '/show-card' :(BuildContext context) => CardDetailPage(),
-
                             // FAQ
                             '/faq' :(BuildContext context) => FAQ(),
-
                             //Claimed item Services
                             '/claimed_item_services' : (BuildContext context) => ClaimedItemServicesPage(),
-
                             '/PaymentsubmissionPage': (BuildContext context) => SubmissionPage(),
-    
                             // NOTICE BOARD
                             '/notice': (BuildContext context) => NoticePage(),
-                            
                             // OFFICE RELATED TO HIB
                             '/offices': (BuildContext context) => OfficePage(),
-    
                             // CONTACT US
                             '/contact': (BuildContext context) => ContactUsPage(),
-
-
                         },
                     );
                 }));

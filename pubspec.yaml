@@ -44,6 +44,7 @@ flutter:
     - assets/images/100-welcome.png
     - assets/images/smcard/
     - assets/images/
+    - assets/ca/
     - assets/locale/localization_en.json
     - assets/locale/localization_np.json
 

@@ -226,7 +226,7 @@ class _CardDetailPageState extends State<CardDetailPage> {
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
                                     Text(
-                                        'सदस्यता नं: ' + '${policyprofile.chfId}',
+                                        AppTranslations.of(context).text('member_id') + ':${policyprofile.chfId}',
                                         style: TextStyle(
                                             fontSize: 16.0,
                                             fontWeight: FontWeight.normal,
@@ -241,7 +241,7 @@ class _CardDetailPageState extends State<CardDetailPage> {
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
                                     Text(
-                                        'नामथर: ',
+                                AppTranslations.of(context).text('name_surname'),
                                         style: TextStyle(
                                             fontSize: 16.0,
                                             fontWeight: FontWeight.normal,
@@ -249,7 +249,7 @@ class _CardDetailPageState extends State<CardDetailPage> {
                                     ),
                                     SizedBox(width: 8.0),
                                     Text(
-                                        '${policyprofile.otherNames} ${policyprofile.lastName}',
+                                        ':${policyprofile.otherNames} ${policyprofile.lastName}',
                                         style: TextStyle(
                                             fontSize: 16.0,
                                             fontWeight: FontWeight.normal,
@@ -266,14 +266,14 @@ class _CardDetailPageState extends State<CardDetailPage> {
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
                                     Text(
-                                        'जन्ममिति: ' + '${insureeProfile.insuree.dob.year}-${insureeProfile.insuree.dob.month}-${insureeProfile.insuree.dob.day}',
+                                        AppTranslations.of(context).text('dob_date') + ':${insureeProfile.insuree.dob.year}-${insureeProfile.insuree.dob.month}-${insureeProfile.insuree.dob.day}',
                                         style: TextStyle(
                                             fontSize: 16.0,
                                             fontWeight: FontWeight.normal,
                                         ),
                                     ),
                                     Text(
-                                        'लिङ्ग: ' + '${insureeProfile.insuree.gender.gender}',
+                                        AppTranslations.of(context).text('gender') + ':${insureeProfile.insuree.gender.gender}',
                                         style: TextStyle(
                                             fontSize: 16.0,
                                             fontWeight: FontWeight.normal,
@@ -288,7 +288,7 @@ class _CardDetailPageState extends State<CardDetailPage> {
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
                                     Text(
-                                        'प्रथम स्वास्थ्य संस्था:',
+                                        AppTranslations.of(context).text('first_hf')+ ':',
                                         style: TextStyle(
                                             fontSize: 16.0,
                                             fontWeight: FontWeight.normal,
