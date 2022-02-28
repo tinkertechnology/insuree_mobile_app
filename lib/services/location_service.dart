@@ -17,10 +17,8 @@ class LocationService {
 
   LocationService() {
     // Request permission to use location
-//    if(checkService() != false){
-//      return;
-//    }
-
+   
+   
     location.requestPermission().then((granted) {
       if (granted== PermissionStatus.granted) {
 //        location.enableBackgroundMode(enable: true);
@@ -34,10 +32,11 @@ class LocationService {
           }
         });
       }
-      else{
-      return;
-
+      if (granted != PermissionStatus.granted)
+      {
+        return;
       }
+      
     }
     
     );
