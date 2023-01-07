@@ -7,8 +7,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
 import 'package:openimis_web_app/pages/card_details.dart';
 import 'package:openimis_web_app/common/env.dart' as env;
-import 'package:openimis_web_app/langlang/app_translation.dart';
-import 'package:openimis_web_app/langlang/application.dart';
+import '../language_config_i18n/app_translation.dart';
+import '../language_config_i18n/application.dart';
 import 'package:provider/provider.dart';
 
 class SubmissionPage extends StatefulWidget {

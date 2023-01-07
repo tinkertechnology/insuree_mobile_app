@@ -10,10 +10,7 @@ import 'package:openimis_web_app/models/claimed_services_items.dart';
 import 'package:openimis_web_app/services/api_graphql_services.dart';
 import 'package:openimis_web_app/models/claimed.dart';
 import 'package:openimis_web_app/models/insuree_claims.dart';
-import 'package:flutter/services.dart';
-import 'package:openimis_web_app/pages/homepage.dart';
-import 'package:openimis_web_app/langlang/application.dart';
-import 'package:openimis_web_app/langlang/app_translation.dart';
+import '../language_config_i18n/app_translation.dart';
 
 
 

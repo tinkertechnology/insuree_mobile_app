@@ -7,8 +7,8 @@ import 'package:provider/provider.dart';
 import 'package:openimis_web_app/services/bottom_nav_bar_service.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:openimis_web_app/pages/settings.dart';
-import 'package:openimis_web_app/langlang/app_translation.dart';
-import 'package:openimis_web_app/langlang/application.dart';
+import '../language_config_i18n/app_translation.dart';
+import '../language_config_i18n/application.dart';
 
 import 'homepage.dart';
 

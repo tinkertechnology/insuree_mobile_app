@@ -10,8 +10,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
 import 'package:openimis_web_app/blocks/auth_block.dart';
-import 'package:openimis_web_app/langlang/app_translation.dart';
-import 'package:openimis_web_app/langlang/application.dart';
+import '../language_config_i18n/app_translation.dart';
+import '../language_config_i18n/application.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:openimis_web_app/helper/shared_preferences_helper.dart';
 

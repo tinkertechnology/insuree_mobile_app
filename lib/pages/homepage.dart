@@ -12,10 +12,10 @@ import 'package:openimis_web_app/models/claimed_services_items.dart';
 import 'package:openimis_web_app/services/api_graphql_services.dart';
 import 'package:openimis_web_app/models/claimed.dart';
 import 'package:openimis_web_app/models/insuree_claims.dart';
-import 'package:openimis_web_app/langlang/app_translation.dart';
+import '../language_config_i18n/app_translation.dart';
 import 'package:provider/provider.dart';
 import 'package:openimis_web_app/helper/shared_preferences_helper.dart';
-import 'package:openimis_web_app/langlang/application.dart';
+import '../language_config_i18n/application.dart';
 
 
 class Homepage extends StatefulWidget {

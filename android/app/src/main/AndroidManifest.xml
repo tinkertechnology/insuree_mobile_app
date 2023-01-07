@@ -6,14 +6,14 @@
          additional functionality it is fine to subclass or reimplement
          FlutterApplication and put your custom class here. -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>
+<!--    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>-->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <application
-        android:name="io.flutter.app.FlutterApplication"
-        android:label="HIB"
+        android:name="${applicationName}"
+        android:label="HIB Profile"
         android:usesCleartextTraffic="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/launcher_icon"
         >
         <activity
             android:name=".MainActivity"

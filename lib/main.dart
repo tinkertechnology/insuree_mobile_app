@@ -23,7 +23,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:openimis_web_app/auth/auth.dart';
 import 'package:openimis_web_app/blocks/auth_block.dart';
 import 'package:openimis_web_app/ui/splash_screen.dart';
 import 'package:openimis_web_app/services/bottom_nav_bar_service.dart';
@@ -31,12 +30,12 @@ import 'package:openimis_web_app/auth/login_card.dart';
 import 'package:openimis_web_app/pages/settings.dart';
 import 'package:openimis_web_app/auth/validate_otp_card.dart';
 import 'package:openimis_web_app/services/location_service.dart';
-import 'langlang/app_localization_deligate.dart';
+import './language_config_i18n/app_localization_deligate.dart';
 import 'package:openimis_web_app/auth/verify_insuree.dart';
 import 'package:openimis_web_app/services/connectivity.dart';
 import 'package:openimis_web_app/pages/claimed_item_services.dart';
 import 'package:openimis_web_app/pages/submission_page.dart';
-import 'package:openimis_web_app/langlang/application.dart';
+import './language_config_i18n/application.dart';
 import 'package:openimis_web_app/blocks/bool_provider.dart';
 
 void main() async {
@@ -112,7 +111,7 @@ class _MyAppState extends State<MyApp> {
                         // locale: locale,
                         debugShowCheckedModeBanner: false,
                         theme: Styles.themeData(themeChangeProvider.darkTheme, context),
-                        initialRoute: '/card',
+                        initialRoute: '/splash',
                         routes: <String, WidgetBuilder>{
                             //'/ggg': (BuildContext context) => Auth(),
                             '/splash' :(BuildContext context) => Display(initIndex: null,),

@@ -2,19 +2,16 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:openimis_web_app/blocks/auth_block.dart';
-import 'package:openimis_web_app/langlang/app_translation.dart';
-import 'package:openimis_web_app/langlang/application.dart';
-import 'package:openimis_web_app/mock_api/profile.dart';
+import '../language_config_i18n/app_translation.dart';
+import '../language_config_i18n/application.dart';
 import 'package:openimis_web_app/models/insuree_info.dart';
 import 'package:openimis_web_app/theme/custom_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
-import 'package:http_parser/http_parser.dart';
 import 'package:openimis_web_app/common/env.dart' as env;
 import 'package:provider/provider.dart';
-import 'package:openimis_web_app/models/profile.dart';
 import 'package:openimis_web_app/services/api_graphql_services.dart';
 
 
